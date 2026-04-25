@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Visitor {
+  id                  String         @id @default(uuid())
+  sessionId           String
+  ipAddress           String?
+  userAgent           String?
+  device              String?
+  browser             String?
+  os                  String?
+  country             String?
+  city                String?
+  referrer            String?
+  utmSource           String?
+  utmMedium           String?
+  utmCampaign         String?
+  landingPage         String
+  pagesViewed         String[]
+  scrollDepthMax      Int            @default(0)
+  timeOnSiteSeconds   Int            @default(0)
+  clickCount          Int            @default(0)
+  formInteractions    Int            @default(0)
+  exitIntentTriggered Boolean        @default(false)
+  behaviorScore       Int            @default(0)
+  isActive            Boolean        @default(true)
+  events              VisitorEvent[]
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+}
+
+model VisitorEvent {
+  id        String   @id @default(uuid())
+  visitorId String
+  visitor   Visitor  @relation(fields: [visitorId], references: [id])
+  eventType String
+  eventData Json?
+  page      String
+  timestamp DateTime @default(now())
+}
+
+model Lead {
+  id        String   @id @default(uuid())
+  name      String?
+  email     String
+  company   String?
+  phone     String?
+  teamSize  String?
+  message   String?
+  source    String
+  page      String
+  visitorId String?
+  score     Int      @default(0)
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([email, source])
+}
+
+model PageView {
+  id        String   @id @default(uuid())
+  visitorId String
+  page      String
+  referrer  String?
+  duration  Int      @default(0)
+  timestamp DateTime @default(now())
+}
