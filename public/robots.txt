@@ -9,7 +9,7 @@ Disallow: /api/
 Disallow: /login
 
 # Host
-Host: https://aegibit-website.vercel.app
+Host: https://aegibit.com
 
 # Sitemaps
-Sitemap: https://aegibit-website.vercel.app/sitemap.xml
+Sitemap: https://aegibit.com/sitemap.xml
