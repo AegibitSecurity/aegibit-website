@@ -1,53 +1,81 @@
-"use client";
 import Link from "next/link";
 
-interface LogoProps {
-  size?: "sm" | "md" | "lg";
-  linkHref?: string;
-}
-
-const sizes = {
-  sm: { icon: 22, text: "text-base" },
-  md: { icon: 28, text: "text-lg" },
-  lg: { icon: 36, text: "text-2xl" },
-};
+interface LogoProps { size?: "sm" | "md" | "lg"; linkHref?: string; }
 
 export function Logo({ size = "md", linkHref = "/" }: LogoProps) {
-  const { icon, text } = sizes[size];
+  const box = size === "sm" ? 28 : size === "lg" ? 40 : 34;
+  const fs  = size === "sm" ? "0.78rem" : size === "lg" ? "1rem" : "0.85rem";
 
   const content = (
     <div className="flex items-center gap-2.5 select-none">
-      {/* Orange shield mark matching brand logo */}
-      <svg
-        width={icon}
-        height={icon}
-        viewBox="0 0 40 44"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M20 2L4 9V22C4 31.9 11.1 41.1 20 43C28.9 41.1 36 31.9 36 22V9L20 2Z"
-          fill="#FF6A00"
-        />
-        <path
-          d="M20 2L4 9V22C4 31.9 11.1 41.1 20 43"
-          fill="#CC5500"
-          opacity="0.4"
-        />
-        <path
-          d="M20 12V26M14 18H26"
-          stroke="white"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          opacity="0.9"
-        />
-      </svg>
 
-      <span
-        className={`font-bold tracking-tight ${text} text-white`}
-        style={{ fontFamily: "var(--font-sora, sans-serif)", letterSpacing: "-0.02em" }}
-      >
-        AEGIBIT
+      {/* Logo icon with professional 3-layer glow */}
+      <div className="relative flex-shrink-0 flex items-center justify-center">
+
+        {/* Layer 1 — outermost pulse ring, slow expand + fade */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: box + 16, height: box + 16,
+            borderRadius: "50%",
+            background: "rgba(249,115,22,0.0)",
+            boxShadow: "0 0 0 1px rgba(249,115,22,0.18)",
+            animation: "logo-pulse 4s ease-out infinite",
+          }}
+        />
+
+        {/* Layer 2 — mid glow ring, delayed */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: box + 8, height: box + 8,
+            borderRadius: "50%",
+            boxShadow: "0 0 0 1px rgba(249,115,22,0.28)",
+            animation: "logo-pulse 4s ease-out infinite 1.3s",
+          }}
+        />
+
+        {/* Layer 3 — icon container with inner glow */}
+        <div
+          className="relative flex items-center justify-center rounded-full"
+          style={{
+            width: box, height: box,
+            border: "1.5px solid rgba(249,115,22,0.6)",
+            background: "radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(249,115,22,0.05) 100%)",
+            boxShadow:
+              "0 0 0 3px rgba(249,115,22,0.08)," +   /* soft halo */
+              "0 0 10px rgba(249,115,22,0.35)," +      /* inner glow */
+              "0 0 22px rgba(249,115,22,0.15)," +      /* mid spread */
+              "inset 0 1px 0 rgba(255,255,255,0.08)",  /* subtle rim light */
+          }}
+        >
+          <svg width={box * 0.46} height={box * 0.52} viewBox="0 0 18 21" fill="none">
+            <path
+              d="M9 1L1 4V10C1 15 4.8 19.2 9 20.5C13.2 19.2 17 15 17 10V4L9 1Z"
+              fill="#F97316"
+              opacity="0.95"
+            />
+            <path
+              d="M5.5 10.5L8 13L12.5 8"
+              stroke="#fff"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+
+      {/* Wordmark */}
+      <span style={{
+        letterSpacing: "0.2em",
+        fontSize: fs,
+        fontFamily: "var(--font-geist-sans, sans-serif)",
+        fontWeight: 600,
+        lineHeight: 1,
+      }}>
+        <span style={{ color: "#FFFFFF" }}>AEGI</span>
+        <span style={{ color: "#F97316" }}>BIT</span>
       </span>
     </div>
   );

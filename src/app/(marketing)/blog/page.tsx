@@ -1,34 +1,46 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SectionHeader } from "@/components/shared/SectionHeader";
+import { blogPosts } from "@/content/blog-posts";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
-export const metadata: Metadata = { title: "Blog" };
-
-const POSTS = [
-  { title: "Why Zero Trust Voice Is the Next Security Frontier", date: "Apr 18, 2026", tag: "Security", mins: 6 },
-  { title: "Voice Biometrics vs. PIN Authentication: A BFSI Comparison", date: "Apr 10, 2026", tag: "Research", mins: 8 },
-  { title: "India's DPDP Act 2023: What It Means for AI Voice Data", date: "Apr 2, 2026", tag: "Compliance", mins: 5 },
-];
+export const metadata: Metadata = { title: "Blog", description: "Security insights and enterprise AI research from AEGIBIT." };
 
 export default function BlogPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <SectionHeader label="BLOG" title="Security insights & updates" />
-        <div className="mt-12 space-y-5">
-          {POSTS.map((post) => (
-            <div key={post.title} className="p-6 rounded-xl border border-[rgba(37,99,235,0.15)] bg-[#070d1a] hover:border-[rgba(37,99,235,0.3)] transition-colors cursor-pointer group">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="mono-label badge-enforced rounded px-2 py-0.5">{post.tag}</span>
-                <span className="text-[#374151] text-xs">{post.date}</span>
-                <span className="text-[#374151] text-xs">{post.mins} min read</span>
-              </div>
-              <h3 className="font-semibold text-[#D1D5DB] group-hover:text-[#F9FAFB] transition-colors">{post.title}</h3>
-            </div>
-          ))}
-        </div>
+      <main className="bg-[#000] min-h-screen">
+        <section className="pt-40 pb-16 px-6 max-w-4xl mx-auto">
+          <span className="mono-label text-[#F97316] block mb-6">Blog</span>
+          <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-bold text-white tracking-tight mb-12">
+            Insights &amp; research.
+          </h1>
+
+          <div className="divide-y divide-[rgba(255,255,255,0.06)]">
+            {blogPosts.map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`}
+                className="flex items-start justify-between gap-6 py-8 group hover:bg-[rgba(249,115,22,0.02)] -mx-6 px-6 transition-colors">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3 flex-wrap">
+                    {post.tags.slice(0,1).map(t => (
+                      <span key={t} className="mono-label text-[#F97316]">{t}</span>
+                    ))}
+                    <span className="mono-label text-[#3F3F46]">
+                      {new Date(post.date).toLocaleDateString("en-IN",{year:"numeric",month:"short",day:"numeric"})}
+                    </span>
+                    <span className="mono-label text-[#3F3F46]">{post.readingTime}m read</span>
+                  </div>
+                  <h3 className="text-[#A1A1AA] group-hover:text-white font-medium text-base transition-colors leading-snug">
+                    {post.title}
+                  </h3>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-[#3F3F46] group-hover:text-[#F97316] flex-shrink-0 mt-1 transition-colors"/>
+              </Link>
+            ))}
+          </div>
+        </section>
       </main>
       <Footer />
     </>

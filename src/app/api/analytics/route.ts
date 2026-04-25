@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
-import { getServiceClient } from "@/lib/supabase";
+import { getServiceClient } from "@/lib/supabase-admin";
 
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");

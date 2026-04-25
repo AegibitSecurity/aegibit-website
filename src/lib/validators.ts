@@ -34,5 +34,20 @@ export const visitorEventSchema = z.object({
 
 export function sanitizeString(input: unknown): string {
   if (typeof input !== "string") return "";
-  return input.replace(/<[^>]*>/g, "").trim().slice(0, 5000);
+  return input
+    .replace(/<[^>]*>/g, "")       // strip HTML tags
+    .replace(/javascript:/gi, "")  // strip JS protocol
+    .replace(/on\w+\s*=/gi, "")    // strip inline handlers
+    .trim()
+    .slice(0, 5000);
+}
+
+/** Client-safe: strip HTML before displaying user input */
+export function sanitizeForDisplay(input: string): string {
+  return input.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+/** Validate email format client-side before submit */
+export function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
 }

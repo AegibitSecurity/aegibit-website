@@ -7,6 +7,7 @@ interface VisitorState {
   visitorId: string | null;
   pagesViewed: string[];
   scrollDepthMax: number;
+  currentPage: string;
   timeOnSiteSeconds: number;
   clickCount: number;
   formInteractions: number;
@@ -16,6 +17,8 @@ interface VisitorState {
   clickedCTA: boolean;
   startedForm: boolean;
   submittedForm: boolean;
+  visitedPricingPage: boolean;
+  visitedAlternativesPage: boolean;
 
   setVisitorId: (id: string) => void;
   addPage: (page: string) => void;
@@ -42,6 +45,7 @@ export const useVisitorStore = create<VisitorState>((set, get) => ({
   visitorId: null,
   pagesViewed: [],
   scrollDepthMax: 0,
+  currentPage: "/",
   timeOnSiteSeconds: 0,
   clickCount: 0,
   formInteractions: 0,
@@ -51,37 +55,44 @@ export const useVisitorStore = create<VisitorState>((set, get) => ({
   clickedCTA: false,
   startedForm: false,
   submittedForm: false,
+  visitedPricingPage: false,
+  visitedAlternativesPage: false,
 
   setVisitorId: (id) => set({ visitorId: id }),
 
   addPage: (page) => set((s) => ({
     pagesViewed: s.pagesViewed.includes(page) ? s.pagesViewed : [...s.pagesViewed, page],
+    currentPage: page,
+    visitedPricingPage:      s.visitedPricingPage      || page.includes("pricing"),
+    visitedAlternativesPage: s.visitedAlternativesPage || page.includes("alternatives"),
   })),
 
   updateScrollDepth: (depth) => set((s) => ({
     scrollDepthMax: Math.max(s.scrollDepthMax, depth),
   })),
 
-  incrementTime: () => set((s) => ({ timeOnSiteSeconds: s.timeOnSiteSeconds + 30 })),
-  incrementClicks: () => set((s) => ({ clickCount: s.clickCount + 1 })),
+  incrementTime:           () => set((s) => ({ timeOnSiteSeconds: s.timeOnSiteSeconds + 30 })),
+  incrementClicks:         () => set((s) => ({ clickCount: s.clickCount + 1 })),
   incrementFormInteractions: () => set((s) => ({ formInteractions: s.formInteractions + 1 })),
-  setExitIntentTriggered: () => set({ exitIntentTriggered: true }),
-  setClickedCTA: () => set({ clickedCTA: true }),
-  setStartedForm: () => set({ startedForm: true }),
-  setSubmittedForm: () => set({ submittedForm: true }),
+  setExitIntentTriggered:  () => set({ exitIntentTriggered: true }),
+  setClickedCTA:           () => set({ clickedCTA: true }),
+  setStartedForm:          () => set({ startedForm: true }),
+  setSubmittedForm:        () => set({ submittedForm: true }),
 
   recalculateScore: () => {
     const s = get();
     const score = calculateBehaviorScore({
-      pagesViewed: s.pagesViewed.length,
-      scrollDepthMax: s.scrollDepthMax,
-      onPricingPage: s.pagesViewed.some((p) => p.includes("pricing")),
-      clickedCTA: s.clickedCTA,
-      startedForm: s.startedForm,
-      submittedForm: s.submittedForm,
-      timeOnSiteSeconds: s.timeOnSiteSeconds,
-      isReturnVisitor: typeof document !== "undefined" && document.cookie.includes("vc_return=1"),
-      bouncedEarly: s.timeOnSiteSeconds < 10 && s.pagesViewed.length <= 1,
+      pagesViewed:             s.pagesViewed.length,
+      scrollDepthMax:          s.scrollDepthMax,
+      onPricingPage:           s.currentPage.includes("pricing"),
+      visitedPricingPage:      s.visitedPricingPage,
+      visitedAlternativesPage: s.visitedAlternativesPage,
+      clickedCTA:              s.clickedCTA,
+      startedForm:             s.startedForm,
+      submittedForm:           s.submittedForm,
+      timeOnSiteSeconds:       s.timeOnSiteSeconds,
+      isReturnVisitor:         typeof document !== "undefined" && document.cookie.includes("vc_return=1"),
+      bouncedEarly:            s.timeOnSiteSeconds < 10 && s.pagesViewed.length <= 1,
     });
     set({ behaviorScore: score, behaviorTier: getBehaviorTier(score) });
   },

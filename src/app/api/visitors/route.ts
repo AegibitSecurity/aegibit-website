@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
-import { getServiceClient } from "@/lib/supabase";
+import { getServiceClient } from "@/lib/supabase-admin";
 import { visitorSchema, sanitizeString } from "@/lib/validators";
 import { checkRateLimit, visitorLimiter } from "@/lib/rate-limiter";
 
@@ -51,5 +51,25 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "DB error" }, { status: 500 });
   }
 
-  return NextResponse.json({ visitorId: visitor.id }, { status: 201 });
+  const response = NextResponse.json({ visitorId: visitor.id }, { status: 201 });
+
+  // HttpOnly cookie: stores visitor ID server-side, not readable by JS
+  response.cookies.set("vc_vid", visitor.id, {
+    httpOnly: true,
+    sameSite: "lax",
+    path:     "/",
+    maxAge:   60 * 60 * 24 * 30, // 30 days
+    secure:   process.env.NODE_ENV === "production",
+  });
+
+  // Non-httpOnly return-visitor flag (readable by client for behavior scoring)
+  response.cookies.set("vc_return", "1", {
+    httpOnly: false,
+    sameSite: "lax",
+    path:     "/",
+    maxAge:   60 * 60 * 24 * 30,
+    secure:   process.env.NODE_ENV === "production",
+  });
+
+  return response;
 }

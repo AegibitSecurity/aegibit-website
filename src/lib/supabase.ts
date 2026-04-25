@@ -1,22 +1,27 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-export function getPublicClient() {
+let _client: SupabaseClient | null = null;
+
+/**
+ * Browser-safe Supabase client using the public anon key.
+ * Safe to import in client components.
+ * NEVER used for privileged DB operations.
+ */
+export function getSupabaseClient(): SupabaseClient {
+  if (_client) return _client;
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) throw new Error("Supabase env vars not configured");
-  return createClient(url, key);
-}
 
-export function getServiceClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !serviceKey) throw new Error("Supabase service env vars not configured");
-  return createClient(url, serviceKey, {
-    auth: { autoRefreshToken: false, persistSession: false },
+  if (!url || !key) {
+    throw new Error(
+      "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY"
+    );
+  }
+
+  _client = createClient(url, key, {
+    auth: { persistSession: true, autoRefreshToken: true },
   });
-}
 
-// Legacy named export for compatibility
-export const supabase = {
-  get client() { return getPublicClient(); },
-};
+  return _client;
+}
