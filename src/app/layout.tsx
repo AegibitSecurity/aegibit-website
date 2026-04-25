@@ -14,7 +14,18 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://aegibitsecurity.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://aegibit.com"),
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/icon.png",
+  },
   title: {
     default: "AEGIBIT — Securing Tomorrow, Today",
     template: "%s | AEGIBIT",
