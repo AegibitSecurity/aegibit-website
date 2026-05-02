@@ -20,7 +20,7 @@ jobs:
     outputs:
       paused: ${{ steps.check.outputs.paused }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: check
         run: |
           if [ -f automation/PAUSE ]; then
@@ -35,14 +35,14 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with: { node-version: "20", cache: "npm" }
       - run: npm ci
       - run: node automation/scripts/generate-blog-post.mjs
       - run: node automation/scripts/generate-seo-pages.mjs --count=5
       - name: Open PR with daily content drop
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore(automation): daily content drop"
@@ -67,8 +67,8 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: node automation/scripts/seo-audit.mjs
       - run: node automation/scripts/ping-search-engines.mjs
@@ -80,8 +80,8 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: |
           mkdir -p automation/logs
@@ -93,7 +93,7 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
@@ -107,8 +107,8 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
