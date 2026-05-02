@@ -1,8 +1,11 @@
 import { log, withJob } from "./_lib.mjs";
 
 await withJob("lead-health-check", async () => {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = (process.env.SUPABASE_URL || "").trim();
+  const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
+  // Diagnostic: log presence + length only (NEVER the value itself).
+  log("lead-health-check", `URL present=${!!url} len=${url.length} startsWithHttps=${url.startsWith("https://")}`);
+  log("lead-health-check", `KEY present=${!!key} len=${key.length} looksLikeJWT=${key.split(".").length === 3}`);
   if (!url || !key) { log("lead-health-check", "Supabase env not set — skipping", "warn"); return; }
 
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
