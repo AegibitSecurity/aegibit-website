@@ -1,12 +1,12 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-02T22:23:12.847Z",
+      "timestamp": "2026-05-02T22:26:49.172Z",
       "success": true,
-      "durationMs": 6
+      "durationMs": 5
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-02T22:23:12.898Z",
+      "timestamp": "2026-05-02T22:26:49.218Z",
       "success": true,
       "durationMs": 6
     },
@@ -28,8 +28,8 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 17,
-    "blogPostsPublished": 4,
+    "pagesGenerated": 22,
+    "blogPostsPublished": 5,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -37,7 +37,8 @@
       "Why Your Next.js Site is a Security Risk (and How to Fix It)",
       "Zero Trust Architecture for SaaS Founders",
       "10 OWASP Top 10 Bugs We Find in Every Code Audit",
-      "How to Build a HIPAA-Compliant Web App in 2026"
+      "How to Build a HIPAA-Compliant Web App in 2026",
+      "The Complete Guide to Secure Mobile App Authentication"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
@@ -56,7 +57,12 @@
       "app-development-for-logistics",
       "website-development-for-manufacturing",
       "app-development-for-manufacturing",
-      "website-development-for-hospitality"
+      "website-development-for-hospitality",
+      "app-development-for-hospitality",
+      "website-development-for-saas",
+      "app-development-for-saas",
+      "website-development-for-gaming",
+      "app-development-for-gaming"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
