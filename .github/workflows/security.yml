@@ -54,7 +54,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: "20" }
       - run: npm audit fix --only=prod || true
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "fix(security): npm audit fix"
           branch: automation/security-fix

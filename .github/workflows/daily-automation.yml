@@ -42,7 +42,7 @@ jobs:
       - run: node automation/scripts/generate-blog-post.mjs
       - run: node automation/scripts/generate-seo-pages.mjs --count=5
       - name: Open PR with daily content drop
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore(automation): daily content drop"
