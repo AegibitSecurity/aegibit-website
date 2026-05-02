@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-02T20:42:30.881Z",
+      "timestamp": "2026-05-02T20:55:21.216Z",
       "success": true,
-      "durationMs": 7
+      "durationMs": 4
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-02T20:42:31.021Z",
+      "timestamp": "2026-05-02T20:55:21.267Z",
       "success": true,
-      "durationMs": 10
+      "durationMs": 6
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -28,17 +28,23 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 2,
-    "blogPostsPublished": 1,
+    "pagesGenerated": 7,
+    "blogPostsPublished": 2,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
     "usedBlogTopics": [
-      "Why Your Next.js Site is a Security Risk (and How to Fix It)"
+      "Why Your Next.js Site is a Security Risk (and How to Fix It)",
+      "Zero Trust Architecture for SaaS Founders"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
-      "app-development-for-healthcare"
+      "app-development-for-healthcare",
+      "website-development-for-fintech",
+      "app-development-for-fintech",
+      "website-development-for-legal",
+      "app-development-for-legal",
+      "website-development-for-real-estate"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
