@@ -2,7 +2,7 @@ import { log, withJob } from "./_lib.mjs";
 
 await withJob("lead-health-check", async () => {
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_KEY;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) { log("lead-health-check", "Supabase env not set — skipping", "warn"); return; }
 
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
