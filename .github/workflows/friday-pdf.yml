@@ -37,14 +37,10 @@ jobs:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           REPORT_TO: contact@aegibit.com
         run: node automation/scripts/send-friday-report.mjs
-      - name: Archive the PDF in repo
-        run: |
-          git config user.name "AEGIS Bot"
-          git config user.email "contact@aegibit.com"
-          git add automation/reports/*.pdf || true
-          if git diff --staged --quiet; then
-            echo "No new report"
-          else
-            git commit -m "chore(report): weekend build plan $(date -u +%Y-%m-%d)"
-            git push
-          fi
+      - name: Archive PDF as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekend-build-plan-${{ github.run_id }}
+          path: automation/reports/*.pdf
+          retention-days: 90
+          if-no-files-found: warn

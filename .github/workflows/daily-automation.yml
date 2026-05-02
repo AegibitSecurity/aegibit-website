@@ -41,17 +41,26 @@ jobs:
       - run: npm ci
       - run: node automation/scripts/generate-blog-post.mjs
       - run: node automation/scripts/generate-seo-pages.mjs --count=5
-      - name: Commit & push
-        run: |
-          git config user.name "AEGIS Bot"
-          git config user.email "contact@aegibit.com"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "No content changes today"
-          else
-            git commit -m "chore(automation): daily content drop $(date -u +%Y-%m-%d)"
-            git push
-          fi
+      - name: Open PR with daily content drop
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(automation): daily content drop"
+          author: "AEGIS Bot <contact@aegibit.com>"
+          committer: "AEGIS Bot <contact@aegibit.com>"
+          branch: automation/daily-content
+          delete-branch: true
+          title: "chore(automation): daily content drop ${{ github.run_id }}"
+          body: |
+            **Tier T0** — auto-generated content drop per AUTOMATION_POLICY.md.
+
+            - 1 new blog post
+            - Up to 5 new programmatic SEO pages
+
+            Safe to merge after Vercel preview build is green.
+          labels: |
+            automation
+            content-drop
 
   seo-watch:
     needs: killswitch
