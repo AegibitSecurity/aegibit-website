@@ -51,31 +51,13 @@ export function WelcomeGreeting() {
       }}
     >
       <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(249,115,22,0.10) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-      <div
         className="greeting-write"
         style={{
           fontFamily: "'Pacifico', cursive",
           fontSize: "clamp(56px, 10vw, 132px)",
-          color: "#fff",
+          color: "#F97316",
           letterSpacing: "0.01em",
-          textShadow:
-            "0 0 60px rgba(249,115,22,0.30), " +
-            "0 0 120px rgba(249,115,22,0.12), " +
-            "0 8px 24px rgba(0,0,0,0.6)",
           whiteSpace: "nowrap",
-          background:
-            "linear-gradient(90deg, #ffffff 0%, #ffd9bf 45%, #f97316 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
           paddingBottom: "0.15em",
         }}
       >
