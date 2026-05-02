@@ -174,3 +174,15 @@
   text-transform: uppercase;
   font-weight: 500;
 }
+
+/* Welcome greeting animations */
+@keyframes greeting-write {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0% 0 0); }
+}
+@keyframes greeting-pulse {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(249,115,22,0.2); }
+  50%      { transform: scale(1.05); box-shadow: 0 0 20px 4px rgba(249,115,22,0.1); }
+}
+.greeting-write { animation: greeting-write 2.8s ease-out forwards; }
+.greeting-pulse { animation: greeting-pulse 2s ease-in-out infinite; }
