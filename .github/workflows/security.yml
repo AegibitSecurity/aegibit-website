@@ -1,0 +1,65 @@
+name: Security Sweep
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "package.json"
+      - "package-lock.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  security-events: write
+
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with: { languages: javascript-typescript }
+      - uses: github/codeql-action/analyze@v3
+
+  osv-scanner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google/osv-scanner-action/osv-scanner-action@v1
+        with:
+          scan-args: |-
+            --recursive
+            ./
+        continue-on-error: true
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  npm-audit-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm audit fix --only=prod || true
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "fix(security): npm audit fix"
+          branch: automation/security-fix
+          title: "fix(security): auto patch"
+          body: |
+            Auto-generated security patches via `npm audit fix`.
+            **Tier T1** (auto-merge after CI green). Per AUTOMATION_POLICY.md §2.4.
+          labels: |
+            automation
+            security

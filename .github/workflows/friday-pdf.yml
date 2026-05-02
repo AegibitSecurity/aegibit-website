@@ -1,0 +1,50 @@
+name: Friday Night Idea Report (AEGIS → Rahul)
+
+on:
+  schedule:
+    - cron: "30 15 * * 5"   # Fridays 15:30 UTC = 21:00 IST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  killswitch:
+    runs-on: ubuntu-latest
+    outputs:
+      paused: ${{ steps.c.outputs.paused }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        run: |
+          if [ -f automation/PAUSE ]; then echo "paused=true" >> $GITHUB_OUTPUT;
+          else echo "paused=false" >> $GITHUB_OUTPUT; fi
+
+  generate-and-send:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm install --no-save pdfkit @sendgrid/mail resend
+      - name: Generate weekend build plan PDF
+        run: node automation/scripts/friday-pdf.mjs
+      - name: Email Rahul the PDF
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          REPORT_TO: contact@aegibit.com
+        run: node automation/scripts/send-friday-report.mjs
+      - name: Archive the PDF in repo
+        run: |
+          git config user.name "AEGIS Bot"
+          git config user.email "contact@aegibit.com"
+          git add automation/reports/*.pdf || true
+          if git diff --staged --quiet; then
+            echo "No new report"
+          else
+            git commit -m "chore(report): weekend build plan $(date -u +%Y-%m-%d)"
+            git push
+          fi
