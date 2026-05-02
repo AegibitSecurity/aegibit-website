@@ -27,7 +27,7 @@ This directory keeps the AEGIBIT website upgrading itself 24/7 — even when Rah
 Settings → Secrets and variables → Actions:
 
 **Required:**
-- `SUPABASE_URL`, `SUPABASE_SERVICE_KEY` — for analytics scripts
+- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — for analytics scripts
 - `RESEND_API_KEY` — to email Rahul the Friday PDF (already a dep in package.json)
 
 **Optional (skip until needed):**
