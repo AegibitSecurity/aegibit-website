@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-02T22:26:49.172Z",
+      "timestamp": "2026-05-02T22:33:38.766Z",
       "success": true,
       "durationMs": 5
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-02T22:26:49.218Z",
+      "timestamp": "2026-05-02T22:33:38.849Z",
       "success": true,
-      "durationMs": 6
+      "durationMs": 38
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -28,8 +28,8 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 22,
-    "blogPostsPublished": 5,
+    "pagesGenerated": 27,
+    "blogPostsPublished": 6,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -38,7 +38,8 @@
       "Zero Trust Architecture for SaaS Founders",
       "10 OWASP Top 10 Bugs We Find in Every Code Audit",
       "How to Build a HIPAA-Compliant Web App in 2026",
-      "The Complete Guide to Secure Mobile App Authentication"
+      "The Complete Guide to Secure Mobile App Authentication",
+      "SOC 2 Type II for Bootstrapped SaaS — A Practical Path"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
@@ -62,7 +63,12 @@
       "website-development-for-saas",
       "app-development-for-saas",
       "website-development-for-gaming",
-      "app-development-for-gaming"
+      "app-development-for-gaming",
+      "website-development-for-media",
+      "app-development-for-media",
+      "website-development-for-non-profit",
+      "app-development-for-non-profit",
+      "website-development-for-government"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
