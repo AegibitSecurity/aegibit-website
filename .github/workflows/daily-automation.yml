@@ -42,6 +42,7 @@ jobs:
       - run: node automation/scripts/generate-blog-post.mjs
       - run: node automation/scripts/generate-seo-pages.mjs --count=5
       - name: Open PR with daily content drop
+        id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -52,15 +53,25 @@ jobs:
           delete-branch: true
           title: "chore(automation): daily content drop ${{ github.run_id }}"
           body: |
-            **Tier T0** — auto-generated content drop per AUTOMATION_POLICY.md.
+            **Tier T0** — auto-generated content drop per AUTOMATION_POLICY.md §6.1.
 
             - 1 new blog post
             - Up to 5 new programmatic SEO pages
 
-            Safe to merge after Vercel preview build is green.
+            **Auto-merge enabled.** Vercel preview must be green; if build fails, this PR holds for human review.
           labels: |
             automation
             content-drop
+      - name: Enable auto-merge on content PR
+        if: steps.cpr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ steps.cpr.outputs.pull-request-number }} \
+            --repo ${{ github.repository }} \
+            --squash \
+            --auto \
+            --delete-branch
 
   seo-watch:
     needs: killswitch
