@@ -16,7 +16,7 @@ jobs:
     outputs:
       paused: ${{ steps.c.outputs.paused }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: c
         run: |
           if [ -f automation/PAUSE ]; then echo "paused=true" >> $GITHUB_OUTPUT;
@@ -27,13 +27,13 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: |
           npx npm-check-updates -u --target patch
           npm install
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "chore(deps): weekly patch sweep"
           branch: automation/deps-patch
@@ -50,8 +50,8 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: node automation/scripts/competitor-watch.mjs
 
@@ -60,7 +60,7 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: node automation/scripts/brand-mentions.mjs
