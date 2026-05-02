@@ -20,7 +20,7 @@ jobs:
     outputs:
       paused: ${{ steps.check.outputs.paused }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: check
         run: |
           if [ -f automation/PAUSE ]; then
@@ -35,7 +35,7 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with: { node-version: "20", cache: "npm" }
       - run: npm ci
@@ -58,7 +58,7 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with: { node-version: "20" }
       - run: node automation/scripts/seo-audit.mjs
@@ -71,7 +71,7 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with: { node-version: "20" }
       - run: |
@@ -84,7 +84,7 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
@@ -98,7 +98,7 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with: { node-version: "20" }
       - env:
