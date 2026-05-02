@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build && next-sitemap",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "automation:blog": "node automation/scripts/generate-blog-post.mjs",
+    "automation:seo-pages": "node automation/scripts/generate-seo-pages.mjs --count=5",
+    "automation:seo-audit": "node automation/scripts/seo-audit.mjs",
+    "automation:ping": "node automation/scripts/ping-search-engines.mjs",
+    "automation:health": "node automation/scripts/lead-health-check.mjs",
+    "automation:competitors": "node automation/scripts/competitor-watch.mjs",
+    "automation:friday-pdf": "node automation/scripts/friday-pdf.mjs",
+    "automation:daily": "npm run automation:blog && npm run automation:seo-pages && npm run automation:seo-audit"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",

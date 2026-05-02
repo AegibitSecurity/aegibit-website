@@ -41,3 +41,11 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# Claude Code local state
+/.claude/
+
+# AEGIS automation logs (state.json + reports ARE tracked)
+/automation/logs/*.log
+/automation/logs/*.json
+!/automation/logs/.gitkeep

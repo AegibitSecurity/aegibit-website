@@ -1,0 +1,66 @@
+name: Weekly Automation (AEGIS)
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"   # Monday 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  killswitch:
+    runs-on: ubuntu-latest
+    outputs:
+      paused: ${{ steps.c.outputs.paused }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        run: |
+          if [ -f automation/PAUSE ]; then echo "paused=true" >> $GITHUB_OUTPUT;
+          else echo "paused=false" >> $GITHUB_OUTPUT; fi
+
+  dependency-sweep:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: |
+          npx npm-check-updates -u --target patch
+          npm install
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore(deps): weekly patch sweep"
+          branch: automation/deps-patch
+          title: "chore(deps): weekly patch sweep"
+          body: |
+            Auto patch-version dependency updates. **Tier T1** (auto-merge after CI green).
+            Per AUTOMATION_POLICY.md §3.2.
+          labels: |
+            automation
+            dependencies
+
+  competitor-watch:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: node automation/scripts/competitor-watch.mjs
+
+  brand-mentions:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: node automation/scripts/brand-mentions.mjs

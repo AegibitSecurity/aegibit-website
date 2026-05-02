@@ -1,0 +1,47 @@
+name: Monthly Automation (AEGIS)
+
+on:
+  schedule:
+    - cron: "0 2 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  killswitch:
+    runs-on: ubuntu-latest
+    outputs:
+      paused: ${{ steps.c.outputs.paused }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        run: |
+          if [ -f automation/PAUSE ]; then echo "paused=true" >> $GITHUB_OUTPUT;
+          else echo "paused=false" >> $GITHUB_OUTPUT; fi
+
+  revenue-report:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - env:
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: node automation/scripts/monthly-revenue-report.mjs
+
+  cost-audit:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: node automation/scripts/cost-audit.mjs

@@ -1,0 +1,107 @@
+name: Daily Automation (AEGIS)
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # daily 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: daily-automation
+  cancel-in-progress: false
+
+jobs:
+  killswitch:
+    runs-on: ubuntu-latest
+    outputs:
+      paused: ${{ steps.check.outputs.paused }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          if [ -f automation/PAUSE ]; then
+            echo "paused=true" >> $GITHUB_OUTPUT
+            echo "::warning::Automation PAUSED (automation/PAUSE present)"
+          else
+            echo "paused=false" >> $GITHUB_OUTPUT
+          fi
+
+  content-engine:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", cache: "npm" }
+      - run: npm ci
+      - run: node automation/scripts/generate-blog-post.mjs
+      - run: node automation/scripts/generate-seo-pages.mjs --count=5
+      - name: Commit & push
+        run: |
+          git config user.name "AEGIS Bot"
+          git config user.email "contact@aegibit.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No content changes today"
+          else
+            git commit -m "chore(automation): daily content drop $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+  seo-watch:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: node automation/scripts/seo-audit.mjs
+      - run: node automation/scripts/ping-search-engines.mjs
+        env:
+          SITE_URL: https://aegibit-website.vercel.app
+
+  security-sweep:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: |
+          mkdir -p automation/logs
+          npm audit --json > automation/logs/audit.json || true
+      - run: node automation/scripts/audit-report.mjs automation/logs/audit.json
+
+  performance-watch:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://aegibit-website.vercel.app
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+        continue-on-error: true
+
+  lead-pipeline-health:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: node automation/scripts/lead-health-check.mjs
