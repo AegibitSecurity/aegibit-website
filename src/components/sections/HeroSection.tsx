@@ -115,7 +115,7 @@ export function HeroSection() {
             color: "#EAEAEA",
           }}
         >
-          Enterprise Security
+          Multi-branch operations,
         </span>
 
         {/* Line 2 — gradient: white → orange → white, padded to show descenders */}
@@ -132,7 +132,7 @@ export function HeroSection() {
             color: "transparent",
           }}
         >
-          Reimagined
+          built like a vault.
         </span>
       </h1>
 
@@ -143,43 +143,45 @@ export function HeroSection() {
           color: "#A1A1AA",
           fontSize: "1.05rem",
           lineHeight: 1.65,
-          maxWidth: "460px",
+          maxWidth: "560px",
           margin: "0 auto 2.5rem",
         }}
       >
-        AI-powered cybersecurity and intelligent automation for organizations
-        that refuse to compromise on protection.
+        AEGIBIT builds the operational backbone for dealerships and multi-branch
+        SMEs. Our flagship — <span style={{ color: "#fff", fontWeight: 600 }}>PayMint</span> —
+        handles real-time expense tracking, branch-coded vouchers, and audit-grade
+        logs. Built by a cybersecurity company. Deployed in days.
       </p>
 
-      {/* CTAs */}
+      {/* CTAs — primary funnel: Book PayMint Demo */}
       <div className="fade-up delay-4 flex flex-col sm:flex-row items-center gap-4 mb-12">
         <Link
-          href="/signup"
+          href="/products/paymint/demo"
           className="text-sm font-semibold text-white transition-all hover:opacity-90"
           style={{
-            background: "#F97316",
+            background: "linear-gradient(135deg, #F97316, #EA6C0A)",
             padding: "13px 30px",
             borderRadius: "10px",
-            minWidth: "200px",
+            minWidth: "220px",
             textAlign: "center",
-            boxShadow: "0 0 18px rgba(249,115,22,0.28), 0 2px 6px rgba(0,0,0,0.4)",
+            boxShadow: "0 0 18px rgba(249,115,22,0.32), 0 2px 6px rgba(0,0,0,0.4)",
           }}
         >
-          Get Enterprise Access
+          Book a 20-min PayMint Demo
         </Link>
         <Link
-          href="/contact"
+          href="/products/paymint"
           className="text-sm font-semibold transition-colors hover:text-white"
           style={{
             padding: "13px 30px",
             borderRadius: "10px",
-            minWidth: "150px",
+            minWidth: "160px",
             textAlign: "center",
             border: "1px solid rgba(255,255,255,0.12)",
             color: "#A1A1AA",
           }}
         >
-          Schedule Demo
+          Explore PayMint
         </Link>
       </div>
 
