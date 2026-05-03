@@ -1,15 +1,17 @@
-# *
+# AEGIBIT — robots policy
+# Canonical host is www.aegibit.com. Edge middleware redirects every
+# other hostname (including *.vercel.app and apex aegibit.com) with a
+# permanent 308 to keep search-engine authority consolidated.
+
 User-agent: *
 Allow: /
 
-# *
-User-agent: *
+# Don't index private app surfaces
 Disallow: /dashboard
 Disallow: /api/
 Disallow: /login
+Disallow: /signup
 
-# Host
-Host: https://aegibit.com
+Host: https://www.aegibit.com
 
-# Sitemaps
-Sitemap: https://aegibit.com/sitemap.xml
+Sitemap: https://www.aegibit.com/sitemap.xml

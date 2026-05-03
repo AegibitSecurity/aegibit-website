@@ -14,7 +14,13 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://aegibit.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://www.aegibit.com"),
+  alternates: {
+    // Canonical URL prevents Google from treating www.aegibit.com,
+    // aegibit.com, and *.vercel.app as separate websites. Edge
+    // middleware (src/middleware.ts) also enforces this with 308s.
+    canonical: "/",
+  },
   // Note: icons + opengraph image are auto-injected by Next.js from the
   // file conventions in src/app — see icon.tsx, apple-icon.tsx,
   // opengraph-image.tsx, twitter-image.tsx, and public/icon.svg.
