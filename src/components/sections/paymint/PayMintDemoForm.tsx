@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, useRef, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   CheckCircle2,
@@ -13,6 +13,8 @@ import {
   Phone,
   ArrowRight,
   Sparkles,
+  ChevronDown,
+  Check,
 } from 'lucide-react';
 
 const ROLES = [
@@ -335,27 +337,20 @@ export function PayMintDemoForm() {
 
                   <div className="grid sm:grid-cols-2 gap-4 mb-4">
                     <Field label="Your role" icon={Users}>
-                      <Select value={form.role} onChange={(v) => update('role', v)}>
-                        <option value="">Select…</option>
-                        {ROLES.map((r) => (
-                          <option key={r} value={r}>
-                            {r}
-                          </option>
-                        ))}
-                      </Select>
+                      <Select
+                        value={form.role}
+                        onChange={(v) => update('role', v)}
+                        options={ROLES}
+                        placeholder="Select your role…"
+                      />
                     </Field>
                     <Field label="Number of branches">
                       <Select
                         value={form.branches}
                         onChange={(v) => update('branches', v)}
-                      >
-                        <option value="">Select…</option>
-                        {BRANCH_RANGES.map((b) => (
-                          <option key={b} value={b}>
-                            {b}
-                          </option>
-                        ))}
-                      </Select>
+                        options={BRANCH_RANGES}
+                        placeholder="Select branch count…"
+                      />
                     </Field>
                   </div>
 
@@ -535,25 +530,151 @@ function Input({
   );
 }
 
+/**
+ * Custom premium dropdown — replaces the native <select>, whose <option>
+ * list ignores our dark theme and renders with a browser-default white
+ * background. The custom dropdown:
+ *   • Matches the form's glass-dark aesthetic exactly
+ *   • Closes on outside click, Escape key, or selection
+ *   • Animates open with a spring, fades out on close
+ *   • Selected option is marked with an accent check
+ *   • Mobile-friendly: tappable rows, proper hit areas
+ *   • Keyboard accessible: Enter/Space to toggle, Tab to navigate
+ */
 function Select({
   value,
   onChange,
-  children,
+  options,
+  placeholder = 'Select…',
 }: {
   value: string;
   onChange: (v: string) => void;
-  children: React.ReactNode;
+  options: string[];
+  placeholder?: string;
 }) {
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('mousedown', onClickOutside);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      style={{ ...inputStyle, paddingRight: 28, appearance: 'none', cursor: 'pointer' }}
-      onFocus={(e) => { e.currentTarget.style.borderColor = 'rgba(249,115,22,0.5)'; }}
-      onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
-    >
-      {children}
-    </select>
+    <div ref={wrapperRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((s) => !s)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="w-full flex items-center justify-between transition-colors"
+        style={{
+          ...inputStyle,
+          paddingRight: 12,
+          cursor: 'pointer',
+          textAlign: 'left',
+          color: value ? '#fff' : '#52525B',
+          borderColor: open ? 'rgba(249,115,22,0.5)' : 'rgba(255,255,255,0.08)',
+          background: open ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.03)',
+        }}
+      >
+        <span className="truncate">{value || placeholder}</span>
+        <ChevronDown
+          size={16}
+          style={{
+            color: '#71717A',
+            transition: 'transform 0.2s ease',
+            transform: open ? 'rotate(180deg)' : 'rotate(0)',
+            flexShrink: 0,
+            marginLeft: 8,
+          }}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            role="listbox"
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -4, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
+            className="absolute z-50 mt-2 w-full overflow-hidden"
+            style={{
+              borderRadius: 12,
+              background: 'linear-gradient(180deg, #0F0F0F 0%, #0A0A0A 100%)',
+              border: '1px solid rgba(255,255,255,0.10)',
+              boxShadow:
+                '0 20px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02) inset, 0 0 30px rgba(249,115,22,0.06)',
+              padding: 6,
+              maxHeight: 280,
+              overflowY: 'auto',
+            }}
+          >
+            {options.map((opt) => {
+              const selected = opt === value;
+              return (
+                <li key={opt}>
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={selected}
+                    onClick={() => {
+                      onChange(opt);
+                      setOpen(false);
+                    }}
+                    className="w-full flex items-center justify-between gap-2 transition-all"
+                    style={{
+                      padding: '10px 12px',
+                      borderRadius: 8,
+                      fontSize: 14,
+                      textAlign: 'left',
+                      color: selected ? '#F97316' : '#E4E4E7',
+                      background: selected
+                        ? 'rgba(249,115,22,0.10)'
+                        : 'transparent',
+                      cursor: 'pointer',
+                      border: 'none',
+                      fontWeight: selected ? 600 : 400,
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!selected) {
+                        e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                        e.currentTarget.style.color = '#fff';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!selected) {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.color = '#E4E4E7';
+                      }
+                    }}
+                  >
+                    <span className="truncate">{opt}</span>
+                    {selected && (
+                      <Check size={14} style={{ color: '#F97316', flexShrink: 0 }} />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
