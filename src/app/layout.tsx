@@ -15,17 +15,11 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://aegibit.com"),
-  icons: {
-    icon: [
-      { url: "/icon.png", type: "image/png" },
-      { url: "/icon.png", sizes: "32x32", type: "image/png" },
-      { url: "/icon.png", sizes: "16x16", type: "image/png" },
-    ],
-    apple: [
-      { url: "/icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: "/icon.png",
-  },
+  // Note: icons + opengraph image are auto-injected by Next.js from the
+  // file conventions in src/app — see icon.tsx, apple-icon.tsx,
+  // opengraph-image.tsx, twitter-image.tsx, and public/icon.svg.
+  // We override only the bits the convention can't infer.
+  manifest: "/manifest.webmanifest",
   title: {
     default: "AEGIBIT — Securing Tomorrow, Today",
     template: "%s | AEGIBIT",
@@ -34,26 +28,28 @@ export const metadata: Metadata = {
     "AI, Cybersecurity, and Automation for enterprises that cannot afford failure.",
   keywords: ["enterprise security", "AI automation", "cybersecurity", "Zero Trust", "India SaaS"],
   authors: [{ name: "AEGIBIT Security" }],
+  applicationName: "AEGIBIT",
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://aegibitsecurity.com",
+    url: "https://www.aegibit.com",
     siteName: "AEGIBIT",
     title: "AEGIBIT — Securing Tomorrow, Today",
-    description: "AI, Cybersecurity, and Automation for enterprises that cannot afford failure.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    description:
+      "AI, Cybersecurity, and Automation for enterprises that cannot afford failure.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AEGIBIT",
+    site: "@aegibit",
+    creator: "@aegibit",
+    title: "AEGIBIT — Securing Tomorrow, Today",
     description: "AI, Cybersecurity, and Automation for enterprises.",
-    images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#06080C",
+  themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
 };

@@ -1,23 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <!-- Black rounded background -->
-  <rect width="512" height="512" rx="100" fill="#000000"/>
+  <!-- Black rounded square background — keeps the shield crisp on every theme -->
+  <rect width="512" height="512" rx="96" fill="#000000"/>
 
-  <!-- Orange shield -->
-  <path d="M256 60 L100 130 L100 270 C100 370 168 450 256 480 C344 450 412 370 412 270 L412 130 Z"
-    fill="none" stroke="#F97316" stroke-width="24" stroke-linejoin="round"/>
+  <!-- Solid orange shield — the orange-only fill creates the iconic outline ring -->
+  <path d="M256 64
+           L96 130
+           L96 268
+           Q96 380, 256 478
+           Q416 380, 416 268
+           L416 130 Z"
+        fill="#F97316"/>
 
-  <!-- Inner shield fill (subtle) -->
-  <path d="M256 90 L128 148 L128 270 C128 358 184 428 256 454 C328 428 384 358 384 270 L384 148 Z"
-    fill="rgba(249,115,22,0.08)"/>
+  <!-- Inner cutout in black — sits inside the orange shape so the orange
+       reads as a bold ring, exactly matching the brand mark -->
+  <path d="M256 100
+           L128 152
+           L128 268
+           Q128 358, 256 440
+           Q384 358, 384 268
+           L384 152 Z"
+        fill="#000000"/>
 
-  <!-- Letter A -->
-  <path d="M192 360 L256 160 L320 360" fill="none" stroke="#F97316" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M212 300 L300 300" fill="none" stroke="#F97316" stroke-width="24" stroke-linecap="round"/>
-
-  <!-- Sound wave bars -->
-  <rect x="196" y="370" width="16" height="40" rx="8" fill="#F97316" opacity="0.7"/>
-  <rect x="220" y="355" width="16" height="55" rx="8" fill="#F97316" opacity="0.85"/>
-  <rect x="244" y="345" width="16" height="65" rx="8" fill="#F97316"/>
-  <rect x="268" y="355" width="16" height="55" rx="8" fill="#F97316" opacity="0.85"/>
-  <rect x="292" y="370" width="16" height="40" rx="8" fill="#F97316" opacity="0.7"/>
+  <!-- White checkmark — bold, with the long arm sweeping up & out past
+       the upper-right of the shield (per the brand reference) -->
+  <path d="M168 282 L240 358 L378 188"
+        fill="none"
+        stroke="#FFFFFF"
+        stroke-width="46"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
 </svg>
