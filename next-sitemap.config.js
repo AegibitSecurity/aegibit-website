@@ -26,11 +26,21 @@ module.exports = {
     const { integrations } = await import("./src/content/integrations.ts");
     const { industries }   = await import("./src/content/industries.ts");
     const { blogPosts }    = await import("./src/content/blog-posts.ts");
+    const { SOLUTIONS }    = await import("./src/content/solutions.ts");
 
     return [
       // ── Products (manually included so a missed auto-detection never
       //    silently drops a flagship landing page from the index). ────
-      { loc: "/products/paymint", changefreq: "weekly",  priority: 0.95 },
+      { loc: "/products/paymint",      changefreq: "weekly",  priority: 0.95 },
+      { loc: "/products/paymint/demo", changefreq: "monthly", priority: 0.85 },
+
+      // ── PayMint solution / SEO landing pages — high priority because
+      //    these are designed to acquire intent traffic. ───────────────
+      ...SOLUTIONS.map((s) => ({
+        loc: `/solutions/${s.slug}`,
+        changefreq: "weekly",
+        priority: 0.9,
+      })),
 
       // ── Programmatic content collections ────────────────────────────
       ...alternatives.map((a) => ({ loc: `/alternatives/${a.slug}`, changefreq: "monthly", priority: 0.8 })),
