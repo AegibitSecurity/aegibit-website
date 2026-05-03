@@ -5,11 +5,82 @@ import { leadSchema, sanitizeString } from "@/lib/validators";
 import { checkRateLimit, leadLimiter } from "@/lib/rate-limiter";
 
 const SOURCE_LABELS: Record<string, string> = {
-  waitlist:    "Waitlist Signup",
-  contact:     "Contact Form",
-  demo:        "Demo Request",
-  exit_intent: "Exit Intent Popup",
+  waitlist:     "Waitlist Signup",
+  contact:      "Contact Form",
+  demo:         "Demo Request",
+  exit_intent:  "Exit Intent Popup",
+  paymint_demo: "PayMint Demo Request",
 };
+
+// Confirmation email sent to the lead themselves so they know the request
+// was received + sets warm next-step expectations. Premium tone, brand-grade.
+async function sendConfirmation(data: {
+  email: string;
+  name?: string;
+  source: string;
+}) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return;
+
+  const isPayMint = data.source === "paymint_demo";
+  const subject = isPayMint
+    ? "Your PayMint demo is being prepared — AEGIBIT"
+    : "We received your request — AEGIBIT";
+  const heading = isPayMint
+    ? "Your PayMint demo is on the way."
+    : "Thanks — we received your request.";
+  const intro = isPayMint
+    ? "A PayMint specialist will reach out within 24 business hours to schedule a 20-minute live demo, walk you through multi-branch expense management, and answer anything specific to your operation."
+    : "A member of the AEGIBIT team will reach out within 24 business hours.";
+
+  try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(apiKey);
+    await resend.emails.send({
+      from: "AEGIBIT <noreply@aegibit.com>",
+      to: [data.email],
+      replyTo: ["contact@aegibit.com"],
+      subject,
+      html: `
+        <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:0 auto;background:#000;color:#fff;padding:40px 32px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:32px;">
+            <div style="width:32px;height:32px;border-radius:7px;background:#000;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(249,115,22,0.4);">
+              <span style="color:#F97316;font-size:18px;font-weight:700;">✓</span>
+            </div>
+            <span style="font-size:16px;font-weight:300;letter-spacing:0.18em;">
+              <span style="color:#fff;">AEGI</span><span style="color:#F97316;">BIT</span>
+            </span>
+          </div>
+          <h1 style="font-size:26px;font-weight:300;line-height:1.2;margin:0 0 18px;letter-spacing:-0.01em;color:#fff;">
+            ${heading}
+          </h1>
+          <p style="font-size:15px;line-height:1.6;color:#A1A1AA;margin:0 0 28px;">
+            ${data.name ? "Hi " + data.name + "," : "Hi,"}<br/><br/>
+            ${intro}
+          </p>
+          ${
+            isPayMint
+              ? `<div style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:18px;margin-bottom:28px;">
+                  <p style="font-size:13px;color:#A1A1AA;margin:0 0 12px;font-weight:600;">While you wait — try the live web app:</p>
+                  <a href="https://nibir-vault.web.app" style="display:inline-block;background:linear-gradient(135deg,#F97316,#EA6C0A);color:#fff;text-decoration:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.01em;">Launch PayMint →</a>
+                </div>`
+              : ""
+          }
+          <p style="font-size:13px;color:#52525B;line-height:1.6;margin:0;">
+            Questions? Reply directly to this email — it routes to our founders' inbox.
+          </p>
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:28px 0;"/>
+          <p style="font-size:11px;color:#52525B;margin:0;">
+            AEGIBIT Security · <a href="https://www.aegibit.com" style="color:#F97316;text-decoration:none;">www.aegibit.com</a><br/>
+            Securing Tomorrow, Today
+          </p>
+        </div>
+      `,
+    });
+  } catch (err) {
+    console.error("[email] confirmation send failed:", err);
+  }
+}
 
 async function notifyTeam(data: {
   email: string;
@@ -118,14 +189,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Failed to save lead" }, { status: 500 });
   }
 
-  // Send notification — awaited so we can see errors in terminal
-  await notifyTeam({
-    email:   data.email,
-    name:    data.name,
-    company: data.company,
-    source:  data.source,
-    page:    data.page,
-  });
+  // Fire team notification + lead confirmation in parallel — both are
+  // best-effort; lead capture has already succeeded by this point.
+  await Promise.allSettled([
+    notifyTeam({
+      email:   data.email,
+      name:    data.name,
+      company: data.company,
+      source:  data.source,
+      page:    data.page,
+    }),
+    sendConfirmation({
+      email:  data.email,
+      name:   data.name,
+      source: data.source,
+    }),
+  ]);
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }

@@ -53,11 +53,15 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden md:block">
-            <Link href="/signup"
+          <div className="hidden md:flex items-center gap-3">
+            <Link href="/login"
+              className="text-sm text-[#A1A1AA] hover:text-white transition-colors px-2">
+              Sign in
+            </Link>
+            <Link href="/products/paymint/demo"
               className="text-sm font-semibold px-5 py-2.5 rounded-lg text-white transition-all hover:opacity-90"
               style={{ background:"#F97316", boxShadow:"0 0 24px rgba(249,115,22,0.3)" }}>
-              Get Access
+              Book Demo
             </Link>
           </div>
 
@@ -78,10 +82,14 @@ export function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <Link href="/signup" onClick={() => setOpen(false)}
+            <Link href="/products/paymint/demo" onClick={() => setOpen(false)}
               className="mt-4 text-center text-sm font-semibold text-white py-3 rounded-lg"
               style={{ background:"#F97316" }}>
-              Get Access
+              Book Demo
+            </Link>
+            <Link href="/login" onClick={() => setOpen(false)}
+              className="mt-2 text-center text-sm text-[#A1A1AA] py-2">
+              Sign in
             </Link>
           </div>
         </motion.div>

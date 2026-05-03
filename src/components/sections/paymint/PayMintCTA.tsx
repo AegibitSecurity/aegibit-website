@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Zap, Download, ArrowRight } from 'lucide-react';
+import { Zap, Download, ArrowRight, CalendarCheck } from 'lucide-react';
 
 const PAYMINT_APP_URL = 'https://nibir-vault.web.app';
 const PAYMINT_APK_URL = '/paymint/paymint-latest.apk';
+const PAYMINT_DEMO_URL = '/products/paymint/demo';
 
 export function PayMintCTA() {
   return (
@@ -52,16 +53,28 @@ export function PayMintCTA() {
             Your team is on PayMint before the kettle boils.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center mb-8">
             <a
-              href={PAYMINT_APP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={PAYMINT_DEMO_URL}
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'linear-gradient(135deg, #F97316, #EA6C0A)',
                 color: '#fff',
                 boxShadow: '0 0 0 1px rgba(249,115,22,0.30), 0 10px 30px rgba(249,115,22,0.25)',
+              }}
+            >
+              <CalendarCheck size={18} />
+              Book a 20-min Demo
+            </a>
+            <a
+              href={PAYMINT_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
+              style={{
+                background: 'transparent',
+                color: '#fff',
+                border: '1px solid rgba(255,255,255,0.20)',
               }}
             >
               <Zap size={18} />
@@ -70,7 +83,7 @@ export function PayMintCTA() {
             <a
               href={PAYMINT_APK_URL}
               download
-              className="group inline-flex items-center justify-center gap-3 px-8 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-3 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'transparent',
                 color: '#fff',
@@ -92,7 +105,7 @@ export function PayMintCTA() {
             className="inline-flex items-center gap-2 text-sm transition-colors group"
             style={{ color: '#A1A1AA' }}
           >
-            Want PayMint deployed for your business? Talk to us
+            Have an enterprise question? Talk to a founder
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
