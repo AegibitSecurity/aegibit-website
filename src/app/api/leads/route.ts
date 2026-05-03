@@ -18,9 +18,12 @@ async function sendConfirmation(data: {
   email: string;
   name?: string;
   source: string;
-}) {
+}): Promise<{ ok: boolean; error?: string; id?: string }> {
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return;
+  if (!apiKey) {
+    console.error("[email] confirmation skipped — RESEND_API_KEY not set");
+    return { ok: false, error: "RESEND_API_KEY not configured" };
+  }
 
   const isPayMint = data.source === "paymint_demo";
   const subject = isPayMint
@@ -36,7 +39,7 @@ async function sendConfirmation(data: {
   try {
     const { Resend } = await import("resend");
     const resend = new Resend(apiKey);
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: "AEGIBIT <noreply@aegibit.com>",
       to: [data.email],
       replyTo: ["contact@aegibit.com"],
@@ -77,8 +80,17 @@ async function sendConfirmation(data: {
         </div>
       `,
     });
+    if (result.error) {
+      const msg = JSON.stringify(result.error);
+      console.error("[email][confirmation] Resend API error:", msg);
+      return { ok: false, error: msg };
+    }
+    console.log("[email][confirmation] sent. id:", result.data?.id);
+    return { ok: true, id: result.data?.id };
   } catch (err) {
-    console.error("[email] confirmation send failed:", err);
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[email][confirmation] exception:", msg);
+    return { ok: false, error: msg };
   }
 }
 
@@ -88,11 +100,11 @@ async function notifyTeam(data: {
   company?: string;
   source: string;
   page: string;
-}) {
+}): Promise<{ ok: boolean; error?: string; id?: string }> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.warn("[email] RESEND_API_KEY not set — skipping notification");
-    return;
+    console.error("[email][team] skipped — RESEND_API_KEY not set");
+    return { ok: false, error: "RESEND_API_KEY not configured" };
   }
 
   try {
@@ -136,12 +148,16 @@ async function notifyTeam(data: {
     });
 
     if (result.error) {
-      console.error("[email] Resend API error:", JSON.stringify(result.error));
-    } else {
-      console.log("[email] Sent successfully. ID:", result.data?.id);
+      const msg = JSON.stringify(result.error);
+      console.error("[email][team] Resend API error:", msg);
+      return { ok: false, error: msg };
     }
+    console.log("[email][team] sent. id:", result.data?.id);
+    return { ok: true, id: result.data?.id };
   } catch (err) {
-    console.error("[email] Exception sending notification:", err);
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[email][team] exception:", msg);
+    return { ok: false, error: msg };
   }
 }
 
@@ -191,7 +207,7 @@ export async function POST(req: NextRequest) {
 
   // Fire team notification + lead confirmation in parallel — both are
   // best-effort; lead capture has already succeeded by this point.
-  await Promise.allSettled([
+  const [teamResult, confResult] = await Promise.all([
     notifyTeam({
       email:   data.email,
       name:    data.name,
@@ -206,7 +222,23 @@ export async function POST(req: NextRequest) {
     }),
   ]);
 
-  return NextResponse.json({ ok: true }, { status: 201 });
+  // Email diagnostics are surfaced to the response when an admin token is
+  // provided (so we can debug from the live form without exposing details
+  // to ordinary users / scrapers).
+  const adminToken = req.headers.get("x-admin-token");
+  const debugAllowed =
+    adminToken && process.env.DASHBOARD_SECRET && adminToken === process.env.DASHBOARD_SECRET;
+
+  const response: Record<string, unknown> = { ok: true };
+  if (debugAllowed) {
+    response._debug = {
+      lead_saved: true,
+      team_email: teamResult,
+      confirmation_email: confResult,
+    };
+  }
+
+  return NextResponse.json(response, { status: 201 });
 }
 
 export async function GET(req: NextRequest) {
