@@ -9,6 +9,7 @@ import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Platform", href: "/features" },
+  { label: "PayMint",  href: "/products/paymint" },
   { label: "Security", href: "/security" },
   { label: "Pricing",  href: "/pricing"  },
   { label: "Contact",  href: "/contact"  },

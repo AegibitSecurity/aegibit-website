@@ -3,6 +3,7 @@ import { Logo } from "@/components/shared/Logo";
 
 const COLS = {
   Product: [
+    { label:"PayMint",   href:"/products/paymint" },
     { label:"Platform",  href:"/features" },
     { label:"Security",  href:"/security" },
     { label:"Pricing",   href:"/pricing"  },
