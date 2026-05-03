@@ -112,9 +112,19 @@ async function notifyTeam(data: {
     const resend = new Resend(apiKey);
     const label = SOURCE_LABELS[data.source] ?? data.source;
 
+    // Comma-separated recipient list from env so we can fan out alerts
+    // to multiple founders/inboxes without redeploys. Belt-and-braces:
+    // Hostinger inbound mail filtering on aegibit.com → aegibit.com
+    // self-sends has been observed to silently route to spam, so we
+    // always also send to a Gmail fallback.
+    const teamRecipients = (process.env.TEAM_NOTIFY_EMAILS ?? "contact@aegibit.com")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
     const result = await resend.emails.send({
       from:    "AEGIBIT <noreply@aegibit.com>",
-      to:      ["contact@aegibit.com"],
+      to:      teamRecipients,
       replyTo: [data.email],
       subject: `🔔 New ${label} — ${data.email}`,
       html: `
