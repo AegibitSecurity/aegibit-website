@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" role="img" aria-label="AEGIBIT">
+  <title>AEGIBIT</title>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8533"/>
+      <stop offset="100%" stop-color="#FF6A00"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#FF6A00" stop-opacity="0.14"/>
+      <stop offset="65%" stop-color="#FF6A00" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#FF6A00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Mark group: scaled mark from 512 viewBox to 260px, top-left at (30, 30) -->
+  <g transform="translate(30, 30) scale(0.5078)">
+    <circle cx="256" cy="256" r="230" fill="url(#halo)"/>
+    <path d="M 256 36 L 446 146 L 446 366 L 256 476 L 66 366 L 66 146 Z"
+          fill="none" stroke="url(#brand)" stroke-width="22" stroke-linejoin="round"/>
+    <path d="M 256 36 L 256 76 M 446 146 L 411 167 M 446 366 L 411 345 M 256 476 L 256 436 M 66 366 L 101 345 M 66 146 L 101 167"
+          stroke="url(#brand)" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+    <path d="M 256 130 L 180 386" fill="none" stroke="url(#brand)" stroke-width="32" stroke-linecap="round"/>
+    <path d="M 256 130 L 332 386" fill="none" stroke="url(#brand)" stroke-width="32" stroke-linecap="round"/>
+    <line x1="208" y1="290" x2="244" y2="290" stroke="url(#brand)" stroke-width="22" stroke-linecap="round"/>
+    <line x1="268" y1="290" x2="304" y2="290" stroke="url(#brand)" stroke-width="22" stroke-linecap="round"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="340" y="215"
+        font-family="Geist, Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif"
+        font-weight="800"
+        font-size="170"
+        letter-spacing="8"
+        fill="url(#brand)">AEGIBIT</text>
+</svg>
