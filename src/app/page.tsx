@@ -23,7 +23,7 @@ const HOME_JSON_LD = {
       logo: "https://www.aegibit.com/icon.svg",
       slogan: "Securing Tomorrow, Today",
       description:
-        "AEGIBIT is a cybersecurity-first software company building operational platforms for multi-branch businesses, dealerships, and mission-critical SMEs.",
+        "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast — for dealerships, multi-branch SMEs, and mission-critical operations.",
       foundingDate: "2024",
       sameAs: [],
       contactPoint: {

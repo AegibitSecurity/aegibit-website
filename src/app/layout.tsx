@@ -27,12 +27,23 @@ export const metadata: Metadata = {
   // We override only the bits the convention can't infer.
   manifest: "/manifest.webmanifest",
   title: {
-    default: "AEGIBIT — Securing Tomorrow, Today",
+    default: "AEGIBIT — Built to Outlast | Cybersecurity-First Operational Software",
     template: "%s | AEGIBIT",
   },
   description:
-    "AI, Cybersecurity, and Automation for enterprises that cannot afford failure.",
-  keywords: ["enterprise security", "AI automation", "cybersecurity", "Zero Trust", "India SaaS"],
+    "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast — for dealerships, multi-branch SMEs, and mission-critical operations.",
+  keywords: [
+    "AEGIBIT",
+    "operational software",
+    "multi-branch expense management",
+    "PayMint",
+    "VoiceCore",
+    "cybersecurity software India",
+    "SaaS for dealerships",
+    "audit-grade software",
+    "Tally integration",
+    "Zero Trust",
+  ],
   authors: [{ name: "AEGIBIT Security" }],
   applicationName: "AEGIBIT",
   openGraph: {
@@ -40,16 +51,17 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://www.aegibit.com",
     siteName: "AEGIBIT",
-    title: "AEGIBIT — Securing Tomorrow, Today",
+    title: "AEGIBIT — Built to Outlast",
     description:
-      "AI, Cybersecurity, and Automation for enterprises that cannot afford failure.",
+      "Cybersecurity-first software company. Operational platforms for multi-branch businesses, dealerships, mission-critical SMEs. Built to outlast.",
   },
   twitter: {
     card: "summary_large_image",
     site: "@aegibit",
     creator: "@aegibit",
-    title: "AEGIBIT — Securing Tomorrow, Today",
-    description: "AI, Cybersecurity, and Automation for enterprises.",
+    title: "AEGIBIT — Built to Outlast",
+    description:
+      "Operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time. Built to outlast.",
   },
   robots: { index: true, follow: true },
 };

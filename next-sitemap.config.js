@@ -8,8 +8,7 @@ module.exports = {
   generateIndexSitemap: false,
   changefreq: "weekly",
   priority: 0.7,
-  // Don't index private surfaces or Next.js's auto-generated icon /
-  // OG-image / manifest routes — those aren't user-facing pages.
+  // Don't index private surfaces or stale services-era pages.
   exclude: [
     "/dashboard",
     "/dashboard/*",
@@ -19,6 +18,12 @@ module.exports = {
     "/apple-icon",
     "/opengraph-image",
     "/twitter-image",
+    // Services pages (legacy contracting-shop framing) — kept alive
+    // for direct traffic but de-indexed via /services/layout.tsx
+    // robots metadata. Excluded from sitemap so we don't tell Google
+    // about pages we're simultaneously asking it not to index.
+    "/services",
+    "/services/*",
   ],
   additionalPaths: async (config) => {
     const { alternatives } = await import("./src/content/alternatives.ts");
