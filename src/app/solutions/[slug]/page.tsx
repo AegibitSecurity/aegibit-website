@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { SOLUTIONS, findSolution } from "@/content/solutions";
 import { SolutionPage } from "@/components/sections/solutions/SolutionPage";
 
@@ -97,7 +99,9 @@ export default async function SolutionDynamicPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      <Navbar />
       <SolutionPage solution={solution} />
+      <Footer />
     </>
   );
 }

@@ -8,11 +8,11 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Platform", href: "/features" },
-  { label: "PayMint",  href: "/products/paymint" },
-  { label: "Security", href: "/security" },
-  { label: "Pricing",  href: "/pricing"  },
-  { label: "Contact",  href: "/contact"  },
+  { label: "PayMint",   href: "/products/paymint" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Pricing",   href: "/pricing"  },
+  { label: "Security",  href: "/security" },
+  { label: "Contact",   href: "/contact"  },
 ];
 
 export function Navbar() {

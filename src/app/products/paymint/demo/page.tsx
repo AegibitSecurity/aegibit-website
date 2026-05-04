@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { PayMintDemoForm } from "@/components/sections/paymint/PayMintDemoForm";
 
 export const metadata: Metadata = {
@@ -18,5 +20,13 @@ export const metadata: Metadata = {
 };
 
 export default function PayMintDemoPage() {
-  return <PayMintDemoForm />;
+  return (
+    <>
+      <Navbar />
+      <main>
+        <PayMintDemoForm />
+      </main>
+      <Footer />
+    </>
+  );
 }

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { PayMintHero } from "@/components/sections/paymint/PayMintHero";
 import { PayMintFeatures } from "@/components/sections/paymint/PayMintFeatures";
 import { PayMintSecurity } from "@/components/sections/paymint/PayMintSecurity";
@@ -39,12 +41,16 @@ export const metadata: Metadata = {
 export default function PayMintPage() {
   return (
     <>
-      <PayMintHero />
-      <PayMintFeatures />
-      <PayMintSecurity />
-      <PayMintScreenshots />
-      <PayMintCustomer />
-      <PayMintCTA />
+      <Navbar />
+      <main>
+        <PayMintHero />
+        <PayMintFeatures />
+        <PayMintSecurity />
+        <PayMintScreenshots />
+        <PayMintCustomer />
+        <PayMintCTA />
+      </main>
+      <Footer />
     </>
   );
 }
