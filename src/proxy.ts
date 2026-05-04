@@ -27,13 +27,18 @@ export function proxy(req: NextRequest) {
   if (host === CANONICAL_HOST) return NextResponse.next();
 
   // Redirect any vercel.app preview/production hostname to the canonical
-  // domain, preserving path + query string verbatim.
+  // domain, preserving path + query string verbatim. Also stamp a noindex
+  // robots header on the redirect response itself — belt-and-braces signal
+  // to Googlebot that even if it doesn't follow the 308 immediately, the
+  // vercel.app URL must drop out of the index.
   if (host.endsWith(".vercel.app")) {
     const url = req.nextUrl.clone();
     url.host = CANONICAL_HOST;
     url.protocol = "https:";
     url.port = "";
-    return NextResponse.redirect(url, 308);
+    const res = NextResponse.redirect(url, 308);
+    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+    return res;
   }
 
   // Apex aegibit.com → www.aegibit.com (single canonical, helps SEO).
