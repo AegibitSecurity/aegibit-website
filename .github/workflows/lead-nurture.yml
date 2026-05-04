@@ -1,0 +1,52 @@
+name: Lead Nurture (AEGIS)
+
+on:
+  schedule:
+    - cron: "15 */6 * * *"   # every 6h, 15 min off the hour to dodge GH cron pile-up
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lead-nurture
+  cancel-in-progress: false
+
+jobs:
+  killswitch:
+    runs-on: ubuntu-latest
+    outputs:
+      paused: ${{ steps.c.outputs.paused }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: c
+        run: |
+          if [ -f automation/PAUSE ]; then echo "paused=true" >> $GITHUB_OUTPUT;
+          else echo "paused=false" >> $GITHUB_OUTPUT; fi
+
+  nurture:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with: { token: ${{ secrets.GITHUB_TOKEN }} }
+      - uses: actions/setup-node@v6
+        with: { node-version: "20" }
+      - run: npm install --no-save resend
+      - name: Run nurture sweep
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: node automation/scripts/lead-nurture.mjs
+      - name: Persist nurture state
+        run: |
+          if ! git diff --quiet automation/state.json; then
+            git config user.name "AEGIS Bot"
+            git config user.email "contact@aegibit.com"
+            git add automation/state.json
+            git commit -m "chore(automation): nurture state"
+            git pull --rebase origin main || true
+            git push origin HEAD:main || true
+          fi

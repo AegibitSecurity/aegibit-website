@@ -11,6 +11,7 @@ This directory keeps the AEGIBIT website upgrading itself 24/7 — even when Rah
 | `friday-pdf.yml` | Fridays 21:00 IST | **Generates weekend build-plan PDF and emails Rahul** |
 | `monthly-automation.yml` | 1st @ 02:00 UTC | Revenue report, cost audit |
 | `security.yml` | 06:00 UTC daily + on dep change | CodeQL, OSV, Gitleaks, npm audit auto-fix PR |
+| `lead-nurture.yml` | every 6h | 4-step email follow-up for new leads (PayMint + default flavours) |
 
 ## Files
 

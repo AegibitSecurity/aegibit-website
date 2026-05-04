@@ -12,6 +12,7 @@
     "automation:seo-audit": "node automation/scripts/seo-audit.mjs",
     "automation:ping": "node automation/scripts/ping-search-engines.mjs",
     "automation:health": "node automation/scripts/lead-health-check.mjs",
+    "automation:nurture": "node automation/scripts/lead-nurture.mjs",
     "automation:competitors": "node automation/scripts/competitor-watch.mjs",
     "automation:friday-pdf": "node automation/scripts/friday-pdf.mjs",
     "automation:daily": "npm run automation:blog && npm run automation:seo-pages && npm run automation:seo-audit"
