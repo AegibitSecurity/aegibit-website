@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-03T09:00:02.637Z",
+      "timestamp": "2026-05-04T10:34:25.122Z",
       "success": true,
-      "durationMs": 4
+      "durationMs": 9
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-03T09:00:02.684Z",
+      "timestamp": "2026-05-04T10:34:25.171Z",
       "success": true,
-      "durationMs": 7
+      "durationMs": 6
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -28,8 +28,8 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 32,
-    "blogPostsPublished": 7,
+    "pagesGenerated": 37,
+    "blogPostsPublished": 8,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -40,7 +40,8 @@
       "How to Build a HIPAA-Compliant Web App in 2026",
       "The Complete Guide to Secure Mobile App Authentication",
       "SOC 2 Type II for Bootstrapped SaaS — A Practical Path",
-      "Ransomware in 2026: What Web Devs Need to Know"
+      "Ransomware in 2026: What Web Devs Need to Know",
+      "API Security: 7 Patterns That Stop 90% of Attacks"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
@@ -74,7 +75,12 @@
       "website-development-for-insurance",
       "app-development-for-insurance",
       "website-development-for-banking",
-      "app-development-for-banking"
+      "app-development-for-banking",
+      "website-development-for-pharma",
+      "app-development-for-pharma",
+      "website-development-for-automotive",
+      "app-development-for-automotive",
+      "website-development-for-construction"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
