@@ -108,48 +108,50 @@ export function HeroSection() {
           maxWidth: "820px",
         }}
       >
-        {/* Line 1 — warm white */}
+        {/* Line 1 — warm white. Two-word setup leading to the kicker. */}
         <span
           style={{
             display: "block",
             color: "#EAEAEA",
           }}
         >
-          Software built like a vault.
+          Built to
         </span>
 
-        {/* Line 2 — gradient: white → orange → white, padded to show descenders */}
+        {/* Line 2 — gradient: white → orange → white. The kicker word.
+            "Outlast" carries durability + decades + cybersec survival. */}
         <span
           style={{
             display: "block",
-            /* Extra padding prevents "g" descender from being clipped by background-clip */
+            /* Extra padding prevents descender clipping by background-clip */
             paddingBottom: "0.15em",
             lineHeight: 1.15,
-            background: "linear-gradient(90deg, #fff 0%, #f97316 35%, #ff8a3d 65%, #fff 100%)",
+            background:
+              "linear-gradient(90deg, #fff 0%, #f97316 35%, #ff8a3d 65%, #fff 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
             color: "transparent",
           }}
         >
-          For businesses that can&apos;t afford a leak.
+          outlast.
         </span>
       </h1>
 
-      {/* Subtext — company-level positioning, not product pitch */}
+      {/* Subtext — three short statements that earn the "outlast" claim. */}
       <p
         className="fade-up delay-3 mb-10"
         style={{
           color: "#A1A1AA",
           fontSize: "1.05rem",
           lineHeight: 1.65,
-          maxWidth: "620px",
+          maxWidth: "600px",
           margin: "0 auto 2.5rem",
         }}
       >
-        AEGIBIT is a cybersecurity-first software company building operational
-        platforms for multi-branch businesses, dealerships, and mission-critical
-        SMEs. Real-time. Audit-grade. Engineered to run for decades.
+        We build operational software for businesses that can&apos;t afford a leak.
+        Cybersecurity-first. Real-time across every branch. Engineered to run for
+        decades — long after the trends pass.
       </p>
 
       {/* CTAs — company-level: explore products grid + talk to founder.
