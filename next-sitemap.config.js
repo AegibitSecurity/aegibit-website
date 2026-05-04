@@ -42,6 +42,13 @@ module.exports = {
       // ── Case studies — pillar SEO authority assets. ─────────────────
       { loc: "/case-studies/nibir-motors", changefreq: "monthly", priority: 0.9 },
 
+      // ── Comparison pages — high-intent acquisition keywords. ───────
+      ...(await import("./src/content/comparisons.ts")).COMPARISONS.map((c) => ({
+        loc: `/compare/${c.slug}`,
+        changefreq: "monthly",
+        priority: 0.92,
+      })),
+
       // ── PayMint solution / SEO landing pages — high priority because
       //    these are designed to acquire intent traffic. ───────────────
       ...SOLUTIONS.map((s) => ({
