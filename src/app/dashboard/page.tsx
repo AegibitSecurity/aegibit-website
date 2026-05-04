@@ -37,7 +37,7 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-[#F9FAFB]">Overview</h1>
         <p className="text-[#6B7280] text-sm mt-1">Real-time visitor and lead intelligence</p>
