@@ -5,11 +5,12 @@ import { leadSchema, sanitizeString } from "@/lib/validators";
 import { checkRateLimit, leadLimiter } from "@/lib/rate-limiter";
 
 const SOURCE_LABELS: Record<string, string> = {
-  waitlist:     "Waitlist Signup",
-  contact:      "Contact Form",
-  demo:         "Demo Request",
-  exit_intent:  "Exit Intent Popup",
-  paymint_demo: "PayMint Demo Request",
+  waitlist:           "Waitlist Signup",
+  contact:            "Contact Form",
+  demo:               "Demo Request",
+  exit_intent:        "Exit Intent Popup",
+  paymint_demo:       "PayMint Demo Request",
+  voicecore_waitlist: "VoiceCore Early Access",
 };
 
 // Confirmation email sent to the lead themselves so they know the request

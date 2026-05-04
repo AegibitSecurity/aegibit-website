@@ -38,6 +38,7 @@ module.exports = {
       //    silently drops a flagship landing page from the index). ────
       { loc: "/products/paymint",      changefreq: "weekly",  priority: 0.95 },
       { loc: "/products/paymint/demo", changefreq: "monthly", priority: 0.85 },
+      { loc: "/products/voicecore",    changefreq: "weekly",  priority: 0.9  },
 
       // ── Case studies — pillar SEO authority assets. ─────────────────
       { loc: "/case-studies/nibir-motors", changefreq: "monthly", priority: 0.9 },

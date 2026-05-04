@@ -7,7 +7,7 @@ export const leadSchema = z.object({
   phone:     z.string().max(20).optional(),
   teamSize:  z.string().max(20).optional(),
   message:   z.string().max(2000).optional(),
-  source:    z.enum(["waitlist", "contact", "demo", "exit_intent", "paymint_demo"]),
+  source:    z.enum(["waitlist", "contact", "demo", "exit_intent", "paymint_demo", "voicecore_waitlist"]),
   page:      z.string().max(500),
   visitorId: z.string().uuid().optional(),
 });
