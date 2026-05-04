@@ -2,16 +2,15 @@ import { Navbar }           from "@/components/layout/Navbar";
 import { Footer }           from "@/components/layout/Footer";
 import { HeroSection }      from "@/components/sections/HeroSection";
 import { TrustStrip }       from "@/components/sections/TrustStrip";
+import { HomeProducts }     from "@/components/sections/HomeProducts";
 import { WhatWeDo }         from "@/components/sections/WhatWeDo";
-import { ProductHighlight } from "@/components/sections/ProductHighlight";
 import { ProofSection }     from "@/components/sections/ProofSection";
 import { HomeCTA }          from "@/components/sections/HomeCTA";
 import { ClientFloatingElements } from "@/components/shared/ClientFloatingElements";
 
-// Structured data for Google Knowledge Graph + Rich Results.
-// PayMint is positioned as the flagship SoftwareApplication (currently in
-// market, with a real customer); VoiceCore is referenced as a sibling
-// product but kept out of pricing claims until it ships.
+// Structured data — AEGIBIT-the-company is the primary entity. PayMint
+// is one of multiple products in the catalogue; the Organization carries
+// brand identity and the SoftwareApplication carries product specifics.
 const HOME_JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -19,16 +18,53 @@ const HOME_JSON_LD = {
       "@type": "Organization",
       "@id": "https://www.aegibit.com/#org",
       name: "AEGIBIT Security",
+      alternateName: "AEGIBIT",
       url: "https://www.aegibit.com",
       logo: "https://www.aegibit.com/icon.svg",
+      slogan: "Securing Tomorrow, Today",
       description:
-        "AEGIBIT builds operational software for dealerships and multi-branch SMEs. Cybersecurity-first by design.",
+        "AEGIBIT is a cybersecurity-first software company building operational platforms for multi-branch businesses, dealerships, and mission-critical SMEs.",
+      foundingDate: "2024",
       sameAs: [],
       contactPoint: {
         "@type": "ContactPoint",
         email: "contact@aegibit.com",
         contactType: "sales",
         areaServed: "IN",
+      },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "AEGIBIT Products",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "SoftwareApplication",
+              name: "PayMint",
+              url: "https://www.aegibit.com/products/paymint",
+              description:
+                "Multi-branch expense automation with branch-coded vouchers, role-based approvals, and Tally-ready exports.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "SoftwareApplication",
+              name: "VoiceCore",
+              description:
+                "Voice-first business operations platform with biometric auth — early access.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "SoftwareApplication",
+              name: "Aira AI",
+              description:
+                "AI co-founder embedded across every AEGIBIT product — anomaly detection, forecasting, natural-language ops.",
+            },
+          },
+        ],
       },
     },
     {
@@ -42,12 +78,19 @@ const HOME_JSON_LD = {
       description:
         "Multi-branch expense management with real-time sync, branch-coded vouchers, role-based approvals, audit-grade logging, and Tally-ready exports. Built by a cybersecurity company.",
       author: { "@id": "https://www.aegibit.com/#org" },
+      brand: { "@id": "https://www.aegibit.com/#org" },
       offers: {
         "@type": "Offer",
         priceCurrency: "INR",
-        price: "0",
+        price: "999",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: "999",
+          priceCurrency: "INR",
+          unitText: "branch/month",
+        },
         availability: "https://schema.org/InStock",
-        description: "Demo available on request",
+        description: "₹999 per branch per month. Free 14-day pilot available.",
       },
       featureList: [
         "Multi-branch expense tracking",
@@ -74,8 +117,8 @@ export default function HomePage() {
       <main>
         {/* 1 */ }<HeroSection />
         {/* 2 */ }<TrustStrip />
-        {/* 3 */ }<WhatWeDo />
-        {/* 4 */ }<ProductHighlight />
+        {/* 3 */ }<HomeProducts />
+        {/* 4 */ }<WhatWeDo />
         {/* 5 */ }<ProofSection />
         {/* 6 */ }<HomeCTA />
       </main>
