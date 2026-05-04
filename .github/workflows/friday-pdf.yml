@@ -38,7 +38,7 @@ jobs:
           REPORT_TO: contact@aegibit.com
         run: node automation/scripts/send-friday-report.mjs
       - name: Archive PDF as workflow artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: weekend-build-plan-${{ github.run_id }}
           path: automation/reports/*.pdf
