@@ -2,14 +2,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/shared/Logo";
-import { BarChart3, Users, Mail, Settings, Home, Activity } from "lucide-react";
+import { BarChart3, Users, Mail, Settings, Home, Sparkles, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/dashboard",            icon: Home,      label: "Overview" },
+  { href: "/dashboard/aira",       icon: Sparkles,  label: "Aira Ops" },
+  { href: "/dashboard/outbound",   icon: Send,      label: "Outbound" },
+  { href: "/dashboard/leads",      icon: Mail,      label: "Leads" },
   { href: "/dashboard/visitors",   icon: Users,     label: "Visitors" },
   { href: "/dashboard/analytics",  icon: BarChart3, label: "Analytics" },
-  { href: "/dashboard/leads",      icon: Mail,      label: "Leads" },
   { href: "/dashboard/settings",   icon: Settings,  label: "Settings" },
 ];
 

@@ -34,6 +34,9 @@ module.exports = {
       { loc: "/products/paymint",      changefreq: "weekly",  priority: 0.95 },
       { loc: "/products/paymint/demo", changefreq: "monthly", priority: 0.85 },
 
+      // ── Case studies — pillar SEO authority assets. ─────────────────
+      { loc: "/case-studies/nibir-motors", changefreq: "monthly", priority: 0.9 },
+
       // ── PayMint solution / SEO landing pages — high priority because
       //    these are designed to acquire intent traffic. ───────────────
       ...SOLUTIONS.map((s) => ({
