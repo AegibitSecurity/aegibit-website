@@ -6,7 +6,7 @@ import { AiraLanding } from "@/components/sections/aira/AiraLanding";
 export const metadata: Metadata = {
   title: "Aira — Your Voice. Built Into Execution. | AEGIBIT",
   description:
-    "Aira is AEGIBIT's voice-first AI co-founder. Wake her with your voice; she opens apps, drafts messages, schedules reminders, and acts on your tools — in Hindi, Bengali, English, and four more Indian languages. Voice biometric secured. Local-first. Reserve early access.",
+    "Aira is AEGIBIT's voice-first AI co-founder. Free download for Windows. Wake her with your voice; she opens apps, drafts messages, schedules reminders, and acts on your tools — in Hindi, Bengali, English, and four more Indian languages. Voice biometric secured. Local-first.",
   keywords: [
     "Aira",
     "AEGIBIT Aira",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Aira — Your Voice. Built Into Execution.",
     description:
-      "AEGIBIT's voice-first AI co-founder. Wake her with your voice; she opens apps, drafts messages, schedules reminders, acts. Hindi · Bengali · English · 4 more.",
+      "AEGIBIT's voice-first AI co-founder. Free download for Windows. Wake her with your voice; she opens apps, drafts messages, schedules reminders, acts. Hindi · Bengali · English · 4 more.",
     type: "website",
     url: "https://www.aegibit.com/products/aira",
     siteName: "AEGIBIT",

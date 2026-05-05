@@ -27,12 +27,19 @@ import {
  * find a meaningful next step from this single section.
  */
 
+type ProductStatus =
+  | "LIVE"
+  | "EARLY ACCESS"
+  | "EMBEDDED"
+  | "COMING 2026"
+  | "FREE · WINDOWS";
+
 interface Product {
   id: string;
   name: string;
   tagline: string;
   description: string;
-  status: "LIVE" | "EARLY ACCESS" | "EMBEDDED" | "COMING 2026";
+  status: ProductStatus;
   icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
   iconColor: string;
   href: string;
@@ -59,12 +66,12 @@ const PRODUCTS: Product[] = [
     name: "Aira",
     tagline: "Your voice. Built into execution.",
     description:
-      "Aira is your voice-first AI co-founder — wake her with your voice and she opens apps, drafts messages, schedules reminders, and acts on your tools. Hindi, Bengali, English. Voice biometric. Local-first by design.",
-    status: "EARLY ACCESS",
+      "Voice-first AI co-founder by AEGIBIT. Free desktop download for Windows — wake her with your voice and she opens apps, drafts messages, schedules reminders, and acts on your tools. Hindi, Bengali, English. Voice biometric. Local-first.",
+    status: "FREE · WINDOWS",
     icon: Mic,
     iconColor: "#60A5FA",
     href: "/products/aira",
-    ctaLabel: "Discover Aira",
+    ctaLabel: "Download Aira free",
   },
   {
     id: "aira-inside",
@@ -167,11 +174,12 @@ export function HomeProducts() {
 function ProductCard({ product }: { product: Product }) {
   const { name, tagline, description, status, icon: Icon, iconColor, href, ctaLabel, highlighted } = product;
 
-  const statusConfig: Record<Product["status"], { bg: string; fg: string; pulse: boolean }> = {
-    "LIVE":          { bg: "rgba(16,185,129,0.10)", fg: "#10B981", pulse: true },
-    "EARLY ACCESS":  { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: false },
-    "EMBEDDED":      { bg: "rgba(168,85,247,0.10)", fg: "#A855F7", pulse: false },
-    "COMING 2026":   { bg: "rgba(255,255,255,0.05)", fg: "#71717A", pulse: false },
+  const statusConfig: Record<ProductStatus, { bg: string; fg: string; pulse: boolean }> = {
+    "LIVE":            { bg: "rgba(16,185,129,0.10)", fg: "#10B981", pulse: true },
+    "EARLY ACCESS":    { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: false },
+    "EMBEDDED":        { bg: "rgba(168,85,247,0.10)", fg: "#A855F7", pulse: false },
+    "COMING 2026":     { bg: "rgba(255,255,255,0.05)", fg: "#71717A", pulse: false },
+    "FREE · WINDOWS":  { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: true  },
   };
   const s = statusConfig[status];
 

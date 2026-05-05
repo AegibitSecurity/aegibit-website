@@ -17,7 +17,22 @@ import {
   Brain,
   Workflow,
   Crown,
+  Download,
+  MonitorSmartphone,
+  Building2,
+  Check,
 } from "lucide-react";
+
+// ── Public download metadata ─────────────────────────────────────
+// AiraSetup.exe is published as a GitHub Release asset on
+// AegibitSecurity/aegibit-website. The /latest/download/{name} URL
+// auto-redirects to whichever release is most recent, so this URL
+// stays stable across version bumps as long as the asset filename
+// remains "AiraSetup.exe".
+const AIRA_DOWNLOAD_URL =
+  "https://github.com/AegibitSecurity/aegibit-website/releases/latest/download/AiraSetup.exe";
+const AIRA_VERSION = "v1.0.0";
+const AIRA_PLATFORM = "Windows 10 / 11 (64-bit)";
 
 /**
  * Aira — AEGIBIT's voice-first AI co-founder.
@@ -39,6 +54,7 @@ export function AiraLanding() {
       <Capabilities />
       <LanguagesSection />
       <UseCases />
+      <Pricing />
       <Waitlist />
       <FAQ />
     </div>
@@ -150,7 +166,7 @@ function Hero() {
 
           <div className="flex flex-col sm:flex-row gap-3">
             <a
-              href="#waitlist"
+              href={AIRA_DOWNLOAD_URL}
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: "linear-gradient(135deg, #3B82F6, #1D4ED8)",
@@ -159,11 +175,11 @@ function Hero() {
                   "0 0 0 1px rgba(59,130,246,0.30), 0 10px 30px rgba(59,130,246,0.25)",
               }}
             >
-              <Sparkles size={18} />
-              Reserve Aira Pro
+              <Download size={18} />
+              Download for Windows · Free
             </a>
             <a
-              href="#capabilities"
+              href="#waitlist"
               className="inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl text-base transition-all duration-300"
               style={{
                 background: "transparent",
@@ -171,16 +187,17 @@ function Hero() {
                 border: "1px solid rgba(255,255,255,0.20)",
               }}
             >
-              See what she can do
+              Reserve Aira Pro
               <ArrowRight size={18} />
             </a>
           </div>
 
           {/* Micro-trust strip */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8">
+            <TrustChip icon={MonitorSmartphone} label={AIRA_PLATFORM} />
             <TrustChip icon={ShieldCheck} label="Voice biometric" />
             <TrustChip icon={Languages} label="7 Indian languages" />
-            <TrustChip icon={Lock} label="Local-first by design" />
+            <TrustChip icon={Lock} label="Local-first" />
           </div>
         </motion.div>
 
@@ -584,6 +601,306 @@ function UseCases() {
   );
 }
 
+// ── PRICING / TIERS ───────────────────────────────────────────────
+
+interface Tier {
+  name: string;
+  price: string;
+  priceSuffix?: string;
+  tagline: string;
+  features: string[];
+  ctaLabel: string;
+  ctaHref: string;
+  ctaIcon: React.ComponentType<{ size?: number }>;
+  status?: { label: string; color: string };
+  highlighted?: boolean;
+  iconColor: string;
+  ctaExternal?: boolean;
+}
+
+const TIERS: Tier[] = [
+  {
+    name: "Aira",
+    price: "Free",
+    priceSuffix: "forever",
+    tagline: "The full desktop co-founder. Yours to keep.",
+    features: [
+      "Wake-word voice activation",
+      "Voice biometric authentication",
+      "7 Indian languages, native voice",
+      "30+ executor verbs (apps, files, windows, browser)",
+      "Local LLM (Ollama, included)",
+      "Local memory + reminders",
+      "100% local — no cloud, no account",
+    ],
+    ctaLabel: "Download for Windows",
+    ctaHref: AIRA_DOWNLOAD_URL,
+    ctaIcon: Download,
+    ctaExternal: true,
+    status: { label: `Available now · ${AIRA_VERSION}`, color: "#10B981" },
+    iconColor: "#60A5FA",
+  },
+  {
+    name: "Aira Pro",
+    price: "Coming",
+    priceSuffix: "Q3 2026",
+    tagline: "Cloud brain, memory sync, integrations.",
+    features: [
+      "Everything in Aira (Free)",
+      "Cloud brain — Claude / GPT routed for hard reasoning",
+      "Aira Cloud Memory — sync across devices",
+      "Native integrations (Gmail, Calendar, Slack, Notion)",
+      "Companion mobile app for reminders on the go",
+      "Priority support, founder channel access",
+      "Permanent founder pricing on GA",
+    ],
+    ctaLabel: "Reserve my Aira Pro",
+    ctaHref: "#waitlist",
+    ctaIcon: Sparkles,
+    status: { label: "Founder waitlist open", color: "#60A5FA" },
+    highlighted: true,
+    iconColor: "#60A5FA",
+  },
+  {
+    name: "Aira Sovereign",
+    price: "Custom",
+    tagline: "For enterprises, BFSI & call centers.",
+    features: [
+      "Everything in Aira Pro",
+      "India data residency (AWS Mumbai / Hyderabad)",
+      "Multi-tenant deployment, dedicated infra",
+      "SSO, audit logs, compliance reports",
+      "Custom voice biometric models",
+      "Bulk voice automation for call centers",
+      "White-glove onboarding & SLAs",
+    ],
+    ctaLabel: "Talk to sales",
+    ctaHref: "/contact?product=aira-sovereign",
+    ctaIcon: Building2,
+    status: { label: "Talk to founders", color: "#A855F7" },
+    iconColor: "#A855F7",
+  },
+];
+
+function Pricing() {
+  return (
+    <section
+      id="pricing"
+      className="py-24 md:py-32 px-6 lg:px-12 relative overflow-hidden"
+      style={{ background: "#000" }}
+    >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 40% at 50% 30%, rgba(59,130,246,0.05) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <p
+            className="text-[11px] uppercase mb-4 font-medium"
+            style={{ color: "#60A5FA", letterSpacing: "0.3em" }}
+          >
+            Aira tiers
+          </p>
+          <h2
+            className="font-light leading-tight max-w-3xl mx-auto"
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#fff" }}
+          >
+            Free today.{" "}
+            <span
+              style={{
+                background:
+                  "linear-gradient(135deg, #fff 0%, #60A5FA 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Yours forever.
+            </span>
+          </h2>
+          <p
+            className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mt-5"
+            style={{ color: "#A1A1AA" }}
+          >
+            Aira (Free) is the complete desktop co-founder — no signup, no
+            account, no asterisk. Pro adds the cloud brain. Sovereign is for
+            regulated industries.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-5 md:gap-6">
+          {TIERS.map((t) => (
+            <TierCard key={t.name} tier={t} />
+          ))}
+        </div>
+
+        {/* Reassurance line */}
+        <p
+          className="text-center text-xs mt-10 max-w-xl mx-auto"
+          style={{ color: "#52525B" }}
+        >
+          The desktop version of Aira will remain free forever. Paid tiers add
+          cloud, sync, integrations, and enterprise features — never paywall
+          what already works on your machine.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function TierCard({ tier }: { tier: Tier }) {
+  const Icon = tier.ctaIcon;
+  const isExternal = tier.ctaExternal;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.55 }}
+      className="rounded-2xl p-7 md:p-8 flex flex-col"
+      style={{
+        background: tier.highlighted
+          ? "linear-gradient(180deg, rgba(59,130,246,0.10) 0%, #0a0a0a 60%)"
+          : "#0D0D0D",
+        border: tier.highlighted
+          ? "1px solid rgba(59,130,246,0.35)"
+          : "1px solid rgba(255,255,255,0.07)",
+        boxShadow: tier.highlighted
+          ? "0 0 0 1px rgba(59,130,246,0.15), 0 30px 60px rgba(0,0,0,0.4), 0 0 60px rgba(59,130,246,0.10)"
+          : "none",
+        minHeight: 480,
+      }}
+    >
+      {/* Status pill */}
+      {tier.status && (
+        <div
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full self-start mb-5"
+          style={{
+            background: `${tier.status.color}15`,
+            border: `1px solid ${tier.status.color}30`,
+          }}
+        >
+          <span className="relative flex h-1.5 w-1.5">
+            <span
+              className="ping-green absolute inline-flex h-full w-full rounded-full opacity-75"
+              style={{ background: tier.status.color }}
+            />
+            <span
+              className="relative inline-flex rounded-full h-1.5 w-1.5"
+              style={{ background: tier.status.color }}
+            />
+          </span>
+          <span
+            className="text-[10px] uppercase font-bold"
+            style={{ color: tier.status.color, letterSpacing: "0.12em" }}
+          >
+            {tier.status.label}
+          </span>
+        </div>
+      )}
+
+      {/* Name + price */}
+      <h3
+        className="text-2xl font-light mb-1"
+        style={{ color: "#fff", letterSpacing: "-0.01em" }}
+      >
+        {tier.name}
+      </h3>
+      <div className="flex items-baseline gap-2 mb-2">
+        <span
+          className="text-3xl font-light"
+          style={{
+            background: tier.highlighted
+              ? "linear-gradient(135deg, #fff 0%, #60A5FA 100%)"
+              : "none",
+            WebkitBackgroundClip: tier.highlighted ? "text" : "unset",
+            WebkitTextFillColor: tier.highlighted ? "transparent" : "#fff",
+            backgroundClip: tier.highlighted ? "text" : "unset",
+            color: tier.highlighted ? undefined : "#fff",
+          }}
+        >
+          {tier.price}
+        </span>
+        {tier.priceSuffix && (
+          <span className="text-sm" style={{ color: "#71717A" }}>
+            {tier.priceSuffix}
+          </span>
+        )}
+      </div>
+      <p className="text-sm mb-6" style={{ color: "#A1A1AA" }}>
+        {tier.tagline}
+      </p>
+
+      {/* Features */}
+      <ul className="space-y-2.5 flex-1 mb-7">
+        {tier.features.map((f) => (
+          <li key={f} className="flex items-start gap-2.5">
+            <Check
+              size={16}
+              style={{
+                color: tier.iconColor,
+                flexShrink: 0,
+                marginTop: 2,
+              }}
+              strokeWidth={2.4}
+            />
+            <span className="text-sm leading-relaxed" style={{ color: "#E4E4E7" }}>
+              {f}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA */}
+      {isExternal ? (
+        <a
+          href={tier.ctaHref}
+          className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5"
+          style={{
+            background: tier.highlighted
+              ? "linear-gradient(135deg, #3B82F6, #1D4ED8)"
+              : "rgba(59,130,246,0.10)",
+            color: "#fff",
+            border: tier.highlighted
+              ? "none"
+              : "1px solid rgba(59,130,246,0.30)",
+            boxShadow: tier.highlighted
+              ? "0 0 0 1px rgba(59,130,246,0.30), 0 10px 30px rgba(59,130,246,0.25)"
+              : "none",
+          }}
+        >
+          <Icon size={16} />
+          {tier.ctaLabel}
+        </a>
+      ) : (
+        <Link
+          href={tier.ctaHref}
+          className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5"
+          style={{
+            background: tier.highlighted
+              ? "linear-gradient(135deg, #3B82F6, #1D4ED8)"
+              : "rgba(59,130,246,0.10)",
+            color: "#fff",
+            border: tier.highlighted
+              ? "none"
+              : "1px solid rgba(59,130,246,0.30)",
+            boxShadow: tier.highlighted
+              ? "0 0 0 1px rgba(59,130,246,0.30), 0 10px 30px rgba(59,130,246,0.25)"
+              : "none",
+          }}
+        >
+          <Icon size={16} />
+          {tier.ctaLabel}
+        </Link>
+      )}
+    </motion.div>
+  );
+}
+
 // ── WAITLIST FORM ─────────────────────────────────────────────────
 
 function Waitlist() {
@@ -863,8 +1180,8 @@ function Waitlist() {
 
 const FAQS = [
   {
-    q: "When can I actually use Aira?",
-    a: "Early-access invites start rolling out within days of you joining the list. Founder-tier pilot includes 6 months of Aira Pro, direct line to the founders, and a permanent discount on general-availability pricing.",
+    q: "How do I get Aira on my machine?",
+    a: "Download the free Windows installer from this page — Aira (Free) is the full desktop co-founder, ready to use today on Windows 10 or 11 (64-bit). No signup, no account, no asterisk. Aira Pro (cloud brain + sync + integrations) opens in Q3 2026; founder-tier waitlist is open below for early access plus a permanent discount on Pro pricing.",
   },
   {
     q: "What does Aira run on? Is it cloud or local?",
