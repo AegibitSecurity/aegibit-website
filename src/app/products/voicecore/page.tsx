@@ -1,40 +1,18 @@
-import type { Metadata } from "next";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { VoiceCoreLanding } from "@/components/sections/voicecore/VoiceCoreLanding";
+import { redirect, permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "VoiceCore — Voice-First Business Operations | AEGIBIT",
-  description:
-    "VoiceCore is AEGIBIT's voice-first operations platform — run your business through natural-language commands in Hindi, Bengali, English. Biometric voice auth. Early access open.",
-  keywords: [
-    "VoiceCore",
-    "voice-first SaaS",
-    "voice biometric authentication",
-    "voice business operations",
-    "AEGIBIT VoiceCore",
-    "Indian language voice AI",
-  ],
-  alternates: { canonical: "/products/voicecore" },
-  openGraph: {
-    title: "VoiceCore — Voice-First Business Operations",
-    description:
-      "Run your business by voice. Hindi, Bengali, English. Biometric auth. Engineered by a cybersecurity company.",
-    type: "website",
-    url: "https://www.aegibit.com/products/voicecore",
-    siteName: "AEGIBIT",
-  },
-  robots: { index: true, follow: true },
-};
-
-export default function VoiceCorePage() {
-  return (
-    <>
-      <Navbar />
-      <main>
-        <VoiceCoreLanding />
-      </main>
-      <Footer />
-    </>
-  );
+/**
+ * /products/voicecore is preserved as a 308 permanent redirect to
+ * /products/aira. VoiceCore was the working title for what is now shipping
+ * as Aira — AEGIBIT's voice-first AI co-founder. All voice-platform marketing
+ * + waitlist capture live at the new canonical URL.
+ *
+ * `permanentRedirect` issues a 308 (vs Next's default 307) so search engines
+ * collapse link equity into the new URL. No content is rendered — Next short
+ * circuits before Navbar / Footer.
+ */
+export default function VoiceCoreRedirect(): never {
+  permanentRedirect("/products/aira");
+  // unreachable, but satisfies the `never` return type hint for clarity
+  // eslint-disable-next-line no-unreachable
+  redirect("/products/aira");
 }

@@ -11,6 +11,7 @@ const SOURCE_LABELS: Record<string, string> = {
   exit_intent:        "Exit Intent Popup",
   paymint_demo:       "PayMint Demo Request",
   voicecore_waitlist: "VoiceCore Early Access",
+  aira_waitlist:      "Aira Early Access",
 };
 
 // Confirmation email sent to the lead themselves so they know the request
