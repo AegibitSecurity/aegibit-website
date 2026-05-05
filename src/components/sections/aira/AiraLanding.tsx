@@ -21,18 +21,22 @@ import {
   MonitorSmartphone,
   Building2,
   Check,
+  FileText,
+  Hash,
 } from "lucide-react";
+import airaVersion from "@/data/aira-version.json";
 
 // ── Public download metadata ─────────────────────────────────────
-// AiraSetup.exe is published as a GitHub Release asset on
-// AegibitSecurity/aegibit-website. The /latest/download/{name} URL
-// auto-redirects to whichever release is most recent, so this URL
-// stays stable across version bumps as long as the asset filename
-// remains "AiraSetup.exe".
-const AIRA_DOWNLOAD_URL =
-  "https://github.com/AegibitSecurity/aegibit-website/releases/latest/download/AiraSetup.exe";
-const AIRA_VERSION = "v1.0.0";
-const AIRA_PLATFORM = "Windows 10 / 11 (64-bit)";
+// Source of truth is src/data/aira-version.json — auto-updated by
+// the Sunday autonomous upgrade session whenever a new release ships.
+// The /latest/download/{name} URL auto-redirects to whichever release
+// is most recent, so the download URL stays stable across version
+// bumps as long as the asset filename remains "AiraSetup.exe".
+const AIRA_DOWNLOAD_URL = airaVersion.downloadUrl;
+const AIRA_VERSION = airaVersion.currentVersion;
+const AIRA_PLATFORM = airaVersion.platform;
+const AIRA_SHA256 = airaVersion.sha256;
+const AIRA_DOWNLOAD_SIZE = `${airaVersion.downloadSizeMB} MB`;
 
 /**
  * Aira — AEGIBIT's voice-first AI co-founder.
@@ -198,6 +202,33 @@ function Hero() {
             <TrustChip icon={ShieldCheck} label="Voice biometric" />
             <TrustChip icon={Languages} label="7 Indian languages" />
             <TrustChip icon={Lock} label="Local-first" />
+          </div>
+
+          {/* Verification + version row */}
+          <div
+            className="flex flex-wrap items-center gap-x-5 gap-y-1.5 mt-4 text-xs"
+            style={{ color: "#71717A" }}
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <Sparkles size={11} style={{ color: "#60A5FA" }} />
+              {AIRA_VERSION} · {AIRA_DOWNLOAD_SIZE}
+            </span>
+            <span
+              className="inline-flex items-center gap-1.5"
+              title={`SHA256: ${AIRA_SHA256}`}
+            >
+              <Hash size={11} />
+              <span style={{ fontFamily: "ui-monospace, monospace" }}>
+                sha256:{AIRA_SHA256.slice(0, 12)}…
+              </span>
+            </span>
+            <Link
+              href="/products/aira/changelog"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+            >
+              <FileText size={11} />
+              Changelog
+            </Link>
           </div>
         </motion.div>
 

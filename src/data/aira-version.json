@@ -1,0 +1,11 @@
+{
+  "_comment": "Static fallback for /products/aira version display. Auto-updated by the Sunday upgrade session. The /products/aira/changelog page hits the GitHub Releases API live; this file is the trust signal on the marketing hero so the page is fast even on cold start.",
+  "currentVersion": "v1.0.0",
+  "releaseDate": "2026-05-06",
+  "downloadSizeMB": 274,
+  "platform": "Windows 10 / 11 (64-bit)",
+  "sha256": "eba191320913d428a5ce4474dc870513e531ea57a9e101d7d6c1921e5e41a591",
+  "downloadUrl": "https://github.com/AegibitSecurity/aegibit-website/releases/latest/download/AiraSetup.exe",
+  "releasesUrl": "https://github.com/AegibitSecurity/aegibit-website/releases?q=aira",
+  "codeSigningStatus": "in_progress"
+}
