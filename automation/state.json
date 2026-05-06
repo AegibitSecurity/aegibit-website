@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-05T09:32:57.706Z",
+      "timestamp": "2026-05-06T10:35:33.763Z",
       "success": true,
       "durationMs": 5
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-05T09:32:57.776Z",
+      "timestamp": "2026-05-06T10:35:33.810Z",
       "success": true,
-      "durationMs": 13
+      "durationMs": 6
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -28,8 +28,8 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 42,
-    "blogPostsPublished": 9,
+    "pagesGenerated": 47,
+    "blogPostsPublished": 10,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -42,7 +42,8 @@
       "SOC 2 Type II for Bootstrapped SaaS — A Practical Path",
       "Ransomware in 2026: What Web Devs Need to Know",
       "API Security: 7 Patterns That Stop 90% of Attacks",
-      "Why We Migrated from JWT to Session Cookies (and You Should Too)"
+      "Why We Migrated from JWT to Session Cookies (and You Should Too)",
+      "Building Audit Logs That Auditors Actually Like"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
@@ -86,7 +87,12 @@
       "website-development-for-agriculture",
       "app-development-for-agriculture",
       "website-development-mumbai",
-      "website-development-bangalore"
+      "website-development-bangalore",
+      "website-development-delhi",
+      "website-development-hyderabad",
+      "website-development-chennai",
+      "website-development-pune",
+      "website-development-kolkata"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
