@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Smartphone, Download, ShieldCheck, Zap, CalendarCheck } from 'lucide-react';
+import { Smartphone, Download, ShieldCheck, Zap, CalendarCheck, FileText } from 'lucide-react';
 
 const PAYMINT_APP_URL = 'https://nibir-vault.web.app';
 const PAYMINT_APK_URL = '/paymint/paymint-latest.apk';
+const PAYMINT_BROCHURE_URL = '/paymint/paymint-brochure.pdf';
 const PAYMINT_DEMO_URL = '/products/paymint/demo';
 
 export function PayMintHero() {
@@ -156,6 +157,24 @@ export function PayMintHero() {
                 <span>Download for Android</span>
                 <span className="text-[11px] font-normal" style={{ color: '#52525B' }}>
                   v1.0 · 6.5 MB · APK
+                </span>
+              </span>
+            </a>
+            <a
+              href={PAYMINT_BROCHURE_URL}
+              download
+              className="group inline-flex items-center justify-center gap-3 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
+              style={{
+                background: 'transparent',
+                color: '#fff',
+                border: '1px solid rgba(255,255,255,0.20)',
+              }}
+            >
+              <FileText size={18} />
+              <span className="flex flex-col items-start leading-tight">
+                <span>Download Brochure</span>
+                <span className="text-[11px] font-normal" style={{ color: '#52525B' }}>
+                  v1.0 · 976 KB · PDF
                 </span>
               </span>
             </a>
