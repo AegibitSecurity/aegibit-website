@@ -8,7 +8,7 @@ export default function VisitorsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/analytics", { headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_DASHBOARD_TOKEN ?? ""}` } })
+    fetch("/api/analytics", { credentials: "include" })
       .then((r) => r.json())
       .then((d) => { setVisitors(d.visitors ?? []); setLoading(false); })
       .catch(() => setLoading(false));

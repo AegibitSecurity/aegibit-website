@@ -21,7 +21,7 @@ import {
  *   • Recent 10 leads with quick actions
  *   • Pipeline health badge (Resend OK, Supabase OK, env-vars OK)
  *
- * Auth via NEXT_PUBLIC_DASHBOARD_TOKEN bearer (existing convention).
+ * Auth via httpOnly session cookie set by /admin/login.
  * Auto-refreshes every 60 seconds for live ops feel.
  */
 
@@ -80,13 +80,10 @@ export default function AiraOpsDashboard() {
 
   async function load() {
     setRefreshing(true);
-    const token = process.env.NEXT_PUBLIC_DASHBOARD_TOKEN ?? "";
-    const headers = { Authorization: `Bearer ${token}` };
-
     try {
       const [leadsRes, healthRes] = await Promise.all([
-        fetch("/api/leads", { headers, cache: "no-store" }).then((r) => r.json()),
-        fetch("/api/admin/health", { headers, cache: "no-store" }).then((r) => r.json()),
+        fetch("/api/leads", { credentials: "include", cache: "no-store" }).then((r) => r.json()),
+        fetch("/api/admin/health", { credentials: "include", cache: "no-store" }).then((r) => r.json()),
       ]);
       setLeads(leadsRes.leads ?? []);
       setHealth(healthRes);

@@ -28,9 +28,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/analytics", {
-      headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_DASHBOARD_TOKEN ?? ""}` },
-    })
+    fetch("/api/analytics", { credentials: "include" })
       .then((r) => r.json())
       .then((d) => { setStats(d); setLoading(false); })
       .catch(() => setLoading(false));
@@ -56,7 +54,7 @@ export default function DashboardPage() {
           Connect Supabase to see live visitor events and lead submissions here.
         </p>
         <p className="text-[#374151] text-xs mt-2 font-mono">
-          Set NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and DASHBOARD_SECRET in .env.local
+          Set NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, SESSION_SECRET, and ADMIN_PASSWORD_HASH in .env.local
         </p>
       </div>
     </div>
