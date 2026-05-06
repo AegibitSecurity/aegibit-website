@@ -9,7 +9,7 @@ export default function LeadsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/leads", { headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_DASHBOARD_TOKEN ?? ""}` } })
+    fetch("/api/leads", { credentials: "include" })
       .then((r) => r.json())
       .then((d) => { setLeads(d.leads ?? []); setLoading(false); })
       .catch(() => setLoading(false));

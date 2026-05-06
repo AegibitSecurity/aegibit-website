@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { getServiceClient } from "@/lib/supabase-admin";
 import { leadSchema, sanitizeString } from "@/lib/validators";
 import { checkRateLimit, leadLimiter } from "@/lib/rate-limiter";
+import { requireAdmin } from "@/lib/auth";
 
 const SOURCE_LABELS: Record<string, string> = {
   waitlist:           "Waitlist Signup",
@@ -234,12 +235,11 @@ export async function POST(req: NextRequest) {
     }),
   ]);
 
-  // Email diagnostics are surfaced to the response when an admin token is
-  // provided (so we can debug from the live form without exposing details
-  // to ordinary users / scrapers).
-  const adminToken = req.headers.get("x-admin-token");
-  const debugAllowed =
-    adminToken && process.env.DASHBOARD_SECRET && adminToken === process.env.DASHBOARD_SECRET;
+  // Email diagnostics are surfaced to the response only for an
+  // authenticated admin session (httpOnly cookie). The previous
+  // x-admin-token header path leaked into client bundles and is gone.
+  const adminGuard = await requireAdmin();
+  const debugAllowed = adminGuard === null;
 
   const response: Record<string, unknown> = { ok: true };
   if (debugAllowed) {
@@ -253,11 +253,9 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(response, { status: 201 });
 }
 
-export async function GET(req: NextRequest) {
-  const authHeader = req.headers.get("authorization");
-  if (authHeader !== `Bearer ${process.env.DASHBOARD_SECRET}`) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+export async function GET() {
+  const guard = await requireAdmin();
+  if (guard) return guard;
 
   const supabase = getServiceClient();
   const { data, error } = await supabase

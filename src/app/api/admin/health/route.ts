@@ -1,34 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase-admin";
+import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 /**
  * /api/admin/health — operator pipeline diagnostic.
  *
- * Auth: Bearer token must equal DASHBOARD_SECRET env var. Single endpoint
- * to verify Supabase connectivity, Resend connectivity, recent lead
- * activity, and email send capability — without polluting production
- * logs with test traffic. Use this anytime the lead funnel feels off.
+ * Auth: cookie session (sign in at /admin/login). Single endpoint to
+ * verify Supabase connectivity, Resend connectivity, recent lead
+ * activity, and email send capability.
  *
  * Optional query params:
  *   ?test_email=you@example.com   → triggers a real Resend send to that
  *                                   address using the same `from` and
  *                                   transport as production lead emails.
- *                                   Shows the unfiltered Resend response
- *                                   (success or full error JSON) so
- *                                   misconfigurations surface in seconds.
  *
- * Curl:
- *   curl -H "Authorization: Bearer $DASHBOARD_SECRET" \
- *     "https://www.aegibit.com/api/admin/health?test_email=you@example.com"
+ * Browser usage: open while signed in to /dashboard.
  */
 export async function GET(req: NextRequest) {
-  // ── Auth gate ──────────────────────────────────────────────────────
-  const auth = req.headers.get("authorization");
-  if (!process.env.DASHBOARD_SECRET || auth !== `Bearer ${process.env.DASHBOARD_SECRET}`) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const guard = await requireAdmin();
+  if (guard) return guard;
 
   const url = new URL(req.url);
   const testEmail = url.searchParams.get("test_email");
@@ -44,7 +36,8 @@ export async function GET(req: NextRequest) {
     NEXT_PUBLIC_SUPABASE_URL: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
     SUPABASE_SERVICE_ROLE_KEY: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
     RESEND_API_KEY: !!process.env.RESEND_API_KEY,
-    DASHBOARD_SECRET: !!process.env.DASHBOARD_SECRET,
+    SESSION_SECRET: !!process.env.SESSION_SECRET,
+    ADMIN_PASSWORD_HASH: !!process.env.ADMIN_PASSWORD_HASH,
   };
 
   // ── Supabase health ────────────────────────────────────────────────

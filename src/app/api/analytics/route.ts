@@ -1,18 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 import { getServiceClient } from "@/lib/supabase-admin";
+import { requireAdmin } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
-  const authHeader = req.headers.get("authorization");
-  if (authHeader !== `Bearer ${process.env.DASHBOARD_SECRET}`) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const guard = await requireAdmin();
+  if (guard) return guard;
 
   const { searchParams } = new URL(req.url);
   const timeframe = searchParams.get("timeframe") ?? "today";
 
   const now = new Date();
-  let since = new Date();
+  const since = new Date();
   if (timeframe === "7d")  since.setDate(now.getDate() - 7);
   else if (timeframe === "30d") since.setDate(now.getDate() - 30);
   else since.setHours(0, 0, 0, 0);
