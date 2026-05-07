@@ -7,6 +7,9 @@
     "build": "next build && next-sitemap",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "automation:blog": "node automation/scripts/generate-blog-post.mjs",
     "automation:seo-pages": "node automation/scripts/generate-seo-pages.mjs --count=5",
     "automation:seo-audit": "node automation/scripts/seo-audit.mjs",
@@ -60,10 +63,12 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.184.0",
+    "@vitest/ui": "^4.1.5",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "prisma": "^7.8.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }

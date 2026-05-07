@@ -34,8 +34,20 @@ export function hashPassword(plaintext: string): string {
 export function verifyPassword(plaintext: string, stored: string): boolean {
   const parts = stored.split(":");
   if (parts.length !== 3 || parts[0] !== "scrypt") return false;
+
+  // Reject hashes whose hex segments aren't actually hex. Buffer.from
+  // silently drops non-hex chars and can produce a 0-byte buffer; an
+  // empty-vs-empty timingSafeEqual returns true and would let any
+  // password authenticate against a malformed stored hash. Belt-and-
+  // braces against a corrupt ADMIN_PASSWORD_HASH env var.
+  const HEX = /^[0-9a-fA-F]+$/;
+  if (!HEX.test(parts[1]) || !HEX.test(parts[2])) return false;
+  if (parts[1].length === 0 || parts[2].length === 0) return false;
+
   const salt = Buffer.from(parts[1], "hex");
   const expected = Buffer.from(parts[2], "hex");
+  if (salt.length === 0 || expected.length === 0) return false;
+
   let actual: Buffer;
   try {
     actual = scryptSync(plaintext, salt, expected.length, {
