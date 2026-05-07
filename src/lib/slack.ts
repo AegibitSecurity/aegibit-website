@@ -75,16 +75,30 @@ export async function sendSlack(msg: SlackMessage): Promise<SlackResult> {
   }
 
   const text = truncate(msg.text);
-  // Slack's "attachments" field gets us color-coded sidebar without
-  // forcing every block consumer to ship attachments-style blocks.
-  const body: Record<string, unknown> = {
-    text,
-    attachments: msg.color
-      ? [{ color: msg.color, blocks: msg.blocks ?? [] }]
-      : msg.blocks
-        ? [{ blocks: msg.blocks }]
-        : undefined,
-  };
+  // Body composition rules — learned the hard way (PR #61):
+  //
+  // Slack rejects `actions` (and a few other block types) when they
+  // appear inside `attachments[].blocks[]`. The webhook returns
+  // `invalid_attachments` and silently drops the whole message. So:
+  //
+  //   - When the caller supplies blocks → put them at TOP LEVEL.
+  //     This is the modern Block Kit path; it supports every block
+  //     type including `actions`. We do not wrap blocks in attachments.
+  //
+  //   - When the caller supplies only color (no blocks) → use the
+  //     legacy text+attachment path so the colored sidebar still works
+  //     for plain notifications (e.g. Aira's agent-failure pings).
+  //
+  //   - When both blocks AND color are supplied → blocks go top-level;
+  //     color is currently ignored. The header block in modern Block
+  //     Kit gives plenty of visual urgency on its own (the 🔥 emoji
+  //     in 🔥 HOT LEAD survives mobile push truncation already).
+  const body: Record<string, unknown> = { text };
+  if (msg.blocks && msg.blocks.length > 0) {
+    body.blocks = msg.blocks;
+  } else if (msg.color) {
+    body.attachments = [{ color: msg.color, fallback: text.slice(0, 100), text }];
+  }
 
   try {
     const res = await fetch(url, {
