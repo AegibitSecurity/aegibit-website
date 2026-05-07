@@ -1,9 +1,8 @@
 "use client";
-import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Check, Calendar, Sparkles, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { TrackedLink } from "@/components/shared/TrackedLink";
 import { motion } from "framer-motion";
 
 /**
@@ -265,8 +264,11 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <Link
+                <TrackedLink
                   href={p.href}
+                  ctaId={`pricing_tier_${p.id}`}
+                  ctaLabel={p.cta}
+                  ctaSection="pricing_tiers"
                   className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
                   style={
                     p.highlight
@@ -285,7 +287,7 @@ export default function PricingPage() {
                 >
                   <Calendar size={16} />
                   {p.cta}
-                </Link>
+                </TrackedLink>
               </motion.div>
             ))}
           </div>
@@ -407,8 +409,11 @@ export default function PricingPage() {
               No credit card. We provision a sandbox branch within 24 hours. You run
               real vouchers across real branches. Decide on day 14.
             </p>
-            <Link
+            <TrackedLink
               href="/products/paymint/demo"
+              ctaId="pricing_bottom_book_demo"
+              ctaLabel="Book Your Demo"
+              ctaSection="pricing_bottom_cta"
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: "linear-gradient(135deg, #F97316, #EA6C0A)",
@@ -418,7 +423,7 @@ export default function PricingPage() {
             >
               <Calendar size={18} />
               Book Your Demo
-            </Link>
+            </TrackedLink>
           </div>
         </section>
       </main>
