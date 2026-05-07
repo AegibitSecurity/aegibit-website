@@ -3,13 +3,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Logo } from "@/components/shared/Logo";
-import { BarChart3, Users, Mail, Settings, Home, Sparkles, Send, Menu, X, GitBranch } from "lucide-react";
+import { BarChart3, Users, Mail, Settings, Home, Sparkles, Send, Menu, X, GitBranch, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/dashboard",            icon: Home,      label: "Overview" },
   { href: "/dashboard/aira",       icon: Sparkles,  label: "Aira Ops" },
   { href: "/dashboard/funnel",     icon: GitBranch, label: "Funnel" },
+  { href: "/dashboard/agents",     icon: Bot,       label: "Agents" },
   { href: "/dashboard/outbound",   icon: Send,      label: "Outbound" },
   { href: "/dashboard/leads",      icon: Mail,      label: "Leads" },
   { href: "/dashboard/visitors",   icon: Users,     label: "Visitors" },
