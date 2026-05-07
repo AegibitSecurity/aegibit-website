@@ -1,12 +1,18 @@
-const BASE = process.env.NEXT_PUBLIC_APP_URL ?? "https://aegibitsecurity.com";
+const BASE = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.aegibit.com";
 
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "AEGIBIT Security",
+  alternateName: "AEGIBIT",
   url: BASE,
-  logo: `${BASE}/og-default.png`,
-  contactPoint: { "@type": "ContactPoint", email: "contact@aegibit.com", contactType: "sales" },
+  logo: `${BASE}/icon.svg`,
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "contact@aegibit.com",
+    contactType: "sales",
+    areaServed: "IN",
+  },
   sameAs: [],
 };
 

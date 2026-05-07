@@ -41,7 +41,7 @@ async function sendEmailNotification(data: {
             <tr><td style="padding:8px 0;color:#9ca3af;vertical-align:top;">Message</td><td style="padding:8px 0;color:#eaeaea;">${sanitizeString(data.message).replace(/\n/g, "<br>")}</td></tr>
           </table>
           <hr style="border-color:#222;margin:24px 0;">
-          <p style="color:#52525b;font-size:12px;margin:0;">Sent from aegibitsecurity.com contact form</p>
+          <p style="color:#52525b;font-size:12px;margin:0;">Sent from www.aegibit.com contact form</p>
         </div>
       `,
     });

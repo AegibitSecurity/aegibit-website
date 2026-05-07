@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://aegibitsecurity.com";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.aegibit.com";
 const SITE_NAME = "AEGIBIT";
 
 export function buildMetadata(opts: {

@@ -37,17 +37,33 @@ export default async function BlogPost({ params }: Props) {
 
   const relatedPosts = blogPosts.filter((p) => p.slug !== slug).slice(0, 3);
 
+  const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.aegibit.com";
+  const postUrl = `${SITE_URL}/blog/${post.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
+        "@id": `${postUrl}#article`,
         headline: post.title,
         description: post.description,
+        url: postUrl,
         datePublished: post.date,
-        author: { "@type": "Organization", name: post.author.name },
-        publisher: { "@type": "Organization", name: "AEGIBIT Security", url: "https://aegibitsecurity.com" },
+        dateModified: post.date,
+        author: {
+          "@type": "Person",
+          name: post.author.name,
+          jobTitle: post.author.title,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "AEGIBIT Security",
+          url: SITE_URL,
+          logo: { "@type": "ImageObject", url: `${SITE_URL}/icon.svg` },
+        },
+        mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
         keywords: post.tags.join(", "),
+        image: `${SITE_URL}/api/og?title=${encodeURIComponent(post.title)}`,
       },
       {
         "@type": "FAQPage",
@@ -60,9 +76,9 @@ export default async function BlogPost({ params }: Props) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "https://aegibitsecurity.com" },
-          { "@type": "ListItem", position: 2, name: "Blog", item: "https://aegibitsecurity.com/blog" },
-          { "@type": "ListItem", position: 3, name: post.title },
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
         ],
       },
     ],
