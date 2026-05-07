@@ -28,17 +28,29 @@ jobs:
     needs: killswitch
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
+    # P2-S4: SITE_URL + DASHBOARD_SECRET feed the agent_actions audit
+    # log via withJob() in automation/scripts/_lib.mjs. If either is
+    # missing the audit silently no-ops.
+    env:
+      SITE_URL:                  https://www.aegibit.com
+      DASHBOARD_SECRET:          ${{ secrets.DASHBOARD_SECRET }}
     steps:
       - uses: actions/checkout@v6
-        with: { token: ${{ secrets.GITHUB_TOKEN }} }
+        with:
+          # Inline-flow form `with: { token: ${{ ... }} }` confuses the
+          # YAML parser (the {{ is read as a nested flow mapping start)
+          # and the entire workflow file silently fails to validate.
+          # Block form is unambiguous; keep it block.
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v6
-        with: { node-version: "20" }
+        with:
+          node-version: "20"
       - run: npm install --no-save resend
       - name: Run nurture sweep
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_URL:              ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_API_KEY:            ${{ secrets.RESEND_API_KEY }}
         run: node automation/scripts/lead-nurture.mjs
       - name: Persist nurture state
         run: |
