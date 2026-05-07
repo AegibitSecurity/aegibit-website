@@ -7,9 +7,12 @@ import { SESSION_COOKIE } from "@/lib/session";
  *
  * Two responsibilities, in order:
  *
- * 1. Canonical-host enforcement
+ * 1. Canonical-host enforcement (PRODUCTION ONLY)
  *    - apex `aegibit.com` → `www.aegibit.com` (308)
  *    - any `*.vercel.app` → `www.aegibit.com` (308 + X-Robots-Tag noindex)
+ *    - Skipped on preview/dev so we can smoke-test PR previews from
+ *      scripts and so localhost continues to work. Production behavior
+ *      is unchanged.
  *
  * 2. Admin gate (defence in depth)
  *    - `/dashboard/*` without session cookie → 303 to /admin/login?from=...
@@ -32,6 +35,8 @@ const PROTECTED_API_PATHS = new Set<string>([
   "/api/admin/health",
 ]);
 
+const IS_PRODUCTION = process.env.VERCEL_ENV === "production";
+
 function hasSessionCookie(req: NextRequest): boolean {
   const cookie = req.cookies.get(SESSION_COOKIE);
   return Boolean(cookie?.value);
@@ -41,22 +46,28 @@ export function proxy(req: NextRequest) {
   const host = (req.headers.get("host") ?? "").toLowerCase();
   const { pathname } = req.nextUrl;
 
-  // ── 1. Canonical-host redirect ─────────────────────────────────────
-  if (host.endsWith(".vercel.app")) {
-    const url = req.nextUrl.clone();
-    url.host = CANONICAL_HOST;
-    url.protocol = "https:";
-    url.port = "";
-    const res = NextResponse.redirect(url, 308);
-    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
-    return res;
-  }
-  if (host === "aegibit.com") {
-    const url = req.nextUrl.clone();
-    url.host = CANONICAL_HOST;
-    url.protocol = "https:";
-    url.port = "";
-    return NextResponse.redirect(url, 308);
+  // ── 1. Canonical-host redirect (production only) ───────────────────
+  // Preview/dev: leave hosts alone so we can curl-test PR previews and
+  // localhost. Preview URLs are protected from search-engine indexing
+  // by Vercel's Deployment Protection auth wall (Googlebot can't crawl
+  // them), so SEO authority is safe even without the redirect.
+  if (IS_PRODUCTION) {
+    if (host.endsWith(".vercel.app")) {
+      const url = req.nextUrl.clone();
+      url.host = CANONICAL_HOST;
+      url.protocol = "https:";
+      url.port = "";
+      const res = NextResponse.redirect(url, 308);
+      res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+      return res;
+    }
+    if (host === "aegibit.com") {
+      const url = req.nextUrl.clone();
+      url.host = CANONICAL_HOST;
+      url.protocol = "https:";
+      url.port = "";
+      return NextResponse.redirect(url, 308);
+    }
   }
 
   // ── 2. Admin gate ──────────────────────────────────────────────────
