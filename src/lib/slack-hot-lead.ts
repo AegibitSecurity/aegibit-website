@@ -44,7 +44,7 @@ function fmtTime(seconds: number): string {
   return m > 0 ? `${m}m ${s}s` : `${s}s`;
 }
 
-function buildHotBlocks(input: NotifyHotLeadInput): SlackBlock[] {
+export function buildHotBlocks(input: NotifyHotLeadInput): SlackBlock[] {
   const j = input.journey;
   const sourceLabel = SOURCE_LABELS[input.source] ?? input.source;
   const identity = input.name
