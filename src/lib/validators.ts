@@ -25,9 +25,33 @@ export const visitorSchema = z.object({
   landingPage: z.string().max(500),
 });
 
+// Event-type taxonomy. Add new types here, never as ad-hoc strings at the
+// call site, so the dashboard funnel queries can rely on a closed enum.
+//   pageview      → route navigation (set automatically per pathname)
+//   scroll        → scroll-depth milestone reached (25/50/75/100)
+//   click         → generic click counter (engagement signal)
+//   cta_click     → ★ named CTA button clicked. event_data carries
+//                    { cta_id, cta_label, target_url? }. The funnel
+//                    pipeline keys on cta_id to attribute conversions.
+//   form_focus    → user first-touched any input on a lead form
+//   form_submit   → form successfully submitted
+//   exit_intent   → mouse-out detected near top of viewport
+//   time_update   → 30-second heartbeat
+export const VISITOR_EVENT_TYPES = [
+  "pageview",
+  "scroll",
+  "click",
+  "cta_click",
+  "form_focus",
+  "form_submit",
+  "exit_intent",
+  "time_update",
+] as const;
+export type VisitorEventType = (typeof VISITOR_EVENT_TYPES)[number];
+
 export const visitorEventSchema = z.object({
   visitorId: z.string().uuid(),
-  eventType: z.enum(["pageview", "scroll", "click", "form_focus", "form_submit", "exit_intent", "time_update"]),
+  eventType: z.enum(VISITOR_EVENT_TYPES),
   eventData: z.record(z.string(), z.unknown()).optional(),
   page:      z.string().max(500),
 });
