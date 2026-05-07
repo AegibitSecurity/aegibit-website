@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
   <!-- Brand -->
   <text x="100" y="320" font-family="system-ui, sans-serif" font-weight="800" font-size="72" fill="white" letter-spacing="-2">${escapeXml(title)}</text>
   <text x="100" y="380" font-family="system-ui, sans-serif" font-weight="400" font-size="28" fill="#A1A1AA">${escapeXml(description)}</text>
-  <text x="100" y="560" font-family="system-ui, sans-serif" font-weight="600" font-size="20" fill="#FF6A00">aegibitsecurity.com</text>
+  <text x="100" y="560" font-family="system-ui, sans-serif" font-weight="600" font-size="20" fill="#FF6A00">www.aegibit.com</text>
 </svg>`;
 
   return new NextResponse(svg, {

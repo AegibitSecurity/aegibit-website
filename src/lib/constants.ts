@@ -1,12 +1,12 @@
 export const SITE = {
-  name: "AEGIBIT VoiceCore",
-  tagline: "Speak. Secure. Execute.",
+  name: "AEGIBIT",
+  tagline: "Built to Outlast.",
   description:
-    "India's first enterprise-grade, security-native AI Voice SaaS platform — built for BFSI, healthcare, and enterprise security teams.",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://aegibitsecurity.com",
-  email: "contact@aegibitsecurity.com",
+    "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast.",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://www.aegibit.com",
+  email: "contact@aegibit.com",
   twitter: "@aegibit",
-  github: "aegibit",
+  github: "AegibitSecurity",
 } as const;
 
 export const NAV_LINKS = [
