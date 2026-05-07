@@ -84,7 +84,7 @@ jobs:
       - run: node automation/scripts/seo-audit.mjs
       - run: node automation/scripts/ping-search-engines.mjs
         env:
-          SITE_URL: https://aegibit-website.vercel.app
+          SITE_URL: https://www.aegibit.com
 
   security-sweep:
     needs: killswitch
@@ -108,7 +108,9 @@ jobs:
       - uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
-            https://aegibit-website.vercel.app
+            https://www.aegibit.com
+            https://www.aegibit.com/products/paymint
+            https://www.aegibit.com/products/aira
           uploadArtifacts: true
           temporaryPublicStorage: true
         continue-on-error: true
