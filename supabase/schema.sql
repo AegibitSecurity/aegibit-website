@@ -102,6 +102,40 @@ create table if not exists waitlist (
 );
 
 -- ─────────────────────────────────────────
+-- AGENT ACTIONS (multi-agent audit log) — P2-S4
+-- ─────────────────────────────────────────
+-- Every autonomous agent action (blog post generated, SEO page
+-- shipped, lead nurture fired, dependency PR opened, etc.) writes a
+-- row here. Append-only by convention; the only mutation is the
+-- terminal status/outcome update at the end of a run.
+--
+-- Required by AUTOMATION_POLICY.md §8 (observability) and the Aira
+-- Charter Phase 2 / Multi-Agent Orchestration Layer requirement that
+-- every agent action be auditable.
+--
+-- Read by /api/admin/agent-actions and rendered at /dashboard/agents.
+-- ─────────────────────────────────────────
+create table if not exists agent_actions (
+  id           uuid primary key default gen_random_uuid(),
+  agent        text not null,                       -- agent identifier (e.g. "generate-blog-post")
+  category     text check (category in ('content','seo','infra','security','ops','outreach','test')),
+  tier         text check (tier in ('T0','T1','T2','T3','T4')),
+  action       text not null,                       -- short verb form: "published", "opened-pr", etc.
+  summary      text,                                -- 1-2 sentence dashboard description
+  metadata     jsonb,                               -- structured payload: pr_url, commit_sha, target_path
+  status       text not null default 'in_progress'
+                check (status in ('in_progress','success','failed','skipped')),
+  outcome      jsonb,                               -- error message, side-effects, etc. (terminal)
+  duration_ms  int,
+  started_at   timestamptz default now(),
+  ended_at     timestamptz
+);
+
+create index if not exists agent_actions_started_at_idx on agent_actions(started_at desc);
+create index if not exists agent_actions_agent_idx      on agent_actions(agent);
+create index if not exists agent_actions_status_idx     on agent_actions(status);
+
+-- ─────────────────────────────────────────
 -- ROW LEVEL SECURITY
 -- Service role key bypasses RLS entirely.
 -- Anon key (frontend) has no access to these tables.
@@ -111,6 +145,7 @@ alter table visitor_events enable row level security;
 alter table leads          enable row level security;
 alter table page_views     enable row level security;
 alter table waitlist       enable row level security;
+alter table agent_actions  enable row level security;
 
 -- No public SELECT/INSERT policies — all access via service role through API routes only.
 

@@ -34,6 +34,13 @@ jobs:
     needs: killswitch
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
+    # P2-S4: every withJob() invocation now writes a row to the
+    # agent_actions audit table via /api/admin/agent-actions. Both env
+    # vars below feed the audit call. If either is missing the audit
+    # silently no-ops — the agent itself keeps running.
+    env:
+      SITE_URL:         https://www.aegibit.com
+      DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -77,19 +84,23 @@ jobs:
     needs: killswitch
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
+    env:
+      SITE_URL:         https://www.aegibit.com
+      DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: node automation/scripts/seo-audit.mjs
       - run: node automation/scripts/ping-search-engines.mjs
-        env:
-          SITE_URL: https://www.aegibit.com
 
   security-sweep:
     needs: killswitch
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
+    env:
+      SITE_URL:         https://www.aegibit.com
+      DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -119,11 +130,13 @@ jobs:
     needs: killswitch
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
+    env:
+      SITE_URL:                  https://www.aegibit.com
+      DASHBOARD_SECRET:          ${{ secrets.DASHBOARD_SECRET }}
+      SUPABASE_URL:              ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with: { node-version: "20" }
-      - env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node automation/scripts/lead-health-check.mjs
+      - run: node automation/scripts/lead-health-check.mjs
