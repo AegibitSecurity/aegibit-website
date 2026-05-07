@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { useCases } from "@/content/use-cases";
+import { SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -15,7 +16,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${uc.name} | AEGIBIT VoiceCore`,
     description: uc.description,
-    openGraph: { title: uc.name, description: uc.description },
+    alternates: { canonical: `/use-cases/${uc.slug}` },
+    openGraph: {
+      title: uc.name,
+      description: uc.description,
+      type: "article",
+      url: `${SITE_URL}/use-cases/${uc.slug}`,
+      siteName: "AEGIBIT",
+    },
+    twitter: { card: "summary_large_image", title: uc.name, description: uc.description },
   };
 }
 
@@ -28,13 +37,28 @@ export default async function UseCasePage({ params }: Props) {
   const uc = useCases.find((u) => u.slug === slug);
   if (!uc) notFound();
 
+  const pageUrl = `${SITE_URL}/use-cases/${uc.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: uc.name,
-    description: uc.description,
-    tool: { "@type": "HowToTool", name: "AEGIBIT VoiceCore" },
-    step: uc.howItHelps.map((s, i) => ({ "@type": "HowToStep", position: i + 1, text: s })),
+    "@graph": [
+      {
+        "@type": "HowTo",
+        "@id": `${pageUrl}#howto`,
+        name: uc.name,
+        description: uc.description,
+        url: pageUrl,
+        tool: { "@type": "HowToTool", name: "AEGIBIT VoiceCore" },
+        step: uc.howItHelps.map((s, i) => ({ "@type": "HowToStep", position: i + 1, text: s })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "AEGIBIT", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Use Cases", item: `${SITE_URL}/use-cases` },
+          { "@type": "ListItem", position: 3, name: uc.name, item: pageUrl },
+        ],
+      },
+    ],
   };
 
   return (
