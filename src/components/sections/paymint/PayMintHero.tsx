@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Smartphone, Download, ShieldCheck, Zap, CalendarCheck, FileText } from 'lucide-react';
+import { track } from '@/lib/track';
 
 const PAYMINT_APP_URL = 'https://nibir-vault.web.app';
 const PAYMINT_APK_URL = '/paymint/paymint-latest.apk';
@@ -118,6 +119,7 @@ export function PayMintHero() {
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-10">
             <a
               href={PAYMINT_DEMO_URL}
+              onClick={() => track('cta_click', { cta_id: 'paymint_hero_book_demo', cta_label: 'Book a 20-min Demo', cta_section: 'paymint_hero', target: PAYMINT_DEMO_URL })}
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'linear-gradient(135deg, #F97316, #EA6C0A)',
@@ -132,6 +134,7 @@ export function PayMintHero() {
               href={PAYMINT_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => track('cta_click', { cta_id: 'paymint_hero_launch_webapp', cta_label: 'Launch Web App', cta_section: 'paymint_hero', target: PAYMINT_APP_URL, external: true })}
               className="inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'transparent',
@@ -145,6 +148,7 @@ export function PayMintHero() {
             <a
               href={PAYMINT_APK_URL}
               download
+              onClick={() => track('cta_click', { cta_id: 'paymint_hero_download_apk', cta_label: 'Download for Android', cta_section: 'paymint_hero', target: PAYMINT_APK_URL, asset_type: 'apk' })}
               className="group inline-flex items-center justify-center gap-3 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'transparent',
@@ -163,6 +167,7 @@ export function PayMintHero() {
             <a
               href={PAYMINT_BROCHURE_URL}
               download
+              onClick={() => track('cta_click', { cta_id: 'paymint_hero_download_brochure', cta_label: 'Download Brochure', cta_section: 'paymint_hero', target: PAYMINT_BROCHURE_URL, asset_type: 'pdf' })}
               className="group inline-flex items-center justify-center gap-3 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'transparent',

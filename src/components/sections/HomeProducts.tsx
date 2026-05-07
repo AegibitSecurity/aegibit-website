@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { TrackedLink } from "@/components/shared/TrackedLink";
 import {
   Wallet,
   Mic,
@@ -184,8 +184,11 @@ function ProductCard({ product }: { product: Product }) {
   const s = statusConfig[status];
 
   return (
-    <Link
+    <TrackedLink
       href={href}
+      ctaId={`home_products_${product.id}`}
+      ctaLabel={ctaLabel}
+      ctaSection="home_products"
       className="group relative rounded-2xl p-7 md:p-8 transition-all duration-300 flex flex-col hover:-translate-y-0.5"
       style={{
         background: highlighted ? "linear-gradient(180deg, #1a1004 0%, #0a0a0a 100%)" : "#0D0D0D",
@@ -300,6 +303,6 @@ function ProductCard({ product }: { product: Product }) {
           <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
         </div>
       </div>
-    </Link>
+    </TrackedLink>
   );
 }

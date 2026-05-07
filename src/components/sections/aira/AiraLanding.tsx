@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { track } from "@/lib/track";
 import {
   Sparkles,
   Mic,
@@ -171,6 +172,7 @@ function Hero() {
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href={AIRA_DOWNLOAD_URL}
+              onClick={() => track('cta_click', { cta_id: 'aira_hero_download_windows', cta_label: 'Download for Windows · Free', cta_section: 'aira_hero', target: AIRA_DOWNLOAD_URL, asset_type: 'exe' })}
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: "linear-gradient(135deg, #3B82F6, #1D4ED8)",
@@ -184,6 +186,7 @@ function Hero() {
             </a>
             <a
               href="#waitlist"
+              onClick={() => track('cta_click', { cta_id: 'aira_hero_reserve_pro', cta_label: 'Reserve Aira Pro', cta_section: 'aira_hero', target: '#waitlist' })}
               className="inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl text-base transition-all duration-300"
               style={{
                 background: "transparent",
