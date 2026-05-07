@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { industries } from "@/content/industries";
+import { SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -15,7 +16,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${ind.name} | AEGIBIT Security Solutions`,
     description: ind.description,
-    openGraph: { title: ind.headline, description: ind.description },
+    alternates: { canonical: `/industries/${ind.slug}` },
+    openGraph: {
+      title: ind.headline,
+      description: ind.description,
+      type: "article",
+      url: `${SITE_URL}/industries/${ind.slug}`,
+      siteName: "AEGIBIT",
+    },
+    twitter: { card: "summary_large_image", title: ind.headline, description: ind.description },
   };
 }
 
@@ -28,13 +37,36 @@ export default async function IndustryPage({ params }: Props) {
   const ind = industries.find((i) => i.slug === slug);
   if (!ind) notFound();
 
+  const pageUrl = `${SITE_URL}/industries/${ind.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: `AEGIBIT VoiceCore — ${ind.name}`,
-    description: ind.description,
-    brand: { "@type": "Organization", name: "AEGIBIT Security" },
-    audience: { "@type": "BusinessAudience", audienceType: ind.name },
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${pageUrl}#app`,
+        name: `AEGIBIT VoiceCore — ${ind.name}`,
+        description: ind.description,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web, iOS, Android",
+        url: pageUrl,
+        brand: { "@type": "Organization", name: "AEGIBIT Security", url: SITE_URL },
+        audience: { "@type": "BusinessAudience", audienceType: ind.name },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "INR",
+          price: "999",
+          availability: "https://schema.org/InStock",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "AEGIBIT", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Industries", item: `${SITE_URL}/industries` },
+          { "@type": "ListItem", position: 3, name: ind.name, item: pageUrl },
+        ],
+      },
+    ],
   };
 
   return (

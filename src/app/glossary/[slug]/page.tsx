@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -40,6 +41,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${t.term} | AEGIBIT Security Glossary`,
     description: t.definition.slice(0, 160),
+    alternates: { canonical: `/glossary/${slug}` },
+    openGraph: {
+      title: `${t.term} | AEGIBIT Security Glossary`,
+      description: t.definition.slice(0, 160),
+      type: "article",
+      url: `${SITE_URL}/glossary/${slug}`,
+      siteName: "AEGIBIT",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.term,
+      description: t.definition.slice(0, 160),
+    },
   };
 }
 
@@ -52,12 +66,31 @@ export default async function GlossaryTerm({ params }: Props) {
   const t = TERMS[slug];
   if (!t) notFound();
 
+  const pageUrl = `${SITE_URL}/glossary/${slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "DefinedTerm",
-    name: t.term,
-    description: t.definition,
-    inDefinedTermSet: { "@type": "DefinedTermSet", name: "AEGIBIT Security Glossary" },
+    "@graph": [
+      {
+        "@type": "DefinedTerm",
+        "@id": `${pageUrl}#term`,
+        name: t.term,
+        description: t.definition,
+        url: pageUrl,
+        inDefinedTermSet: {
+          "@type": "DefinedTermSet",
+          name: "AEGIBIT Security Glossary",
+          url: `${SITE_URL}/glossary`,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "AEGIBIT", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Glossary", item: `${SITE_URL}/glossary` },
+          { "@type": "ListItem", position: 3, name: t.term, item: pageUrl },
+        ],
+      },
+    ],
   };
 
   return (

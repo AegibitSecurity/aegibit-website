@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { integrations } from "@/content/integrations";
+import { SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -17,7 +18,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    openGraph: { title, description },
+    alternates: { canonical: `/integrations/${int.slug}` },
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `${SITE_URL}/integrations/${int.slug}`,
+      siteName: "AEGIBIT",
+    },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 
@@ -30,14 +39,36 @@ export default async function IntegrationPage({ params }: Props) {
   const int = integrations.find((i) => i.slug === slug);
   if (!int) notFound();
 
+  const pageUrl = `${SITE_URL}/integrations/${int.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: `AEGIBIT VoiceCore`,
-    applicationCategory: "SecurityApplication",
-    description: int.description,
-    offers: { "@type": "Offer", priceCurrency: "INR", price: "999" },
-    featureList: int.commands,
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${pageUrl}#app`,
+        name: "AEGIBIT VoiceCore",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web, iOS, Android",
+        url: pageUrl,
+        description: int.description,
+        brand: { "@type": "Organization", name: "AEGIBIT Security", url: SITE_URL },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "INR",
+          price: "999",
+          availability: "https://schema.org/InStock",
+        },
+        featureList: int.commands,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "AEGIBIT", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Integrations", item: `${SITE_URL}/integrations` },
+          { "@type": "ListItem", position: 3, name: int.name, item: pageUrl },
+        ],
+      },
+    ],
   };
 
   return (
