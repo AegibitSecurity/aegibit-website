@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
 import { useVisitorStore } from "@/stores/visitor-store";
+import { track } from "@/lib/track";
 
 interface FormData {
   email: string;
@@ -38,12 +39,20 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
   const setSubmittedForm = useVisitorStore((s) => s.setSubmittedForm);
   const recalculate     = useVisitorStore((s) => s.recalculateScore);
   const visitorId       = useVisitorStore((s) => s.visitorId);
+  const focusFired      = useRef(false);
 
   function set(field: keyof FormData, value: string) {
     setData((d) => ({ ...d, [field]: value }));
     setErrors((e) => ({ ...e, [field]: undefined }));
     setStartedForm();
     recalculate();
+    // Fire form_focus exactly once per form-instance — first user
+    // touch is the funnel "engagement" signal. Subsequent fields
+    // are noise for funnel math.
+    if (!focusFired.current) {
+      focusFired.current = true;
+      track("form_focus", { source, field });
+    }
   }
 
   function validateStep(): boolean {
@@ -84,6 +93,12 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
       setStatus("success");
       setSubmittedForm();
       recalculate();
+      track("form_submit", {
+        source,
+        team_size: data.teamSize || undefined,
+        had_company: Boolean(data.company.trim()),
+        had_message: Boolean(data.message.trim()),
+      });
       onSuccess?.();
     } catch {
       setStatus("idle");
