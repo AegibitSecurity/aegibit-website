@@ -63,7 +63,18 @@ module.exports = {
       ...useCases.map((u)     => ({ loc: `/use-cases/${u.slug}`,     changefreq: "monthly", priority: 0.8 })),
       ...integrations.map((i) => ({ loc: `/integrations/${i.slug}`,  changefreq: "monthly", priority: 0.7 })),
       ...industries.map((i)   => ({ loc: `/industries/${i.slug}`,    changefreq: "monthly", priority: 0.8 })),
-      ...blogPosts.map((p)    => ({ loc: `/blog/${p.slug}`,          changefreq: "weekly",  priority: 0.9 })),
+
+      // ── Blog posts ─ lastmod from frontmatter date so Google sees
+      //    honest "last modified" timestamps. Without this every blog
+      //    post showed today's build date, which (a) misleads Google
+      //    and (b) dilutes ranking signals (everything always "fresh"
+      //    is ignored as noise). ─────────────────────────────────────
+      ...blogPosts.map((p)    => ({
+        loc: `/blog/${p.slug}`,
+        changefreq: "weekly",
+        priority: 0.9,
+        lastmod: new Date(p.date).toISOString(),
+      })),
     ];
   },
 };
