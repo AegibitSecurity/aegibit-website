@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Logo } from "@/components/shared/Logo";
+import { TrackedLink } from "@/components/shared/TrackedLink";
 
 const COLS = {
   Product: [
@@ -39,10 +39,14 @@ export function Footer() {
               <ul className="space-y-3">
                 {links.map(l => (
                   <li key={l.href}>
-                    <Link href={l.href}
+                    <TrackedLink
+                      href={l.href}
+                      ctaId={`footer_${cat.toLowerCase()}_${l.label.toLowerCase().replace(/\W+/g, "_")}`}
+                      ctaLabel={l.label}
+                      ctaSection="footer"
                       className="text-xs text-[#3F3F46] hover:text-[#A1A1AA] transition-colors">
                       {l.label}
-                    </Link>
+                    </TrackedLink>
                   </li>
                 ))}
               </ul>
