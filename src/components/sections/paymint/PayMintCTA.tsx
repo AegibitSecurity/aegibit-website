@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Zap, Download, ArrowRight, CalendarCheck } from 'lucide-react';
+import { track } from '@/lib/track';
 
 const PAYMINT_APP_URL = 'https://nibir-vault.web.app';
 const PAYMINT_APK_URL = '/paymint/paymint-latest.apk';
@@ -56,6 +57,7 @@ export function PayMintCTA() {
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center mb-8">
             <a
               href={PAYMINT_DEMO_URL}
+              onClick={() => track('cta_click', { cta_id: 'paymint_bottom_book_demo', cta_label: 'Book a 20-min Demo', cta_section: 'paymint_bottom_cta', target: PAYMINT_DEMO_URL })}
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'linear-gradient(135deg, #F97316, #EA6C0A)',
@@ -70,6 +72,7 @@ export function PayMintCTA() {
               href={PAYMINT_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => track('cta_click', { cta_id: 'paymint_bottom_launch_webapp', cta_label: 'Launch Web App', cta_section: 'paymint_bottom_cta', target: PAYMINT_APP_URL, external: true })}
               className="inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'transparent',
@@ -83,6 +86,7 @@ export function PayMintCTA() {
             <a
               href={PAYMINT_APK_URL}
               download
+              onClick={() => track('cta_click', { cta_id: 'paymint_bottom_download_apk', cta_label: 'Download for Android', cta_section: 'paymint_bottom_cta', target: PAYMINT_APK_URL, asset_type: 'apk' })}
               className="group inline-flex items-center justify-center gap-3 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'transparent',
@@ -102,6 +106,7 @@ export function PayMintCTA() {
 
           <a
             href="/contact"
+            onClick={() => track('cta_click', { cta_id: 'paymint_bottom_talk_to_founder', cta_label: 'Talk to a founder', cta_section: 'paymint_bottom_cta', target: '/contact' })}
             className="inline-flex items-center gap-2 text-sm transition-colors group"
             style={{ color: '#A1A1AA' }}
           >
