@@ -1,9 +1,11 @@
+import { SITE_URL } from "@/lib/seo";
+
 export const SITE = {
   name: "AEGIBIT",
   tagline: "Built to Outlast.",
   description:
     "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast.",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://www.aegibit.com",
+  url: SITE_URL,
   email: "contact@aegibit.com",
   twitter: "@aegibit",
   github: "AegibitSecurity",

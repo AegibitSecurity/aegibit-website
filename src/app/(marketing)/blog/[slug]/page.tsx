@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { blogPosts } from "@/content/blog-posts";
+import { SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -37,7 +38,6 @@ export default async function BlogPost({ params }: Props) {
 
   const relatedPosts = blogPosts.filter((p) => p.slug !== slug).slice(0, 3);
 
-  const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.aegibit.com";
   const postUrl = `${SITE_URL}/blog/${post.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",

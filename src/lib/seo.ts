@@ -1,6 +1,34 @@
 import type { Metadata } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.aegibit.com";
+/**
+ * Canonical site URL — always includes the `www.` prefix even if the
+ * env var is set to the apex domain. The Vercel proxy 308-redirects
+ * apex → www, so apex URLs in JSON-LD/OG/canonical tags would force
+ * Google to follow an extra hop and dilute ranking signals. This
+ * helper normalizes everywhere downstream.
+ *
+ * Operators can set NEXT_PUBLIC_APP_URL to either apex or www and the
+ * site behaves the same way.
+ */
+function normalizeCanonical(input: string | undefined): string {
+  const raw = (input ?? "https://www.aegibit.com").trim().replace(/\/+$/, "");
+  // Force https + www on aegibit.com hosts; leave other hosts alone
+  // so localhost / preview URLs continue to work.
+  try {
+    const u = new URL(raw);
+    if (u.hostname === "aegibit.com") u.hostname = "www.aegibit.com";
+    if (u.hostname.endsWith(".aegibit.com") || u.hostname === "aegibit.com" || u.hostname === "www.aegibit.com") {
+      u.protocol = "https:";
+      u.port = "";
+    }
+    return u.toString().replace(/\/$/, "");
+  } catch {
+    return "https://www.aegibit.com";
+  }
+}
+
+export const SITE_URL = normalizeCanonical(process.env.NEXT_PUBLIC_APP_URL);
+const BASE_URL = SITE_URL;
 const SITE_NAME = "AEGIBIT";
 
 export function buildMetadata(opts: {
