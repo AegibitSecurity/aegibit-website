@@ -1,4 +1,6 @@
-const BASE = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.aegibit.com";
+import { SITE_URL } from "@/lib/seo";
+
+const BASE = SITE_URL;
 
 export const organizationSchema = {
   "@context": "https://schema.org",
