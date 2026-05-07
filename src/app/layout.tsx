@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { TrackingProvider } from "@/components/shared/TrackingProvider";
+import { SITE_URL } from "@/lib/seo";
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-serif",
@@ -14,11 +15,17 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://www.aegibit.com"),
+  // Use the normalized SITE_URL from src/lib/seo so metadataBase
+  // always emits www.aegibit.com regardless of whether
+  // NEXT_PUBLIC_APP_URL is set to apex or www in Vercel. Bug surfaced
+  // in Search Console: homepage <link rel=canonical> was pointing at
+  // apex `https://aegibit.com`, which Google treated as duplicate of
+  // www.aegibit.com and refused to index either.
+  metadataBase: new URL(SITE_URL),
   alternates: {
     // Canonical URL prevents Google from treating www.aegibit.com,
-    // aegibit.com, and *.vercel.app as separate websites. Edge
-    // middleware (src/middleware.ts) also enforces this with 308s.
+    // aegibit.com, and *.vercel.app as separate websites. Edge proxy
+    // (src/proxy.ts) also enforces this with 308s.
     canonical: "/",
   },
   // Note: icons + opengraph image are auto-injected by Next.js from the
