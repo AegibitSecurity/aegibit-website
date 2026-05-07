@@ -27,16 +27,20 @@ export const visitorSchema = z.object({
 
 // Event-type taxonomy. Add new types here, never as ad-hoc strings at the
 // call site, so the dashboard funnel queries can rely on a closed enum.
-//   pageview      → route navigation (set automatically per pathname)
-//   scroll        → scroll-depth milestone reached (25/50/75/100)
-//   click         → generic click counter (engagement signal)
-//   cta_click     → ★ named CTA button clicked. event_data carries
-//                    { cta_id, cta_label, target_url? }. The funnel
-//                    pipeline keys on cta_id to attribute conversions.
-//   form_focus    → user first-touched any input on a lead form
-//   form_submit   → form successfully submitted
-//   exit_intent   → mouse-out detected near top of viewport
-//   time_update   → 30-second heartbeat
+//   pageview              → route navigation (set automatically per pathname)
+//   scroll                → scroll-depth milestone reached (25/50/75/100)
+//   click                 → generic click counter (engagement signal)
+//   cta_click             → ★ named CTA button clicked. event_data carries
+//                            { cta_id, cta_label, target_url? }. The funnel
+//                            pipeline keys on cta_id to attribute conversions.
+//   form_focus            → user first-touched any input on a lead form
+//   form_submit           → form successfully submitted
+//   exit_intent           → mouse-out detected near top of viewport
+//   time_update           → 30-second heartbeat
+//   experiment_exposure   → A/B variant assignment fired when a component
+//                            renders an experiment variant. event_data:
+//                            { experiment, variant }. The experiments
+//                            dashboard groups conversions by these.
 export const VISITOR_EVENT_TYPES = [
   "pageview",
   "scroll",
@@ -46,6 +50,7 @@ export const VISITOR_EVENT_TYPES = [
   "form_submit",
   "exit_intent",
   "time_update",
+  "experiment_exposure",
 ] as const;
 export type VisitorEventType = (typeof VISITOR_EVENT_TYPES)[number];
 

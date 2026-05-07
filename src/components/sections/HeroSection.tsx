@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TrackedLink } from "@/components/shared/TrackedLink";
+import { HeroPrimaryCTA } from "@/components/sections/HeroPrimaryCTA";
 
 const TRUST = [
   { label: "SOC 2 Type II Certified" },
@@ -158,23 +159,11 @@ export function HeroSection() {
       {/* CTAs — company-level: explore products grid + talk to founder.
            Specific product CTAs live one section below in HomeProducts. */}
       <div className="fade-up delay-4 flex flex-col sm:flex-row items-center gap-4 mb-12">
-        <TrackedLink
-          href="#products"
-          ctaId="hero_explore_products"
-          ctaLabel="Explore Our Products"
-          ctaSection="hero"
-          className="text-sm font-semibold text-white transition-all hover:opacity-90"
-          style={{
-            background: "linear-gradient(135deg, #F97316, #EA6C0A)",
-            padding: "13px 30px",
-            borderRadius: "10px",
-            minWidth: "220px",
-            textAlign: "center",
-            boxShadow: "0 0 18px rgba(249,115,22,0.32), 0 2px 6px rgba(0,0,0,0.4)",
-          }}
-        >
-          Explore Our Products
-        </TrackedLink>
+        {/* Primary CTA is wrapped in HeroPrimaryCTA — first live A/B
+            experiment (hero_cta_copy). Renders the control variant on
+            server / first-paint to keep SSR stable, then swaps to the
+            assigned variant once visitorId resolves. */}
+        <HeroPrimaryCTA />
         <TrackedLink
           href="/contact"
           ctaId="hero_talk_founder"
