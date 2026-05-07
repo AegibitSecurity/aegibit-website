@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { SESSION_COOKIE } from "@/lib/session";
+import { shouldGateProtectedApi } from "@/lib/proxy-gate";
 
 /**
  * AEGIBIT proxy (Next 16+ replacement for middleware.ts).
@@ -16,10 +17,14 @@ import { SESSION_COOKIE } from "@/lib/session";
  *
  * 2. Admin gate (defence in depth)
  *    - `/dashboard/*` without session cookie → 303 to /admin/login?from=...
- *    - `/api/leads` (GET/PUT/etc), `/api/analytics`, and `/api/admin/health`
- *      are still authoritatively guarded by `requireAdmin` inside each
- *      route handler. The proxy only exists to short-circuit the obvious
- *      pre-auth case before it hits Node + DB.
+ *    - `/api/leads`, `/api/analytics`, and `/api/admin/health` are still
+ *      authoritatively guarded by `requireAdmin` inside each route handler.
+ *      The proxy only exists to short-circuit the obvious pre-auth case
+ *      before it hits Node + DB.
+ *    - `/api/leads` POST is the PUBLIC lead-capture endpoint — every form
+ *      on the marketing site submits to it. It is explicitly exempted in
+ *      `shouldGateProtectedApi` (see src/lib/proxy-gate.ts). Only the admin
+ *      GET / PATCH / DELETE methods are proxy-gated.
  *    - `/api/admin/login` is intentionally NOT gated (you need to be able
  *      to authenticate without already being authenticated).
  *    - `/api/admin/deploy-notify` runs its own server-to-server bearer
@@ -29,11 +34,6 @@ import { SESSION_COOKIE } from "@/lib/session";
 const CANONICAL_HOST = "www.aegibit.com";
 
 const DASHBOARD_PREFIX = "/dashboard";
-const PROTECTED_API_PATHS = new Set<string>([
-  "/api/leads",
-  "/api/analytics",
-  "/api/admin/health",
-]);
 
 const IS_PRODUCTION = process.env.VERCEL_ENV === "production";
 
@@ -79,7 +79,7 @@ export function proxy(req: NextRequest) {
     return NextResponse.redirect(url, 303);
   }
 
-  if (PROTECTED_API_PATHS.has(pathname) && !hasSessionCookie(req)) {
+  if (shouldGateProtectedApi(pathname, req.method, hasSessionCookie(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
