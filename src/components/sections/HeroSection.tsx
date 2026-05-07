@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TrackedLink } from "@/components/shared/TrackedLink";
 
 const TRUST = [
   { label: "SOC 2 Type II Certified" },
@@ -157,8 +158,11 @@ export function HeroSection() {
       {/* CTAs — company-level: explore products grid + talk to founder.
            Specific product CTAs live one section below in HomeProducts. */}
       <div className="fade-up delay-4 flex flex-col sm:flex-row items-center gap-4 mb-12">
-        <Link
+        <TrackedLink
           href="#products"
+          ctaId="hero_explore_products"
+          ctaLabel="Explore Our Products"
+          ctaSection="hero"
           className="text-sm font-semibold text-white transition-all hover:opacity-90"
           style={{
             background: "linear-gradient(135deg, #F97316, #EA6C0A)",
@@ -170,9 +174,12 @@ export function HeroSection() {
           }}
         >
           Explore Our Products
-        </Link>
-        <Link
+        </TrackedLink>
+        <TrackedLink
           href="/contact"
+          ctaId="hero_talk_founder"
+          ctaLabel="Talk to a Founder"
+          ctaSection="hero"
           className="text-sm font-semibold transition-colors hover:text-white"
           style={{
             padding: "13px 30px",
@@ -184,7 +191,7 @@ export function HeroSection() {
           }}
         >
           Talk to a Founder
-        </Link>
+        </TrackedLink>
       </div>
 
       {/* Trust badges — more visible */}

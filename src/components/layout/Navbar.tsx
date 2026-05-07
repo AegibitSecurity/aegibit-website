@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Logo } from "@/components/shared/Logo";
 import { cn } from "@/lib/utils";
+import { track } from "@/lib/track";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
@@ -59,6 +60,7 @@ export function Navbar() {
               Sign in
             </Link>
             <Link href="/products/paymint/demo"
+              onClick={() => track("cta_click", { cta_id: "navbar_book_demo", cta_label: "Book Demo", target: "/products/paymint/demo" })}
               className="text-sm font-semibold px-5 py-2.5 rounded-lg text-white transition-all hover:opacity-90"
               style={{ background:"#F97316", boxShadow:"0 0 24px rgba(249,115,22,0.3)" }}>
               Book Demo
@@ -82,7 +84,11 @@ export function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <Link href="/products/paymint/demo" onClick={() => setOpen(false)}
+            <Link href="/products/paymint/demo"
+              onClick={() => {
+                track("cta_click", { cta_id: "mobile_book_demo", cta_label: "Book Demo", target: "/products/paymint/demo" });
+                setOpen(false);
+              }}
               className="mt-4 text-center text-sm font-semibold text-white py-3 rounded-lg"
               style={{ background:"#F97316" }}>
               Book Demo
