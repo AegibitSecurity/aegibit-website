@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { alternatives } from "@/content/alternatives";
+import { SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -16,7 +17,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: alt.title,
     description: alt.metaDescription,
     keywords: alt.targetKeywords,
-    openGraph: { title: alt.title, description: alt.metaDescription, type: "website" },
+    alternates: { canonical: `/alternatives/${alt.slug}` },
+    openGraph: {
+      title: alt.title,
+      description: alt.metaDescription,
+      type: "article",
+      url: `${SITE_URL}/alternatives/${alt.slug}`,
+      siteName: "AEGIBIT",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: alt.title,
+      description: alt.metaDescription,
+    },
   };
 }
 
@@ -29,17 +42,47 @@ export default async function AlternativePage({ params }: Props) {
   const alt = alternatives.find((a) => a.slug === slug);
   if (!alt) notFound();
 
+  const pageUrl = `${SITE_URL}/alternatives/${alt.slug}`;
+
+  // schema.org rejects mixed @type arrays — split into a @graph of
+  // independent entities. Google parses each one and emits the right
+  // rich result (Product card + FAQ accordion).
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": ["Product", "FAQPage"],
-    name: `AEGIBIT VoiceCore — ${alt.name} Alternative`,
-    description: alt.metaDescription,
-    brand: { "@type": "Organization", name: "AEGIBIT Security" },
-    mainEntity: alt.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: { "@type": "Answer", text: faq.a },
-    })),
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${pageUrl}#app`,
+        name: "AEGIBIT VoiceCore",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web, iOS, Android",
+        url: pageUrl,
+        description: alt.metaDescription,
+        brand: { "@type": "Organization", name: "AEGIBIT Security", url: SITE_URL },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "INR",
+          price: "999",
+          availability: "https://schema.org/InStock",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: alt.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "AEGIBIT", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Alternatives", item: `${SITE_URL}/alternatives` },
+          { "@type": "ListItem", position: 3, name: `vs ${alt.name}`, item: pageUrl },
+        ],
+      },
+    ],
   };
 
   const relatedAlts = alternatives.filter((a) => a.slug !== slug).slice(0, 4);
