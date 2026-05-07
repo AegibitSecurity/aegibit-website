@@ -15,6 +15,33 @@ export function isPaused() {
   return fs.existsSync(path.join(AUTOMATION_DIR, "PAUSE"));
 }
 
+/**
+ * Per-job auto-disable check. Enforces AUTOMATION_POLICY §9
+ * "If the same automation fails 3 times in a row: disable that workflow."
+ *
+ * Until now §9 was documentation only. Now withJob() refuses to run any
+ * job whose consecutiveFailures counter has reached the threshold. The
+ * job exits cleanly with status=skipped (NOT failed) so it doesn't
+ * compound failures on the audit log.
+ *
+ * Operator can re-enable by running:
+ *   node automation/scripts/aegis-reenable.mjs <jobName>
+ * which resets the consecutiveFailures counter to 0 in state.json.
+ *
+ * Threshold can be overridden via env (AEGIS_AUTODISABLE_THRESHOLD=5)
+ * for ops who want a longer leash; default 3 matches policy.
+ */
+export const AUTODISABLE_THRESHOLD = (() => {
+  const v = parseInt(process.env.AEGIS_AUTODISABLE_THRESHOLD ?? "", 10);
+  return Number.isFinite(v) && v > 0 ? v : 3;
+})();
+
+export function isAutoDisabled(jobName) {
+  const state = loadState();
+  const failures = state.consecutiveFailures?.[jobName] ?? 0;
+  return failures >= AUTODISABLE_THRESHOLD;
+}
+
 export function loadConfig() {
   return JSON.parse(fs.readFileSync(CONFIG_FILE, "utf8"));
 }
@@ -143,7 +170,30 @@ async function auditFinish(id, status, durationMs, outcome) {
 
 export async function withJob(jobName, fn) {
   if (isPaused()) {
-    log(jobName, "PAUSED — skipping", "warn");
+    log(jobName, "PAUSED (global kill switch) — skipping", "warn");
+    // Audit-record the skip so the dashboard can show why nothing ran
+    const skipId = await auditStart(jobName, "skipped: global PAUSE file present");
+    await auditFinish(skipId, "skipped", 0, { reason: "automation/PAUSE present" });
+    process.exit(0);
+  }
+  if (isAutoDisabled(jobName)) {
+    const failures = loadState().consecutiveFailures?.[jobName] ?? 0;
+    log(
+      jobName,
+      `AUTO-DISABLED — ${failures} consecutive failures ≥ threshold ${AUTODISABLE_THRESHOLD}. ` +
+        `Per AUTOMATION_POLICY §9, this job is paused until manually re-enabled. ` +
+        `To re-enable: node automation/scripts/aegis-reenable.mjs ${jobName}`,
+      "error",
+    );
+    const skipId = await auditStart(
+      jobName,
+      `skipped: auto-disabled after ${failures} consecutive failures`,
+    );
+    await auditFinish(skipId, "skipped", 0, {
+      reason: "auto-disabled per AUTOMATION_POLICY §9",
+      consecutive_failures: failures,
+      threshold: AUTODISABLE_THRESHOLD,
+    });
     process.exit(0);
   }
   const start = Date.now();
