@@ -11,6 +11,8 @@ import {
   type LeadHeat,
   type VisitorJourney,
 } from "@/lib/hot-lead";
+import { notifySlackLead } from "@/lib/slack-hot-lead";
+import { SITE_URL } from "@/lib/seo";
 
 const SOURCE_LABELS: Record<string, string> = {
   waitlist:           "Waitlist Signup",
@@ -262,9 +264,12 @@ export async function POST(req: NextRequest) {
     journey,
   });
 
-  // Fire team notification + lead confirmation in parallel — both are
-  // best-effort; lead capture has already succeeded by this point.
-  const [teamResult, confResult] = await Promise.all([
+  // Fire team email + Slack push + lead confirmation email in parallel.
+  // All three are best-effort — lead capture has already succeeded by
+  // this point and a downstream notifier outage must not 500 the form.
+  // Slack only fires when SLACK_HOT_LEAD_WEBHOOK_URL is set; absent =
+  // silent skip.
+  const [teamResult, confResult, slackOk] = await Promise.all([
     notifyTeam({
       email:   data.email,
       name:    data.name,
@@ -281,6 +286,18 @@ export async function POST(req: NextRequest) {
       name:   data.name,
       source: data.source,
     }),
+    notifySlackLead({
+      email:   data.email,
+      name:    data.name,
+      company: data.company,
+      phone:   data.phone,
+      source:  data.source,
+      page:    data.page,
+      message: data.message,
+      heat,
+      journey,
+      siteUrl: SITE_URL,
+    }),
   ]);
 
   // Email diagnostics are surfaced to the response only for an
@@ -295,6 +312,7 @@ export async function POST(req: NextRequest) {
       lead_saved: true,
       team_email: teamResult,
       confirmation_email: confResult,
+      slack_pushed: slackOk,
       heat,
       journey_pages: journey?.pages_viewed.length ?? null,
       journey_score: journey?.behavior_score ?? null,
