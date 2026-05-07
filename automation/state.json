@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-06T10:35:33.763Z",
+      "timestamp": "2026-05-07T10:59:05.168Z",
       "success": true,
-      "durationMs": 5
+      "durationMs": 10
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-06T10:35:33.810Z",
+      "timestamp": "2026-05-07T10:59:05.310Z",
       "success": true,
-      "durationMs": 6
+      "durationMs": 16
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -28,8 +28,8 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 47,
-    "blogPostsPublished": 10,
+    "pagesGenerated": 52,
+    "blogPostsPublished": 11,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -43,7 +43,8 @@
       "Ransomware in 2026: What Web Devs Need to Know",
       "API Security: 7 Patterns That Stop 90% of Attacks",
       "Why We Migrated from JWT to Session Cookies (and You Should Too)",
-      "Building Audit Logs That Auditors Actually Like"
+      "Building Audit Logs That Auditors Actually Like",
+      "Secrets Management for Tiny Teams: Doppler vs Vault vs Env Vars"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
@@ -92,7 +93,12 @@
       "website-development-hyderabad",
       "website-development-chennai",
       "website-development-pune",
-      "website-development-kolkata"
+      "website-development-kolkata",
+      "website-development-ahmedabad",
+      "website-development-dubai",
+      "website-development-singapore",
+      "website-development-london",
+      "website-development-new-york"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
