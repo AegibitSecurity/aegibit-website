@@ -3,7 +3,7 @@
   "owner": "AEGIS",
   "founder": "Rahul",
   "contact": "contact@aegibit.com",
-  "siteUrl": "https://aegibit-website.vercel.app",
+  "siteUrl": "https://www.aegibit.com",
   "thresholds": {
     "lighthouse": { "minScore": 85, "alertBelow": 80 },
     "leadConversion": { "alertDropPct": 20 },
