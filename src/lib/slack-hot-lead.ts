@@ -130,7 +130,12 @@ export function buildHotBlocks(input: NotifyHotLeadInput): SlackBlock[] {
     });
   }
 
-  // Actions: mailto + dashboard
+  // Actions: mailto + dashboard. We deliberately do NOT add a tel:
+  // button — Slack's button `url` field only accepts http(s):// and
+  // mailto: schemes, and a tel: URL fails schema validation with
+  // `invalid_blocks`, killing the entire message. The phone number is
+  // already displayed in the identity section above; mobile Slack
+  // auto-linkifies it so tap-to-call still works without a button.
   blocks.push({
     type: "actions",
     elements: [
@@ -140,15 +145,6 @@ export function buildHotBlocks(input: NotifyHotLeadInput): SlackBlock[] {
         url: `mailto:${input.email}`,
         style: "primary",
       },
-      ...(input.phone
-        ? [
-            {
-              type: "button",
-              text: { type: "plain_text", text: "📞 Call", emoji: true },
-              url: `tel:${input.phone}`,
-            },
-          ]
-        : []),
       {
         type: "button",
         text: { type: "plain_text", text: "Open dashboard", emoji: true },
