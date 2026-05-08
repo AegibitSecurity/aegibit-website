@@ -1,23 +1,28 @@
 /**
- * Aira chatbot — Gemini Flash backbone.
+ * Aira chatbot — Groq (Llama 3.3 70B) backbone.
  *
- * Why Gemini Flash, not Claude API:
- *   - Zero-spend mandate. Gemini's free tier is 1500 req/day, hard
- *     capped — no surprise bills. Claude API charges per token.
- *   - Quality is sufficient for product-FAQ + lead-capture flow
- *     (the bot's actual job). Claude Sonnet quality is overkill here.
- *   - Migration cost later is one wrapper swap (~30 lines) if AEGIBIT
- *     decides to upgrade.
+ * Provider history (so the next contributor doesn't repeat it):
+ *   1. Started on Gemini Flash for the generous free-tier promise.
+ *      Burned through a session debugging quotas:
+ *        - gemini-2.0-flash returned 429 (200 RPD cap, blown by probes)
+ *        - gemini-1.5-flash returned 404 (Google deprecated the 1.5 line)
+ *        - gemini-2.5-flash returned 403 PERMISSION_DENIED — the
+ *          GCP project the API key was attached to was blocked from
+ *          generateContent without billing linkage.
+ *      Google's "free tier" turns out to require a credit card on file
+ *      to unblock the API even within the free quota. That violates
+ *      Zero-Spend (no payment instruments allowed in the AEGIBIT stack).
+ *   2. Swapped to Groq (https://console.groq.com). Genuinely free —
+ *      no card requirement, ever. Llama 3.3 70B is comparable in
+ *      quality to Gemini Flash for product-FAQ + lead-capture flow.
+ *      Free tier limits: 30 RPM, 14400 TPM, plenty for our scale.
  *
- * Why STRICT knowledge boundary:
+ * Why STRICT knowledge boundary (unchanged):
  *   The bot answers ONLY questions about AEGIBIT, PayMint, AIRA,
  *   VoiceCore, pricing, security posture, and contact paths. Anything
  *   else escalates to "let me connect you with a founder" → /api/leads.
- *   This is the cheapest hallucination defense — refuse rather than
- *   guess. We learned the hard way last night (Slack Block Kit, #61)
- *   that LLM-shaped guessing is expensive to debug.
  *
- * Lead-capture protocol (the [CAPTURE_LEAD] token):
+ * Lead-capture protocol (unchanged — the [CAPTURE_LEAD] token):
  *   When the bot determines the visitor needs a founder-level reply
  *   (custom integration, deep pricing question, demo intent, anything
  *   off the FAQ rails), it ends its message with the literal token
@@ -26,26 +31,25 @@
  *   conversation snippet to /api/leads with source="chat". The hot-
  *   lead pipeline (Resend + Slack push) takes over from there.
  *
- *   This token-based control plane is decoupled and testable — the
- *   server just produces text, the client interprets the marker.
+ *   Provider-agnostic by design: the only thing that changed in this
+ *   swap is buildPayload + airaChatTurn internals. parseAiraOutput,
+ *   the system prompt, and the chat route are untouched.
  */
 
-// Model selection journey (so the next contributor doesn't repeat it):
-//   1. Picked gemini-2.0-flash first → returned 429 because its
-//      free-tier daily cap is only 200 RPD; we burned through it
-//      with debug probes + smoke tests in one session.
-//   2. Swapped to gemini-1.5-flash (1500 RPD on free tier per old
-//      docs) → returned 404 "model not found for v1beta". Google
-//      deprecated the 1.5 series and pulled it from the API.
-//   3. gemini-2.5-flash is the current free-tier flash model with
-//      generous quotas. That's the choice.
-// If 2.5-flash later gets pulled the same way, the diagnostic
-// endpoint /api/admin/slack-debug.gemini.models lists every model
-// the live API key is allowed to call — single-curl rediagnose.
-const MODEL = "gemini-2.5-flash";
-const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+// Llama 3.3 70B Versatile — Groq's flagship free-tier model.
+// Quality: comparable to GPT-4o-mini and Gemini 2.5 Flash for
+// conversational Q&A. Latency: typically 200-500ms first token on
+// Groq's hardware. Free tier: 30 RPM / 14k TPM / 1k req/day.
+const MODEL = "llama-3.3-70b-versatile";
+const ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
 
 export interface ChatMessage {
+  /**
+   * Kept as "user" | "model" (Gemini's native vocabulary) at the
+   * interface boundary so existing callers + tests don't have to
+   * change. Translated to "user" | "assistant" inside the Groq
+   * payload builder.
+   */
   role: "user" | "model";
   text: string;
 }
@@ -125,6 +129,9 @@ export interface AiraTurnInput {
  * Strip the CAPTURE_LEAD token (and any trailing whitespace/newline)
  * from the model output, returning both the cleaned text and the
  * boolean signal. Pure function — exported for testing.
+ *
+ * Provider-agnostic: token shape doesn't depend on which LLM produced
+ * the text. Carry-over from the Gemini implementation untouched.
  */
 export function parseAiraOutput(raw: string): { text: string; captureLead: boolean } {
   const captureLead = raw.includes(CAPTURE_TOKEN);
@@ -133,100 +140,81 @@ export function parseAiraOutput(raw: string): { text: string; captureLead: boole
 }
 
 /**
- * Build the Gemini request payload. Pure function — exported for
- * testing the system-prompt + history threading.
+ * Build the Groq (OpenAI-compatible) chat-completions request body.
+ * Pure function — exported for testing the system-prompt threading
+ * + role translation (Gemini's "model" → OpenAI/Groq's "assistant").
  */
-export function buildGeminiPayload(input: AiraTurnInput): unknown {
+export function buildGroqPayload(input: AiraTurnInput): unknown {
   return {
-    systemInstruction: {
-      parts: [{ text: SYSTEM_PROMPT }],
-    },
-    contents: [
+    model: MODEL,
+    messages: [
+      { role: "system", content: SYSTEM_PROMPT },
       ...input.history.map((m) => ({
-        role: m.role,
-        parts: [{ text: m.text }],
+        role: m.role === "model" ? "assistant" : "user",
+        content: m.text,
       })),
-      {
-        role: "user",
-        parts: [{ text: input.userMessage }],
-      },
+      { role: "user", content: input.userMessage },
     ],
-    generationConfig: {
-      // Keep replies short. Aira is a guide, not a chatty bot.
-      maxOutputTokens: 400,
-      // A little creativity for tone, not so much that it hallucinates
-      // features we haven't built.
-      temperature: 0.4,
-      // Stop on the capture token so we don't waste tokens after it.
-      stopSequences: [CAPTURE_TOKEN + "\n", CAPTURE_TOKEN],
-    },
-    safetySettings: [
-      { category: "HARM_CATEGORY_HATE_SPEECH",       threshold: "BLOCK_ONLY_HIGH" },
-      { category: "HARM_CATEGORY_HARASSMENT",        threshold: "BLOCK_ONLY_HIGH" },
-      { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
-      { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
-    ],
+    // Aira is a guide, not chatty — caps replies to short answers.
+    max_tokens: 400,
+    // Moderate creativity for tone, low enough to avoid hallucinating
+    // features we haven't built.
+    temperature: 0.4,
+    // Stop on the capture token so we don't waste tokens after it.
+    stop: [CAPTURE_TOKEN],
   };
 }
 
 /**
- * Send one turn to Gemini. No-throw — returns AiraReply with ok:false
- * on any failure (missing key, network error, rate-limit, blocked
- * content). The chat route turns ok:false into a graceful "let me
+ * Send one turn to Groq. No-throw — returns AiraReply with ok:false
+ * on any failure (missing key, network error, rate-limit, server
+ * error). The chat route turns ok:false into a graceful "let me
  * connect you with a founder" fallback so the visitor never sees a
  * raw error.
  */
 export async function airaChatTurn(input: AiraTurnInput): Promise<AiraReply> {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return {
       ok: false,
       text: "",
       captureLead: false,
-      error: "GEMINI_API_KEY not configured",
+      error: "GROQ_API_KEY not configured",
     };
   }
 
-  const payload = buildGeminiPayload(input);
+  const payload = buildGroqPayload(input);
 
   try {
-    const res = await fetch(`${ENDPOINT}?key=${apiKey}`, {
+    const res = await fetch(ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey.trim()}`,
+      },
       body: JSON.stringify(payload),
     });
 
     if (!res.ok) {
       const errText = await res.text().catch(() => "");
-      console.error(`[aira-bot] Gemini ${res.status}: ${errText.slice(0, 200)}`);
-      // 429 = free-tier daily cap hit. Treat as "graceful fallback to
+      console.error(`[aira-bot] Groq ${res.status}: ${errText.slice(0, 200)}`);
+      // 429 = free-tier rate limit hit. Treat as "graceful fallback to
       // founder handoff" — the visitor doesn't need to know the cap
       // was exhausted; they just hit the same escalation flow.
       return {
         ok: false,
         text: "",
         captureLead: false,
-        error: `gemini_http_${res.status}`,
+        error: `groq_http_${res.status}`,
       };
     }
 
-    type GeminiResp = {
-      candidates?: { content?: { parts?: { text?: string }[] } }[];
-      promptFeedback?: { blockReason?: string };
+    type GroqResp = {
+      choices?: { message?: { content?: string }; finish_reason?: string }[];
     };
-    const data: GeminiResp = await res.json();
+    const data: GroqResp = await res.json();
+    const raw = data.choices?.[0]?.message?.content ?? "";
 
-    if (data.promptFeedback?.blockReason) {
-      console.error(`[aira-bot] safety-blocked: ${data.promptFeedback.blockReason}`);
-      return {
-        ok: false,
-        text: "",
-        captureLead: false,
-        error: `safety_${data.promptFeedback.blockReason}`,
-      };
-    }
-
-    const raw = data.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
     if (!raw.trim()) {
       return { ok: false, text: "", captureLead: false, error: "empty_response" };
     }

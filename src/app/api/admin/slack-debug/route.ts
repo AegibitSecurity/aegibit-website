@@ -55,7 +55,13 @@ function maskUrl(url: string | undefined): {
  * Also fires a real Gemini call with the key so we know it WORKS,
  * not just that it's syntactically valid.
  */
-function maskGeminiKey(key: string | undefined): {
+/**
+ * Mask GROQ_API_KEY for safe diagnostic dumping. Reports presence,
+ * length, prefix shape (Groq keys start with "gsk_"), trailing
+ * 4 chars, and whitespace-contamination flags — common silent bugs
+ * when pasting keys into Vercel.
+ */
+function maskGroqKey(key: string | undefined): {
   present: boolean;
   length: number;
   prefix: string;
@@ -78,27 +84,37 @@ function maskGeminiKey(key: string | undefined): {
   return {
     present: true,
     length: key.length,
-    prefix: key.slice(0, 6),  // "AIzaSy..." is the standard Google key shape
+    prefix: key.slice(0, 4),       // Groq keys start with "gsk_"
     suffix: key.slice(-4),
-    shapeOk: key.trim().startsWith("AIza"),
+    shapeOk: key.trim().startsWith("gsk_"),
     hasLeadingWhitespace: key !== key.trimStart(),
     hasTrailingWhitespace: key !== key.trimEnd(),
   };
 }
 
-async function probeGemini(): Promise<{ ok: boolean; status: number; error?: string }> {
-  const key = process.env.GEMINI_API_KEY;
+/**
+ * Fire a real 1-token "ping" call to Groq with the runtime's key.
+ * Confirms the key is valid + the runtime can actually reach Groq.
+ * Returns HTTP status + first 200 chars of error body on failure.
+ */
+async function probeGroq(): Promise<{ ok: boolean; status: number; error?: string }> {
+  const key = process.env.GROQ_API_KEY;
   if (!key) return { ok: false, status: 0, error: "no_key" };
   try {
-    // Match the model used by aira-bot.ts so the probe reflects the
-    // same free-tier quota the chat route is subject to.
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(key.trim())}`;
-    const res = await fetch(url, {
+    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key.trim()}`,
+      },
       body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: "ping — reply with one word: pong" }] }],
-        generationConfig: { maxOutputTokens: 8 },
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { role: "system", content: "Reply with one word." },
+          { role: "user", content: "ping" },
+        ],
+        max_tokens: 4,
+        temperature: 0,
       }),
     });
     if (!res.ok) {
@@ -112,32 +128,25 @@ async function probeGemini(): Promise<{ ok: boolean; status: number; error?: str
 }
 
 /**
- * List the models the API key is actually allowed to call. When a
- * generateContent probe returns 404, this tells us in one call which
- * model names ARE valid — instead of trial-and-error redeploying the
- * chat route every time Google deprecates a model.
- *
- * Returns just the model `name` strings (e.g. "models/gemini-2.5-flash")
- * filtered to those that support generateContent. Capped to 30 entries
- * so the JSON response stays readable.
+ * List models the Groq key can call. Future-proofing: if Groq ever
+ * deprecates llama-3.3-70b-versatile, this tells us in one curl
+ * which model names ARE valid.
  */
-async function listGeminiModels(): Promise<{ ok: boolean; status: number; models?: string[]; error?: string }> {
-  const key = process.env.GEMINI_API_KEY;
+async function listGroqModels(): Promise<{ ok: boolean; status: number; models?: string[]; error?: string }> {
+  const key = process.env.GROQ_API_KEY;
   if (!key) return { ok: false, status: 0, error: "no_key" };
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(key.trim())}`;
-    const res = await fetch(url);
+    const res = await fetch("https://api.groq.com/openai/v1/models", {
+      headers: { Authorization: `Bearer ${key.trim()}` },
+    });
     if (!res.ok) {
       const errText = await res.text().catch(() => "");
       return { ok: false, status: res.status, error: errText.slice(0, 200) };
     }
-    type Model = { name: string; supportedGenerationMethods?: string[] };
-    const data = (await res.json().catch(() => ({}))) as { models?: Model[] };
-    const supported = (data.models ?? [])
-      .filter((m) => (m.supportedGenerationMethods ?? []).includes("generateContent"))
-      .map((m) => m.name)
-      .slice(0, 30);
-    return { ok: true, status: res.status, models: supported };
+    type Model = { id: string };
+    const data = (await res.json().catch(() => ({}))) as { data?: Model[] };
+    const ids = (data.data ?? []).map((m) => m.id).slice(0, 30);
+    return { ok: true, status: res.status, models: ids };
   } catch (err) {
     return { ok: false, status: 0, error: err instanceof Error ? err.message : String(err) };
   }
@@ -196,13 +205,13 @@ export async function GET(req: NextRequest) {
     color: "#EF4444",
   });
 
-  // Gemini env-state diagnostic. Surfaces the masked shape of
-  // GEMINI_API_KEY, hits Gemini directly with that key (probe), and
+  // Groq env-state diagnostic. Surfaces the masked shape of
+  // GROQ_API_KEY, hits Groq directly with that key (probe), and
   // lists the models the key is allowed to call (models). Three
   // signals in one call → no more trial-and-error redeploys.
-  const [probe, models] = await Promise.all([probeGemini(), listGeminiModels()]);
-  const gemini = {
-    env: maskGeminiKey(process.env.GEMINI_API_KEY),
+  const [probe, models] = await Promise.all([probeGroq(), listGroqModels()]);
+  const groq = {
+    env: maskGroqKey(process.env.GROQ_API_KEY),
     probe,
     models,
   };
@@ -211,6 +220,6 @@ export async function GET(req: NextRequest) {
     env,
     probes: { text, blockMinimal, blockColored, hotLead },
     hotLeadBlockCount: hotLeadBlocks.length,
-    gemini,
+    groq,
   });
 }
