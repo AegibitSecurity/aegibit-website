@@ -4,32 +4,25 @@ import dynamic from "next/dynamic";
 /**
  * Homepage-only floating chrome. Mounted by `app/page.tsx`.
  *
- * NOTE: ExitIntentPopup used to be imported here, which meant it only
- * ever fired on `/` — visitors landing on /products/paymint, /pricing,
- * /case-studies, etc. got no exit-intent capture. It now lives in
- * SiteWideExitIntent, mounted at the root layout level with pathname
- * gating, so every marketing page captures abandoning visitors.
+ * As of P3-S8, every floating element that should appear on every
+ * marketing page (ScrollProgress, StickyMobileCTA, SocialProofToast,
+ * ExitIntentPopup, LiveBadge) lives in `MarketingChrome` mounted at
+ * the root layout. The only thing left here is `WelcomeGreeting` —
+ * which is intentionally homepage-only because it's a 2.2s
+ * scroll-locked first-visit overlay; firing it on a direct SEO
+ * landing on /pricing or /products/paymint would be jarring and
+ * actively conversion-hostile.
  *
- * Other elements remain homepage-only because their copy / placement
- * is tuned for the home experience (welcome greeting, hero scroll
- * progress, etc.). Promote individually as the design demands.
+ * If WelcomeGreeting ever moves to "fire on first visit, anywhere"
+ * the right move is to fold it into MarketingChrome and delete this
+ * file. Until then, this stays as the homepage-specific seam.
  */
 
-// All client-only, ssr:false — zero LCP impact
-const ScrollProgress   = dynamic(() => import("./ScrollProgress").then(m =>                ({ default: m.ScrollProgress })),    { ssr: false });
-const LiveBadge        = dynamic(() => import("./LiveBadge").then(m =>                     ({ default: m.LiveBadge })),         { ssr: false });
-const SocialProofToast = dynamic(() => import("../conversion/SocialProofToast").then(m =>  ({ default: m.SocialProofToast })),  { ssr: false });
-const StickyMobileCTA  = dynamic(() => import("../conversion/StickyMobileCTA").then(m =>   ({ default: m.StickyMobileCTA })),   { ssr: false });
-const WelcomeGreeting  = dynamic(() => import("./WelcomeGreeting").then(m =>               ({ default: m.WelcomeGreeting })),   { ssr: false });
+const WelcomeGreeting = dynamic(
+  () => import("./WelcomeGreeting").then((m) => ({ default: m.WelcomeGreeting })),
+  { ssr: false },
+);
 
 export function ClientFloatingElements() {
-  return (
-    <>
-      <WelcomeGreeting />
-      <ScrollProgress />
-      <StickyMobileCTA />
-      <SocialProofToast />
-      <LiveBadge />
-    </>
-  );
+  return <WelcomeGreeting />;
 }
