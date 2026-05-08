@@ -7,19 +7,21 @@ import { useCohort } from "@/hooks/useCohort";
 /**
  * Cohort-personalized homepage CTA.
  *
- * Three variants matched in priority order via useCohort():
- *   high_intent  → "Skip the demo. Start a 14-day pilot."
- *                   target: /products/paymint/demo (urgency framing)
- *   returning    → "Welcome back. Pick up where you left off."
- *                   target: /products/paymint
- *   default      → "Ready to secure and scale your business?"
- *                   target: /signup (the canonical experience, unchanged)
+ * Six variants matched in priority order via useCohort():
+ *   high_intent  → "Skip the demo. Start a 14-day pilot." (urgency)
+ *   from_paid    → "You searched. We deliver." (intent-validation; UTM=cpc/google_ads)
+ *   from_social  → "We meet on LinkedIn often. Let's meet for real." (relationship; UTM=linkedin etc.)
+ *   from_email   → "Picked the right link." (already-warm; UTM=email)
+ *   returning    → "Pick up where you left off." (generic returning)
+ *   default      → "Ready to secure and scale your business?" (canonical)
  *
  * Each cohort gets a distinct cta_id so the funnel dashboard groups
  * conversions per-cohort automatically. No new dashboard code.
  *
  * The personalization is segment-based, not per-user fingerprinted —
- * respects the charter privacy posture.
+ * respects the charter privacy posture. UTM cohorts are per-visit
+ * (sessionStorage); they identify WHY the visitor is here today, not
+ * WHO they are.
  */
 
 const COPY = {
@@ -30,6 +32,30 @@ const COPY = {
     ctaLabel: "Start my pilot",
     ctaHref: "/products/paymint/demo",
     ctaId: "home_cta_high_intent",
+  },
+  from_paid: {
+    eyebrow: "Direct match",
+    headline: "You searched.\nWe deliver.",
+    body: "Multi-branch operational software with cybersecurity baked in. Real-time visibility, audit-grade trail, 30-second voucher capture. See PayMint in action.",
+    ctaLabel: "Book a 12-min demo",
+    ctaHref: "/products/paymint/demo",
+    ctaId: "home_cta_from_paid",
+  },
+  from_social: {
+    eyebrow: "Glad you came over",
+    headline: "We meet on social\noften. Let's meet for real.",
+    body: "20 minutes, no pitch deck — just a frank conversation about what you're trying to fix. If AEGIBIT isn't the right shape, we'll point you to who is.",
+    ctaLabel: "Talk to a founder",
+    ctaHref: "/contact",
+    ctaId: "home_cta_from_social",
+  },
+  from_email: {
+    eyebrow: "Right link, right time",
+    headline: "Ready to take\nthe next step?",
+    body: "You've been following AEGIBIT. The next move is the easy one — pick a slot, get the live walkthrough, decide on the spot.",
+    ctaLabel: "Pick a demo slot",
+    ctaHref: "/products/paymint/demo",
+    ctaId: "home_cta_from_email",
   },
   returning: {
     eyebrow: "Welcome back",

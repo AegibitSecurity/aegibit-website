@@ -15,6 +15,28 @@ export function useVisitorTracking() {
 
     const params = new URLSearchParams(window.location.search);
 
+    // UTM resolution priority: URL on first paint > sessionStorage from
+    // an earlier paint > null. URL params are present only on the
+    // entry page; sessionStorage carries them across SPA navigations
+    // and tab refreshes, dies on tab close (which matches per-visit
+    // semantics — UTM identifies WHY they're here today, not WHO).
+    const utmSource =
+      params.get("utm_source") ?? sessionStorage.getItem("aegibit_utm_source");
+    const utmMedium =
+      params.get("utm_medium") ?? sessionStorage.getItem("aegibit_utm_medium");
+    const utmCampaign =
+      params.get("utm_campaign") ?? sessionStorage.getItem("aegibit_utm_campaign");
+
+    if (utmSource) sessionStorage.setItem("aegibit_utm_source", utmSource);
+    if (utmMedium) sessionStorage.setItem("aegibit_utm_medium", utmMedium);
+    if (utmCampaign) sessionStorage.setItem("aegibit_utm_campaign", utmCampaign);
+
+    // Mirror into the zustand store so the cohort engine + any
+    // UTM-aware UI can read them without touching sessionStorage
+    // directly. Cohort lookup happens on every render of CTA components,
+    // so a synchronous in-memory read matters.
+    store.setUtmParams({ source: utmSource, medium: utmMedium, campaign: utmCampaign });
+
     fetch("/api/visitors", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,9 +47,9 @@ export function useVisitorTracking() {
         browser: getBrowser(),
         os: getOS(),
         referrer: document.referrer || null,
-        utmSource: params.get("utm_source"),
-        utmMedium: params.get("utm_medium"),
-        utmCampaign: params.get("utm_campaign"),
+        utmSource,
+        utmMedium,
+        utmCampaign,
         landingPage: pathname,
       }),
     })

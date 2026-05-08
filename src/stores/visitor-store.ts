@@ -20,6 +20,15 @@ interface VisitorState {
   visitedPricingPage: boolean;
   visitedAlternativesPage: boolean;
 
+  // UTM attribution. Captured from URL on first paint by
+  // useVisitorTracking and persisted to sessionStorage so cohort
+  // assignment remains stable across SPA navigations (URL params don't
+  // survive client-side route changes). Cleared when the tab closes
+  // — UTM is a per-visit signal, not per-user.
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+
   setVisitorId: (id: string) => void;
   addPage: (page: string) => void;
   updateScrollDepth: (depth: number) => void;
@@ -30,6 +39,7 @@ interface VisitorState {
   setClickedCTA: () => void;
   setStartedForm: () => void;
   setSubmittedForm: () => void;
+  setUtmParams: (params: { source: string | null; medium: string | null; campaign: string | null }) => void;
   recalculateScore: () => void;
 }
 
@@ -57,6 +67,9 @@ export const useVisitorStore = create<VisitorState>((set, get) => ({
   submittedForm: false,
   visitedPricingPage: false,
   visitedAlternativesPage: false,
+  utmSource: null,
+  utmMedium: null,
+  utmCampaign: null,
 
   setVisitorId: (id) => set({ visitorId: id }),
 
@@ -78,6 +91,9 @@ export const useVisitorStore = create<VisitorState>((set, get) => ({
   setClickedCTA:           () => set({ clickedCTA: true }),
   setStartedForm:          () => set({ startedForm: true }),
   setSubmittedForm:        () => set({ submittedForm: true }),
+
+  setUtmParams: ({ source, medium, campaign }) =>
+    set({ utmSource: source, utmMedium: medium, utmCampaign: campaign }),
 
   recalculateScore: () => {
     const s = get();
