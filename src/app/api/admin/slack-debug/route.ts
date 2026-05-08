@@ -92,7 +92,7 @@ async function probeGemini(): Promise<{ ok: boolean; status: number; error?: str
   try {
     // Match the model used by aira-bot.ts so the probe reflects the
     // same free-tier quota the chat route is subject to.
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(key.trim())}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(key.trim())}`;
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -106,6 +106,38 @@ async function probeGemini(): Promise<{ ok: boolean; status: number; error?: str
       return { ok: false, status: res.status, error: errText.slice(0, 200) };
     }
     return { ok: true, status: res.status };
+  } catch (err) {
+    return { ok: false, status: 0, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
+/**
+ * List the models the API key is actually allowed to call. When a
+ * generateContent probe returns 404, this tells us in one call which
+ * model names ARE valid — instead of trial-and-error redeploying the
+ * chat route every time Google deprecates a model.
+ *
+ * Returns just the model `name` strings (e.g. "models/gemini-2.5-flash")
+ * filtered to those that support generateContent. Capped to 30 entries
+ * so the JSON response stays readable.
+ */
+async function listGeminiModels(): Promise<{ ok: boolean; status: number; models?: string[]; error?: string }> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) return { ok: false, status: 0, error: "no_key" };
+  try {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(key.trim())}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "");
+      return { ok: false, status: res.status, error: errText.slice(0, 200) };
+    }
+    type Model = { name: string; supportedGenerationMethods?: string[] };
+    const data = (await res.json().catch(() => ({}))) as { models?: Model[] };
+    const supported = (data.models ?? [])
+      .filter((m) => (m.supportedGenerationMethods ?? []).includes("generateContent"))
+      .map((m) => m.name)
+      .slice(0, 30);
+    return { ok: true, status: res.status, models: supported };
   } catch (err) {
     return { ok: false, status: 0, error: err instanceof Error ? err.message : String(err) };
   }
@@ -165,11 +197,14 @@ export async function GET(req: NextRequest) {
   });
 
   // Gemini env-state diagnostic. Surfaces the masked shape of
-  // GEMINI_API_KEY *and* hits Gemini directly with that key, so we
-  // know whether the runtime can reach Google's API at all.
+  // GEMINI_API_KEY, hits Gemini directly with that key (probe), and
+  // lists the models the key is allowed to call (models). Three
+  // signals in one call → no more trial-and-error redeploys.
+  const [probe, models] = await Promise.all([probeGemini(), listGeminiModels()]);
   const gemini = {
     env: maskGeminiKey(process.env.GEMINI_API_KEY),
-    probe: await probeGemini(),
+    probe,
+    models,
   };
 
   return NextResponse.json({
