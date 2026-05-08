@@ -111,7 +111,12 @@ function loadSeed() {
   if (!Array.isArray(json.companies)) {
     throw new Error(`ICP seed malformed — expected { companies: [...] }`);
   }
-  return json.companies;
+  // Safety: skip placeholder examples that ship with the scaffolding.
+  // The first cron run after merge will see only placeholders, and
+  // we'd rather no-op than spam the repo with PRs full of drafts to
+  // "Example Multi-Branch Auto Co". When Rahul replaces the examples
+  // with real ICPs (no "Example " prefix), drafts start flowing.
+  return json.companies.filter((e) => !String(e.company ?? "").startsWith("Example "));
 }
 
 function buildDraft(entry) {
