@@ -5,7 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { TrackingProvider } from "@/components/shared/TrackingProvider";
-import { SiteWideExitIntent } from "@/components/conversion/SiteWideExitIntent";
+import { MarketingChrome } from "@/components/shared/MarketingChrome";
 import { SITE_URL } from "@/lib/seo";
 
 const instrumentSerif = Instrument_Serif({
@@ -89,12 +89,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col bg-[#000] text-white">
         <TrackingProvider>{children}</TrackingProvider>
         {/*
-          Site-wide exit-intent popup. Self-gates by pathname (renders
-          null on /admin, /dashboard, /api, /signup, /login). Has its
-          own engagement gates inside the component: score >= 50,
-          desktop only, sessionStorage de-dupe.
+          Site-wide marketing chrome — scroll progress, mobile CTA,
+          social proof, exit-intent, live badge. Self-gates by pathname
+          (renders null on /admin, /dashboard, /api, /signup, /login).
+          Each child has its own internal triggers (engagement score,
+          mobile detection, etc.). See MarketingChrome.tsx for the full
+          rationale + the "why each component" doc.
         */}
-        <SiteWideExitIntent />
+        <MarketingChrome />
         <Analytics />
       </body>
     </html>
