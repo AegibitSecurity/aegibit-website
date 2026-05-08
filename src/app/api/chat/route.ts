@@ -28,8 +28,12 @@ interface ChatRequestBody {
   message?: string;
 }
 
+// Single fallback reply used whenever Gemini is unreachable (missing
+// key, rate-limit, network error, safety-block). Kept terse and on-
+// brand so the visitor can't tell something failed — they just hit
+// the founder-handoff path one turn earlier than expected.
 const FALLBACK_REPLY =
-  "Let me connect you with one of our founders directly — they'll get back to you within 24 hours. What's the best work email to reach you at?";
+  "Let me put you in touch with Rahul directly. What's the best work email to reach you at?";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";

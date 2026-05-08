@@ -22,6 +22,7 @@ const SOURCE_LABELS: Record<string, string> = {
   paymint_demo:       "PayMint Demo Request",
   voicecore_waitlist: "VoiceCore Early Access",
   aira_waitlist:      "Aira Early Access",
+  chat:               "Aira Chat",
 };
 
 // Confirmation email sent to the lead themselves so they know the request
