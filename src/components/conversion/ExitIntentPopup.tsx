@@ -75,10 +75,10 @@ export function ExitIntentPopup() {
                 <>
                   <p className="mono-label text-[#FF5A1F] mb-4">Before you go</p>
                   <h3 className="text-2xl font-bold text-white mb-2 tracking-tight leading-snug">
-                    Get 3 months free on the Business plan.
+                    See PayMint live in 12 minutes.
                   </h3>
                   <p className="text-[#A1A1AA] text-sm mb-6 leading-relaxed">
-                    Limited beta offer. Drop your work email and we&apos;ll hold your spot — no credit card required.
+                    Drop your work email and Rahul will send a 4-minute walkthrough plus two demo slot options. No spam, no credit card.
                   </p>
                   <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                     <input

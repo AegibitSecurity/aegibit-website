@@ -1,12 +1,10 @@
 import { Navbar }           from "@/components/layout/Navbar";
 import { Footer }           from "@/components/layout/Footer";
 import { HeroSection }      from "@/components/sections/HeroSection";
-import { TrustStrip }       from "@/components/sections/TrustStrip";
 import { HomeProducts }     from "@/components/sections/HomeProducts";
 import { WhatWeDo }         from "@/components/sections/WhatWeDo";
 import { ProofSection }     from "@/components/sections/ProofSection";
 import { HomeCTA }          from "@/components/sections/HomeCTA";
-import { ClientFloatingElements } from "@/components/shared/ClientFloatingElements";
 
 // Structured data — AEGIBIT-the-company is the primary entity. PayMint
 // is one of multiple products in the catalogue; the Organization carries
@@ -116,15 +114,13 @@ export default function HomePage() {
 
       <main>
         {/* 1 */ }<HeroSection />
-        {/* 2 */ }<TrustStrip />
-        {/* 3 */ }<HomeProducts />
-        {/* 4 */ }<WhatWeDo />
-        {/* 5 */ }<ProofSection />
-        {/* 6 */ }<HomeCTA />
+        {/* 2 */ }<HomeProducts />
+        {/* 3 */ }<WhatWeDo />
+        {/* 4 */ }<ProofSection />
+        {/* 5 */ }<HomeCTA />
       </main>
 
       <Footer />
-      <ClientFloatingElements />
     </>
   );
 }

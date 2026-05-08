@@ -24,6 +24,12 @@ module.exports = {
     // about pages we're simultaneously asking it not to index.
     "/services",
     "/services/*",
+    // Locations pages — same disposition (services-shop legacy with
+    // fictional "$499/month" pricing that doesn't match /pricing).
+    // De-indexed via /locations/layout.tsx; excluded from sitemap
+    // here too.
+    "/locations",
+    "/locations/*",
   ],
   additionalPaths: async (config) => {
     const { alternatives } = await import("./src/content/alternatives.ts");
