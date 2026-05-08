@@ -30,14 +30,19 @@
  *   server just produces text, the client interprets the marker.
  */
 
-// gemini-1.5-flash chosen over 2.0-flash for free-tier headroom:
-//   - 1.5-flash: 15 RPM, 1M TPM, **1500 RPD**
-//   - 2.0-flash: 10 RPM, 4M TPM, **200 RPD** (tight; trip hourly with
-//                                              even moderate traffic)
-// Quality tradeoff is real (1.5 is older) but for product-FAQ +
-// lead-capture conversation, 1.5 is fully sufficient. Upgrade later
-// if conversion data argues for it AND we waive zero-spend.
-const MODEL = "gemini-1.5-flash";
+// Model selection journey (so the next contributor doesn't repeat it):
+//   1. Picked gemini-2.0-flash first → returned 429 because its
+//      free-tier daily cap is only 200 RPD; we burned through it
+//      with debug probes + smoke tests in one session.
+//   2. Swapped to gemini-1.5-flash (1500 RPD on free tier per old
+//      docs) → returned 404 "model not found for v1beta". Google
+//      deprecated the 1.5 series and pulled it from the API.
+//   3. gemini-2.5-flash is the current free-tier flash model with
+//      generous quotas. That's the choice.
+// If 2.5-flash later gets pulled the same way, the diagnostic
+// endpoint /api/admin/slack-debug.gemini.models lists every model
+// the live API key is allowed to call — single-curl rediagnose.
+const MODEL = "gemini-2.5-flash";
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 export interface ChatMessage {
