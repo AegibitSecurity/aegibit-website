@@ -70,7 +70,8 @@
     "competitor-watch": { "enabled": true, "tier": "T0", "autoDeploy": false },
     "brand-mentions": { "enabled": true, "tier": "T0", "autoDeploy": false },
     "friday-pdf": { "enabled": true, "tier": "T0", "autoDeploy": false },
-    "monthly-revenue-report": { "enabled": true, "tier": "T0", "autoDeploy": false }
+    "monthly-revenue-report": { "enabled": true, "tier": "T0", "autoDeploy": false },
+    "outbound-draft":         { "enabled": true, "tier": "T1", "autoDeploy": false }
   },
   "competitors": [
     { "name": "Nova AI", "pricingUrl": "https://nova.ai" }
