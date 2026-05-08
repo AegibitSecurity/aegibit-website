@@ -78,7 +78,7 @@ export function ExitIntentPopup() {
                     See PayMint live in 12 minutes.
                   </h3>
                   <p className="text-[#A1A1AA] text-sm mb-6 leading-relaxed">
-                    Drop your work email and Rahul will send a 4-minute walkthrough plus two demo slot options. No spam, no credit card.
+                    Drop your work email and the AEGIBIT team will send a 4-minute walkthrough plus two demo slot options. No spam, no credit card.
                   </p>
                   <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                     <input

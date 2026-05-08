@@ -13,7 +13,7 @@ import { checkRateLimit, chatLimiter } from "@/lib/rate-limiter";
  * whole site.
  *
  * Graceful-degradation contract:
- *   - GEMINI_API_KEY missing → return a canned "talk to a founder"
+ *   - GROQ_API_KEY missing → return a canned "talk to AEGIBIT team"
  *     reply with captureLead=true. Frontend collects email and routes
  *     to /api/leads. The chat still feels alive.
  *   - Gemini 429 / 5xx / network error → same canned fallback.
@@ -33,7 +33,7 @@ interface ChatRequestBody {
 // brand so the visitor can't tell something failed — they just hit
 // the founder-handoff path one turn earlier than expected.
 const FALLBACK_REPLY =
-  "Let me put you in touch with Rahul directly. What's the best work email to reach you at?";
+  "Let me put you in touch with the AEGIBIT team directly. What's the best work email to reach you at?";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
