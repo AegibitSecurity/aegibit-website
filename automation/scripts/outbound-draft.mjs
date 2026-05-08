@@ -78,11 +78,10 @@ We built PayMint for exactly this — multi-branch expense capture with same-day
 
 I'm not asking for a meeting yet. ${signoffLine}
 
-If this isn't a fit, just reply "no thanks" and I'll never email you again.
+If this isn't a fit, just reply "no thanks" and we'll never email you again.
 
 Best,
-Rahul Mondal
-Co-founder, AEGIBIT
+The AEGIBIT Team
 www.aegibit.com
 `;
 

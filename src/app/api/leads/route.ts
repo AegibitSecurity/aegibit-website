@@ -83,7 +83,7 @@ async function sendConfirmation(data: {
               : ""
           }
           <p style="font-size:13px;color:#52525B;line-height:1.6;margin:0;">
-            Questions? Reply directly to this email — it routes to our founders' inbox.
+            Questions? Reply directly to this email — it routes to the AEGIBIT team inbox.
           </p>
           <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:28px 0;"/>
           <p style="font-size:11px;color:#52525B;margin:0;">

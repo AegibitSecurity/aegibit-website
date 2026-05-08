@@ -164,8 +164,10 @@ export function HeroSection() {
         decades — long after the trends pass.
       </p>
 
-      {/* CTAs — company-level: explore products grid + talk to founder.
-           Specific product CTAs live one section below in HomeProducts. */}
+      {/* CTAs — company-level: explore products grid + Talk to AEGIBIT.
+           Specific product CTAs live one section below in HomeProducts.
+           Brand voice rule: response promises always reference the
+           AEGIBIT team, not the founder personally. */}
       <div className="fade-up delay-4 flex flex-col sm:flex-row items-center gap-4 mb-12">
         {/* Primary CTA is wrapped in HeroPrimaryCTA — first live A/B
             experiment (hero_cta_copy). Renders the control variant on
@@ -174,8 +176,8 @@ export function HeroSection() {
         <HeroPrimaryCTA />
         <TrackedLink
           href="/contact"
-          ctaId="hero_talk_founder"
-          ctaLabel="Talk to a Founder"
+          ctaId="hero_talk_team"
+          ctaLabel="Talk to AEGIBIT"
           ctaSection="hero"
           className="text-sm font-semibold transition-colors hover:text-white"
           style={{
@@ -187,7 +189,7 @@ export function HeroSection() {
             color: "#A1A1AA",
           }}
         >
-          Talk to a Founder
+          Talk to AEGIBIT
         </TrackedLink>
       </div>
 

@@ -80,7 +80,7 @@ If multi-branch expense tracking is on the roadmap for {{company}} this quarter,
 
 If not, all good — I'll keep building, see you when the time is right.
 
-— Rahul (AEGIBIT)`,
+— The AEGIBIT Team`,
   },
 ];
 
@@ -102,8 +102,7 @@ We built PayMint specifically for this — branch-coded vouchers, real-time sync
 
 Open to a 20-min walkthrough? Same-day sandbox link if you want to try it first.
 
-— Rahul
-Co-founder, AEGIBIT
+— The AEGIBIT Team
 aegibit.com/products/paymint/demo?utm_source=email&utm_campaign=cold_t1`,
   },
   {
@@ -122,7 +121,7 @@ PayMint takes that from 2 days to 20 minutes. Vouchers flow live as they're spen
 Want to see it run on real numbers? 20-min screen-share, no prep needed:
 aegibit.com/products/paymint/demo?utm_source=email&utm_campaign=cold_t2
 
-— Rahul`,
+— The AEGIBIT Team`,
   },
   {
     id: "email_3",
@@ -136,7 +135,7 @@ aegibit.com/case-studies/nibir-motors?utm_source=email&utm_campaign=cold_t3
 
 7 branches. Real-time vouchers. Tally exports. Audit log. Built by a cybersecurity company.
 
-— Rahul`,
+— The AEGIBIT Team`,
   },
   {
     id: "email_4",
@@ -155,7 +154,7 @@ For {{company}}'s {{branchCount}} branches: ₹{{branchCount}}999/month. ROI mat
 
 Full pricing + ROI calculator: aegibit.com/pricing?utm_source=email&utm_campaign=cold_t4
 
-— Rahul`,
+— The AEGIBIT Team`,
   },
   {
     id: "email_5",
@@ -173,8 +172,7 @@ aegibit.com/products/paymint/demo?utm_source=email&utm_campaign=cold_t5
 
 Either way — keep building.
 
-— Rahul
-Co-founder, AEGIBIT`,
+— The AEGIBIT Team`,
   },
 ];
 

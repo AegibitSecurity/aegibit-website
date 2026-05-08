@@ -185,7 +185,7 @@ await withJob("lead-nurture", async () => {
 
     try {
       const r = await resend.emails.send({
-        from: "Rahul (AEGIBIT) <noreply@aegibit.com>",
+        from: "AEGIBIT Team <noreply@aegibit.com>",
         to: [email],
         replyTo: ["contact@aegibit.com"],
         subject: due.subject,

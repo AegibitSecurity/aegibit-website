@@ -112,13 +112,13 @@ export function ChatWidget() {
       appendMessage(
         "model",
         replyText ||
-          "Let me put you in touch with Rahul directly. What's the best work email to reach you?",
+          "Let me put you in touch with the AEGIBIT team directly. What's the best work email to reach you?",
       );
       if (data.captureLead) setMode("capture");
     } catch {
       appendMessage(
         "model",
-        "Connection hiccup. If you'd like a founder to reach out directly, drop your work email here.",
+        "Connection hiccup. If you'd like the AEGIBIT team to reach out directly, drop your work email here.",
       );
       setMode("capture");
     } finally {
@@ -169,7 +169,7 @@ export function ChatWidget() {
       track("chat_lead");
       appendMessage(
         "model",
-        "Done. Rahul will be in touch within 24 hours. Anything else I can answer while you wait?",
+        "Done. The AEGIBIT team will be in touch within 24 hours. Anything else I can answer while you wait?",
       );
       setMode("captured");
     } catch {
