@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { TrackingProvider } from "@/components/shared/TrackingProvider";
+import { SiteWideExitIntent } from "@/components/conversion/SiteWideExitIntent";
 import { SITE_URL } from "@/lib/seo";
 
 const instrumentSerif = Instrument_Serif({
@@ -87,6 +88,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full flex flex-col bg-[#000] text-white">
         <TrackingProvider>{children}</TrackingProvider>
+        {/*
+          Site-wide exit-intent popup. Self-gates by pathname (renders
+          null on /admin, /dashboard, /api, /signup, /login). Has its
+          own engagement gates inside the component: score >= 50,
+          desktop only, sessionStorage de-dupe.
+        */}
+        <SiteWideExitIntent />
         <Analytics />
       </body>
     </html>
