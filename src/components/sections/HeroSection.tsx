@@ -1,10 +1,18 @@
-import Link from "next/link";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 import { HeroPrimaryCTA } from "@/components/sections/HeroPrimaryCTA";
 
+// Trust badges — every claim here must be defensible if a CISO asks.
+//   SOC 2 Type II is *in progress*, not certified — see /security.
+//     Until the audit closes, we don't claim it on the homepage.
+//   "99.99% Uptime SLA" was inherited from the dev-shop era; we don't
+//     have a customer with an SLA contract that says 99.99% — drop.
+//   "Zero Trust Architecture" is honest — defensible from next.config.ts
+//     headers + admin auth model.
+//   "Cybersecurity-First" is honest — it's the brand positioning.
+//   "Built for Multi-Branch Ops" is honest — it's the actual product.
 const TRUST = [
-  { label: "SOC 2 Type II Certified" },
-  { label: "99.99% Uptime SLA" },
+  { label: "Cybersecurity-First" },
+  { label: "Built for Multi-Branch Ops" },
   { label: "Zero Trust Architecture" },
 ];
 

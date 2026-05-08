@@ -18,10 +18,14 @@ import { usePathname } from "next/navigation";
  * What this DOES include:
  *   - ScrollProgress    — reading-position bar at the top of the page
  *   - StickyMobileCTA   — fixed bottom "Get Demo" CTA on mobile
- *   - SocialProofToast  — periodic "team from <city> joined" cue
  *   - ExitIntentPopup   — abandon-capture
- *   - LiveBadge         — "N teams evaluating" cue
- *   - ChatWidget        — Aira AI guide (Gemini Flash backbone)
+ *   - ChatWidget        — Aira AI guide (Groq Llama 3.3 70B backbone)
+ *
+ * What was REMOVED in the credibility-cleanup pass:
+ *   - SocialProofToast  — fabricated "team from <random-city> joined"
+ *   - LiveBadge         — fabricated "47 teams evaluating" RNG counter
+ *   The bar for trust signals is "every claim is defensible if a CISO
+ *   asks where it came from." Random-city RNG fails that bar instantly.
  *
  * What this does NOT include:
  *   - WelcomeGreeting — homepage-specific 2.2s scroll-locked overlay
@@ -55,18 +59,8 @@ const StickyMobileCTA = dynamic(
   { ssr: false },
 );
 
-const SocialProofToast = dynamic(
-  () => import("../conversion/SocialProofToast").then((m) => ({ default: m.SocialProofToast })),
-  { ssr: false },
-);
-
 const ExitIntentPopup = dynamic(
   () => import("../conversion/ExitIntentPopup").then((m) => ({ default: m.ExitIntentPopup })),
-  { ssr: false },
-);
-
-const LiveBadge = dynamic(
-  () => import("./LiveBadge").then((m) => ({ default: m.LiveBadge })),
   { ssr: false },
 );
 
@@ -102,9 +96,7 @@ export function MarketingChrome() {
     <>
       <ScrollProgress />
       <StickyMobileCTA />
-      <SocialProofToast />
       <ExitIntentPopup />
-      <LiveBadge />
       <ChatWidget />
     </>
   );
