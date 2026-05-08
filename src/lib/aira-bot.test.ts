@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { buildGeminiPayload, parseAiraOutput, type ChatMessage } from "./aira-bot";
+import { buildGroqPayload, parseAiraOutput, type ChatMessage } from "./aira-bot";
 
 /**
- * Pure-function tests for the Aira chatbot. We don't test the
- * Gemini network call (that's an external service); we test the
- * boundary code that turns raw model output into the
- * captureLead/text contract the frontend depends on, plus the
- * payload assembly so the system prompt + history + user message
- * thread correctly.
+ * Pure-function tests for the Aira chatbot. We don't test the Groq
+ * network call (that's an external service); we test the boundary
+ * code that turns raw model output into the captureLead/text contract
+ * the frontend depends on, plus the payload assembly so the system
+ * prompt + history threading is correct AND the Gemini-vocabulary
+ * "model" role translates to OpenAI-vocabulary "assistant" before
+ * leaving the process.
  */
 
 describe("parseAiraOutput", () => {
@@ -42,62 +43,68 @@ describe("parseAiraOutput", () => {
   });
 });
 
-describe("buildGeminiPayload", () => {
+describe("buildGroqPayload", () => {
   const baseInput = {
     history: [] as ChatMessage[],
     userMessage: "What's PayMint?",
   };
 
-  it("emits a systemInstruction with the bot prompt", () => {
-    const payload = buildGeminiPayload(baseInput) as { systemInstruction?: { parts?: { text?: string }[] } };
-    const text = payload.systemInstruction?.parts?.[0]?.text ?? "";
-    expect(text).toContain("AEGIBIT");
-    expect(text).toContain("PayMint");
-    expect(text).toContain("[CAPTURE_LEAD]");
+  it("emits a Groq-shaped payload with the system prompt as the first message", () => {
+    const payload = buildGroqPayload(baseInput) as { messages: { role: string; content: string }[] };
+    expect(payload.messages[0].role).toBe("system");
+    expect(payload.messages[0].content).toContain("AEGIBIT");
+    expect(payload.messages[0].content).toContain("PayMint");
+    expect(payload.messages[0].content).toContain("[CAPTURE_LEAD]");
   });
 
   it("appends the userMessage as the final 'user' content turn", () => {
-    const payload = buildGeminiPayload(baseInput) as { contents: { role: string; parts: { text: string }[] }[] };
-    const last = payload.contents[payload.contents.length - 1];
+    const payload = buildGroqPayload(baseInput) as { messages: { role: string; content: string }[] };
+    const last = payload.messages[payload.messages.length - 1];
     expect(last.role).toBe("user");
-    expect(last.parts[0].text).toBe("What's PayMint?");
+    expect(last.content).toBe("What's PayMint?");
   });
 
-  it("threads conversation history with correct roles before the user message", () => {
-    const payload = buildGeminiPayload({
+  it("translates Gemini's 'model' role to OpenAI's 'assistant' role in history", () => {
+    const payload = buildGroqPayload({
       history: [
         { role: "user",  text: "Hi" },
         { role: "model", text: "Hello — how can I help?" },
       ],
       userMessage: "Tell me about pricing.",
-    }) as { contents: { role: string; parts: { text: string }[] }[] };
+    }) as { messages: { role: string; content: string }[] };
 
-    expect(payload.contents.map((c) => c.role)).toEqual(["user", "model", "user"]);
-    expect(payload.contents[0].parts[0].text).toBe("Hi");
-    expect(payload.contents[1].parts[0].text).toBe("Hello — how can I help?");
-    expect(payload.contents[2].parts[0].text).toBe("Tell me about pricing.");
+    // Index 0 is system, then history (user, assistant), then final user.
+    expect(payload.messages.map((m) => m.role)).toEqual([
+      "system",
+      "user",
+      "assistant", // <-- translated from "model"
+      "user",
+    ]);
+    expect(payload.messages[1].content).toBe("Hi");
+    expect(payload.messages[2].content).toBe("Hello — how can I help?");
+    expect(payload.messages[3].content).toBe("Tell me about pricing.");
   });
 
-  it("includes stopSequences for CAPTURE_LEAD so we don't waste tokens", () => {
-    const payload = buildGeminiPayload(baseInput) as {
-      generationConfig?: { stopSequences?: string[] };
-    };
-    expect(payload.generationConfig?.stopSequences).toContain("[CAPTURE_LEAD]");
+  it("includes a stop sequence for CAPTURE_LEAD so we don't waste tokens", () => {
+    const payload = buildGroqPayload(baseInput) as { stop?: string[] };
+    expect(payload.stop).toContain("[CAPTURE_LEAD]");
   });
 
-  it("caps maxOutputTokens (Aira is a guide, not a chatty bot)", () => {
-    const payload = buildGeminiPayload(baseInput) as {
-      generationConfig?: { maxOutputTokens?: number };
-    };
-    expect(payload.generationConfig?.maxOutputTokens).toBeLessThanOrEqual(500);
+  it("caps max_tokens (Aira is a guide, not a chatty bot)", () => {
+    const payload = buildGroqPayload(baseInput) as { max_tokens?: number };
+    expect(payload.max_tokens).toBeLessThanOrEqual(500);
   });
 
   it("temperature is moderate — creative tone, low hallucination risk", () => {
-    const payload = buildGeminiPayload(baseInput) as {
-      generationConfig?: { temperature?: number };
-    };
-    const t = payload.generationConfig?.temperature ?? 1;
+    const payload = buildGroqPayload(baseInput) as { temperature?: number };
+    const t = payload.temperature ?? 1;
     expect(t).toBeGreaterThanOrEqual(0.2);
     expect(t).toBeLessThanOrEqual(0.6);
+  });
+
+  it("specifies a model name (so a future provider config bug fails loudly)", () => {
+    const payload = buildGroqPayload(baseInput) as { model?: string };
+    expect(typeof payload.model).toBe("string");
+    expect(payload.model).toBeTruthy();
   });
 });
