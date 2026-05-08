@@ -140,3 +140,43 @@ jobs:
       - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: node automation/scripts/lead-health-check.mjs
+
+  outbound-engine:
+    # Generates 5 personalized cold-email drafts/day from automation/data/icp-seed.json,
+    # writes a single markdown report under automation/reports/outbound/, and opens
+    # a PR with NO auto-merge — Rahul reviews every draft before any send.
+    # Tier T1 (acts on outside parties' inboxes once Rahul approves).
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL:         https://www.aegibit.com
+      DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with: { node-version: "20" }
+      - run: node automation/scripts/outbound-draft.mjs
+      - name: Open PR with outbound drafts (manual review)
+        id: cpr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(outbound): daily draft batch"
+          author: "AEGIS Bot <contact@aegibit.com>"
+          committer: "AEGIS Bot <contact@aegibit.com>"
+          branch: automation/outbound-drafts
+          delete-branch: true
+          title: "chore(outbound): daily draft batch ${{ github.run_id }}"
+          body: |
+            **Tier T1** — auto-generated cold-email drafts per AUTOMATION_POLICY.md §6.
+            **NO auto-merge.** Review each draft, look up the recipient's email, edit as needed, and send manually via your inbox tool of choice. Close this PR (or merge it as historical record) when done.
+
+            - Drafts: `automation/reports/outbound/<date>.md`
+            - Seed:   `automation/data/icp-seed.json` — top up with new ICPs as the seed depletes
+            - State:  `automation/state.json` — `metrics.usedOutboundCompanies` deduplicates so the same company is never drafted twice
+
+            Compliance reminder: respect DPDP / GDPR / CAN-SPAM. Drafts include a soft "reply 'no thanks'" opt-out; do not send to anyone who's previously opted out.
+          labels: |
+            automation
+            outbound

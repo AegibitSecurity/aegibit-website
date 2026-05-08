@@ -1,0 +1,48 @@
+{
+  "_README": [
+    "Outbound ICP seed list. Each entry produces one personalized cold-email draft per generation cycle.",
+    "Schema:",
+    "  company       — display name (e.g. 'Nibir Motors')",
+    "  domain        — primary domain, used for subtle research cue (e.g. 'nibir.in')",
+    "  industry      — one of the keys in HOOK_BY_INDUSTRY in outbound-draft.mjs",
+    "  city          — for geographic personalization",
+    "  role          — target role (e.g. 'CFO', 'Operations Lead', 'COO')",
+    "  firstName     — recipient first name (research per-company)",
+    "  painSignal    — one observed signal that justifies cold contact (e.g. 'expanded to 3 new branches in Q1')",
+    "  notes         — free-form, NOT included in email — your private context only",
+    "REPLACE THESE EXAMPLES WITH YOUR ACTUAL ICPS BEFORE THE FIRST GENERATION CYCLE.",
+    "Compliance: respect DPDP (India), GDPR (EU), CAN-SPAM (US). Drafts are NOT auto-sent — you review every one."
+  ],
+  "companies": [
+    {
+      "company": "Example Multi-Branch Auto Co",
+      "domain": "example-auto.in",
+      "industry": "automotive",
+      "city": "Pune",
+      "role": "CFO",
+      "firstName": "Priya",
+      "painSignal": "expanded from 4 to 7 dealerships in 2025 per their LinkedIn",
+      "notes": "Replace this example. Real ICPs go here."
+    },
+    {
+      "company": "Example Regional Pharma Distributor",
+      "domain": "example-pharma.com",
+      "industry": "pharma",
+      "city": "Hyderabad",
+      "role": "COO",
+      "firstName": "Arjun",
+      "painSignal": "12 warehouses across 3 states; recently hired a Compliance Head",
+      "notes": "Audit-trail pain is acute in this segment."
+    },
+    {
+      "company": "Example Multi-Branch Restaurant Group",
+      "domain": "example-restaurants.in",
+      "industry": "hospitality",
+      "city": "Bangalore",
+      "role": "Finance Director",
+      "firstName": "Karan",
+      "painSignal": "8 outlets, recently posted job for 'cash reconciliation specialist'",
+      "notes": "Petty cash drift is the wedge."
+    }
+  ]
+}

@@ -98,6 +98,7 @@ const JOB_TAXONOMY = {
   "ping-search-engines":     { tier: "T0", category: "seo"      },
   "lead-health-check":       { tier: "T0", category: "ops"      },
   "lead-nurture":            { tier: "T1", category: "outreach" },
+  "outbound-draft":          { tier: "T1", category: "outreach" },
   "competitor-watch":        { tier: "T0", category: "ops"      },
   "brand-mentions":          { tier: "T0", category: "outreach" },
   "friday-pdf":              { tier: "T0", category: "ops"      },
