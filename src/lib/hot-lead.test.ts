@@ -39,6 +39,10 @@ describe("classifyLead", () => {
     expect(classifyLead({ source: "aira_waitlist" })).toBe("hot");
   });
 
+  it("chat source is always hot (visitor explicitly handed over email after a conversation)", () => {
+    expect(classifyLead({ source: "chat" })).toBe("hot");
+  });
+
   it("contact source with no signal is warm", () => {
     expect(classifyLead({ source: "contact" })).toBe("warm");
   });

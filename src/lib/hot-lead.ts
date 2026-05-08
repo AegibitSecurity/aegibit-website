@@ -28,6 +28,11 @@ const HOT_SOURCES = new Set([
   "demo",
   "voicecore_waitlist",
   "aira_waitlist",
+  // Chat leads are by definition high-intent — the visitor had a
+  // conversation with Aira and explicitly handed over their email
+  // (the bot only escalates on demo/pricing/custom-feature signals,
+  // and the user passed the email validation gate). Always hot.
+  "chat",
 ]);
 
 const INTENT_KEYWORDS = [

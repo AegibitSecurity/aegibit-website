@@ -47,7 +47,7 @@ const GREETING: UiMessage = {
   id: "g0",
   role: "model",
   text:
-    "Hi — I'm Aira, the AEGIBIT guide. Ask me about PayMint, AIRA, VoiceCore, pricing, or anything else. If you'd rather talk to a founder, I can set that up too.",
+    "I'm Aira. AEGIBIT's product guide. Ask me about PayMint, AIRA, VoiceCore, or pricing — or tell me what you're trying to fix and I'll point you to the right thing.",
 };
 
 function newId() {
@@ -103,18 +103,22 @@ export function ChatWidget() {
       if (res.status === 429) {
         appendMessage(
           "model",
-          "I'm getting a lot of questions right now — give me a few seconds, then try again.",
+          "Give me a few seconds — getting more questions than usual. Try again shortly.",
         );
         return;
       }
       const data = await res.json();
       const replyText = (data.text as string | undefined) ?? "";
-      appendMessage("model", replyText || "Sorry — let me connect you with a founder. What's your work email?");
+      appendMessage(
+        "model",
+        replyText ||
+          "Let me put you in touch with Rahul directly. What's the best work email to reach you?",
+      );
       if (data.captureLead) setMode("capture");
     } catch {
       appendMessage(
         "model",
-        "Connection hiccup. Want to reach a founder directly? Drop your email and I'll route it to them.",
+        "Connection hiccup. If you'd like a founder to reach out directly, drop your work email here.",
       );
       setMode("capture");
     } finally {
@@ -144,13 +148,13 @@ export function ChatWidget() {
       track("chat_lead");
       appendMessage(
         "model",
-        "Got it. A founder will reach out within 24 hours. Anything else I can answer in the meantime?",
+        "Done. Rahul will be in touch within 24 hours. Anything else I can answer while you wait?",
       );
       setMode("captured");
     } catch {
       appendMessage(
         "model",
-        "Couldn't save that just now. You can reach us directly at contact@aegibit.com — sorry for the hiccup.",
+        "Something hiccupped on our side — please reach out directly at contact@aegibit.com. Sorry about that.",
       );
     } finally {
       setBusy(false);
@@ -166,7 +170,7 @@ export function ChatWidget() {
       if (!isValidEmail(text)) {
         appendMessage(
           "model",
-          "That doesn't look like an email address — could you double-check?",
+          "That doesn't look right — mind double-checking the email?",
         );
         return;
       }
