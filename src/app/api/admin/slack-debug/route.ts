@@ -46,6 +46,69 @@ function maskUrl(url: string | undefined): {
   };
 }
 
+/**
+ * Mask GEMINI_API_KEY for safe diagnostic dumping. Reports presence,
+ * length, prefix shape (Google keys start with "AIza"), trailing
+ * 4 chars, and a `hasWhitespace` flag — the #1 silent bug when
+ * pasting keys into Vercel from the Google AI Studio UI.
+ *
+ * Also fires a real Gemini call with the key so we know it WORKS,
+ * not just that it's syntactically valid.
+ */
+function maskGeminiKey(key: string | undefined): {
+  present: boolean;
+  length: number;
+  prefix: string;
+  suffix: string;
+  shapeOk: boolean;
+  hasLeadingWhitespace: boolean;
+  hasTrailingWhitespace: boolean;
+} {
+  if (!key) {
+    return {
+      present: false,
+      length: 0,
+      prefix: "",
+      suffix: "",
+      shapeOk: false,
+      hasLeadingWhitespace: false,
+      hasTrailingWhitespace: false,
+    };
+  }
+  return {
+    present: true,
+    length: key.length,
+    prefix: key.slice(0, 6),  // "AIzaSy..." is the standard Google key shape
+    suffix: key.slice(-4),
+    shapeOk: key.trim().startsWith("AIza"),
+    hasLeadingWhitespace: key !== key.trimStart(),
+    hasTrailingWhitespace: key !== key.trimEnd(),
+  };
+}
+
+async function probeGemini(): Promise<{ ok: boolean; status: number; error?: string }> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) return { ok: false, status: 0, error: "no_key" };
+  try {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(key.trim())}`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ role: "user", parts: [{ text: "ping — reply with one word: pong" }] }],
+        generationConfig: { maxOutputTokens: 8 },
+      }),
+    });
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "");
+      return { ok: false, status: res.status, error: errText.slice(0, 200) };
+    }
+    return { ok: true, status: res.status };
+  } catch (err) {
+    return { ok: false, status: 0, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
 export async function GET(req: NextRequest) {
   const auth = req.headers.get("authorization");
   if (!process.env.DASHBOARD_SECRET || auth !== `Bearer ${process.env.DASHBOARD_SECRET}`) {
@@ -99,9 +162,18 @@ export async function GET(req: NextRequest) {
     color: "#EF4444",
   });
 
+  // Gemini env-state diagnostic. Surfaces the masked shape of
+  // GEMINI_API_KEY *and* hits Gemini directly with that key, so we
+  // know whether the runtime can reach Google's API at all.
+  const gemini = {
+    env: maskGeminiKey(process.env.GEMINI_API_KEY),
+    probe: await probeGemini(),
+  };
+
   return NextResponse.json({
     env,
     probes: { text, blockMinimal, blockColored, hotLead },
     hotLeadBlockCount: hotLeadBlocks.length,
+    gemini,
   });
 }
