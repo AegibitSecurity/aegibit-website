@@ -28,6 +28,8 @@ export function useCohort(): CohortAssignment {
   const clickedCTA       = useVisitorStore((s) => s.clickedCTA);
   const visitedPricing   = useVisitorStore((s) => s.visitedPricingPage);
   const visitedAlts      = useVisitorStore((s) => s.visitedAlternativesPage);
+  const utmSource        = useVisitorStore((s) => s.utmSource);
+  const utmMedium        = useVisitorStore((s) => s.utmMedium);
 
   const [cohort, setCohort] = useState<CohortAssignment>({ id: "default", reason: "ssr" });
   const exposed = useRef<string | null>(null);
@@ -48,7 +50,7 @@ export function useCohort(): CohortAssignment {
         reason: next.reason,
       });
     }
-  }, [visitorId, clickedCTA, visitedPricing, visitedAlts]);
+  }, [visitorId, clickedCTA, visitedPricing, visitedAlts, utmSource, utmMedium]);
 
   return cohort;
 }
