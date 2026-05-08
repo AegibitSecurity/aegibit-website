@@ -21,6 +21,7 @@ import { usePathname } from "next/navigation";
  *   - SocialProofToast  — periodic "team from <city> joined" cue
  *   - ExitIntentPopup   — abandon-capture
  *   - LiveBadge         — "N teams evaluating" cue
+ *   - ChatWidget        — Aira AI guide (Gemini Flash backbone)
  *
  * What this does NOT include:
  *   - WelcomeGreeting — homepage-specific 2.2s scroll-locked overlay
@@ -69,6 +70,11 @@ const LiveBadge = dynamic(
   { ssr: false },
 );
 
+const ChatWidget = dynamic(
+  () => import("../conversion/ChatWidget").then((m) => ({ default: m.ChatWidget })),
+  { ssr: false },
+);
+
 // Routes where marketing chrome must NEVER render. Match by prefix.
 // Keep this list in sync with src/proxy.ts conceptually — anything
 // that's "internal" or "auth-gated" goes here.
@@ -99,6 +105,7 @@ export function MarketingChrome() {
       <SocialProofToast />
       <ExitIntentPopup />
       <LiveBadge />
+      <ChatWidget />
     </>
   );
 }

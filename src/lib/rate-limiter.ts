@@ -50,6 +50,17 @@ export const leadLimiter: LimiterConfig = {
   durationSec: 60,
 };
 
+// Chat is chattier than form submits but every message is an LLM
+// roundtrip. 20/min keeps a single visitor from burning the Gemini
+// free tier (1500 req/day = ~1 sustained req/min across all visitors).
+// At 20 msg/min/IP we can serve ~75 simultaneous chatters before the
+// limiter kicks in.
+export const chatLimiter: LimiterConfig = {
+  name: "chat",
+  points: 20,
+  durationSec: 60,
+};
+
 // ── Upstash backend (lazy-initialised so module import doesn't crash
 //    when env vars are absent — only callers of checkRateLimit see it). ──
 

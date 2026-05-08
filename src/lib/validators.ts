@@ -41,6 +41,13 @@ export const visitorSchema = z.object({
 //                            renders an experiment variant. event_data:
 //                            { experiment, variant }. The experiments
 //                            dashboard groups conversions by these.
+//   chat_open             → Aira chat widget opened by visitor (P3-S10)
+//   chat_message          → user sent a message to Aira. event_data
+//                            carries { length: <chars> } so we can spot
+//                            high-engagement conversations in the funnel.
+//   chat_lead             → email captured via the chat widget; the
+//                            corresponding /api/leads insert fires the
+//                            normal hot-lead pipeline.
 export const VISITOR_EVENT_TYPES = [
   "pageview",
   "scroll",
@@ -51,6 +58,9 @@ export const VISITOR_EVENT_TYPES = [
   "exit_intent",
   "time_update",
   "experiment_exposure",
+  "chat_open",
+  "chat_message",
+  "chat_lead",
 ] as const;
 export type VisitorEventType = (typeof VISITOR_EVENT_TYPES)[number];
 
