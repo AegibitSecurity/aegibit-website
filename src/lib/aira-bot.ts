@@ -30,7 +30,14 @@
  *   server just produces text, the client interprets the marker.
  */
 
-const MODEL = "gemini-2.0-flash";
+// gemini-1.5-flash chosen over 2.0-flash for free-tier headroom:
+//   - 1.5-flash: 15 RPM, 1M TPM, **1500 RPD**
+//   - 2.0-flash: 10 RPM, 4M TPM, **200 RPD** (tight; trip hourly with
+//                                              even moderate traffic)
+// Quality tradeoff is real (1.5 is older) but for product-FAQ +
+// lead-capture conversation, 1.5 is fully sufficient. Upgrade later
+// if conversion data argues for it AND we waive zero-spend.
+const MODEL = "gemini-1.5-flash";
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 export interface ChatMessage {
