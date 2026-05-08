@@ -90,7 +90,9 @@ async function probeGemini(): Promise<{ ok: boolean; status: number; error?: str
   const key = process.env.GEMINI_API_KEY;
   if (!key) return { ok: false, status: 0, error: "no_key" };
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(key.trim())}`;
+    // Match the model used by aira-bot.ts so the probe reflects the
+    // same free-tier quota the chat route is subject to.
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(key.trim())}`;
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
