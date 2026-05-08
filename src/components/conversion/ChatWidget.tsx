@@ -128,10 +128,31 @@ export function ChatWidget() {
 
   async function submitLead(email: string) {
     setBusy(true);
-    const conversationSnippet = messages
-      .slice(-6)
+
+    // Promote the visitor's actual questions to the top of the email
+    // so the founder can read what they asked in 2 seconds, BEFORE
+    // wading through the Aira transcript. The transcript is still
+    // included below for full context — but the question is the
+    // founder's primary need ("what do they want?") and should not
+    // be buried.
+    const visitorQuestions = messages
+      .filter((m) => m.role === "user")
+      .map((m) => m.text.trim())
+      .filter(Boolean);
+
+    const conversationLines = messages
+      .slice(-12) // up to 12 turns of context (6 each side)
       .map((m) => `${m.role === "user" ? "Visitor" : "Aira"}: ${m.text}`)
       .join("\n");
+
+    const formattedQuestions =
+      visitorQuestions.length > 0
+        ? visitorQuestions.map((q, i) => `${i + 1}. ${q}`).join("\n")
+        : "(no question captured — visitor handed over email immediately)";
+
+    const message =
+      `WHAT THE VISITOR ASKED\n${formattedQuestions}\n\n` +
+      `FULL CHAT TRANSCRIPT\n${conversationLines}`;
 
     try {
       const res = await fetch("/api/leads", {
@@ -141,7 +162,7 @@ export function ChatWidget() {
           email,
           source: "chat",
           page: typeof window !== "undefined" ? window.location.pathname : "/",
-          message: `Captured via chatbot. Last messages:\n\n${conversationSnippet}`,
+          message,
         }),
       });
       if (!res.ok) throw new Error(String(res.status));
