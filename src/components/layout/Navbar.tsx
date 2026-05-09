@@ -9,11 +9,12 @@ import { track } from "@/lib/track";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "PayMint",   href: "/products/paymint" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Pricing",   href: "/pricing"  },
-  { label: "Security",  href: "/security" },
-  { label: "Contact",   href: "/contact"  },
+  { label: "PayMint",    href: "/products/paymint"     },
+  { label: "MCP Shield", href: "/products/mcp-shield"  },
+  { label: "Solutions",  href: "/solutions"            },
+  { label: "Pricing",    href: "/pricing"              },
+  { label: "Security",   href: "/security"             },
+  { label: "Contact",    href: "/contact"              },
 ];
 
 export function Navbar() {
