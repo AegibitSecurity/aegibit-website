@@ -30,6 +30,23 @@ module.exports = {
     // here too.
     "/locations",
     "/locations/*",
+    // Stale programmatic SEO surfaces from the VoiceCore-era. Each
+    // has its own layout-level robots noindex now (see
+    // src/app/{alternatives,use-cases,industries,integrations,glossary}
+    // /layout.tsx). Excluded here so we stop submitting them to
+    // Google's sitemap while their content still misrepresents the
+    // brand. Re-enable after the C-2 rewrite ships substantive
+    // PayMint-positioned replacements.
+    "/alternatives",
+    "/alternatives/*",
+    "/use-cases",
+    "/use-cases/*",
+    "/industries",
+    "/industries/*",
+    "/integrations",
+    "/integrations/*",
+    "/glossary",
+    "/glossary/*",
   ],
   additionalPaths: async (config) => {
     const { alternatives } = await import("./src/content/alternatives.ts");
