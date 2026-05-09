@@ -3,11 +3,12 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 
 const COLS = {
   Product: [
-    { label:"PayMint",   href:"/products/paymint" },
-    { label:"Platform",  href:"/features" },
-    { label:"Security",  href:"/security" },
-    { label:"Pricing",   href:"/pricing"  },
-    { label:"Changelog", href:"/blog"     },
+    { label:"PayMint",    href:"/products/paymint"    },
+    { label:"MCP Shield", href:"/products/mcp-shield" },
+    { label:"Platform",   href:"/features"            },
+    { label:"Security",   href:"/security"            },
+    { label:"Pricing",    href:"/pricing"             },
+    { label:"Changelog",  href:"/blog"                },
   ],
   Company: [
     { label:"About",   href:"/about"   },
