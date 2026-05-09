@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-08T08:19:36.567Z",
+      "timestamp": "2026-05-09T08:25:23.829Z",
       "success": true,
-      "durationMs": 1451
+      "durationMs": 1882
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-08T08:19:37.608Z",
+      "timestamp": "2026-05-09T08:25:24.890Z",
       "success": true,
-      "durationMs": 530
+      "durationMs": 546
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -28,8 +28,8 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 57,
-    "blogPostsPublished": 12,
+    "pagesGenerated": 62,
+    "blogPostsPublished": 13,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -45,7 +45,8 @@
       "Why We Migrated from JWT to Session Cookies (and You Should Too)",
       "Building Audit Logs That Auditors Actually Like",
       "Secrets Management for Tiny Teams: Doppler vs Vault vs Env Vars",
-      "Cloudflare Workers Security: The Footguns Nobody Mentions"
+      "Cloudflare Workers Security: The Footguns Nobody Mentions",
+      "Postgres Row-Level Security: A 30-Minute Guide"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
@@ -104,7 +105,12 @@
       "website-development-toronto",
       "website-development-sydney",
       "website-development-berlin",
-      "website-development-amsterdam"
+      "website-development-amsterdam",
+      "website-development-tokyo",
+      "website-development-hong-kong",
+      "website-development-riyadh",
+      "website-development-doha",
+      "website-development-abu-dhabi"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
