@@ -4,7 +4,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import {
   Wallet,
   Mic,
-  Sparkles,
+  Shield,
   Layers,
   ArrowRight,
   Zap,
@@ -32,7 +32,8 @@ type ProductStatus =
   | "EARLY ACCESS"
   | "EMBEDDED"
   | "COMING 2026"
-  | "FREE · WINDOWS";
+  | "FREE · WINDOWS"
+  | "FREE · OPEN SOURCE";
 
 interface Product {
   id: string;
@@ -74,16 +75,16 @@ const PRODUCTS: Product[] = [
     ctaLabel: "Download Aira free",
   },
   {
-    id: "aira-inside",
-    name: "Aira Inside",
-    tagline: "AI co-founder, in every AEGIBIT product.",
+    id: "mcp-shield",
+    name: "MCP Shield",
+    tagline: "Security for the protocol Anthropic refused to secure.",
     description:
-      "Anomaly detection, cash-flow forecasting, natural-language queries — Aira lives inside PayMint, the upcoming Industry OS suite, and every future AEGIBIT product. Smarter with every customer.",
-    status: "EMBEDDED",
-    icon: Sparkles,
-    iconColor: "#A855F7",
-    href: "/products/paymint",
-    ctaLabel: "See Aira inside PayMint",
+      "Open-source security scanner and runtime firewall for Model Context Protocol servers. Detects tool poisoning, prompt injection, hidden-Unicode steganography, secret exposure, and unsafe stdio launch patterns. Built after Anthropic's April 2026 MCP-RCE disclosure. MIT licensed, stdlib-only, zero dependencies.",
+    status: "FREE · OPEN SOURCE",
+    icon: Shield,
+    iconColor: "#F97316",
+    href: "https://shield.aegibit.com",
+    ctaLabel: "Explore MCP Shield",
   },
   {
     id: "industry-os",
@@ -175,11 +176,12 @@ function ProductCard({ product }: { product: Product }) {
   const { name, tagline, description, status, icon: Icon, iconColor, href, ctaLabel, highlighted } = product;
 
   const statusConfig: Record<ProductStatus, { bg: string; fg: string; pulse: boolean }> = {
-    "LIVE":            { bg: "rgba(16,185,129,0.10)", fg: "#10B981", pulse: true },
-    "EARLY ACCESS":    { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: false },
-    "EMBEDDED":        { bg: "rgba(168,85,247,0.10)", fg: "#A855F7", pulse: false },
-    "COMING 2026":     { bg: "rgba(255,255,255,0.05)", fg: "#71717A", pulse: false },
-    "FREE · WINDOWS":  { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: true  },
+    "LIVE":              { bg: "rgba(16,185,129,0.10)", fg: "#10B981", pulse: true  },
+    "EARLY ACCESS":      { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: false },
+    "EMBEDDED":          { bg: "rgba(168,85,247,0.10)", fg: "#A855F7", pulse: false },
+    "COMING 2026":       { bg: "rgba(255,255,255,0.05)", fg: "#71717A", pulse: false },
+    "FREE · WINDOWS":    { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: true  },
+    "FREE · OPEN SOURCE":{ bg: "rgba(249,115,22,0.10)", fg: "#F97316", pulse: true  },
   };
   const s = statusConfig[status];
 
