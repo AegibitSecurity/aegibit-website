@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { AiraLanding } from "@/components/sections/aira/AiraLanding";
 
 export const metadata: Metadata = {
-  title: "Aira — Voice control for your desktop | AEGIBIT",
+  title: "Aira — Voice control for your desktop",
   description:
     "Aira is AEGIBIT's voice-controlled desktop assistant. Free download for Windows. Wake by voice — she opens apps, drafts messages, schedules reminders, and acts on your tools. Hindi, Bengali, English, and four more Indian languages. Voice biometric secured. Local-first. Built in India.",
   keywords: [

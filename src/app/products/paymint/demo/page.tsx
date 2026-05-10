@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PayMintDemoForm } from "@/components/sections/paymint/PayMintDemoForm";
 
 export const metadata: Metadata = {
-  title: "Book a PayMint Demo — Multi-Branch Expense Automation | AEGIBIT",
+  title: "Book a PayMint Demo — Multi-Branch Expense Automation",
   description:
     "See PayMint in action. 20-minute live demo for dealership owners, CFOs, and operations leaders. Learn how to automate multi-branch expense tracking, voucher generation, and Tally exports.",
   alternates: { canonical: "/products/paymint/demo" },

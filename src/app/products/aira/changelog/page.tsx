@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Aira Changelog — Every Release | AEGIBIT",
+  title: "Aira Changelog — Every Release",
   description:
     "Full release history of Aira — AEGIBIT's voice-controlled desktop assistant. Every version, every fix, every new feature. Verify your download with the SHA256 checksum on every release.",
   alternates: { canonical: "/products/aira/changelog" },

@@ -6,7 +6,7 @@ import { SOLUTIONS } from "@/content/solutions";
 import { ArrowRight, CalendarCheck, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Solutions — PayMint for Every Branch Operation | AEGIBIT",
+  title: "Solutions — PayMint for Every Branch Operation",
   description:
     "Tailored PayMint solutions for car dealerships, multi-branch SMEs, fleet operators, automotive workshops, and more. Real-time expense automation, audit-grade.",
   alternates: { canonical: "/solutions" },

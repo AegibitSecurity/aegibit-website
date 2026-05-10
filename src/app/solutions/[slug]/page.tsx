@@ -16,7 +16,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const solution = findSolution(slug);
-  if (!solution) return { title: "Solution Not Found | AEGIBIT" };
+  if (!solution) return { title: "Solution Not Found" };
 
   const url = `https://www.aegibit.com/solutions/${solution.slug}`;
   return {
