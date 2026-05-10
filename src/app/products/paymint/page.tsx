@@ -9,7 +9,7 @@ import { PayMintCustomer } from "@/components/sections/paymint/PayMintCustomer";
 import { PayMintCTA } from "@/components/sections/paymint/PayMintCTA";
 
 export const metadata: Metadata = {
-  title: "PayMint — Multi-Branch Expense & Payments Platform | AEGIBIT",
+  title: "PayMint — Multi-Branch Expense & Payments Platform",
   description:
     "PayMint is the secure, real-time expense management platform built by AEGIBIT for multi-branch businesses. Branch-coded vouchers, role-based approvals, audit-grade logging, Tally-ready exports.",
   keywords: [

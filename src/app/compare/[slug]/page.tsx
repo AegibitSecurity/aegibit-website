@@ -16,7 +16,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const c = findComparison(slug);
-  if (!c) return { title: "Comparison Not Found | AEGIBIT" };
+  if (!c) return { title: "Comparison Not Found" };
 
   const url = `https://www.aegibit.com/compare/${c.slug}`;
   return {

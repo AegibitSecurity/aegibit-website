@@ -27,7 +27,7 @@ import {
  */
 
 export const metadata: Metadata = {
-  title: "How Nibir Motors Automated 7 Branches with PayMint | AEGIBIT",
+  title: "How Nibir Motors Automated 7 Branches with PayMint",
   description:
     "Inside the Nibir Motors PayMint deployment — 7 branches across West Bengal, real-time voucher sync, audit-grade logging, ₹4.8L+ monthly transaction volume reconciled in real time.",
   alternates: { canonical: "/case-studies/nibir-motors" },
