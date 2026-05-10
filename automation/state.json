@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-09T08:25:23.829Z",
+      "timestamp": "2026-05-10T09:15:21.585Z",
       "success": true,
-      "durationMs": 1882
+      "durationMs": 724
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-09T08:25:24.890Z",
+      "timestamp": "2026-05-10T09:15:22.511Z",
       "success": true,
-      "durationMs": 546
+      "durationMs": 454
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -28,8 +28,8 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 62,
-    "blogPostsPublished": 13,
+    "pagesGenerated": 67,
+    "blogPostsPublished": 14,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -46,7 +46,8 @@
       "Building Audit Logs That Auditors Actually Like",
       "Secrets Management for Tiny Teams: Doppler vs Vault vs Env Vars",
       "Cloudflare Workers Security: The Footguns Nobody Mentions",
-      "Postgres Row-Level Security: A 30-Minute Guide"
+      "Postgres Row-Level Security: A 30-Minute Guide",
+      "How to Pass a Penetration Test on the First Try"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
@@ -110,7 +111,12 @@
       "website-development-hong-kong",
       "website-development-riyadh",
       "website-development-doha",
-      "website-development-abu-dhabi"
+      "website-development-abu-dhabi",
+      "website-development-kuala-lumpur",
+      "website-development-bangkok",
+      "website-development-manila",
+      "website-development-jakarta",
+      "website-development-ho-chi-minh-city"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
