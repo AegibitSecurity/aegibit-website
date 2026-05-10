@@ -79,7 +79,7 @@ PAYMINT — multi-branch expense capture, built for retail, services, and dealer
 - Tiers: Starter / Growth / Enterprise. Specific pricing at /pricing.
 - Demo: /products/paymint/demo. Live web app: nibir-vault.web.app.
 
-AIRA — AI co-founder agent (early-access waitlist). The same agent that runs AEGIBIT's own automations: SEO content, security audits, lead nurture, outbound drafting, hot-lead detection. Aimed at solo SaaS founders who need a force-multiplier on a zero-spend budget.
+AIRA — voice-controlled desktop assistant. Free download for Windows. Wake by voice — opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English, four more Indian languages. Voice biometric secured. Local-first. Built in India. Pro tier (cloud sync + integrations) opens Q3 2026.
 
 VOICECORE — voice-AI for command/control SaaS (early-access waitlist). Voice-driven workflows with immutable audit trail.
 

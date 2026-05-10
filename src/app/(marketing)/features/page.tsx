@@ -12,7 +12,7 @@ const FEATURES = [
   {
     title: "Voice-Driven Control",
     body: "Control your entire security infrastructure with natural voice commands. AEGIBIT understands context, intent, and executes complex workflows with simple spoken instructions.",
-    tag: "Voice AI",
+    tag: "Voice Control",
   },
   {
     title: "Zero Trust Architecture",

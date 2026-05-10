@@ -57,9 +57,9 @@ const HOME_JSON_LD = {
             "@type": "Offer",
             itemOffered: {
               "@type": "SoftwareApplication",
-              name: "Aira AI",
+              name: "Aira",
               description:
-                "AI co-founder embedded across every AEGIBIT product — anomaly detection, forecasting, natural-language ops.",
+                "Voice-controlled desktop assistant by AEGIBIT. Free for Windows. Hindi, Bengali, English. Local-first. Voice biometric.",
             },
           },
         ],

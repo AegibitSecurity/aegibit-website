@@ -4,35 +4,35 @@ import { Footer } from "@/components/layout/Footer";
 import { AiraLanding } from "@/components/sections/aira/AiraLanding";
 
 export const metadata: Metadata = {
-  title: "Aira — Your Voice. Built Into Execution. | AEGIBIT",
+  title: "Aira — Voice control for your desktop | AEGIBIT",
   description:
-    "Aira is AEGIBIT's voice-first AI co-founder. Free download for Windows. Wake her with your voice; she opens apps, drafts messages, schedules reminders, and acts on your tools — in Hindi, Bengali, English, and four more Indian languages. Voice biometric secured. Local-first.",
+    "Aira is AEGIBIT's voice-controlled desktop assistant. Free download for Windows. Wake by voice — she opens apps, drafts messages, schedules reminders, and acts on your tools. Hindi, Bengali, English, and four more Indian languages. Voice biometric secured. Local-first. Built in India.",
   keywords: [
     "Aira",
     "AEGIBIT Aira",
-    "AI co-founder",
-    "voice-first AI assistant",
-    "Indian voice AI",
-    "Hindi voice AI",
-    "Bengali voice AI",
+    "voice control Windows",
+    "desktop voice assistant",
+    "Hindi voice assistant",
+    "Bengali voice assistant",
+    "Indian voice software",
     "voice biometric authentication",
-    "executive voice assistant",
+    "local-first voice software",
     "AEGIBIT product",
   ],
   alternates: { canonical: "/products/aira" },
   openGraph: {
-    title: "Aira — Your Voice. Built Into Execution.",
+    title: "Aira — Voice control for your desktop",
     description:
-      "AEGIBIT's voice-first AI co-founder. Free download for Windows. Wake her with your voice; she opens apps, drafts messages, schedules reminders, acts. Hindi · Bengali · English · 4 more.",
+      "AEGIBIT's voice-controlled desktop assistant. Free download for Windows. Wake by voice — opens apps, drafts messages, schedules reminders, acts. Hindi · Bengali · English · 4 more.",
     type: "website",
     url: "https://www.aegibit.com/products/aira",
     siteName: "AEGIBIT",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aira — Your Voice. Built Into Execution.",
+    title: "Aira — Voice control for your desktop",
     description:
-      "Voice-first AI co-founder by AEGIBIT. Hindi · Bengali · English. Voice biometric. Local-first.",
+      "Voice-controlled desktop assistant by AEGIBIT. Hindi · Bengali · English. Voice biometric. Local-first. Built in India.",
   },
   robots: { index: true, follow: true },
 };
