@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: "Aira Changelog — Every Release | AEGIBIT",
   description:
-    "Full release history of Aira — AEGIBIT's voice-first AI co-founder. Every version, every fix, every new feature. Verify your download with the SHA256 checksum on every release.",
+    "Full release history of Aira — AEGIBIT's voice-controlled desktop assistant. Every version, every fix, every new feature. Verify your download with the SHA256 checksum on every release.",
   alternates: { canonical: "/products/aira/changelog" },
   openGraph: {
     title: "Aira Changelog — Every Release",

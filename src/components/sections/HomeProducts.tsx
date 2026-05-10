@@ -65,9 +65,9 @@ const PRODUCTS: Product[] = [
   {
     id: "aira",
     name: "Aira",
-    tagline: "Your voice. Built into execution.",
+    tagline: "Voice control for your desktop.",
     description:
-      "Voice-first AI co-founder by AEGIBIT. Free desktop download for Windows — wake her with your voice and she opens apps, drafts messages, schedules reminders, and acts on your tools. Hindi, Bengali, English. Voice biometric. Local-first.",
+      "Free desktop assistant for Windows. Wake by voice — opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English. Voice biometric. Local-first. Built in India.",
     status: "FREE · WINDOWS",
     icon: Mic,
     iconColor: "#60A5FA",

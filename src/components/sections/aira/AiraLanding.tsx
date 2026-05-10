@@ -40,7 +40,7 @@ const AIRA_SHA256 = airaVersion.sha256;
 const AIRA_DOWNLOAD_SIZE = `${airaVersion.downloadSizeMB} MB`;
 
 /**
- * Aira — AEGIBIT's voice-first AI co-founder.
+ * Aira — AEGIBIT's voice-controlled desktop assistant.
  *
  * Page strategy (premium conversion funnel):
  *   • Hero shows Aira's face + the one-line promise: "Your Voice. Built Into Execution."
@@ -163,10 +163,10 @@ function Hero() {
             className="text-lg md:text-xl leading-relaxed mb-10 max-w-xl"
             style={{ color: "#A1A1AA" }}
           >
-            Aira is your voice-first AI co-founder. She lives on your machine,
-            answers in your language, and acts on your tools — opening apps,
-            sending messages, scheduling reminders, drafting on demand. No
-            keyboards. No tabs. No friction. Just say her name.
+            Aira is your voice-controlled desktop assistant. She lives on your
+            machine, answers in your language, and acts on your tools — opening
+            apps, sending messages, scheduling reminders, drafting on demand.
+            No keyboards. No tabs. No friction. Just say her name.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
@@ -255,7 +255,7 @@ function Hero() {
           >
             <Image
               src="/aira/aira_face.png"
-              alt="Aira — your voice-first AI co-founder"
+              alt="Aira — your voice-controlled desktop assistant"
               width={920}
               height={920}
               priority
@@ -393,8 +393,8 @@ function Capabilities() {
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mt-5"
             style={{ color: "#A1A1AA" }}
           >
-            Other voice AIs answer questions. Aira opens the app, drafts the
-            reply, and books the meeting — without you touching the keyboard.
+            Other voice assistants answer questions. Aira opens the app, drafts
+            the reply, and books the meeting — without you touching the keyboard.
           </p>
         </div>
 
@@ -499,7 +499,7 @@ function LanguagesSection() {
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mt-4"
             style={{ color: "#A1A1AA" }}
           >
-            Most voice AI is English-first with Indian languages bolted on.
+            Most voice software is English-first with Indian languages bolted on.
             Aira understands and replies in the warm Indian voice you actually
             recognise — Neerja, Swara, Tanishaa.
           </p>
@@ -657,7 +657,7 @@ const TIERS: Tier[] = [
     name: "Aira",
     price: "Free",
     priceSuffix: "forever",
-    tagline: "The full desktop co-founder. Yours to keep.",
+    tagline: "The full desktop assistant. Yours to keep.",
     features: [
       "Wake-word voice activation",
       "Voice biometric authentication",
@@ -760,7 +760,7 @@ function Pricing() {
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mt-5"
             style={{ color: "#A1A1AA" }}
           >
-            Aira (Free) is the complete desktop co-founder — no signup, no
+            Aira (Free) is the complete desktop assistant — no signup, no
             account, no asterisk. Pro adds the cloud brain. Sovereign is for
             regulated industries.
           </p>
@@ -1215,7 +1215,7 @@ function Waitlist() {
 const FAQS = [
   {
     q: "How do I get Aira on my machine?",
-    a: "Download the free Windows installer from this page — Aira (Free) is the full desktop co-founder, ready to use today on Windows 10 or 11 (64-bit). No signup, no account, no asterisk. Aira Pro (cloud brain + sync + integrations) opens in Q3 2026; founder-tier waitlist is open below for early access plus a permanent discount on Pro pricing.",
+    a: "Download the free Windows installer from this page — Aira (Free) is the full desktop assistant, ready to use today on Windows 10 or 11 (64-bit). No signup, no account, no asterisk. Aira Pro (cloud brain + sync + integrations) opens in Q3 2026; early-access waitlist is open below for first access plus a permanent discount on Pro pricing.",
   },
   {
     q: "What does Aira run on? Is it cloud or local?",
