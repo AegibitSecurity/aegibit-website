@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-10T09:15:21.585Z",
+      "timestamp": "2026-05-11T12:50:48.637Z",
       "success": true,
-      "durationMs": 724
+      "durationMs": 1311
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-10T09:15:22.511Z",
+      "timestamp": "2026-05-11T12:50:49.705Z",
       "success": true,
-      "durationMs": 454
+      "durationMs": 519
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -28,8 +28,8 @@
     "friday-pdf": 0
   },
   "metrics": {
-    "pagesGenerated": 67,
-    "blogPostsPublished": 14,
+    "pagesGenerated": 72,
+    "blogPostsPublished": 15,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -47,7 +47,8 @@
       "Secrets Management for Tiny Teams: Doppler vs Vault vs Env Vars",
       "Cloudflare Workers Security: The Footguns Nobody Mentions",
       "Postgres Row-Level Security: A 30-Minute Guide",
-      "How to Pass a Penetration Test on the First Try"
+      "How to Pass a Penetration Test on the First Try",
+      "Stripe Webhook Security: The Right Way"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
@@ -116,7 +117,12 @@
       "website-development-bangkok",
       "website-development-manila",
       "website-development-jakarta",
-      "website-development-ho-chi-minh-city"
+      "website-development-ho-chi-minh-city",
+      "website-development-seoul",
+      "website-development-taipei",
+      "website-development-auckland",
+      "ios-app-development",
+      "android-app-development"
     ],
     "usedFridayIdeas": [
       "AEGIBIT Watchtower",
