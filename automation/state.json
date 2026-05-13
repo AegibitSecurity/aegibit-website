@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-12T11:26:50.960Z",
+      "timestamp": "2026-05-13T11:38:04.674Z",
       "success": true,
-      "durationMs": 2008
+      "durationMs": 1566
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-12T11:26:52.054Z",
+      "timestamp": "2026-05-13T11:38:05.882Z",
       "success": true,
-      "durationMs": 557
+      "durationMs": 599
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -29,7 +29,7 @@
   },
   "metrics": {
     "pagesGenerated": 75,
-    "blogPostsPublished": 16,
+    "blogPostsPublished": 17,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -49,7 +49,8 @@
       "Postgres Row-Level Security: A 30-Minute Guide",
       "How to Pass a Penetration Test on the First Try",
       "Stripe Webhook Security: The Right Way",
-      "Voice AI Security: What VoiceCore Got Right"
+      "Voice AI Security: What VoiceCore Got Right",
+      "Zero-Day Response Playbook for SaaS Companies"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
