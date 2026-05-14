@@ -107,7 +107,7 @@ export default async function AiraChangelogPage() {
   return (
     <>
       <Navbar />
-      <main style={{ background: "#000" }}>
+      <main id="main-content" style={{ background: "#000" }}>
         {/* HERO */}
         <section
           className="relative pt-32 pb-12 px-6 lg:px-12 overflow-hidden"

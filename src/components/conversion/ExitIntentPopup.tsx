@@ -61,7 +61,11 @@ export function ExitIntentPopup() {
             className="fixed inset-0 z-[101] flex items-center justify-center px-4"
           >
             <div className="relative w-full max-w-md bg-[rgba(17,17,17,0.85)] backdrop-blur-xl rounded-lg border border-[rgba(255,255,255,0.1)] p-8 shadow-[0_24px_64px_rgba(0,0,0,0.6)]">
-              <button onClick={dismiss} className="absolute top-4 right-4 text-[#52525B] hover:text-white transition-colors">
+              <button
+                onClick={dismiss}
+                className="absolute top-4 right-4 text-[#52525B] hover:text-white transition-colors"
+                aria-label="Close popup"
+              >
                 <X className="w-4 h-4" />
               </button>
 

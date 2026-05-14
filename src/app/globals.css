@@ -175,3 +175,72 @@
   font-weight: 500;
 }
 
+/* ─────────────────────────────────────────────────────────────────
+   Accessibility — WCAG 2.1 AA baseline (C-5)
+
+   Adds global focus-visible rings to every interactive element so
+   keyboard users get an unmistakable focus path. Mouse-clickers see
+   nothing — :focus-visible only triggers for keyboard navigation,
+   matching the native browser UX. Brand-orange ring + 3px offset
+   so the focus state reads as designed-in, not bolted-on.
+
+   Also: skip-to-content link (first focusable element on every
+   page, jumps past the navbar straight to <main>), and global
+   prefers-reduced-motion handling so users who request reduced
+   motion don't get our fade-up / pulse animations.
+   ───────────────────────────────────────────────────────────────── */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible,
+[role="link"]:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: outline-offset 0.15s ease;
+}
+
+/* Skip-to-content link — keyboard users press Tab on first focus
+   and land here, can hit Enter to jump past the navbar. Visually
+   hidden until focused. */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 1000;
+  background: var(--orange);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: top 0.2s ease;
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+  top: 1rem;
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Respect user's reduced-motion preference — disables our fade-up,
+   pulse, ping, scroll-bounce animations and instant-scrolls anchor
+   links. Anyone who set "Reduce motion" in OS prefs doesn't get the
+   marketing-site animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

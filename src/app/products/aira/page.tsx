@@ -41,7 +41,7 @@ export default function AiraPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <AiraLanding />
       </main>
       <Footer />

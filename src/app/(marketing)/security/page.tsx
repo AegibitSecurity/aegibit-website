@@ -150,7 +150,7 @@ export default function SecurityPage() {
   return (
     <>
       <Navbar />
-      <main style={{ background: "#000", color: "#fff" }}>
+      <main id="main-content" style={{ background: "#000", color: "#fff" }}>
         {/* ───────── Hero ───────── */}
         <section
           className="relative pt-36 pb-24 md:pt-44 md:pb-32 px-6 lg:px-12 overflow-hidden"
