@@ -17,9 +17,10 @@ const COLS = {
     { label:"Careers", href:"/about#careers" },
   ],
   Legal: [
-    { label:"Privacy",  href:"/privacy" },
-    { label:"Terms",    href:"/terms"   },
-    { label:"Security", href:"/security#compliance" },
+    { label:"Privacy",       href:"/privacy" },
+    { label:"Terms",         href:"/terms"   },
+    { label:"DPDP (India)",  href:"/dpdp"    },
+    { label:"Security",      href:"/security" },
   ],
 };
 
