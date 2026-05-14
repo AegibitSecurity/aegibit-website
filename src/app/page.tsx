@@ -7,8 +7,18 @@ import { ProofSection }     from "@/components/sections/ProofSection";
 import { HomeCTA }          from "@/components/sections/HomeCTA";
 
 // Structured data — AEGIBIT-the-company is the primary entity. PayMint
-// is one of multiple products in the catalogue; the Organization carries
-// brand identity and the SoftwareApplication carries product specifics.
+// is one of three products in the OfferCatalog (PayMint paid SaaS,
+// MCP Shield open-source MIT, Aira free Windows). The Organization
+// carries brand identity; the top-level SoftwareApplication node
+// carries PayMint specifics because PayMint is the lead commercial
+// product Google should treat as the primary rich-result candidate.
+//
+// VoiceCore was dropped from this graph in 2026-05 — the product was
+// deprecated, leaving it in Schema.org meant Google indexed an item
+// that didn't exist on the site, which (a) eroded the rich-result
+// trust signal and (b) violated the "every claim must be defensible"
+// bar set during the credibility cleanup pass. Don't add a product
+// here until its /products/<slug> page is live and on-message.
 const HOME_JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -48,9 +58,10 @@ const HOME_JSON_LD = {
             "@type": "Offer",
             itemOffered: {
               "@type": "SoftwareApplication",
-              name: "VoiceCore",
+              name: "MCP Shield",
+              url: "https://www.aegibit.com/products/mcp-shield",
               description:
-                "Voice-first business operations platform with biometric auth — early access.",
+                "Open-source MIT-licensed security shim for Model Context Protocol servers. Origin allow-listing, prompt-injection guardrails, structured audit logging. v0.2.1 on GitHub.",
             },
           },
           {
@@ -58,6 +69,7 @@ const HOME_JSON_LD = {
             itemOffered: {
               "@type": "SoftwareApplication",
               name: "Aira",
+              url: "https://www.aegibit.com/products/aira",
               description:
                 "Voice-controlled desktop assistant by AEGIBIT. Free for Windows. Hindi, Bengali, English. Local-first. Voice biometric.",
             },
