@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-13T11:38:04.674Z",
+      "timestamp": "2026-05-14T11:20:58.882Z",
       "success": true,
-      "durationMs": 1566
+      "durationMs": 625
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-13T11:38:05.882Z",
+      "timestamp": "2026-05-14T11:20:59.804Z",
       "success": true,
-      "durationMs": 599
+      "durationMs": 484
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -29,7 +29,7 @@
   },
   "metrics": {
     "pagesGenerated": 75,
-    "blogPostsPublished": 17,
+    "blogPostsPublished": 18,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -50,7 +50,8 @@
       "How to Pass a Penetration Test on the First Try",
       "Stripe Webhook Security: The Right Way",
       "Voice AI Security: What VoiceCore Got Right",
-      "Zero-Day Response Playbook for SaaS Companies"
+      "Zero-Day Response Playbook for SaaS Companies",
+      "DDoS Protection: When Cloudflare Free Isn't Enough"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
