@@ -7,7 +7,7 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-32 pb-16 px-6 lg:px-10">
+      <main id="main-content" className="pt-32 pb-16 px-6 lg:px-10">
         <div className="max-w-md mx-auto">
           <span className="mono-label text-[#F97316] block mb-4">Contact</span>
           <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Get in touch.</h1>

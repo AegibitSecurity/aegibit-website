@@ -11,7 +11,7 @@ export default function BlogPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-[#000] min-h-screen">
+      <main id="main-content" className="bg-[#000] min-h-screen">
         <section className="pt-40 pb-16 px-6 max-w-4xl mx-auto">
           <span className="mono-label text-[#F97316] block mb-6">Blog</span>
           <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-bold text-white tracking-tight mb-12">

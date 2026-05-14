@@ -71,7 +71,7 @@ export default function McpShieldPage() {
   return (
     <>
       <Navbar />
-      <main style={{ background: "#000", color: "#fff" }}>
+      <main id="main-content" style={{ background: "#000", color: "#fff" }}>
         {/* ─────────── Hero ─────────── */}
         <section
           className="relative pt-36 pb-20 md:pt-44 md:pb-28 px-6 lg:px-12 overflow-hidden"

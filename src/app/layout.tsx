@@ -87,6 +87,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${instrumentSerif.variable} ${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#000] text-white">
+        {/*
+          Skip-to-content link — first focusable element on every
+          page. Keyboard users hit Tab once and can jump past the
+          navbar straight to <main>. Visually hidden until focused
+          (see .skip-to-content in globals.css). Each page wraps
+          its content in <main id="main-content"> so this anchor
+          resolves cleanly.
+        */}
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         <TrackingProvider>{children}</TrackingProvider>
         {/*
           Site-wide marketing chrome — scroll progress, mobile CTA,

@@ -68,16 +68,25 @@ export function Navbar() {
             </Link>
           </div>
 
-          <button className="md:hidden text-[#71717A] hover:text-white transition-colors"
-            onClick={() => setOpen(!open)} aria-label="menu">
+          <button
+            className="md:hidden text-[#71717A] hover:text-white transition-colors"
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-nav-menu"
+          >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </motion.header>
 
       {open && (
-        <motion.div initial={{ opacity:0,y:-8 }} animate={{ opacity:1,y:0 }}
-          className="fixed inset-x-0 top-[68px] z-40 glass-nav border-b border-[rgba(255,255,255,0.06)] md:hidden">
+        <motion.div
+          id="mobile-nav-menu"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed inset-x-0 top-[68px] z-40 glass-nav border-b border-[rgba(255,255,255,0.06)] md:hidden"
+        >
           <div className="px-6 py-5 flex flex-col gap-1">
             {NAV_LINKS.map(l => (
               <Link key={l.href} href={l.href} onClick={() => setOpen(false)}

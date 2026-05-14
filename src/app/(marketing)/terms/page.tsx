@@ -32,7 +32,7 @@ export default function TermsPage() {
   return (
     <>
       <Navbar />
-      <main style={{ background: "#000", color: "#fff" }}>
+      <main id="main-content" style={{ background: "#000", color: "#fff" }}>
         <article className="max-w-3xl mx-auto px-6 lg:px-12 pt-36 pb-24 md:pt-44 md:pb-32">
           <span
             className="mono-label uppercase block mb-6"

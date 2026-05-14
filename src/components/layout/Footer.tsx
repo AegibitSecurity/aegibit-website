@@ -31,8 +31,9 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
             <Logo size="sm" />
-            <p className="text-[#3F3F46] text-xs mt-4 leading-relaxed max-w-[200px]">
-              AI, Cybersecurity, and Automation for enterprises that cannot afford failure.
+            <p className="text-[#71717A] text-xs mt-4 leading-relaxed max-w-[200px]">
+              Cybersecurity-first operational software for businesses that
+              can&apos;t afford a leak.
             </p>
           </div>
           {Object.entries(COLS).map(([cat, links]) => (
@@ -46,7 +47,7 @@ export function Footer() {
                       ctaId={`footer_${cat.toLowerCase()}_${l.label.toLowerCase().replace(/\W+/g, "_")}`}
                       ctaLabel={l.label}
                       ctaSection="footer"
-                      className="text-xs text-[#3F3F46] hover:text-[#A1A1AA] transition-colors">
+                      className="text-xs text-[#71717A] hover:text-white transition-colors">
                       {l.label}
                     </TrackedLink>
                   </li>

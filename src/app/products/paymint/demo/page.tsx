@@ -23,7 +23,7 @@ export default function PayMintDemoPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <PayMintDemoForm />
       </main>
       <Footer />

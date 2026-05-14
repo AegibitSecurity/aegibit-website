@@ -42,7 +42,7 @@ export default function PayMintPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <PayMintHero />
         <PayMintFeatures />
         <PayMintSecurity />
