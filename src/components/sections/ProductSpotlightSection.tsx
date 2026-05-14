@@ -17,7 +17,7 @@ export function ProductSpotlightSection() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="mono-label text-[#FF6A00] block mb-6"
+            className="mono-label text-[#F97316] block mb-6"
           >
             Product
           </motion.span>
@@ -91,7 +91,7 @@ export function ProductSpotlightSection() {
               {/* Activity feed */}
               <div className="space-y-2">
                 {[
-                  { msg: "Automated threat response triggered", time: "2s ago", dot: "#FF6A00" },
+                  { msg: "Automated threat response triggered", time: "2s ago", dot: "#F97316" },
                   { msg: "Workflow 'Invoice Processing' completed", time: "1m ago", dot: "#22C55E" },
                   { msg: "AI agent deployed to production", time: "4m ago", dot: "#A1A1AA" },
                   { msg: "Compliance audit log generated", time: "8m ago", dot: "#A1A1AA" },
@@ -107,7 +107,7 @@ export function ProductSpotlightSection() {
           </div>
 
           {/* Glow */}
-          <div className="absolute -inset-4 bg-[rgba(255,106,0,0.04)] rounded-2xl blur-2xl -z-10" />
+          <div className="absolute -inset-4 bg-[rgba(249,115,22,0.04)] rounded-2xl blur-2xl -z-10" />
         </motion.div>
       </div>
     </section>

@@ -87,7 +87,7 @@ export function InteractiveDemo() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-12"
         >
-          <span className="mono-label text-[#FF6A00] block mb-4">Interactive Demo</span>
+          <span className="mono-label text-[#F97316] block mb-4">Interactive Demo</span>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
             See Zero Trust in action.
           </h2>
@@ -109,7 +109,7 @@ export function InteractiveDemo() {
                 disabled={running}
                 className={`w-full text-left p-5 rounded-sm border transition-all ${
                   active === i
-                    ? "border-[rgba(255,106,0,0.4)] bg-[rgba(255,106,0,0.06)]"
+                    ? "border-[rgba(249,115,22,0.4)] bg-[rgba(249,115,22,0.06)]"
                     : "border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.12)] bg-[#0A0A0A]"
                 } disabled:opacity-60 disabled:cursor-not-allowed`}
               >
@@ -118,7 +118,7 @@ export function InteractiveDemo() {
                     {c.label}
                   </span>
                   {active === i && running && (
-                    <span className="mono-label text-[#FF6A00] animate-pulse">running…</span>
+                    <span className="mono-label text-[#F97316] animate-pulse">running…</span>
                   )}
                 </div>
                 <p className="mono-label text-[#2A2A2A]">❯ {c.command}</p>
@@ -141,13 +141,13 @@ export function InteractiveDemo() {
               <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,255,255,0.08)]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,255,255,0.08)]" />
               <span className="ml-3 mono-label text-[#2A2A2A]">voicecore security pipeline</span>
-              <Mic className="ml-auto w-3.5 h-3.5 text-[#FF6A00]" />
+              <Mic className="ml-auto w-3.5 h-3.5 text-[#F97316]" />
             </div>
 
             <div className="p-5 min-h-[240px]">
               {/* Command line */}
               <div className="flex items-start gap-2 mb-5">
-                <span className="mono-label text-[#FF6A00]">❯</span>
+                <span className="mono-label text-[#F97316]">❯</span>
                 <span className="font-mono text-sm text-[#A1A1AA]">{cmd.command}</span>
               </div>
 

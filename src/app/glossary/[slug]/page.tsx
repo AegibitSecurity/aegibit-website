@@ -98,7 +98,7 @@ export default async function GlossaryTerm({ params }: Props) {
       <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main className="pt-32 pb-16 px-6 lg:px-10 max-w-3xl mx-auto">
-        <span className="mono-label text-[#FF6A00] block mb-4">Glossary</span>
+        <span className="mono-label text-[#F97316] block mb-4">Glossary</span>
         <h1 className="text-4xl font-bold text-white tracking-tight mb-6">{t.term}</h1>
         <p className="text-[#A1A1AA] text-lg leading-relaxed mb-10">{t.definition}</p>
         {t.related.length > 0 && (

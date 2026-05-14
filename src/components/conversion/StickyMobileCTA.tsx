@@ -52,7 +52,7 @@ export function StickyMobileCTA() {
         >
           <Link
             href={cta.href}
-            className="block w-full text-center bg-[#FF5A1F] hover:bg-[#E84E17] text-white font-semibold py-3.5 rounded-md text-sm transition-colors active:scale-[0.98]"
+            className="block w-full text-center bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold py-3.5 rounded-md text-sm transition-colors active:scale-[0.98]"
           >
             {cta.label}
           </Link>

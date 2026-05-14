@@ -39,7 +39,7 @@ export interface SlackMessage {
   text: string;
   /** Optional Block Kit blocks for richer in-app rendering. */
   blocks?: SlackBlock[];
-  /** "good" (green) | "warning" (yellow) | "danger" (red) | hex like #FF6A00. */
+  /** "good" (green) | "warning" (yellow) | "danger" (red) | hex like #F97316. */
   color?: string;
 }
 

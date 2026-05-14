@@ -57,7 +57,7 @@ export function ComparisonSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-12"
         >
-          <span className="mono-label text-[#FF6A00] block mb-4">Comparison</span>
+          <span className="mono-label text-[#F97316] block mb-4">Comparison</span>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
             The only platform built security-first.
           </h2>
@@ -75,7 +75,7 @@ export function ComparisonSection() {
               <tr className="border-b border-[rgba(255,255,255,0.06)]">
                 <th className="text-left p-4 text-[#52525B] text-xs font-medium w-1/3">Feature</th>
                 {COMPETITORS.map((c) => (
-                  <th key={c.name} className={`p-4 text-xs font-semibold text-center ${c.brand ? "text-[#FF6A00]" : "text-[#2A2A2A]"} ${c.brand ? "bg-[rgba(255,106,0,0.04)]" : ""}`}>
+                  <th key={c.name} className={`p-4 text-xs font-semibold text-center ${c.brand ? "text-[#F97316]" : "text-[#2A2A2A]"} ${c.brand ? "bg-[rgba(249,115,22,0.04)]" : ""}`}>
                     {c.label}
                   </th>
                 ))}
@@ -86,9 +86,9 @@ export function ComparisonSection() {
                 <tr key={feat} className={`border-b border-[rgba(255,255,255,0.04)] ${fi % 2 === 0 ? "bg-[#0A0A0A]" : "bg-[rgba(255,255,255,0.01)]"}`}>
                   <td className="p-4 text-[#A1A1AA] text-xs">{feat}</td>
                   {COMPETITORS.map((c) => (
-                    <td key={c.name} className={`p-4 text-center ${c.brand ? "bg-[rgba(255,106,0,0.04)]" : ""}`}>
+                    <td key={c.name} className={`p-4 text-center ${c.brand ? "bg-[rgba(249,115,22,0.04)]" : ""}`}>
                       {c.values[fi]
-                        ? <Check className={`w-4 h-4 mx-auto ${c.brand ? "text-[#FF6A00]" : "text-[#52525B]"}`} />
+                        ? <Check className={`w-4 h-4 mx-auto ${c.brand ? "text-[#F97316]" : "text-[#52525B]"}`} />
                         : <X className="w-4 h-4 mx-auto text-[#1C1C1C]" />
                       }
                     </td>

@@ -66,7 +66,7 @@ export default async function UseCasePage({ params }: Props) {
       <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main className="pt-32 pb-16 px-6 lg:px-10 max-w-4xl mx-auto">
-        <span className="mono-label text-[#FF6A00] block mb-4">{uc.industry}</span>
+        <span className="mono-label text-[#F97316] block mb-4">{uc.industry}</span>
         <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight mb-5">{uc.headline}</h1>
         <p className="text-[#A1A1AA] text-lg leading-relaxed mb-14 max-w-2xl">{uc.description}</p>
 
@@ -82,11 +82,11 @@ export default async function UseCasePage({ params }: Props) {
             </ul>
           </div>
           <div>
-            <h2 className="mono-label text-[#FF6A00] mb-5">How VoiceCore Helps</h2>
+            <h2 className="mono-label text-[#F97316] mb-5">How VoiceCore Helps</h2>
             <ul className="space-y-3">
               {uc.howItHelps.map((h) => (
                 <li key={h} className="flex items-start gap-3 text-[#A1A1AA] text-sm">
-                  <span className="w-1 h-1 rounded-full bg-[#FF6A00] mt-2 flex-shrink-0" />{h}
+                  <span className="w-1 h-1 rounded-full bg-[#F97316] mt-2 flex-shrink-0" />{h}
                 </li>
               ))}
             </ul>
@@ -104,7 +104,7 @@ export default async function UseCasePage({ params }: Props) {
             <div className="p-5 space-y-3">
               {uc.commands.map((cmd) => (
                 <div key={cmd} className="flex items-start gap-3">
-                  <span className="mono-label text-[#FF6A00] flex-shrink-0 mt-0.5">❯</span>
+                  <span className="mono-label text-[#F97316] flex-shrink-0 mt-0.5">❯</span>
                   <span className="font-mono text-sm text-[#A1A1AA]">{cmd}</span>
                 </div>
               ))}
@@ -112,7 +112,7 @@ export default async function UseCasePage({ params }: Props) {
           </div>
         </div>
 
-        <Link href="/signup" className="inline-flex items-center gap-2 bg-[#FF6A00] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
+        <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
           Get Private Access <ArrowRight className="w-4 h-4" />
         </Link>
       </main>

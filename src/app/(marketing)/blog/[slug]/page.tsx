@@ -103,7 +103,7 @@ export default async function BlogPost({ params }: Props) {
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-5">
             {post.tags.map((tag) => (
-              <span key={tag} className="mono-label text-[#FF6A00] border border-[rgba(255,106,0,0.2)] rounded px-2 py-0.5">{tag}</span>
+              <span key={tag} className="mono-label text-[#F97316] border border-[rgba(249,115,22,0.2)] rounded px-2 py-0.5">{tag}</span>
             ))}
           </div>
 
@@ -111,7 +111,7 @@ export default async function BlogPost({ params }: Props) {
 
           {/* Meta row */}
           <div className="flex items-center gap-4 mb-10 pb-8 border-b border-[rgba(255,255,255,0.06)]">
-            <div className="w-9 h-9 rounded-full bg-[rgba(255,106,0,0.15)] border border-[rgba(255,106,0,0.2)] flex items-center justify-center text-[#FF6A00] text-xs font-bold flex-shrink-0">
+            <div className="w-9 h-9 rounded-full bg-[rgba(249,115,22,0.15)] border border-[rgba(249,115,22,0.2)] flex items-center justify-center text-[#F97316] text-xs font-bold flex-shrink-0">
               {post.author.initials}
             </div>
             <div>
@@ -134,7 +134,7 @@ export default async function BlogPost({ params }: Props) {
                 <ul key={i} className="space-y-2 ml-1">
                   {(block.content as string[]).map((item, j) => (
                     <li key={j} className="flex items-start gap-3 text-[#A1A1AA]">
-                      <span className="w-1 h-1 rounded-full bg-[#FF6A00] mt-2.5 flex-shrink-0" />
+                      <span className="w-1 h-1 rounded-full bg-[#F97316] mt-2.5 flex-shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -159,7 +159,7 @@ export default async function BlogPost({ params }: Props) {
 
           {/* Author bio */}
           <div className="p-6 rounded-sm border border-[rgba(255,255,255,0.06)] bg-[#111111] mb-14 flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-[rgba(255,106,0,0.15)] border border-[rgba(255,106,0,0.2)] flex items-center justify-center text-[#FF6A00] font-bold flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-[rgba(249,115,22,0.15)] border border-[rgba(249,115,22,0.2)] flex items-center justify-center text-[#F97316] font-bold flex-shrink-0">
               {post.author.initials}
             </div>
             <div>
@@ -170,11 +170,11 @@ export default async function BlogPost({ params }: Props) {
           </div>
 
           {/* CTA */}
-          <div className="p-8 rounded-sm border border-[rgba(255,106,0,0.2)] bg-[#111111] mb-14 text-center">
-            <p className="mono-label text-[#FF6A00] mb-3">AEGIBIT VOICECORE</p>
+          <div className="p-8 rounded-sm border border-[rgba(249,115,22,0.2)] bg-[#111111] mb-14 text-center">
+            <p className="mono-label text-[#F97316] mb-3">AEGIBIT VOICECORE</p>
             <h3 className="text-xl font-bold text-white mb-2">Ready to secure your voice workflows?</h3>
             <p className="text-[#A1A1AA] text-sm mb-6">Join 50+ enterprise teams. No credit card required.</p>
-            <Link href="/signup" className="inline-flex items-center gap-2 bg-[#FF6A00] hover:bg-[#CC5500] text-white font-semibold px-6 py-3 rounded-md text-sm transition-colors">
+            <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-6 py-3 rounded-md text-sm transition-colors">
               Get Private Access <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -186,7 +186,7 @@ export default async function BlogPost({ params }: Props) {
               {relatedPosts.map((p) => (
                 <Link key={p.slug} href={`/blog/${p.slug}`} className="flex items-center justify-between gap-4 p-4 rounded-sm border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.1)] bg-[#0A0A0A] hover:bg-[#111111] transition-all group">
                   <p className="text-[#A1A1AA] group-hover:text-white text-sm transition-colors">{p.title}</p>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#2A2A2A] group-hover:text-[#FF6A00] flex-shrink-0 transition-colors" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#2A2A2A] group-hover:text-[#F97316] flex-shrink-0 transition-colors" />
                 </Link>
               ))}
             </div>

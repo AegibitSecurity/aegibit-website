@@ -95,7 +95,7 @@ export default async function AlternativePage({ params }: Props) {
 
         {/* Header */}
         <div className="mb-14">
-          <span className="mono-label text-[#FF6A00] block mb-4">Alternative to {alt.name}</span>
+          <span className="mono-label text-[#F97316] block mb-4">Alternative to {alt.name}</span>
           <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight mb-5">{alt.title}</h1>
           <p className="text-[#A1A1AA] text-lg leading-relaxed max-w-2xl">{alt.metaDescription}</p>
         </div>
@@ -104,14 +104,14 @@ export default async function AlternativePage({ params }: Props) {
         <div className="mb-16 rounded-sm border border-[rgba(255,255,255,0.06)] overflow-hidden">
           <div className="grid grid-cols-3 bg-[#111111] border-b border-[rgba(255,255,255,0.06)]">
             <div className="p-4 text-[#52525B] text-sm font-medium">Feature</div>
-            <div className="p-4 text-[#FF6A00] text-sm font-semibold border-l border-[rgba(255,255,255,0.06)]">AEGIBIT VoiceCore</div>
+            <div className="p-4 text-[#F97316] text-sm font-semibold border-l border-[rgba(255,255,255,0.06)]">AEGIBIT VoiceCore</div>
             <div className="p-4 text-[#52525B] text-sm font-medium border-l border-[rgba(255,255,255,0.06)]">{alt.name}</div>
           </div>
           {alt.features.map((f, i) => (
             <div key={i} className={`grid grid-cols-3 border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.02)] transition-colors ${i % 2 === 0 ? "bg-[#0A0A0A]" : "bg-[rgba(255,255,255,0.01)]"}`}>
               <div className="p-4 text-[#A1A1AA] text-sm">{f.feature}</div>
               <div className="p-4 border-l border-[rgba(255,255,255,0.04)] flex items-center">
-                {f.us ? <Check className="w-4 h-4 text-[#FF6A00]" /> : <X className="w-4 h-4 text-[#2A2A2A]" />}
+                {f.us ? <Check className="w-4 h-4 text-[#F97316]" /> : <X className="w-4 h-4 text-[#2A2A2A]" />}
               </div>
               <div className="p-4 border-l border-[rgba(255,255,255,0.04)] flex items-center">
                 {f.them ? <Check className="w-4 h-4 text-[#52525B]" /> : <X className="w-4 h-4 text-[#2A2A2A]" />}
@@ -134,10 +134,10 @@ export default async function AlternativePage({ params }: Props) {
         </div>
 
         {/* CTA */}
-        <div className="p-8 rounded-sm border border-[rgba(255,106,0,0.2)] bg-[#111111] mb-14 text-center">
+        <div className="p-8 rounded-sm border border-[rgba(249,115,22,0.2)] bg-[#111111] mb-14 text-center">
           <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">Ready to switch to VoiceCore?</h2>
           <p className="text-[#A1A1AA] mb-6 text-sm">Join 50+ enterprise teams. No credit card required.</p>
-          <Link href="/signup" className="inline-flex items-center gap-2 bg-[#FF6A00] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
+          <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
             Get Private Access <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

@@ -24,7 +24,7 @@ function Slider({ label, min, max, value, onChange, prefix = "", suffix = "" }: 
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full h-1 rounded-full appearance-none cursor-pointer"
         style={{
-          background: `linear-gradient(to right, #FF6A00 0%, #FF6A00 ${((value - min) / (max - min)) * 100}%, rgba(255,255,255,0.08) ${((value - min) / (max - min)) * 100}%, rgba(255,255,255,0.08) 100%)`,
+          background: `linear-gradient(to right, #F97316 0%, #F97316 ${((value - min) / (max - min)) * 100}%, rgba(255,255,255,0.08) ${((value - min) / (max - min)) * 100}%, rgba(255,255,255,0.08) 100%)`,
         }}
       />
       <div className="flex justify-between">
@@ -67,7 +67,7 @@ export function ROICalculator() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <span className="mono-label text-[#FF6A00] block mb-4">ROI Calculator</span>
+          <span className="mono-label text-[#F97316] block mb-4">ROI Calculator</span>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-2">
             How much is manual work costing you?
           </h2>
@@ -92,7 +92,7 @@ export function ROICalculator() {
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="rounded-sm border border-[rgba(255,106,0,0.2)] bg-[#0A0A0A] p-8 space-y-6"
+            className="rounded-sm border border-[rgba(249,115,22,0.2)] bg-[#0A0A0A] p-8 space-y-6"
           >
             <div className="pb-6 border-b border-[rgba(255,255,255,0.06)]">
               <p className="mono-label text-[#52525B] mb-2">Monthly savings potential</p>
@@ -113,15 +113,15 @@ export function ROICalculator() {
               </div>
               <div className="flex justify-between text-sm border-t border-[rgba(255,255,255,0.06)] pt-4">
                 <span className="text-[#A1A1AA] font-medium">Net monthly gain</span>
-                <span className={`font-bold ${results.netMonthlySavings > 0 ? "text-[#FF6A00]" : "text-[#52525B]"}`}>
+                <span className={`font-bold ${results.netMonthlySavings > 0 ? "text-[#F97316]" : "text-[#52525B]"}`}>
                   {results.netMonthlySavings > 0 ? "+" : ""}{fmt(results.netMonthlySavings)}
                 </span>
               </div>
             </div>
 
             {results.roi > 0 && (
-              <div className="rounded-sm bg-[rgba(255,106,0,0.08)] border border-[rgba(255,106,0,0.15)] px-4 py-3">
-                <p className="text-[#FF6A00] font-semibold text-sm">
+              <div className="rounded-sm bg-[rgba(249,115,22,0.08)] border border-[rgba(249,115,22,0.15)] px-4 py-3">
+                <p className="text-[#F97316] font-semibold text-sm">
                   That&apos;s {fmt(results.annualSavings)} per year — {results.roi}x ROI on Business plan
                 </p>
               </div>
@@ -129,7 +129,7 @@ export function ROICalculator() {
 
             <Link
               href="/signup"
-              className="group flex items-center justify-center gap-2 w-full bg-[#FF6A00] hover:bg-[#CC5500] text-white font-semibold py-3 rounded-md text-sm transition-colors"
+              className="group flex items-center justify-center gap-2 w-full bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold py-3 rounded-md text-sm transition-colors"
             >
               See Your Savings in Action — Start Free Trial
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
