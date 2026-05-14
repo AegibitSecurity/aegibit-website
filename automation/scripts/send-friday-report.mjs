@@ -1,7 +1,7 @@
 // Emails the Friday PDF to Rahul. Prefers Resend (already a dep), falls back to SendGrid.
 import fs from "node:fs";
 import path from "node:path";
-import { ROOT, loadState, log, withJob, REPORTS_DIR } from "./_lib.mjs";
+import { ROOT, loadState, log, withJob } from "./_lib.mjs";
 
 await withJob("send-friday-report", async () => {
   const state = loadState();

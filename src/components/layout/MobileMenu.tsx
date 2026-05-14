@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Logo } from "@/components/shared/Logo";
 import { NAV_LINKS } from "@/lib/constants";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);

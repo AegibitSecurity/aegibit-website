@@ -48,7 +48,9 @@ module.exports = {
     "/glossary",
     "/glossary/*",
   ],
-  additionalPaths: async (config) => {
+  // The `config` argument is the resolved next-sitemap config; we don't
+  // use it here because our paths are static + content-derived.
+  additionalPaths: async () => {
     const { alternatives } = await import("./src/content/alternatives.ts");
     const { useCases }     = await import("./src/content/use-cases.ts");
     const { integrations } = await import("./src/content/integrations.ts");

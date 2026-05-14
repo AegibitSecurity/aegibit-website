@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { SlideUp } from "@/components/motion/SlideUp";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { Fingerprint, Lock, Shield, BookOpen, Activity } from "lucide-react";
 
