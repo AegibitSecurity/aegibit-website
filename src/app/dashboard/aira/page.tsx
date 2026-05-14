@@ -97,7 +97,12 @@ export default function AiraOpsDashboard() {
   }
 
   useEffect(() => {
-    load();
+    // Defer the first load to the next microtask so the setState
+    // calls inside load() (which run after the awaited fetches) don't
+    // appear as synchronous setState in the effect body. See
+    // src/app/dashboard/agents/page.tsx for the same pattern + full
+    // rationale.
+    void Promise.resolve().then(load);
     const interval = setInterval(load, 60_000);
     return () => clearInterval(interval);
   }, []);

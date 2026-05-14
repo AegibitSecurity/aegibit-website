@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useVisitorStore } from "@/stores/visitor-store";
 import { track } from "@/lib/track";
 import {
@@ -29,6 +29,15 @@ import {
  * (experiment, variant) pair. Conversion rate = leads attributed to
  * each variant's distinct cta_id. The dashboard funnel view already
  * shows this without any new code.
+ *
+ * Why compute on render (not useState + useEffect):
+ *   The variant is a deterministic function of (visitorId, experimentId)
+ *   via FNV-1a bucketing in `getExperimentVariant` — a pure function.
+ *   Computing on render with `visitorId` as a Zustand-tracked dependency
+ *   gives correct re-render semantics without the cascading-render
+ *   anti-pattern that `useEffect(setState)` trips
+ *   (react-hooks/set-state-in-effect). Exposure tracking remains in a
+ *   useEffect because it's a side effect, not a derived value.
  */
 export function useExperiment<E extends ExperimentId>(
   experimentId: E,
@@ -36,23 +45,26 @@ export function useExperiment<E extends ExperimentId>(
   const visitorId = useVisitorStore((s) => s.visitorId);
   const exp = EXPERIMENTS[experimentId];
   const control = exp.variants[0] as ExperimentVariant<E>;
-  const [variant, setVariant] = useState<ExperimentVariant<E>>(control);
+
+  // Derived value: until visitorId resolves (SSR + first client paint
+  // before useVisitorTracking has populated the store), return control
+  // so the served HTML and the first client render match. After
+  // hydration, getExperimentVariant returns the deterministic bucket
+  // assignment and the component re-renders with the actual variant.
+  const variant: ExperimentVariant<E> = visitorId
+    ? ((getExperimentVariant(visitorId, experimentId) ?? control) as ExperimentVariant<E>)
+    : control;
+
   const exposed = useRef(false);
 
   useEffect(() => {
-    if (!visitorId) return;
-    const assigned = getExperimentVariant(visitorId, experimentId);
-    const final = (assigned ?? control) as ExperimentVariant<E>;
-    setVariant(final);
-
-    if (!exposed.current && exp.enabled) {
-      exposed.current = true;
-      track("experiment_exposure", {
-        experiment: experimentId,
-        variant: final,
-      });
-    }
-  }, [visitorId, experimentId, exp.enabled, control]);
+    if (!visitorId || exposed.current || !exp.enabled) return;
+    exposed.current = true;
+    track("experiment_exposure", {
+      experiment: experimentId,
+      variant,
+    });
+  }, [visitorId, experimentId, exp.enabled, variant]);
 
   return variant;
 }

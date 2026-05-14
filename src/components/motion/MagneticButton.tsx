@@ -1,5 +1,5 @@
 "use client";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ReactNode, useRef } from "react";
 
 interface MagneticButtonProps {

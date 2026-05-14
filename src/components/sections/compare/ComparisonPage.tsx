@@ -436,7 +436,7 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
   );
 }
 
-function FeatureRow({ row, competitorName }: { row: ComparisonRow; competitorName: string }) {
+function FeatureRow({ row }: { row: ComparisonRow; competitorName: string }) {
   return (
     <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
       <td className="py-4 px-4 align-top" style={{ color: "#E4E4E7" }}>

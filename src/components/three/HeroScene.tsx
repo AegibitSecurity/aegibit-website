@@ -1,5 +1,5 @@
 "use client";
-import { useRef, Suspense } from "react";
+import { Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { ShieldModel } from "./ShieldModel";
@@ -9,11 +9,19 @@ import { GridPlane } from "./GridPlane";
 
 function CameraRig() {
   const { camera, mouse } = useThree();
+  // React Three Fiber explicitly designs for direct mutation of three.js
+  // objects inside useFrame — that's how every camera-follow, parallax,
+  // and animation example in the R3F docs is written. The
+  // react-hooks/immutability rule is React-pure-render oriented and
+  // doesn't model R3F's mutation-first render loop. Disabling for the
+  // canonical camera-rig pattern.
+  /* eslint-disable react-hooks/immutability */
   useFrame(() => {
     camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.03;
     camera.position.y += (mouse.y * 0.3 - camera.position.y) * 0.03;
     camera.lookAt(0, 0, 0);
   });
+  /* eslint-enable react-hooks/immutability */
   return null;
 }
 

@@ -25,17 +25,13 @@ jobs:
       - run: npm ci
       - name: Type-check
         run: npx tsc --noEmit
-      # Lint is scoped to the surfaces we actively maintain.
-      # Pre-existing lint errors in src/hooks and three.js helpers are
-      # tracked under follow-up A-7 and will be cleaned up there.
-      # Running `npx eslint` against the whole repo would gate this CI
-      # job on issues unrelated to the current PR.
-      - name: Lint (scoped)
-        run: |
-          npx eslint \
-            "src/lib/**/*.{ts,tsx}" \
-            "src/proxy.ts" \
-            "src/app/api/**/*.{ts,tsx}" \
-            "src/app/admin/**/*.{ts,tsx}"
+      # Repo-wide lint gate. Previously scoped to src/lib + proxy +
+      # api + admin because src/hooks and src/components/three carried
+      # 11+ pre-existing errors (tracked as follow-up A-7). Those are
+      # now resolved (see PR for details) so the gate runs across the
+      # whole repo — every new commit is held to the same purity,
+      # set-state-in-effect, and exhaustive-deps standards.
+      - name: Lint
+        run: npx eslint .
       - name: Unit tests
         run: npm test

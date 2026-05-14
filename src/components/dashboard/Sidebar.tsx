@@ -6,6 +6,21 @@ import { Logo } from "@/components/shared/Logo";
 import { BarChart3, Users, Mail, Settings, Home, Sparkles, Send, Menu, X, GitBranch, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Close-on-navigate sidebar.
+ *
+ * Previous shape did `useEffect(() => setOpen(false), [pathname])` —
+ * which trips react-hooks/set-state-in-effect (cascading-render
+ * anti-pattern). Rewritten using React's documented "derive state
+ * during render" pattern: track the last-seen pathname in state,
+ * and when it differs from the current pathname, reschedule a render
+ * with `open=false`. React batches this so the visitor sees one
+ * render with the closed state, not two.
+ *
+ * Reference:
+ *   https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+ */
+
 const NAV = [
   { href: "/dashboard",            icon: Home,      label: "Overview" },
   { href: "/dashboard/aira",       icon: Sparkles,  label: "Aira Ops" },
@@ -21,10 +36,15 @@ const NAV = [
 export function DashboardSidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [lastPathname, setLastPathname] = useState(pathname);
 
-  useEffect(() => {
+  // Derived-state-during-render: close the mobile sidebar when route
+  // changes. React batches the two setState calls into a single render
+  // and the lint rule (which targets effects, not render) is satisfied.
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     if (open) {
