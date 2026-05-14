@@ -33,7 +33,7 @@ export function ScrollProgressCTA() {
               Ready to secure and scale your operations?
             </p>
             <div className="flex items-center gap-3 ml-auto">
-              <Link href="/signup" className="text-sm font-semibold bg-[#FF5A1F] hover:bg-[#E84E17] text-white px-5 py-2 rounded-md transition-colors">
+              <Link href="/signup" className="text-sm font-semibold bg-[#F97316] hover:bg-[#EA580C] text-white px-5 py-2 rounded-md transition-colors">
                 Get Private Access
               </Link>
               <button onClick={() => setDismissed(true)} className="text-[#52525B] hover:text-white transition-colors">

@@ -51,7 +51,7 @@ export function TrustSection() {
 
         {/* Industries */}
         <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
-          <span className="mono-label text-[#FF6A00]">Industries Served</span>
+          <span className="mono-label text-[#F97316]">Industries Served</span>
           <div className="h-px flex-1 mx-8 bg-[rgba(255,255,255,0.06)] hidden sm:block" />
         </div>
 
@@ -62,9 +62,9 @@ export function TrustSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.22,1,0.36,1] }}
-              className="group p-7 rounded-sm border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,106,0,0.2)] bg-[#111111] hover:bg-[#161616] transition-all"
+              className="group p-7 rounded-sm border border-[rgba(255,255,255,0.06)] hover:border-[rgba(249,115,22,0.2)] bg-[#111111] hover:bg-[#161616] transition-all"
             >
-              <h3 className="text-white font-semibold text-lg mb-3 group-hover:text-[#FF6A00] transition-colors">
+              <h3 className="text-white font-semibold text-lg mb-3 group-hover:text-[#F97316] transition-colors">
                 {ind.name}
               </h3>
               <p className="text-[#52525B] text-sm leading-relaxed group-hover:text-[#A1A1AA] transition-colors">

@@ -67,13 +67,13 @@ export function ExitIntentPopup() {
 
               {status === "success" ? (
                 <div className="text-center py-6 space-y-3">
-                  <CheckCircle2 className="w-12 h-12 text-[#FF5A1F] mx-auto" />
+                  <CheckCircle2 className="w-12 h-12 text-[#F97316] mx-auto" />
                   <p className="text-white font-bold text-lg">Access requested.</p>
                   <p className="text-[#A1A1AA] text-sm">We&apos;ll be in touch shortly.</p>
                 </div>
               ) : (
                 <>
-                  <p className="mono-label text-[#FF5A1F] mb-4">Before you go</p>
+                  <p className="mono-label text-[#F97316] mb-4">Before you go</p>
                   <h3 className="text-2xl font-bold text-white mb-2 tracking-tight leading-snug">
                     See PayMint live in 12 minutes.
                   </h3>
@@ -84,11 +84,11 @@ export function ExitIntentPopup() {
                     <input
                       type="email" value={email} onChange={(e) => setEmail(e.target.value)}
                       placeholder="your@company.com" required
-                      className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-[#52525B] focus:border-[rgba(255,90,31,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                      className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-[#52525B] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
                     />
                     <button
                       type="submit" disabled={status === "loading"}
-                      className="inline-flex items-center justify-center gap-2 bg-[#FF5A1F] hover:bg-[#E84E17] text-white font-semibold py-3 rounded-md text-sm transition-colors"
+                      className="inline-flex items-center justify-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold py-3 rounded-md text-sm transition-colors"
                     >
                       {status === "loading" ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Request Access <ArrowRight className="w-4 h-4" /></>}
                     </button>

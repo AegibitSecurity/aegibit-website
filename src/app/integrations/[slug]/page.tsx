@@ -76,7 +76,7 @@ export default async function IntegrationPage({ params }: Props) {
       <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main className="pt-32 pb-16 px-6 lg:px-10 max-w-4xl mx-auto">
-        <span className="mono-label text-[#FF6A00] block mb-4">{int.category} Integration</span>
+        <span className="mono-label text-[#F97316] block mb-4">{int.category} Integration</span>
         <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight mb-5">
           AEGIBIT VoiceCore + {int.name}
         </h1>
@@ -85,7 +85,7 @@ export default async function IntegrationPage({ params }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-14">
           {/* Commands */}
           <div>
-            <h2 className="mono-label text-[#FF6A00] mb-5">Voice Commands</h2>
+            <h2 className="mono-label text-[#F97316] mb-5">Voice Commands</h2>
             <div className="rounded-sm border border-[rgba(255,255,255,0.06)] bg-[#111111] overflow-hidden">
               <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[rgba(255,255,255,0.06)] bg-[#0A0A0A]">
                 <Terminal className="w-3.5 h-3.5 text-[#52525B]" />
@@ -94,7 +94,7 @@ export default async function IntegrationPage({ params }: Props) {
               <div className="p-4 space-y-3">
                 {int.commands.map((cmd) => (
                   <div key={cmd} className="flex items-start gap-2">
-                    <span className="mono-label text-[#FF6A00] flex-shrink-0">❯</span>
+                    <span className="mono-label text-[#F97316] flex-shrink-0">❯</span>
                     <span className="font-mono text-xs text-[#A1A1AA] leading-relaxed">{cmd}</span>
                   </div>
                 ))}
@@ -108,7 +108,7 @@ export default async function IntegrationPage({ params }: Props) {
             <ol className="space-y-4">
               {int.setupSteps.map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-[#A1A1AA] text-sm">
-                  <span className="mono-label text-[#FF6A00] flex-shrink-0 w-5">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="mono-label text-[#F97316] flex-shrink-0 w-5">{String(i + 1).padStart(2, "0")}</span>
                   {step}
                 </li>
               ))}
@@ -116,7 +116,7 @@ export default async function IntegrationPage({ params }: Props) {
           </div>
         </div>
 
-        <Link href="/signup" className="inline-flex items-center gap-2 bg-[#FF6A00] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
+        <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
           Connect {int.name} to VoiceCore <ArrowRight className="w-4 h-4" />
         </Link>
       </main>

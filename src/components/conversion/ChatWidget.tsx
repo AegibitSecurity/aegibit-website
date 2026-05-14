@@ -217,7 +217,7 @@ export function ChatWidget() {
             transition={{ type: "spring", stiffness: 240, damping: 20, delay: 1.5 }}
             onClick={openWidget}
             aria-label="Open chat with Aira"
-            className="fixed bottom-6 right-6 z-50 hidden md:flex items-center gap-2 px-4 py-3 rounded-full bg-[#FF5A1F] hover:bg-[#E84E17] text-white text-sm font-semibold shadow-[0_8px_30px_rgba(255,90,31,0.4)] transition-colors"
+            className="fixed bottom-6 right-6 z-50 hidden md:flex items-center gap-2 px-4 py-3 rounded-full bg-[#F97316] hover:bg-[#EA580C] text-white text-sm font-semibold shadow-[0_8px_30px_rgba(249,115,22,0.4)] transition-colors"
           >
             <MessageSquare className="w-4 h-4" />
             <span>Ask Aira</span>
@@ -235,7 +235,7 @@ export function ChatWidget() {
             transition={{ type: "spring", stiffness: 240, damping: 20, delay: 1.5 }}
             onClick={openWidget}
             aria-label="Open chat with Aira"
-            className="fixed bottom-20 right-4 z-50 md:hidden flex items-center justify-center w-14 h-14 rounded-full bg-[#FF5A1F] text-white shadow-[0_8px_30px_rgba(255,90,31,0.4)]"
+            className="fixed bottom-20 right-4 z-50 md:hidden flex items-center justify-center w-14 h-14 rounded-full bg-[#F97316] text-white shadow-[0_8px_30px_rgba(249,115,22,0.4)]"
           >
             <MessageSquare className="w-6 h-6" />
           </motion.button>
@@ -255,8 +255,8 @@ export function ChatWidget() {
             <header className="flex items-center justify-between px-4 py-3 border-b border-[rgba(255,255,255,0.06)]">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-[#FF5A1F] opacity-75 animate-ping" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF5A1F]" />
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-[#F97316] opacity-75 animate-ping" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#F97316]" />
                 </span>
                 <span className="text-white text-sm font-semibold">Aira</span>
                 <span className="text-[#52525B] text-xs">· AEGIBIT</span>
@@ -279,7 +279,7 @@ export function ChatWidget() {
                   <div
                     className={`max-w-[85%] rounded-lg px-3 py-2 text-sm leading-relaxed ${
                       m.role === "user"
-                        ? "bg-[#FF5A1F] text-white"
+                        ? "bg-[#F97316] text-white"
                         : "bg-[rgba(255,255,255,0.05)] text-[#E4E4E7] border border-[rgba(255,255,255,0.06)]"
                     }`}
                     style={{ whiteSpace: "pre-wrap" }}
@@ -311,13 +311,13 @@ export function ChatWidget() {
                         : "Type a message…"
                   }
                   disabled={busy}
-                  className="flex-1 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] focus:border-[rgba(255,90,31,0.5)] rounded-md px-3 py-2 text-sm text-white placeholder:text-[#52525B] outline-none transition-colors"
+                  className="flex-1 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] focus:border-[rgba(249,115,22,0.5)] rounded-md px-3 py-2 text-sm text-white placeholder:text-[#52525B] outline-none transition-colors"
                   required
                 />
                 <button
                   type="submit"
                   disabled={busy || !input.trim()}
-                  className="flex items-center justify-center w-10 h-10 rounded-md bg-[#FF5A1F] hover:bg-[#E84E17] disabled:opacity-40 text-white transition-colors"
+                  className="flex items-center justify-center w-10 h-10 rounded-md bg-[#F97316] hover:bg-[#EA580C] disabled:opacity-40 text-white transition-colors"
                   aria-label={mode === "capture" ? "Submit email" : "Send message"}
                 >
                   {mode === "capture" ? (

@@ -40,7 +40,7 @@ export function CoreOfferingsSection() {
         {/* Header */}
         <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
           <div>
-            <span className="mono-label text-[#FF6A00] block mb-4">Core Offerings</span>
+            <span className="mono-label text-[#F97316] block mb-4">Core Offerings</span>
             <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold text-white tracking-tight">
               What we deliver.
             </h2>
@@ -74,13 +74,13 @@ export function CoreOfferingsSection() {
               {/* Link */}
               <Link
                 href={item.href}
-                className="inline-flex items-center gap-1 text-xs text-[#FF6A00] mt-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="inline-flex items-center gap-1 text-xs text-[#F97316] mt-8 opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 Learn more <ArrowUpRight className="w-3 h-3" />
               </Link>
 
               {/* Orange corner accent on hover */}
-              <div className="absolute top-0 left-0 w-0 h-px bg-[#FF6A00] group-hover:w-full transition-all duration-500" />
+              <div className="absolute top-0 left-0 w-0 h-px bg-[#F97316] group-hover:w-full transition-all duration-500" />
             </motion.div>
           ))}
         </div>

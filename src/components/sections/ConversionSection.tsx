@@ -16,7 +16,7 @@ export function ConversionSection() {
           initial={{ scaleX: 0 }}
           animate={inView ? { scaleX: 1 } : {}}
           transition={{ duration: 0.8, ease: [0.22,1,0.36,1] }}
-          className="w-16 h-0.5 bg-[#FF6A00] mx-auto mb-12 origin-left"
+          className="w-16 h-0.5 bg-[#F97316] mx-auto mb-12 origin-left"
         />
 
         <motion.h2
@@ -45,7 +45,7 @@ export function ConversionSection() {
         >
           <Link
             href="/signup"
-            className="group inline-flex items-center gap-2 bg-[#FF6A00] hover:bg-[#CC5500] text-white font-semibold px-8 py-3.5 rounded-md text-sm transition-colors"
+            className="group inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-8 py-3.5 rounded-md text-sm transition-colors"
           >
             Get Private Access
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

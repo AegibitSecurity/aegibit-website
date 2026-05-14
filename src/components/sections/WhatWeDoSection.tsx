@@ -12,7 +12,7 @@ export function WhatWeDoSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="mono-label text-[#FF6A00] block mb-8"
+          className="mono-label text-[#F97316] block mb-8"
         >
           What we do
         </motion.span>

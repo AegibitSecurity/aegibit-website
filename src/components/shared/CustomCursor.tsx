@@ -46,14 +46,14 @@ export function CustomCursor() {
         style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
         animate={{ scale: isPointer ? 1.5 : 1, opacity: visible ? 1 : 0 }}
         transition={{ scale: { duration: 0.15 } }}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#FF6A00] z-[9999] pointer-events-none mix-blend-normal"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#F97316] z-[9999] pointer-events-none mix-blend-normal"
       />
       {/* Ring */}
       <motion.div
         style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
         animate={{ scale: isPointer ? 2 : 1, opacity: visible ? 0.4 : 0 }}
         transition={{ scale: { duration: 0.2 } }}
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[#FF6A00] z-[9998] pointer-events-none"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[#F97316] z-[9998] pointer-events-none"
       />
     </>
   );

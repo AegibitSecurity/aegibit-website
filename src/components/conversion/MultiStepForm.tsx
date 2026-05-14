@@ -112,7 +112,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
         animate={{ opacity: 1, scale: 1 }}
         className="text-center py-10 space-y-4"
       >
-        <CheckCircle2 className="w-12 h-12 text-[#FF5A1F] mx-auto" />
+        <CheckCircle2 className="w-12 h-12 text-[#F97316] mx-auto" />
         <p className="text-white font-bold text-xl tracking-tight">You&apos;re on the list.</p>
         <p className="text-[#A1A1AA] text-sm">We&apos;ll reach out to {data.email} within 24 hours.</p>
       </motion.div>
@@ -125,8 +125,8 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
       <div className="flex items-center gap-2 mb-8">
         {[1, 2, 3].map((s) => (
           <div key={s} className="flex items-center gap-2 flex-1">
-            <div className={`h-0.5 flex-1 rounded-full transition-colors duration-300 ${s <= step ? "bg-[#FF5A1F]" : "bg-[rgba(255,255,255,0.08)]"}`} />
-            <span className={`mono-label flex-shrink-0 transition-colors ${s === step ? "text-[#FF5A1F]" : s < step ? "text-[#E84E17]" : "text-[#2A2A2A]"}`}>
+            <div className={`h-0.5 flex-1 rounded-full transition-colors duration-300 ${s <= step ? "bg-[#F97316]" : "bg-[rgba(255,255,255,0.08)]"}`} />
+            <span className={`mono-label flex-shrink-0 transition-colors ${s === step ? "text-[#F97316]" : s < step ? "text-[#EA580C]" : "text-[#2A2A2A]"}`}>
               {s}/{3}
             </span>
           </div>
@@ -144,7 +144,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
                 <input
                   type="email" value={data.email} onChange={(e) => set("email", e.target.value)}
                   placeholder="you@company.com" autoFocus
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(255,90,31,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
                 />
                 {errors.email && <p className="text-[#EF4444] text-xs">{errors.email}</p>}
               </div>
@@ -161,14 +161,14 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
                   <input
                     type="text" value={data.name} onChange={(e) => set("name", e.target.value)}
                     placeholder="Your name" autoFocus
-                    className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(255,90,31,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                    className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
                   />
                   {errors.name && <p className="text-[#EF4444] text-xs mt-1">{errors.name}</p>}
                 </div>
                 <input
                   type="text" value={data.company} onChange={(e) => set("company", e.target.value)}
                   placeholder="Company name"
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(255,90,31,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
                 />
               </div>
             </motion.div>
@@ -185,7 +185,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
                   <div className="flex flex-wrap gap-2">
                     {TEAM_SIZES.map((size) => (
                       <button key={size} type="button" onClick={() => set("teamSize", size)}
-                        className={`px-4 py-2 rounded-md text-sm border transition-colors ${data.teamSize === size ? "bg-[#FF5A1F] border-[#FF5A1F] text-white" : "border-[rgba(255,255,255,0.08)] text-[#A1A1AA] hover:border-[rgba(255,255,255,0.2)]"}`}>
+                        className={`px-4 py-2 rounded-md text-sm border transition-colors ${data.teamSize === size ? "bg-[#F97316] border-[#F97316] text-white" : "border-[rgba(255,255,255,0.08)] text-[#A1A1AA] hover:border-[rgba(255,255,255,0.2)]"}`}>
                         {size}
                       </button>
                     ))}
@@ -194,7 +194,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
                 <textarea
                   value={data.message} onChange={(e) => set("message", e.target.value)}
                   placeholder="What are you trying to solve? (optional)" rows={3}
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(255,90,31,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors resize-none"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors resize-none"
                 />
               </div>
             </motion.div>
@@ -211,7 +211,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
           )}
           <button
             type="submit" disabled={status === "loading"}
-            className="inline-flex items-center gap-2 bg-[#FF5A1F] hover:bg-[#E84E17] text-white font-semibold px-6 py-2.5 rounded-md text-sm transition-colors disabled:opacity-60"
+            className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-6 py-2.5 rounded-md text-sm transition-colors disabled:opacity-60"
           >
             {status === "loading" ? (
               <Loader2 className="w-4 h-4 animate-spin" />

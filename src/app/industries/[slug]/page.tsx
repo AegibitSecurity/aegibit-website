@@ -74,7 +74,7 @@ export default async function IndustryPage({ params }: Props) {
       <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main className="pt-32 pb-16 px-6 lg:px-10 max-w-4xl mx-auto">
-        <span className="mono-label text-[#FF6A00] block mb-4">{ind.name}</span>
+        <span className="mono-label text-[#F97316] block mb-4">{ind.name}</span>
         <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight mb-5">{ind.headline}</h1>
         <p className="text-[#A1A1AA] text-lg leading-relaxed mb-14 max-w-2xl">{ind.description}</p>
 
@@ -90,11 +90,11 @@ export default async function IndustryPage({ params }: Props) {
             </ul>
           </div>
           <div>
-            <h2 className="mono-label text-[#FF6A00] mb-5">How VoiceCore Solves It</h2>
+            <h2 className="mono-label text-[#F97316] mb-5">How VoiceCore Solves It</h2>
             <ul className="space-y-3">
               {ind.solutions.map((s) => (
                 <li key={s} className="flex items-start gap-3 text-[#A1A1AA] text-sm">
-                  <span className="w-1 h-1 rounded-full bg-[#FF6A00] mt-2 flex-shrink-0" />{s}
+                  <span className="w-1 h-1 rounded-full bg-[#F97316] mt-2 flex-shrink-0" />{s}
                 </li>
               ))}
             </ul>
@@ -112,7 +112,7 @@ export default async function IndustryPage({ params }: Props) {
           </div>
         )}
 
-        <Link href="/signup" className="inline-flex items-center gap-2 bg-[#FF6A00] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
+        <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
           Get Private Access <ArrowRight className="w-4 h-4" />
         </Link>
       </main>

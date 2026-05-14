@@ -32,8 +32,8 @@ export function DynamicCTA({ className, size = "md" }: DynamicCTAProps) {
           "group inline-flex items-center gap-2 font-semibold rounded-md transition-colors",
           sizeClasses[size],
           cta.urgency === "high"
-            ? "bg-[#FF6A00] hover:bg-[#CC5500] text-white ring-2 ring-[rgba(255,106,0,0.3)]"
-            : "bg-[#FF6A00] hover:bg-[#CC5500] text-white",
+            ? "bg-[#F97316] hover:bg-[#CC5500] text-white ring-2 ring-[rgba(249,115,22,0.3)]"
+            : "bg-[#F97316] hover:bg-[#CC5500] text-white",
           className
         )}
       >
