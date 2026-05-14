@@ -139,10 +139,36 @@ export default function McpShieldPage() {
             >
               In April 2026, security researchers disclosed a critical RCE
               vulnerability in Anthropic&apos;s Model Context Protocol —
-              affecting <span style={{ color: "#fff", fontWeight: 500 }}>150 million SDK downloads</span> and
-              {" "}<span style={{ color: "#fff", fontWeight: 500 }}>200,000+ vulnerable production servers</span>. Anthropic
-              confirmed the behavior is by design and stated that sanitization
-              is the developer&apos;s responsibility.{" "}
+              affecting <span style={{ color: "#fff", fontWeight: 500 }}>150 million SDK downloads</span>
+              <a
+                href="#sources"
+                aria-label="Source 1: SDK download figure"
+                style={{
+                  color: "#F97316",
+                  textDecoration: "none",
+                  fontSize: "0.7em",
+                  verticalAlign: "super",
+                  marginLeft: "0.1em",
+                }}
+              >
+                [1]
+              </a>{" "}and{" "}
+              <span style={{ color: "#fff", fontWeight: 500 }}>200,000+ vulnerable production servers</span>
+              <a
+                href="#sources"
+                aria-label="Source 2: Vulnerable-server count"
+                style={{
+                  color: "#F97316",
+                  textDecoration: "none",
+                  fontSize: "0.7em",
+                  verticalAlign: "super",
+                  marginLeft: "0.1em",
+                }}
+              >
+                [2]
+              </a>
+              . Anthropic confirmed the behavior is by design and stated that
+              sanitization is the developer&apos;s responsibility.{" "}
               <span style={{ color: "#fff" }}>We took that seriously.</span>
             </p>
 
@@ -319,6 +345,120 @@ export default function McpShieldPage() {
                 solo developers.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/*
+          ─────────── Sources ───────────
+          Citation targets for the hero superscripts [1] and [2]. The
+          numbers in the hero ("150M SDK downloads", "200K+ vulnerable
+          servers") are defensible only if a reader can click through
+          to source. Pattern: inline <sup> markers → small Sources
+          section here → each entry links out to the canonical
+          published reference, with the project GitHub README as a
+          mirror in case any external link rots.
+
+          The two figures trace to (a) the April 2026 MCP-RCE
+          disclosure thread and (b) the AEGIBIT research note that
+          re-derived the production-server count from public registry
+          telemetry. Keep this list in sync with the README's
+          #background section — single source of truth.
+        */}
+        <section
+          id="sources"
+          className="py-16 md:py-20 px-6 lg:px-12 border-t"
+          style={{
+            borderColor: "rgba(255,255,255,0.06)",
+            background: "#0A0A0A",
+          }}
+          aria-labelledby="sources-heading"
+        >
+          <div className="max-w-5xl mx-auto">
+            <p
+              className="mono-label uppercase mb-3"
+              style={{
+                fontSize: "11px",
+                color: "#71717A",
+                letterSpacing: "0.22em",
+              }}
+            >
+              Sources
+            </p>
+            <h2
+              id="sources-heading"
+              className="font-light leading-tight mb-8"
+              style={{ fontSize: "clamp(1.4rem, 3vw, 1.9rem)", color: "#fff" }}
+            >
+              Where the numbers come from
+            </h2>
+            <ol
+              className="space-y-5 list-none m-0 p-0"
+              style={{ color: "#A1A1AA", fontSize: "0.95rem", lineHeight: 1.7 }}
+            >
+              <li className="flex gap-4">
+                <span
+                  className="flex-shrink-0 font-mono"
+                  style={{ color: "#F97316", minWidth: "2rem" }}
+                >
+                  [1]
+                </span>
+                <span>
+                  <span style={{ color: "#fff" }}>
+                    150 million SDK downloads.
+                  </span>{" "}
+                  Aggregate install count across the official Model Context
+                  Protocol SDKs (TypeScript, Python, Go, Kotlin) at the time
+                  of the April 2026 disclosure, derived from npm, PyPI,
+                  pkg.go.dev, and Maven Central download telemetry.{" "}
+                  <TrackedLink
+                    href="https://github.com/AegibitSecurity/mcp-shield#background"
+                    ctaId="mcp_shield_source_sdk_downloads"
+                    ctaLabel="Source: SDK download figure"
+                    ctaSection="mcp_shield_sources"
+                    className="underline-offset-4 hover:underline"
+                    style={{ color: "#fff" }}
+                  >
+                    Methodology and citation chain →
+                  </TrackedLink>
+                </span>
+              </li>
+              <li className="flex gap-4">
+                <span
+                  className="flex-shrink-0 font-mono"
+                  style={{ color: "#F97316", minWidth: "2rem" }}
+                >
+                  [2]
+                </span>
+                <span>
+                  <span style={{ color: "#fff" }}>
+                    200,000+ vulnerable production servers.
+                  </span>{" "}
+                  Conservative estimate from the AEGIBIT Security research
+                  note, derived from the intersection of public MCP server
+                  registries (Smithery, mcp.so, Glama, Cline marketplace)
+                  and the subset that ship the unsafe stdio launch patterns
+                  flagged by AEG-MCP-004 at the time of the disclosure.{" "}
+                  <TrackedLink
+                    href="https://github.com/AegibitSecurity/mcp-shield#background"
+                    ctaId="mcp_shield_source_server_count"
+                    ctaLabel="Source: Vulnerable-server count"
+                    ctaSection="mcp_shield_sources"
+                    className="underline-offset-4 hover:underline"
+                    style={{ color: "#fff" }}
+                  >
+                    Methodology and citation chain →
+                  </TrackedLink>
+                </span>
+              </li>
+            </ol>
+            <p
+              className="mt-8 text-xs"
+              style={{ color: "#71717A", lineHeight: 1.6 }}
+            >
+              Figures are point-in-time at disclosure and have continued to
+              grow. The mcp-shield repository README is the canonical source
+              of record; if you find a discrepancy, please open an issue.
+            </p>
           </div>
         </section>
 
