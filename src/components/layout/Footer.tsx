@@ -1,6 +1,12 @@
 import { Logo } from "@/components/shared/Logo";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 
+// Footer navigation. Hrefs are resolved against routes that actually
+// exist — see /sitemap.xml. Two regressions fixed during the $1B
+// credibility sprint:
+//   - Product.Changelog used to point at /blog (different page entirely)
+//   - Company.Careers used to point at /about#careers (dead anchor)
+// Both now resolve to dedicated routes that ship in PR #102.
 const COLS = {
   Product: [
     { label:"PayMint",    href:"/products/paymint"    },
@@ -8,13 +14,15 @@ const COLS = {
     { label:"Platform",   href:"/features"            },
     { label:"Security",   href:"/security"            },
     { label:"Pricing",    href:"/pricing"             },
-    { label:"Changelog",  href:"/blog"                },
+    { label:"Status",     href:"/status"              },
+    { label:"Changelog",  href:"/changelog"           },
   ],
   Company: [
     { label:"About",   href:"/about"   },
     { label:"Blog",    href:"/blog"    },
     { label:"Contact", href:"/contact" },
-    { label:"Careers", href:"/about#careers" },
+    { label:"Careers", href:"/careers" },
+    { label:"Press",   href:"/press"   },
   ],
   Legal: [
     { label:"Privacy",       href:"/privacy" },
