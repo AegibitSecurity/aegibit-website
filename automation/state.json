@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-14T11:20:58.882Z",
+      "timestamp": "2026-05-15T11:30:58.848Z",
       "success": true,
-      "durationMs": 625
+      "durationMs": 784
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-14T11:20:59.804Z",
+      "timestamp": "2026-05-15T11:31:00.073Z",
       "success": true,
-      "durationMs": 484
+      "durationMs": 614
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -29,7 +29,7 @@
   },
   "metrics": {
     "pagesGenerated": 75,
-    "blogPostsPublished": 18,
+    "blogPostsPublished": 19,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -51,7 +51,8 @@
       "Stripe Webhook Security: The Right Way",
       "Voice AI Security: What VoiceCore Got Right",
       "Zero-Day Response Playbook for SaaS Companies",
-      "DDoS Protection: When Cloudflare Free Isn't Enough"
+      "DDoS Protection: When Cloudflare Free Isn't Enough",
+      "GDPR for Indian SaaS Companies Selling to EU"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
