@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-05-15T11:30:58.848Z",
+      "timestamp": "2026-05-16T09:14:17.593Z",
       "success": true,
-      "durationMs": 784
+      "durationMs": 1296
     },
     "generate-seo-pages": {
-      "timestamp": "2026-05-15T11:31:00.073Z",
+      "timestamp": "2026-05-16T09:14:18.524Z",
       "success": true,
-      "durationMs": 614
+      "durationMs": 459
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
@@ -29,7 +29,7 @@
   },
   "metrics": {
     "pagesGenerated": 75,
-    "blogPostsPublished": 19,
+    "blogPostsPublished": 20,
     "depsAutoMerged": 0,
     "leadsProcessed": 0,
     "fridayReportsSent": 1,
@@ -52,7 +52,8 @@
       "Voice AI Security: What VoiceCore Got Right",
       "Zero-Day Response Playbook for SaaS Companies",
       "DDoS Protection: When Cloudflare Free Isn't Enough",
-      "GDPR for Indian SaaS Companies Selling to EU"
+      "GDPR for Indian SaaS Companies Selling to EU",
+      "The Cost of a Data Breach in 2026 (and How to Avoid It)"
     ],
     "generatedSeoPages": [
       "website-development-for-healthcare",
