@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { TrackedLink } from "@/components/shared/TrackedLink";
+import { McpScannerSection } from "@/components/sections/mcp-shield/McpScannerSection";
 import { Shield, ExternalLink, ArrowRight, Eye, Lock, Search } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -174,9 +175,9 @@ export default function McpShieldPage() {
 
             <div className="flex flex-wrap gap-3">
               <TrackedLink
-                href="https://shield.aegibit.com"
-                ctaId="mcp_shield_page_hero_primary"
-                ctaLabel="Visit shield.aegibit.com"
+                href="#scanner"
+                ctaId="mcp_shield_page_hero_scanner"
+                ctaLabel="Try the scanner"
                 ctaSection="mcp_shield_page_hero"
                 className="inline-flex items-center gap-2 px-6 h-12 rounded-xl font-semibold text-white transition-all hover:opacity-90"
                 style={{
@@ -185,8 +186,8 @@ export default function McpShieldPage() {
                 }}
               >
                 <Shield size={18} />
-                Visit shield.aegibit.com
-                <ExternalLink size={14} />
+                Try the scanner
+                <ArrowRight size={14} />
               </TrackedLink>
               <TrackedLink
                 href="https://github.com/AegibitSecurity/mcp-shield"
@@ -200,6 +201,20 @@ export default function McpShieldPage() {
                 }}
               >
                 View on GitHub
+                <ExternalLink size={14} />
+              </TrackedLink>
+              <TrackedLink
+                href="https://shield.aegibit.com"
+                ctaId="mcp_shield_page_hero_homepage"
+                ctaLabel="shield.aegibit.com"
+                ctaSection="mcp_shield_page_hero"
+                className="inline-flex items-center gap-2 px-6 h-12 rounded-xl font-medium text-white transition-all"
+                style={{
+                  background: "transparent",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                }}
+              >
+                shield.aegibit.com
                 <ExternalLink size={14} />
               </TrackedLink>
             </div>
@@ -278,6 +293,9 @@ export default function McpShieldPage() {
             </div>
           </div>
         </section>
+
+        {/* ─────────── Try the scanner (interactive) ─────────── */}
+        <McpScannerSection />
 
         {/* ─────────── Why this exists ─────────── */}
         <section

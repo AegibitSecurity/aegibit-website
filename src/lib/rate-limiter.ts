@@ -61,6 +61,19 @@ export const chatLimiter: LimiterConfig = {
   durationSec: 60,
 };
 
+// MCP Shield web scanner. Per-IP cap on scan submissions. Each scan
+// runs 5 in-process checks (cheap) + optionally one Groq call for the
+// plain-English summary. 10/hour/IP is generous enough for a curious
+// security engineer testing every manifest in their setup, tight
+// enough to keep the Groq free-tier quota (1000 req/day) from being
+// burned by automation. Resets hourly so a legitimate retry after a
+// fix doesn't get punished for too long.
+export const mcpScanLimiter: LimiterConfig = {
+  name: "mcp_scan",
+  points: 10,
+  durationSec: 3600,
+};
+
 // ── Upstash backend (lazy-initialised so module import doesn't crash
 //    when env vars are absent — only callers of checkRateLimit see it). ──
 
