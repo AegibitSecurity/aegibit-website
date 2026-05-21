@@ -19,13 +19,19 @@
       "timestamp": "2026-05-02T20:42:49.384Z",
       "success": true,
       "durationMs": 46
+    },
+    "outbound-draft": {
+      "timestamp": "2026-05-21T06:41:35.311Z",
+      "success": true,
+      "durationMs": 4132
     }
   },
   "consecutiveFailures": {
     "generate-blog-post": 0,
     "generate-seo-pages": 0,
     "seo-audit": 0,
-    "friday-pdf": 0
+    "friday-pdf": 0,
+    "outbound-draft": 0
   },
   "metrics": {
     "pagesGenerated": 75,
