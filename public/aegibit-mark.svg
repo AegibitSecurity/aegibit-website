@@ -1,30 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AEGIBIT">
   <title>AEGIBIT</title>
   <defs>
-    <linearGradient id="aegibit-white" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="aegibit-white" x1="0.05" y1="0" x2="0.55" y2="1">
       <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#C7C7CC"/>
+      <stop offset="60%" stop-color="#EDEDF0"/>
+      <stop offset="100%" stop-color="#C2C2C9"/>
     </linearGradient>
-    <linearGradient id="aegibit-orange" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FB923C"/>
-      <stop offset="100%" stop-color="#F97316"/>
+    <linearGradient id="aegibit-orange" x1="0.05" y1="0" x2="0.45" y2="1">
+      <stop offset="0%" stop-color="#FFB061"/>
+      <stop offset="50%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#E05B04"/>
     </linearGradient>
-    <radialGradient id="halo" cx="50%" cy="42%" r="55%">
+    <radialGradient id="halo" cx="50%" cy="44%" r="52%">
       <stop offset="0%" stop-color="#F97316" stop-opacity="0.14"/>
       <stop offset="65%" stop-color="#F97316" stop-opacity="0.04"/>
       <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <!-- Soft halo behind the mark -->
   <circle cx="256" cy="256" r="230" fill="url(#halo)"/>
 
-  <!-- The AEGIBIT "A": two angled strokes, no crossbar.
-       Left leg white, right leg orange. -->
-  <path d="M256 84 L122 430 L194 430 L256 168 Z"
-        fill="url(#aegibit-white)"
-        stroke="url(#aegibit-white)" stroke-width="14" stroke-linejoin="round"/>
-  <path d="M256 84 L390 430 L318 430 L256 168 Z"
-        fill="url(#aegibit-orange)"
-        stroke="url(#aegibit-orange)" stroke-width="14" stroke-linejoin="round"/>
+  <!-- The AEGIBIT "A": white left blade rises to the apex; shorter
+       orange right blade splays from a notch below the peak. -->
+  <path d="M286 100 L224 130 L124 426 L196 426 Z"
+        fill="url(#aegibit-white)" stroke="url(#aegibit-white)" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M272 162 L328 182 L388 426 L322 426 Z"
+        fill="url(#aegibit-orange)" stroke="url(#aegibit-orange)" stroke-width="16" stroke-linejoin="round"/>
 </svg>

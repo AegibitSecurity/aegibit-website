@@ -34,12 +34,12 @@ Master brand identity for AEGIBIT Security. All assets are SVG (infinite scale, 
 
 ## The mark
 
-**The "A"** — two angled strokes meeting at a solid peak and splaying open at the base. No crossbar.
+**The "A"** — two offset blades forming a dynamic, asymmetric letterform. No crossbar.
 
-- **Left leg — white.** Clarity, the human side, the operator.
-- **Right leg — orange.** The brand, the security layer, the system.
+- **White left blade.** The dominant stroke. Rises with a chiselled top to the apex. Clarity, the human side, the operator. Subtle white→soft-grey gradient gives it a glossy, dimensional sheen.
+- **Orange right blade.** Shorter, set lower-right, splaying from a notch just below the peak down to the base. The brand, the security layer, the system. Light-orange→deep-orange gradient.
 
-Read together: a single declarative letterform built from two materials — *human + system, secured*. Clean, geometric, scales from a 16px favicon to a billboard without losing legibility.
+The two blades don't meet at a symmetric point — the white reaches higher and the orange offsets below it, leaving a fine diagonal gap. That asymmetry is the signature; it reads as forward motion, not a static peak. Scales from a 16px favicon to a billboard without losing legibility.
 
 ## Typography
 
@@ -59,12 +59,13 @@ The wordmark splits color: **AEGI** in white, **BIT** in `#F97316`.
 - Scale uniformly. Width 24px is the smallest sensible size for the mark; below that, use the favicon tile (`icon.svg`).
 
 ❌ **Don't**
-- Re-color the legs. White stays white, orange stays `#F97316`. Use the mono variant for single-ink contexts.
-- Add a crossbar to the "A" or close the gap at the base.
+- Re-color the blades. White stays white, orange stays `#F97316`. Use the mono variant for single-ink contexts.
+- Add a crossbar to the "A", close the notch, or make the two blades symmetric.
+- Flatten the gradients — the white→grey and orange→deep-orange sheen is intrinsic to the mark, not an added effect.
 - Stretch or skew non-uniformly.
-- Add drop-shadows or 3D effects beyond the built-in halo + the subtle UI glow used in the navbar lockup.
+- Add drop-shadows beyond the built-in halo + the subtle UI glow used in the navbar lockup.
 - Set the wordmark in a bold/heavy weight.
-- Re-create the mark by hand with different proportions. Use the SVG; it's the source of truth (geometry: `M256 84 L122 430 L194 430 L256 168 Z` left, `M256 84 L390 430 L318 430 L256 168 Z` right, on a 512 viewBox).
+- Re-create the mark by hand with different proportions. Use the SVG; it's the source of truth (geometry on a 512 viewBox: white blade `M286 100 L224 130 L124 426 L196 426 Z`, orange blade `M272 162 L328 182 L388 426 L322 426 Z`, both with `stroke-width="16"` + `stroke-linejoin="round"` for the soft corners).
 
 ## Example usage
 
