@@ -106,12 +106,26 @@ export function PayMintHero() {
 
           {/* Sub */}
           <p
-            className="text-lg md:text-xl leading-relaxed mb-10 max-w-xl"
+            className="text-lg md:text-xl leading-relaxed mb-4 max-w-xl"
             style={{ color: '#A1A1AA' }}
           >
             Multi-branch expense tracking with role-based approvals, branch-coded
             vouchers, and audit-grade logs. Engineered by a cybersecurity company,
             for businesses that can&apos;t afford a leak.
+          </p>
+
+          {/* Soft-anchor to the free Snapshot tool — non-competing with the
+              primary CTAs below but discoverable above the fold. */}
+          <p className="mb-10 max-w-xl">
+            <a
+              href="#snapshot"
+              onClick={() => track('cta_click', { cta_id: 'paymint_hero_snapshot_anchor', cta_label: 'Try the free Snapshot tool', cta_section: 'paymint_hero', target: '#snapshot' })}
+              className="inline-flex items-center gap-1.5 text-sm underline-offset-4 hover:underline transition-opacity"
+              style={{ color: '#F97316' }}
+            >
+              <span aria-hidden>↓</span>
+              <span>Try the free Snapshot tool on your own Tally CSV</span>
+            </a>
           </p>
 
           {/* CTAs — primary is Book Demo (sales-led growth motion).

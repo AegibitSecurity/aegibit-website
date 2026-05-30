@@ -6,6 +6,7 @@ import { PayMintFeatures } from "@/components/sections/paymint/PayMintFeatures";
 import { PayMintSecurity } from "@/components/sections/paymint/PayMintSecurity";
 import { PayMintScreenshots } from "@/components/sections/paymint/PayMintScreenshots";
 import { PayMintCustomer } from "@/components/sections/paymint/PayMintCustomer";
+import { PayMintSnapshotSection } from "@/components/sections/paymint/PayMintSnapshotSection";
 import { PayMintCTA } from "@/components/sections/paymint/PayMintCTA";
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ export default function PayMintPage() {
       <main id="main-content">
         <PayMintHero />
         <PayMintFeatures />
+        <PayMintSnapshotSection />
         <PayMintSecurity />
         <PayMintScreenshots />
         <PayMintCustomer />
