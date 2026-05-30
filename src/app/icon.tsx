@@ -1,20 +1,22 @@
 import { ImageResponse } from "next/og";
 
 /**
- * Browser-tab favicon. Next.js generates a 32×32 PNG from this at build,
- * and auto-injects <link rel="icon" href="/icon"> into every page. Google
- * search results crawl this URL.
+ * Browser-tab + search-result favicon (PNG). Next.js generates this at
+ * build and auto-injects <link rel="icon" href="/icon" sizes="48x48">.
  *
- * Design: the AEGIBIT "A" mark — two angled strokes (white left leg,
- * orange right leg, no crossbar) on a black rounded square. Identical
- * geometry to apple-icon.tsx and public/icon.svg so the brand reads
- * consistently from a 16×16 tab to a 1024×1024 app launcher.
+ * Sized at 48×48 — Google's recommended favicon size is a multiple of
+ * 48px (48/96/144). The earlier 32×32 was below that bar and got
+ * deprioritised in Search results. The static src/app/favicon.ico
+ * (16/32/48 multi-size) is the belt-and-braces companion that crawlers
+ * hitting /favicon.ico directly will pick up.
  *
- * Solid fills (not gradients) at this size — crispest at 16–32px and
- * avoids Satori gradient-rendering quirks in next/og.
+ * Design: the AEGIBIT "A" mark — white left blade rising to the apex,
+ * orange right blade splaying from the notch — on a black rounded
+ * square. Solid fills (crispest at small size, Satori-safe). Geometry
+ * matches apple-icon.tsx, favicon.ico, and public/icon.svg.
  */
 
-export const size = { width: 32, height: 32 };
+export const size = { width: 48, height: 48 };
 export const contentType = "image/png";
 
 export default function Icon() {
@@ -22,16 +24,16 @@ export default function Icon() {
     (
       <div
         style={{
-          width: 32,
-          height: 32,
+          width: 48,
+          height: 48,
           background: "#000000",
-          borderRadius: 7,
+          borderRadius: 10,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <svg width="27" height="27" viewBox="0 0 512 512" fill="none">
+        <svg width="40" height="40" viewBox="0 0 512 512" fill="none">
           {/* White left blade (rises to apex) */}
           <path d="M286 100 L224 130 L124 426 L196 426 Z" fill="#FFFFFF" />
           {/* Orange right blade (splays from the notch) */}

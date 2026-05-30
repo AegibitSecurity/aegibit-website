@@ -1,7 +1,7 @@
 {
   "name": "AEGIBIT",
   "short_name": "AEGIBIT",
-  "description": "AI, Cybersecurity, and Automation for enterprises that cannot afford failure.",
+  "description": "Cybersecurity-first operational software for businesses that can't afford a leak.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -17,7 +17,7 @@
     },
     {
       "src": "/icon",
-      "sizes": "32x32",
+      "sizes": "48x48",
       "type": "image/png",
       "purpose": "any"
     },
