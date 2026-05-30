@@ -23,6 +23,13 @@ const SOURCE_LABELS: Record<string, string> = {
   voicecore_waitlist: "VoiceCore Early Access",
   aira_waitlist:      "Aira Early Access",
   chat:               "Aira Chat",
+  // Free-tool lead-magnet captures (M-1, M-2). Each export through
+  // /api/paymint-snapshot/email or /api/mcp-scan/email writes a row
+  // here so they show up in /dashboard/leads alongside organic
+  // inbound. The page on which the export originated is the source
+  // of truth for which product to route the follow-up to.
+  snapshot_export:    "PayMint Snapshot Export",
+  scan_export:        "MCP Shield Scan Export",
 };
 
 // Confirmation email sent to the lead themselves so they know the request

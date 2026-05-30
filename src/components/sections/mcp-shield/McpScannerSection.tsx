@@ -1,7 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Shield, AlertTriangle, AlertCircle, Info, Loader2, ChevronRight, Copy, CheckCircle2 } from "lucide-react";
+import {
+  Shield,
+  AlertTriangle,
+  AlertCircle,
+  Info,
+  Loader2,
+  ChevronRight,
+  Copy,
+  CheckCircle2,
+  Mail,
+} from "lucide-react";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 import { track } from "@/lib/track";
 
@@ -124,6 +134,12 @@ export function McpScannerSection() {
   const [result, setResult] = useState<ScanResponse | null>(null);
   const [copied, setCopied] = useState(false);
 
+  // M-2 email-gated lead capture
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [emailStatus, setEmailStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [emailError, setEmailError] = useState<string | null>(null);
+
   async function handleScan() {
     if (!input.trim()) return;
     setStatus("scanning");
@@ -159,6 +175,37 @@ export function McpScannerSection() {
     setStatus("idle");
     setResult(null);
     setError(null);
+    setEmailStatus("idle");
+    setEmailError(null);
+  }
+
+  async function handleEmail(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim() || !input.trim()) return;
+    setEmailStatus("sending");
+    setEmailError(null);
+    track("cta_click", {
+      cta_id: "mcp_shield_scanner_email",
+      cta_label: "Email this report",
+      cta_section: "mcp_shield_scanner",
+    });
+    try {
+      const res = await fetch("/api/mcp-scan/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ manifest: input, email, name: name || undefined }),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        setEmailError(json.error ?? `HTTP ${res.status}`);
+        setEmailStatus("error");
+        return;
+      }
+      setEmailStatus("sent");
+    } catch (err) {
+      setEmailError(err instanceof Error ? err.message : "Network error");
+      setEmailStatus("error");
+    }
   }
 
   function loadSample(kind: "tools" | "servers") {
@@ -563,6 +610,104 @@ export function McpScannerSection() {
                 );
               })}
             </ol>
+          </div>
+        )}
+
+        {/* ── M-2 email-gate report ──────────────────────────────── */}
+        {status === "done" && result && (
+          <div
+            className="rounded-lg p-5 mt-6"
+            style={{
+              background: "#0A0A0A",
+              border: "1px solid rgba(255,255,255,0.06)",
+            }}
+          >
+            {emailStatus === "sent" ? (
+              <div className="flex items-start gap-3">
+                <CheckCircle2 size={20} style={{ color: "#22C55E", marginTop: "0.15rem" }} />
+                <div>
+                  <p className="font-medium" style={{ color: "#fff", fontSize: "1rem" }}>
+                    Report sent to {email}.
+                  </p>
+                  <p className="text-sm mt-1" style={{ color: "#A1A1AA", lineHeight: 1.6 }}>
+                    Check the inbox in a few seconds. The format is Slack /
+                    Teams forward-friendly so you can share with the
+                    security team in one click.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleEmail}>
+                <p
+                  className="mono-label uppercase mb-3"
+                  style={{ fontSize: "10px", color: "#F97316", letterSpacing: "0.18em" }}
+                >
+                  Email this report to your team
+                </p>
+                <p
+                  className="mb-4 text-sm"
+                  style={{ color: "#A1A1AA", lineHeight: 1.6 }}
+                >
+                  We&apos;ll send the full scan as a forward-friendly HTML
+                  report (no PDF attachment — Slack-grade rendering). No
+                  drip sequence, no list-spam.
+                </p>
+                <div className="grid sm:grid-cols-[1fr_1fr_auto] gap-3">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@company.com"
+                    required
+                    className="w-full rounded-md px-3 py-2 text-sm"
+                    style={{
+                      background: "#000",
+                      border: "1px solid rgba(255,255,255,0.10)",
+                      color: "#E4E4E7",
+                      outline: "none",
+                    }}
+                    aria-label="Your work email"
+                  />
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name (optional)"
+                    className="w-full rounded-md px-3 py-2 text-sm"
+                    style={{
+                      background: "#000",
+                      border: "1px solid rgba(255,255,255,0.10)",
+                      color: "#E4E4E7",
+                      outline: "none",
+                    }}
+                    aria-label="Your name (optional)"
+                  />
+                  <button
+                    type="submit"
+                    disabled={emailStatus === "sending" || !email.trim()}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-md font-semibold text-white transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+                    style={{ background: "#F97316" }}
+                  >
+                    {emailStatus === "sending" ? (
+                      <>
+                        <Loader2 size={14} className="animate-spin" />
+                        Sending…
+                      </>
+                    ) : (
+                      <>
+                        <Mail size={14} />
+                        Email me the report
+                      </>
+                    )}
+                  </button>
+                </div>
+                {emailError && (
+                  <p className="text-xs mt-3" style={{ color: "#FCA5A5" }}>
+                    {emailError}
+                  </p>
+                )}
+              </form>
+            )}
           </div>
         )}
 

@@ -74,6 +74,29 @@ export const mcpScanLimiter: LimiterConfig = {
   durationSec: 3600,
 };
 
+// PayMint Snapshot tool. CSV uploads are heavier than MCP manifests
+// (rows × columns; we cap at 512 KB at the route layer) and the
+// downstream Groq call is more expensive on tokens. 8/hour/IP keeps
+// the same legitimate-power-user latitude as mcpScanLimiter while
+// being a touch stricter on automation abuse.
+export const paymintSnapshotLimiter: LimiterConfig = {
+  name: "paymint_snapshot",
+  points: 8,
+  durationSec: 3600,
+};
+
+// Email-gated report exporter (shared by PayMint Snapshot + MCP scan).
+// One submission funnels into /api/leads under source="snapshot_export"
+// or "scan_export". Tighter cap because each call sends a real
+// transactional email through Resend's free tier (100/day across the
+// account). 3/hour/IP gives the visitor enough latitude to re-send if
+// it lands in spam, but stops a bad actor from blasting our quota.
+export const reportExportLimiter: LimiterConfig = {
+  name: "report_export",
+  points: 3,
+  durationSec: 3600,
+};
+
 // ── Upstash backend (lazy-initialised so module import doesn't crash
 //    when env vars are absent — only callers of checkRateLimit see it). ──
 
