@@ -19,29 +19,42 @@ export function Logo({ size = "md", linkHref = "/" }: LogoProps) {
   const content = (
     <div className="flex items-center gap-2.5 select-none">
 
-      {/* "A" mark */}
+      {/* "A" mark — two offset blades (white left rises to apex,
+          orange right splays from the notch), with a soft orange glow */}
       <div className="relative flex-shrink-0 flex items-center justify-center">
         <svg
           width={box}
           height={box}
           viewBox="0 0 512 512"
           fill="none"
-          style={{ filter: "drop-shadow(0 0 7px rgba(249,115,22,0.40))" }}
+          style={{ filter: "drop-shadow(0 0 7px rgba(249,115,22,0.38))" }}
         >
-          {/* Left leg — white */}
+          <defs>
+            <linearGradient id="aegibit-logo-w" x1="0.05" y1="0" x2="0.55" y2="1">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="60%" stopColor="#EDEDF0" />
+              <stop offset="100%" stopColor="#C2C2C9" />
+            </linearGradient>
+            <linearGradient id="aegibit-logo-o" x1="0.05" y1="0" x2="0.45" y2="1">
+              <stop offset="0%" stopColor="#FFB061" />
+              <stop offset="50%" stopColor="#F97316" />
+              <stop offset="100%" stopColor="#E05B04" />
+            </linearGradient>
+          </defs>
+          {/* White left blade */}
           <path
-            d="M256 84 L122 430 L194 430 L256 168 Z"
-            fill="#FFFFFF"
-            stroke="#FFFFFF"
-            strokeWidth="14"
+            d="M286 100 L224 130 L124 426 L196 426 Z"
+            fill="url(#aegibit-logo-w)"
+            stroke="url(#aegibit-logo-w)"
+            strokeWidth="16"
             strokeLinejoin="round"
           />
-          {/* Right leg — canonical brand orange */}
+          {/* Orange right blade */}
           <path
-            d="M256 84 L390 430 L318 430 L256 168 Z"
-            fill="#F97316"
-            stroke="#F97316"
-            strokeWidth="14"
+            d="M272 162 L328 182 L388 426 L322 426 Z"
+            fill="url(#aegibit-logo-o)"
+            stroke="url(#aegibit-logo-o)"
+            strokeWidth="16"
             strokeLinejoin="round"
           />
         </svg>

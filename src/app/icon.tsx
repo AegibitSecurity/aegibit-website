@@ -31,11 +31,11 @@ export default function Icon() {
           justifyContent: "center",
         }}
       >
-        <svg width="26" height="26" viewBox="0 0 512 512" fill="none">
-          {/* Left leg — white */}
-          <path d="M256 84 L122 430 L194 430 L256 168 Z" fill="#FFFFFF" />
-          {/* Right leg — canonical brand orange */}
-          <path d="M256 84 L390 430 L318 430 L256 168 Z" fill="#F97316" />
+        <svg width="27" height="27" viewBox="0 0 512 512" fill="none">
+          {/* White left blade (rises to apex) */}
+          <path d="M286 100 L224 130 L124 426 L196 426 Z" fill="#FFFFFF" />
+          {/* Orange right blade (splays from the notch) */}
+          <path d="M272 162 L328 182 L388 426 L322 426 Z" fill="#F97316" />
         </svg>
       </div>
     ),

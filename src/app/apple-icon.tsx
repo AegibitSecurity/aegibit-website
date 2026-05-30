@@ -26,10 +26,10 @@ export default function AppleIcon() {
         }}
       >
         <svg width="150" height="150" viewBox="0 0 512 512" fill="none">
-          {/* Left leg — white */}
-          <path d="M256 84 L122 430 L194 430 L256 168 Z" fill="#FFFFFF" />
-          {/* Right leg — canonical brand orange */}
-          <path d="M256 84 L390 430 L318 430 L256 168 Z" fill="#F97316" />
+          {/* White left blade (rises to apex) */}
+          <path d="M286 100 L224 130 L124 426 L196 426 Z" fill="#FFFFFF" />
+          {/* Orange right blade (splays from the notch) */}
+          <path d="M272 162 L328 182 L388 426 L322 426 Z" fill="#F97316" />
         </svg>
       </div>
     ),

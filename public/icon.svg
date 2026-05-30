@@ -1,28 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="AEGIBIT">
   <title>AEGIBIT</title>
   <defs>
-    <!-- White leg: subtle top-light → soft-grey sheen, matches the brand reference -->
-    <linearGradient id="aegibit-white" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="aegibit-white" x1="0.05" y1="0" x2="0.55" y2="1">
       <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#C7C7CC"/>
+      <stop offset="60%" stop-color="#EDEDF0"/>
+      <stop offset="100%" stop-color="#C2C2C9"/>
     </linearGradient>
-    <!-- Orange leg: canonical brand orange with a lighter top edge -->
-    <linearGradient id="aegibit-orange" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FB923C"/>
-      <stop offset="100%" stop-color="#F97316"/>
+    <linearGradient id="aegibit-orange" x1="0.05" y1="0" x2="0.45" y2="1">
+      <stop offset="0%" stop-color="#FFB061"/>
+      <stop offset="50%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#E05B04"/>
     </linearGradient>
   </defs>
 
   <!-- Black rounded square — keeps the mark crisp on every browser theme -->
-  <rect width="512" height="512" rx="96" fill="#000000"/>
+  <rect width="512" height="512" rx="104" fill="#000000"/>
 
-  <!-- The AEGIBIT "A": two angled strokes, no crossbar. Left leg white,
-       right leg orange. Strokes meet at a solid peak and splay open at
-       the base. stroke-* on each path softens the corners. -->
-  <path d="M256 84 L122 430 L194 430 L256 168 Z"
-        fill="url(#aegibit-white)"
-        stroke="url(#aegibit-white)" stroke-width="14" stroke-linejoin="round"/>
-  <path d="M256 84 L390 430 L318 430 L256 168 Z"
-        fill="url(#aegibit-orange)"
-        stroke="url(#aegibit-orange)" stroke-width="14" stroke-linejoin="round"/>
+  <!-- The AEGIBIT "A": two offset blades. The dominant white left blade
+       rises to the apex with a chiselled top; the shorter orange right
+       blade splays from a notch below the peak down to the base. -->
+  <path d="M286 100 L224 130 L124 426 L196 426 Z"
+        fill="url(#aegibit-white)" stroke="url(#aegibit-white)" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M272 162 L328 182 L388 426 L322 426 Z"
+        fill="url(#aegibit-orange)" stroke="url(#aegibit-orange)" stroke-width="16" stroke-linejoin="round"/>
 </svg>
