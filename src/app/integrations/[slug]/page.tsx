@@ -116,7 +116,7 @@ export default async function IntegrationPage({ params }: Props) {
           </div>
         </div>
 
-        <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
+        <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
           Connect {int.name} to VoiceCore <ArrowRight className="w-4 h-4" />
         </Link>
       </main>

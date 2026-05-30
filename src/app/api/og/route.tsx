@@ -59,23 +59,10 @@ export async function GET(req: NextRequest) {
             marginBottom: 60,
           }}
         >
-          <svg width="56" height="56" viewBox="0 0 512 512" fill="none">
-            <path
-              d="M256 64 L96 130 L96 268 Q96 380 256 478 Q416 380 416 268 L416 130 Z"
-              fill="#F97316"
-            />
-            <path
-              d="M256 100 L128 152 L128 268 Q128 358 256 440 Q384 358 384 268 L384 152 Z"
-              fill="#000000"
-            />
-            <path
-              d="M168 282 L240 358 L378 188"
-              fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="46"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+          <svg width="52" height="52" viewBox="0 0 512 512" fill="none">
+            {/* AEGIBIT "A" mark — left leg white, right leg orange */}
+            <path d="M256 84 L122 430 L194 430 L256 168 Z" fill="#FFFFFF" />
+            <path d="M256 84 L390 430 L318 430 L256 168 Z" fill="#F97316" />
           </svg>
           <div
             style={{

@@ -1,15 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AEGIBIT" fill="none" stroke="currentColor">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AEGIBIT" fill="currentColor">
   <title>AEGIBIT</title>
-  <!-- Hexagonal shield -->
-  <path d="M 256 36 L 446 146 L 446 366 L 256 476 L 66 366 L 66 146 Z"
-        stroke-width="22"
-        stroke-linejoin="round"/>
-
-  <!-- Letter A legs -->
-  <path d="M 256 130 L 180 386" stroke-width="32" stroke-linecap="round"/>
-  <path d="M 256 130 L 332 386" stroke-width="32" stroke-linecap="round"/>
-
-  <!-- Split crossbar -->
-  <line x1="208" y1="290" x2="244" y2="290" stroke-width="22" stroke-linecap="round"/>
-  <line x1="268" y1="290" x2="304" y2="290" stroke-width="22" stroke-linecap="round"/>
+  <!-- Monochrome stamp of the AEGIBIT "A" mark — both legs in currentColor.
+       Use for single-ink contexts (embossing, watermarks, dark/light overlays). -->
+  <path d="M256 84 L122 430 L194 430 L256 168 Z"/>
+  <path d="M256 84 L390 430 L318 430 L256 168 Z"/>
 </svg>

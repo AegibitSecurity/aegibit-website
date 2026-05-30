@@ -45,7 +45,7 @@ export function ConversionSection() {
         >
           <Link
             href="/signup"
-            className="group inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-8 py-3.5 rounded-md text-sm transition-colors"
+            className="group inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-8 py-3.5 rounded-md text-sm transition-colors"
           >
             Get Private Access
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

@@ -2,76 +2,57 @@ import Link from "next/link";
 
 interface LogoProps { size?: "sm" | "md" | "lg"; linkHref?: string; }
 
+/**
+ * AEGIBIT logo lockup — the "A" mark + AEGI/BIT wordmark.
+ *
+ * The mark is two angled strokes (no crossbar): the left leg is white,
+ * the right leg is canonical brand orange (#F97316). A soft orange
+ * drop-shadow keeps the premium glow without the heavy circular ring
+ * the previous shield mark sat inside. Geometry matches public/icon.svg,
+ * icon.tsx, apple-icon.tsx and opengraph-image.tsx exactly so the brand
+ * reads identically from a 16px tab to a share card.
+ */
 export function Logo({ size = "md", linkHref = "/" }: LogoProps) {
-  const box = size === "sm" ? 28 : size === "lg" ? 40 : 34;
+  const box = size === "sm" ? 26 : size === "lg" ? 38 : 32;
   const fs  = size === "sm" ? "0.78rem" : size === "lg" ? "1rem" : "0.85rem";
 
   const content = (
     <div className="flex items-center gap-2.5 select-none">
 
-      {/* Logo icon with professional 3-layer glow */}
+      {/* "A" mark */}
       <div className="relative flex-shrink-0 flex items-center justify-center">
-
-        {/* Layer 1 — outermost pulse ring, slow expand + fade */}
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: box + 16, height: box + 16,
-            borderRadius: "50%",
-            background: "rgba(249,115,22,0.0)",
-            boxShadow: "0 0 0 1px rgba(249,115,22,0.18)",
-            animation: "logo-pulse 4s ease-out infinite",
-          }}
-        />
-
-        {/* Layer 2 — mid glow ring, delayed */}
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: box + 8, height: box + 8,
-            borderRadius: "50%",
-            boxShadow: "0 0 0 1px rgba(249,115,22,0.28)",
-            animation: "logo-pulse 4s ease-out infinite 1.3s",
-          }}
-        />
-
-        {/* Layer 3 — icon container with inner glow */}
-        <div
-          className="relative flex items-center justify-center rounded-full"
-          style={{
-            width: box, height: box,
-            border: "1.5px solid rgba(249,115,22,0.6)",
-            background: "radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(249,115,22,0.05) 100%)",
-            boxShadow:
-              "0 0 0 3px rgba(249,115,22,0.08)," +   /* soft halo */
-              "0 0 10px rgba(249,115,22,0.35)," +      /* inner glow */
-              "0 0 22px rgba(249,115,22,0.15)," +      /* mid spread */
-              "inset 0 1px 0 rgba(255,255,255,0.08)",  /* subtle rim light */
-          }}
+        <svg
+          width={box}
+          height={box}
+          viewBox="0 0 512 512"
+          fill="none"
+          style={{ filter: "drop-shadow(0 0 7px rgba(249,115,22,0.40))" }}
         >
-          <svg width={box * 0.46} height={box * 0.52} viewBox="0 0 18 21" fill="none">
-            <path
-              d="M9 1L1 4V10C1 15 4.8 19.2 9 20.5C13.2 19.2 17 15 17 10V4L9 1Z"
-              fill="#F97316"
-              opacity="0.95"
-            />
-            <path
-              d="M5.5 10.5L8 13L12.5 8"
-              stroke="#fff"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+          {/* Left leg — white */}
+          <path
+            d="M256 84 L122 430 L194 430 L256 168 Z"
+            fill="#FFFFFF"
+            stroke="#FFFFFF"
+            strokeWidth="14"
+            strokeLinejoin="round"
+          />
+          {/* Right leg — canonical brand orange */}
+          <path
+            d="M256 84 L390 430 L318 430 L256 168 Z"
+            fill="#F97316"
+            stroke="#F97316"
+            strokeWidth="14"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
 
       {/* Wordmark */}
       <span style={{
-        letterSpacing: "0.2em",
+        letterSpacing: "0.22em",
         fontSize: fs,
         fontFamily: "var(--font-geist-sans, sans-serif)",
-        fontWeight: 600,
+        fontWeight: 500,
         lineHeight: 1,
       }}>
         <span style={{ color: "#FFFFFF" }}>AEGI</span>

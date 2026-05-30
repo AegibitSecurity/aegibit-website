@@ -174,7 +174,7 @@ export default async function BlogPost({ params }: Props) {
             <p className="mono-label text-[#F97316] mb-3">AEGIBIT VOICECORE</p>
             <h3 className="text-xl font-bold text-white mb-2">Ready to secure your voice workflows?</h3>
             <p className="text-[#A1A1AA] text-sm mb-6">Join 50+ enterprise teams. No credit card required.</p>
-            <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-6 py-3 rounded-md text-sm transition-colors">
+            <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-6 py-3 rounded-md text-sm transition-colors">
               Get Private Access <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

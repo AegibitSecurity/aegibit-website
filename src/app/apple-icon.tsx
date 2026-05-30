@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
  * a 180×180 PNG at build and auto-injects <link rel="apple-touch-icon"
  * href="/apple-icon"> into every page.
  *
- * Same shield-and-check mark as icon.tsx and public/icon.svg, scaled up.
+ * Same AEGIBIT "A" mark as icon.tsx and public/icon.svg, scaled up.
  */
 
 export const size = { width: 180, height: 180 };
@@ -25,26 +25,11 @@ export default function AppleIcon() {
           justifyContent: "center",
         }}
       >
-        <svg width="160" height="160" viewBox="0 0 512 512" fill="none">
-          {/* Solid orange shield */}
-          <path
-            d="M256 64 L96 130 L96 268 Q96 380 256 478 Q416 380 416 268 L416 130 Z"
-            fill="#F97316"
-          />
-          {/* Inner black cutout — bold orange ring */}
-          <path
-            d="M256 100 L128 152 L128 268 Q128 358 256 440 Q384 358 384 268 L384 152 Z"
-            fill="#000000"
-          />
-          {/* White checkmark — long arm extends past the upper-right shield edge */}
-          <path
-            d="M168 282 L240 358 L378 188"
-            fill="none"
-            stroke="#FFFFFF"
-            strokeWidth="46"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg width="150" height="150" viewBox="0 0 512 512" fill="none">
+          {/* Left leg — white */}
+          <path d="M256 84 L122 430 L194 430 L256 168 Z" fill="#FFFFFF" />
+          {/* Right leg — canonical brand orange */}
+          <path d="M256 84 L390 430 L318 430 L256 168 Z" fill="#F97316" />
         </svg>
       </div>
     ),

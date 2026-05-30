@@ -137,7 +137,7 @@ export default async function AlternativePage({ params }: Props) {
         <div className="p-8 rounded-sm border border-[rgba(249,115,22,0.2)] bg-[#111111] mb-14 text-center">
           <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">Ready to switch to VoiceCore?</h2>
           <p className="text-[#A1A1AA] mb-6 text-sm">Join 50+ enterprise teams. No credit card required.</p>
-          <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
+          <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-7 py-3 rounded-md text-sm transition-colors">
             Get Private Access <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
