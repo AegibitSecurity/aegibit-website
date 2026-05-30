@@ -6,8 +6,9 @@ import { ImageResponse } from "next/og";
  * override it. WhatsApp / X / LinkedIn / Slack / Telegram / Discord all
  * crawl this URL when someone pastes an aegibit.com link.
  *
- * Layout: full-bleed black, centered shield mark, wordmark below in
- * orange, tagline in muted orange. Mirrors the brand reference exactly.
+ * Layout: full-bleed black, centered "A" mark (white + orange legs),
+ * AEGI/BIT wordmark below, tagline in muted orange. Mirrors the brand
+ * reference exactly.
  */
 
 export const alt = "AEGIBIT — Securing Tomorrow, Today";
@@ -40,7 +41,7 @@ export default function OpenGraphImage() {
           }}
         />
 
-        {/* Shield mark */}
+        {/* "A" mark — two angled strokes, white left + orange right */}
         <div
           style={{
             display: "flex",
@@ -49,37 +50,25 @@ export default function OpenGraphImage() {
             marginBottom: 36,
           }}
         >
-          <svg width="240" height="240" viewBox="0 0 512 512" fill="none">
-            <path
-              d="M256 64 L96 130 L96 268 Q96 380 256 478 Q416 380 416 268 L416 130 Z"
-              fill="#F97316"
-            />
-            <path
-              d="M256 100 L128 152 L128 268 Q128 358 256 440 Q384 358 384 268 L384 152 Z"
-              fill="#000000"
-            />
-            <path
-              d="M168 282 L240 358 L378 188"
-              fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="46"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+          <svg width="220" height="220" viewBox="0 0 512 512" fill="none">
+            {/* Left leg — white */}
+            <path d="M256 84 L122 430 L194 430 L256 168 Z" fill="#FFFFFF" />
+            {/* Right leg — canonical brand orange */}
+            <path d="M256 84 L390 430 L318 430 L256 168 Z" fill="#F97316" />
           </svg>
         </div>
 
-        {/* Wordmark */}
+        {/* Wordmark — AEGI white, BIT orange (the official lockup) */}
         <div
           style={{
             fontSize: 96,
             fontWeight: 300,
             letterSpacing: "0.18em",
-            color: "#F97316",
             display: "flex",
           }}
         >
-          AEGIBIT
+          <span style={{ color: "#FFFFFF" }}>AEGI</span>
+          <span style={{ color: "#F97316" }}>BIT</span>
         </div>
 
         {/* Tagline */}

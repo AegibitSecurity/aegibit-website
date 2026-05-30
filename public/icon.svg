@@ -1,32 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <!-- Black rounded square background — keeps the shield crisp on every theme -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="AEGIBIT">
+  <title>AEGIBIT</title>
+  <defs>
+    <!-- White leg: subtle top-light → soft-grey sheen, matches the brand reference -->
+    <linearGradient id="aegibit-white" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#C7C7CC"/>
+    </linearGradient>
+    <!-- Orange leg: canonical brand orange with a lighter top edge -->
+    <linearGradient id="aegibit-orange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Black rounded square — keeps the mark crisp on every browser theme -->
   <rect width="512" height="512" rx="96" fill="#000000"/>
 
-  <!-- Solid orange shield — the orange-only fill creates the iconic outline ring -->
-  <path d="M256 64
-           L96 130
-           L96 268
-           Q96 380, 256 478
-           Q416 380, 416 268
-           L416 130 Z"
-        fill="#F97316"/>
-
-  <!-- Inner cutout in black — sits inside the orange shape so the orange
-       reads as a bold ring, exactly matching the brand mark -->
-  <path d="M256 100
-           L128 152
-           L128 268
-           Q128 358, 256 440
-           Q384 358, 384 268
-           L384 152 Z"
-        fill="#000000"/>
-
-  <!-- White checkmark — bold, with the long arm sweeping up & out past
-       the upper-right of the shield (per the brand reference) -->
-  <path d="M168 282 L240 358 L378 188"
-        fill="none"
-        stroke="#FFFFFF"
-        stroke-width="46"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
+  <!-- The AEGIBIT "A": two angled strokes, no crossbar. Left leg white,
+       right leg orange. Strokes meet at a solid peak and splay open at
+       the base. stroke-* on each path softens the corners. -->
+  <path d="M256 84 L122 430 L194 430 L256 168 Z"
+        fill="url(#aegibit-white)"
+        stroke="url(#aegibit-white)" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M256 84 L390 430 L318 430 L256 168 Z"
+        fill="url(#aegibit-orange)"
+        stroke="url(#aegibit-orange)" stroke-width="14" stroke-linejoin="round"/>
 </svg>

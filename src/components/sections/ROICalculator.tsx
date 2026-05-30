@@ -129,7 +129,7 @@ export function ROICalculator() {
 
             <Link
               href="/signup"
-              className="group flex items-center justify-center gap-2 w-full bg-[#F97316] hover:bg-[#CC5500] text-white font-semibold py-3 rounded-md text-sm transition-colors"
+              className="group flex items-center justify-center gap-2 w-full bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold py-3 rounded-md text-sm transition-colors"
             >
               See Your Savings in Action — Start Free Trial
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
