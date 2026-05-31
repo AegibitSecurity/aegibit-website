@@ -1,0 +1,11 @@
+Everyone is racing to connect AI agents to their tools.
+
+Almost nobody scans what those tools can actually do.
+
+"Tool poisoning" hides a malicious instruction inside a tool description — your agent reads it, you never do.
+
+We built a free scanner for exactly this. Paste a manifest, findings in under a second.
+
+automation without security is a liability.
+
+→ aegibit.com/products/mcp-shield

@@ -1,0 +1,9 @@
+An automation you can't audit isn't an asset. It's a liability you haven't been billed for yet.
+
+The difference shows up at the worst moment: an auditor asks, a customer disputes a charge, a regulator wants the trail.
+
+For any process that touches money or data, can you answer in under five minutes, without asking a person: who did it, when, what changed, who approved it, and has anything been edited since?
+
+If the answer is "we'd have to check a few places," it's running on trust, not evidence.
+
+Trust is fine. Until the day it isn't.
