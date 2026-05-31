@@ -1,0 +1,50 @@
+name: Daily Social Post (@aegibitsec)
+
+# Emails the day's pre-rendered, pre-approved @aegibitsec post (HD image
+# + caption) to the operator each morning so it can be published with a
+# copy-paste. The cron NEVER renders — it only reads the committed PNG +
+# caption from social/queue/, so there are no headless-font failures and
+# every post shipped was reviewed when the queue was built.
+#
+# Zero new infrastructure: reuses RESEND_API_KEY. Honors the automation
+# PAUSE killswitch like the other crons.
+
+on:
+  schedule:
+    - cron: "30 2 * * *"   # 02:30 UTC = 08:00 IST, daily
+  workflow_dispatch:        # manual "send today's post now"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: social-daily
+  cancel-in-progress: false
+
+jobs:
+  killswitch:
+    runs-on: ubuntu-latest
+    outputs:
+      paused: ${{ steps.c.outputs.paused }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: c
+        run: |
+          if [ -f automation/PAUSE ]; then echo "paused=true" >> $GITHUB_OUTPUT;
+          else echo "paused=false" >> $GITHUB_OUTPUT; fi
+
+  send:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - name: Email today's post
+        env:
+          RESEND_API_KEY:      ${{ secrets.RESEND_API_KEY }}
+          TEAM_NOTIFY_EMAILS:  ${{ secrets.TEAM_NOTIFY_EMAILS }}
+          SOCIAL_NOTIFY_EMAIL: ${{ secrets.SOCIAL_NOTIFY_EMAIL }}
+        run: node automation/scripts/social-daily-send.mjs

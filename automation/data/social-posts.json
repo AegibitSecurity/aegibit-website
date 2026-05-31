@@ -1,0 +1,85 @@
+[
+  {
+    "date": "2026-06-01",
+    "badge": "AI-AGENT SECURITY",
+    "headline": [
+      { "t": "Your AI agent trusts", "size": 82 },
+      { "t": "every tool it's handed.", "size": 82 },
+      { "t": "That trust is the attack surface.", "c": "#F97316", "size": 58 }
+    ],
+    "card": { "sev": "CRITICAL", "id": "AEG-MCP-001", "title": "Tool poisoning — hidden instruction in a tool description", "meta": "scanned in 0.4s" },
+    "footer": { "text": "Free scanner — paste a manifest, findings in under a second:", "url": "aegibit.com/products/mcp-shield" },
+    "caption": "Everyone is racing to connect AI agents to their tools.\n\nAlmost nobody scans what those tools can actually do.\n\n\"Tool poisoning\" hides a malicious instruction inside a tool description — your agent reads it, you never do.\n\nWe built a free scanner for exactly this. Paste a manifest, findings in under a second.\n\nautomation without security is a liability.\n\n→ aegibit.com/products/mcp-shield"
+  },
+  {
+    "date": "2026-06-02",
+    "badge": "MULTI-BRANCH OPS",
+    "headline": [
+      { "t": "\"Where did the money", "size": 80 },
+      { "t": "go this week?\"", "size": 80 },
+      { "t": "The old answer took 5 to 9 days.", "c": "#F97316", "size": 54 }
+    ],
+    "sub": "PayMint shows every branch the same day. Captured, time-stamped, audit-ready.",
+    "footer": { "text": "See it on your own Tally CSV — free, no signup:", "url": "aegibit.com/products/paymint" },
+    "caption": "A dealer group asked us a simple question: where did the money go this week.\n\nThe old answer took 5 to 9 days, branch by branch.\n\nWith PayMint, one of our customers — 7 dealership branches in West Bengal — now sees spend same-day, reclaimed about 12 hours a week of accounts time, and was audit-ready in 30 days.\n\nNo black box. Every voucher captured, time-stamped, explainable.\n\n→ aegibit.com/products/paymint"
+  },
+  {
+    "date": "2026-06-03",
+    "badge": "BUILDING IN PUBLIC",
+    "headline": [
+      { "t": "We patched 13 CVEs", "size": 82 },
+      { "t": "on our own site in hours.", "size": 82 },
+      { "t": "7 of them high-severity. That's the baseline.", "c": "#F97316", "size": 46 }
+    ],
+    "sub": "A security shop that won't treat its own surface as hostile is selling a story.",
+    "footer": { "text": "Cybersecurity-first — in practice, not the pitch:", "url": "aegibit.com" },
+    "caption": "We treat our own site as hostile.\n\nWhen 13 Next.js CVEs landed (7 high-severity), we patched them on production within hours of disclosure.\n\nThat is not a flex. It is the baseline.\n\nIf a security-first shop won't treat its own dependency surface as an attack vector, why would you trust it with yours.\n\n→ aegibit.com"
+  },
+  {
+    "date": "2026-06-04",
+    "badge": "AI-AGENT SECURITY",
+    "headline": [
+      { "t": "The NSA just published", "size": 78 },
+      { "t": "its first MCP guidance.", "size": 78 },
+      { "t": "We shipped our checks before the memo.", "c": "#F97316", "size": 52 }
+    ],
+    "sub": "That guidance is the floor now, not the ceiling. Check your manifest in under a second.",
+    "footer": { "text": "Free MCP scanner, open source, MIT:", "url": "aegibit.com/products/mcp-shield" },
+    "caption": "On 20 May the NSA published its first official MCP security guidance.\n\nWe had already shipped our 5 checks for the same threat class, plus a free scanner anyone can run.\n\nNo victory lap. The point is simpler: that guidance is now the floor, not the ceiling.\n\nYou can check your own manifest against the top risks in under a second, free, today.\n\n→ aegibit.com/products/mcp-shield"
+  },
+  {
+    "date": "2026-06-05",
+    "badge": "BUSINESS SYSTEMS",
+    "headline": [
+      { "t": "Most \"sales problems\"", "size": 80 },
+      { "t": "are memory problems.", "c": "#F97316", "size": 80 }
+    ],
+    "sub": "The deal didn't die on price. It died in the 11 days before anyone followed up.",
+    "footer": { "text": "Operational software that doesn't forget:", "url": "aegibit.com" },
+    "caption": "Most \"sales problems\" are actually memory problems.\n\nThe deal didn't die because the pitch was weak. It died in the 11 days between \"send me a proposal\" and someone remembering to follow up.\n\nPull your last 20 lost deals. Tag each: never qualified, lost on merit, or went dark after a specific step.\n\nMost teams expect mostly \"lost on merit.\" They find mostly \"went dark.\"\n\nYou don't have a talent gap. You have one unowned handoff leaking pipeline, invisibly, every month.\n\nName the handoff. Name the owner. Set the clock."
+  },
+  {
+    "date": "2026-06-06",
+    "badge": "THE THESIS",
+    "headline": [
+      { "t": "An automation", "size": 86 },
+      { "t": "you can't audit", "size": 86 },
+      { "t": "is a liability.", "c": "#F97316", "size": 86 }
+    ],
+    "sub": "An AI agent calling tools, or an expense booked at a branch nobody's watching. Same rule.",
+    "footer": { "text": "Cybersecurity-first operational software:", "url": "aegibit.com" },
+    "caption": "An automation you can't audit isn't an asset. It's a liability you haven't been billed for yet.\n\nThe difference shows up at the worst moment: an auditor asks, a customer disputes a charge, a regulator wants the trail.\n\nFor any process that touches money or data, can you answer in under five minutes, without asking a person: who did it, when, what changed, who approved it, and has anything been edited since?\n\nIf the answer is \"we'd have to check a few places,\" it's running on trust, not evidence.\n\nTrust is fine. Until the day it isn't."
+  },
+  {
+    "date": "2026-06-07",
+    "badge": "SECURITY 101",
+    "headline": [
+      { "t": "A leaked password", "size": 82 },
+      { "t": "usually isn't stolen.", "size": 82 },
+      { "t": "It's left in plain text — in a config file.", "c": "#F97316", "size": 46 }
+    ],
+    "sub": "Keep secrets out of code. Rotate anything exposed. Scan before you ship.",
+    "footer": { "text": "One of MCP Shield's 5 checks looks for exactly this:", "url": "aegibit.com/products/mcp-shield" },
+    "caption": "A common way to leak a password is to write it down where it works perfectly: inside a config file.\n\nIt feels harmless. The app needs the key, you paste it into settings, you ship. Nothing breaks.\n\nThen that file lands in a Git repo, a backup, a screenshot, or a tool description an AI agent reads automatically. Now your live credential is in places you never meant it to be.\n\nThe fix is boring and it works:\n— Keep secrets out of code (env vars / a secrets manager).\n— Rotate any key you suspect is exposed. Assume exposed means compromised.\n— Scan before things ship, not after.\n\n→ aegibit.com/products/mcp-shield"
+  }
+]

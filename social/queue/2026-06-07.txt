@@ -1,0 +1,12 @@
+A common way to leak a password is to write it down where it works perfectly: inside a config file.
+
+It feels harmless. The app needs the key, you paste it into settings, you ship. Nothing breaks.
+
+Then that file lands in a Git repo, a backup, a screenshot, or a tool description an AI agent reads automatically. Now your live credential is in places you never meant it to be.
+
+The fix is boring and it works:
+— Keep secrets out of code (env vars / a secrets manager).
+— Rotate any key you suspect is exposed. Assume exposed means compromised.
+— Scan before things ship, not after.
+
+→ aegibit.com/products/mcp-shield

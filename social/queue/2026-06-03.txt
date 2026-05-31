@@ -1,0 +1,9 @@
+We treat our own site as hostile.
+
+When 13 Next.js CVEs landed (7 high-severity), we patched them on production within hours of disclosure.
+
+That is not a flex. It is the baseline.
+
+If a security-first shop won't treat its own dependency surface as an attack vector, why would you trust it with yours.
+
+→ aegibit.com

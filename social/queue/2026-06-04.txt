@@ -1,0 +1,9 @@
+On 20 May the NSA published its first official MCP security guidance.
+
+We had already shipped our 5 checks for the same threat class, plus a free scanner anyone can run.
+
+No victory lap. The point is simpler: that guidance is now the floor, not the ceiling.
+
+You can check your own manifest against the top risks in under a second, free, today.
+
+→ aegibit.com/products/mcp-shield
