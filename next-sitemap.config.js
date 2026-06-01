@@ -51,10 +51,13 @@ module.exports = {
   // The `config` argument is the resolved next-sitemap config; we don't
   // use it here because our paths are static + content-derived.
   additionalPaths: async () => {
-    const { alternatives } = await import("./src/content/alternatives.ts");
-    const { useCases }     = await import("./src/content/use-cases.ts");
-    const { integrations } = await import("./src/content/integrations.ts");
-    const { industries }   = await import("./src/content/industries.ts");
+    // NOTE: /alternatives, /use-cases, /integrations, /industries, /glossary
+    // are intentionally NOT added here. They are noindex'd (stale
+    // VoiceCore-era programmatic content, see C-1.6) AND listed in
+    // `exclude` above. Adding them back here created a sitemap-vs-noindex
+    // contradiction — the sitemap said "index me", the page said "don't" —
+    // which wastes crawl budget and muddies ranking signals. Surfaced by
+    // the live SEO guardian (automation/scripts/seo-live-audit.mjs).
     const { blogPosts }    = await import("./src/content/blog-posts.ts");
     const { SOLUTIONS }    = await import("./src/content/solutions.ts");
 
@@ -63,7 +66,10 @@ module.exports = {
       //    silently drops a flagship landing page from the index). ────
       { loc: "/products/paymint",      changefreq: "weekly",  priority: 0.95 },
       { loc: "/products/paymint/demo", changefreq: "monthly", priority: 0.85 },
-      { loc: "/products/voicecore",    changefreq: "weekly",  priority: 0.9  },
+      { loc: "/products/mcp-shield",   changefreq: "weekly",  priority: 0.9  },
+      { loc: "/products/aira",         changefreq: "weekly",  priority: 0.85 },
+      // /products/voicecore removed — it 308-redirects to /products/aira
+      // now (retired), so a sitemap entry would point Google at a redirect.
 
       // ── Case studies — pillar SEO authority assets. ─────────────────
       { loc: "/case-studies/nibir-motors", changefreq: "monthly", priority: 0.9 },
@@ -82,12 +88,6 @@ module.exports = {
         changefreq: "weekly",
         priority: 0.9,
       })),
-
-      // ── Programmatic content collections ────────────────────────────
-      ...alternatives.map((a) => ({ loc: `/alternatives/${a.slug}`, changefreq: "monthly", priority: 0.8 })),
-      ...useCases.map((u)     => ({ loc: `/use-cases/${u.slug}`,     changefreq: "monthly", priority: 0.8 })),
-      ...integrations.map((i) => ({ loc: `/integrations/${i.slug}`,  changefreq: "monthly", priority: 0.7 })),
-      ...industries.map((i)   => ({ loc: `/industries/${i.slug}`,    changefreq: "monthly", priority: 0.8 })),
 
       // ── Blog posts ─ lastmod from frontmatter date so Google sees
       //    honest "last modified" timestamps. Without this every blog
