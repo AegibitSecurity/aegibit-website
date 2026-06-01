@@ -19,13 +19,19 @@
       "timestamp": "2026-05-02T20:42:49.384Z",
       "success": true,
       "durationMs": 46
+    },
+    "seo-live-audit": {
+      "timestamp": "2026-06-01T15:03:41.137Z",
+      "success": true,
+      "durationMs": 6610
     }
   },
   "consecutiveFailures": {
     "generate-blog-post": 0,
     "generate-seo-pages": 0,
     "seo-audit": 0,
-    "friday-pdf": 0
+    "friday-pdf": 0,
+    "seo-live-audit": 0
   },
   "metrics": {
     "pagesGenerated": 75,

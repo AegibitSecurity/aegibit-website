@@ -1,0 +1,64 @@
+name: SEO Guardian (live)
+
+# 24/7 live SEO watchdog. Crawls the production sitemap every 6 hours,
+# audits the rendered HTML (status, canonical, noindex, JSON-LD validity,
+# titles, OG, duplicates), scores it, and alerts (Slack + email) ONLY when
+# a new error appears since the last run — regression detection, not noise.
+# Commits the report so there's a trend history.
+#
+# Reuses RESEND_API_KEY + the Slack webhook. Honors the automation PAUSE
+# killswitch. Never renders anything; pure HTTP crawl + checks.
+
+on:
+  schedule:
+    - cron: "20 */6 * * *"   # every 6h, :20 past to dodge cron pile-up
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seo-monitor
+  cancel-in-progress: false
+
+jobs:
+  killswitch:
+    runs-on: ubuntu-latest
+    outputs:
+      paused: ${{ steps.c.outputs.paused }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: c
+        run: |
+          if [ -f automation/PAUSE ]; then echo "paused=true" >> $GITHUB_OUTPUT;
+          else echo "paused=false" >> $GITHUB_OUTPUT; fi
+
+  audit:
+    needs: killswitch
+    if: needs.killswitch.outputs.paused == 'false'
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL:                   https://www.aegibit.com
+      DASHBOARD_SECRET:           ${{ secrets.DASHBOARD_SECRET }}
+      RESEND_API_KEY:             ${{ secrets.RESEND_API_KEY }}
+      TEAM_NOTIFY_EMAILS:         ${{ secrets.TEAM_NOTIFY_EMAILS }}
+      SEO_NOTIFY_EMAIL:           ${{ secrets.SEO_NOTIFY_EMAIL }}
+      SLACK_HOT_LEAD_WEBHOOK_URL: ${{ secrets.SLACK_HOT_LEAD_WEBHOOK_URL }}
+      SEO_SLACK_WEBHOOK_URL:      ${{ secrets.SEO_SLACK_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - name: Run live SEO audit
+        run: node automation/scripts/seo-live-audit.mjs
+      - name: Persist SEO report
+        run: |
+          if ! git diff --quiet automation/reports/seo/ 2>/dev/null || [ -n "$(git status --porcelain automation/reports/seo/)" ]; then
+            git config user.name "AEGIS Bot"
+            git config user.email "contact@aegibit.com"
+            git add automation/reports/seo/
+            git commit -m "chore(seo): live audit report" || true
+            git pull --rebase origin main || true
+            git push origin HEAD:main || true
+          fi
