@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     "Tally integration",
     "Zero Trust",
   ],
-  authors: [{ name: "AEGIBIT Security" }],
+  authors: [{ name: "AEGIBIT Global Consulting" }],
   applicationName: "AEGIBIT",
   openGraph: {
     type: "website",

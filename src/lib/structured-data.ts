@@ -5,7 +5,7 @@ const BASE = SITE_URL;
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "AEGIBIT Security",
+  name: "AEGIBIT Global Consulting",
   alternateName: "AEGIBIT",
   url: BASE,
   logo: `${BASE}/icon.svg`,
@@ -48,6 +48,6 @@ export function articleSchema(opts: { title: string; description: string; date: 
     description: opts.description,
     datePublished: opts.date,
     author: { "@type": "Organization", name: opts.author },
-    publisher: { "@type": "Organization", name: "AEGIBIT Security", url: BASE },
+    publisher: { "@type": "Organization", name: "AEGIBIT Global Consulting", url: BASE },
   };
 }

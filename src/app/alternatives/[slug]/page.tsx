@@ -58,7 +58,7 @@ export default async function AlternativePage({ params }: Props) {
         operatingSystem: "Web, iOS, Android",
         url: pageUrl,
         description: alt.metaDescription,
-        brand: { "@type": "Organization", name: "AEGIBIT Security", url: SITE_URL },
+        brand: { "@type": "Organization", name: "AEGIBIT Global Consulting", url: SITE_URL },
         offers: {
           "@type": "Offer",
           priceCurrency: "INR",

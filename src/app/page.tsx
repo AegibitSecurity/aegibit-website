@@ -25,7 +25,7 @@ const HOME_JSON_LD = {
     {
       "@type": "Organization",
       "@id": "https://www.aegibit.com/#org",
-      name: "AEGIBIT Security",
+      name: "AEGIBIT Global Consulting",
       alternateName: "AEGIBIT",
       url: "https://www.aegibit.com",
       logo: "https://www.aegibit.com/icon.svg",

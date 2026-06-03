@@ -51,7 +51,7 @@ export default async function IntegrationPage({ params }: Props) {
         operatingSystem: "Web, iOS, Android",
         url: pageUrl,
         description: int.description,
-        brand: { "@type": "Organization", name: "AEGIBIT Security", url: SITE_URL },
+        brand: { "@type": "Organization", name: "AEGIBIT Global Consulting", url: SITE_URL },
         offers: {
           "@type": "Offer",
           priceCurrency: "INR",

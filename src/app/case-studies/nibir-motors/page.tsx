@@ -59,12 +59,12 @@ const ARTICLE_LD = {
   dateModified: "2026-05-04",
   author: {
     "@type": "Organization",
-    name: "AEGIBIT Security",
+    name: "AEGIBIT Global Consulting",
     url: "https://www.aegibit.com",
   },
   publisher: {
     "@type": "Organization",
-    name: "AEGIBIT Security",
+    name: "AEGIBIT Global Consulting",
     logo: {
       "@type": "ImageObject",
       url: "https://www.aegibit.com/icon.svg",
