@@ -1,5 +1,5 @@
 /**
- * AEGIBIT — Programmatic SEO landing pages.
+ * AEGIBIT, Programmatic SEO landing pages.
  *
  * Each entry generates a static, indexable page at /solutions/{slug}.
  *
@@ -36,7 +36,7 @@ export interface Solution {
   description: string;
   /** Eyebrow label above the H1 (category). */
   eyebrow: string;
-  /** The H1 — should contain the keyword naturally. */
+  /** The H1, should contain the keyword naturally. */
   h1: string;
   /** Sub-headline beneath H1. ≤ 200 chars. */
   subheadline: string;
@@ -75,19 +75,19 @@ export const SOLUTIONS: Solution[] = [
     features: [
       {
         title: "Branch-coded voucher numbers",
-        body: "Every payment gets a tamper-proof voucher like KLY/0042/2627 — branch + sequence + fiscal year. Atomic per-branch counters prevent duplicates even when multiple managers submit at once.",
+        body: "Every payment gets a tamper-proof voucher like KLY/0042/2627, branch + sequence + fiscal year. Atomic per-branch counters prevent duplicates even when multiple managers submit at once.",
       },
       {
         title: "Role-based approval workflow",
-        body: "Maker → Authoriser → Accountant → Admin. Each role only sees what their job demands. Server-enforced rules — not a UI gate that can be bypassed.",
+        body: "Maker → Authoriser → Accountant → Admin. Each role only sees what their job demands. Server-enforced rules, not a UI gate that can be bypassed.",
       },
       {
         title: "Tally-ready CSV exports",
-        body: "Eleven-column accounting CSVs map straight to Tally and Power BI. Cost centers, voucher types, amounts — all pre-formatted. Month-end goes from days to minutes.",
+        body: "Eleven-column accounting CSVs map straight to Tally and Power BI. Cost centers, voucher types, amounts, all pre-formatted. Month-end goes from days to minutes.",
       },
       {
         title: "Real-time multi-branch sync",
-        body: "Submit a voucher in Kalyani branch — head office sees it in 200 ms. Works offline; queued writes flush the moment connectivity returns.",
+        body: "Submit a voucher in Kalyani branch, head office sees it in 200 ms. Works offline; queued writes flush the moment connectivity returns.",
       },
     ],
     testimonialAngle:
@@ -95,11 +95,11 @@ export const SOLUTIONS: Solution[] = [
     faqs: [
       {
         q: "Can PayMint handle multiple dealership branches under one head office?",
-        a: "Yes. PayMint is built multi-branch-first. Each branch operates independently for day-to-day vouchering, while head-office finance sees a consolidated real-time view of every transaction across every branch. Branch managers cannot see other branches' data — server-enforced via Firestore Security Rules.",
+        a: "Yes. PayMint is built multi-branch-first. Each branch operates independently for day-to-day vouchering, while head-office finance sees a consolidated real-time view of every transaction across every branch. Branch managers cannot see other branches' data, server-enforced via Firestore Security Rules.",
       },
       {
         q: "Does PayMint integrate with Tally?",
-        a: "Yes. PayMint exports your monthly transactions as a Tally-ready CSV with all 11 standard accounting columns pre-mapped — voucher type, voucher number, date, ledger name, amount, cost center, narration, and more. Drop the file straight into Tally Prime; no manual cleanup required.",
+        a: "Yes. PayMint exports your monthly transactions as a Tally-ready CSV with all 11 standard accounting columns pre-mapped, voucher type, voucher number, date, ledger name, amount, cost center, narration, and more. Drop the file straight into Tally Prime; no manual cleanup required.",
       },
       {
         q: "What happens if a branch is offline?",
@@ -107,7 +107,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "How long does deployment take for a new dealership?",
-        a: "First branch live in 24-48 hours after the demo. Each additional branch takes about 15 minutes — we onboard your branch managers, configure their role, and they start submitting expenses immediately. Full multi-branch rollout typically completes in under a week.",
+        a: "First branch live in 24-48 hours after the demo. Each additional branch takes about 15 minutes, we onboard your branch managers, configure their role, and they start submitting expenses immediately. Full multi-branch rollout typically completes in under a week.",
       },
       {
         q: "Is PayMint secure enough for financial data?",
@@ -124,13 +124,13 @@ export const SOLUTIONS: Solution[] = [
     description:
       "Reconcile petty cash across every branch in real time. Audit-grade logs, branch-coded vouchers, no spreadsheets. Built for multi-location SMEs in India.",
     eyebrow: "Petty Cash Control",
-    h1: "Multi-Branch Petty Cash Management — Reconciled in Real Time.",
+    h1: "Multi-Branch Petty Cash Management, Reconciled in Real Time.",
     subheadline:
-      "Stop chasing branch managers for receipts at month-end. PayMint captures every petty-cash voucher the moment it's spent — across every branch, on every device, with full audit trail.",
+      "Stop chasing branch managers for receipts at month-end. PayMint captures every petty-cash voucher the moment it's spent, across every branch, on every device, with full audit trail.",
     audience:
       "Multi-location businesses where head office finance is responsible for petty cash across branches they cannot physically visit.",
     painPoints: [
-      "Branch managers submit petty cash vouchers in WhatsApp / paper / Excel — head office reconciles manually at month-end",
+      "Branch managers submit petty cash vouchers in WhatsApp / paper / Excel, head office reconciles manually at month-end",
       "Receipts get lost, photos go missing, totals don't tie out",
       "No way to know if a branch is over-spending until the books close",
       "Audits take days because there's no single source of truth",
@@ -142,15 +142,15 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Real-time branch-level dashboard",
-        body: "Head office sees today's, this week's, this month's petty-cash spend per branch — live. Set a threshold per branch; get notified the moment it's breached.",
+        body: "Head office sees today's, this week's, this month's petty-cash spend per branch, live. Set a threshold per branch; get notified the moment it's breached.",
       },
       {
         title: "Append-only audit log",
-        body: "Every action — create, edit, approve, reject, delete — is captured with actor UID and timestamp. No one can erase their own history. Audit-ready by design.",
+        body: "Every action, create, edit, approve, reject, delete, is captured with actor UID and timestamp. No one can erase their own history. Audit-ready by design.",
       },
       {
         title: "Soft-delete safety net",
-        body: "Vouchers are never destroyed on user action — they're tombstoned. Recover from accidental deletes or bad-actor edits with a single click.",
+        body: "Vouchers are never destroyed on user action, they're tombstoned. Recover from accidental deletes or bad-actor edits with a single click.",
       },
     ],
     testimonialAngle:
@@ -158,7 +158,7 @@ export const SOLUTIONS: Solution[] = [
     faqs: [
       {
         q: "How does PayMint prevent duplicate or fraudulent petty-cash entries?",
-        a: "Every voucher number is issued by an atomic transaction on a per-branch counter — concurrent submissions cannot collide on the same number. Once a voucher is approved and paid, the number is permanent and visible in every audit log entry. Editing requires elevated permissions and is itself logged.",
+        a: "Every voucher number is issued by an atomic transaction on a per-branch counter, concurrent submissions cannot collide on the same number. Once a voucher is approved and paid, the number is permanent and visible in every audit log entry. Editing requires elevated permissions and is itself logged.",
       },
       {
         q: "Can branch staff submit expenses on a basic Android phone?",
@@ -185,23 +185,23 @@ export const SOLUTIONS: Solution[] = [
     keyword: "tally compatible expense tracking software",
     title: "Tally-Ready Expense Tracking Software for India | PayMint",
     description:
-      "Export every expense as a Tally-ready CSV with 11 pre-mapped columns. Cost centers, voucher types, amounts — all formatted. Month-end in minutes.",
+      "Export every expense as a Tally-ready CSV with 11 pre-mapped columns. Cost centers, voucher types, amounts, all formatted. Month-end in minutes.",
     eyebrow: "Tally Integration",
-    h1: "Tally-Ready Expense Tracking — Month-End in Minutes, Not Days.",
+    h1: "Tally-Ready Expense Tracking, Month-End in Minutes, Not Days.",
     subheadline:
-      "Eleven-column accounting CSVs that drop straight into Tally Prime. Voucher type, voucher number, ledger name, cost center, amount — all pre-mapped, all clean.",
+      "Eleven-column accounting CSVs that drop straight into Tally Prime. Voucher type, voucher number, ledger name, cost center, amount, all pre-mapped, all clean.",
     audience:
       "Indian SMEs and dealerships whose accountants use Tally Prime and lose days every month to manual data entry.",
     painPoints: [
-      "Accountant manually keys vouchers from receipts into Tally — slow and error-prone",
+      "Accountant manually keys vouchers from receipts into Tally, slow and error-prone",
       "Branch and cost-center mappings drift between Excel and Tally",
-      "No standard voucher numbering — entries get duplicated or skipped",
+      "No standard voucher numbering, entries get duplicated or skipped",
       "Reconciliation depends on one accountant's spreadsheet skills",
     ],
     features: [
       {
         title: "11-column Tally CSV mapping",
-        body: "Voucher Type · Voucher Number · Date · Reference · Narration · Cost Center · Ledger Name · Amount · Tax · Approver · Source — every column matches Tally Prime's standard import schema.",
+        body: "Voucher Type · Voucher Number · Date · Reference · Narration · Cost Center · Ledger Name · Amount · Tax · Approver · Source, every column matches Tally Prime's standard import schema.",
       },
       {
         title: "Cost-center auto-tagging",
@@ -209,11 +209,11 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Idempotent voucher numbers",
-        body: "Once assigned, a voucher number never changes — re-export the same month and Tally won't see duplicates. Safe to regenerate as often as needed.",
+        body: "Once assigned, a voucher number never changes, re-export the same month and Tally won't see duplicates. Safe to regenerate as often as needed.",
       },
       {
         title: "Power BI dashboards",
-        body: "Same CSV opens in Power BI for executive dashboards — branch comparison, expense category breakdown, month-over-month trend, all live.",
+        body: "Same CSV opens in Power BI for executive dashboards, branch comparison, expense category breakdown, month-over-month trend, all live.",
       },
     ],
     testimonialAngle:
@@ -221,7 +221,7 @@ export const SOLUTIONS: Solution[] = [
     faqs: [
       {
         q: "Which Tally version does PayMint export work with?",
-        a: "Tally Prime (current version) and Tally ERP 9. The CSV format follows Tally's standard import schema — Voucher Type, Voucher Number, Date, Reference, Narration, Cost Center, Ledger, Amount. Verified working across both.",
+        a: "Tally Prime (current version) and Tally ERP 9. The CSV format follows Tally's standard import schema, Voucher Type, Voucher Number, Date, Reference, Narration, Cost Center, Ledger, Amount. Verified working across both.",
       },
       {
         q: "Do we need to map ledger names manually for every voucher?",
@@ -233,7 +233,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "Can we re-export a previous month if we missed something?",
-        a: "Yes, anytime. Voucher numbers are immutable, so re-exports are idempotent — Tally won't see duplicates. Many customers re-run exports monthly as a check.",
+        a: "Yes, anytime. Voucher numbers are immutable, so re-exports are idempotent, Tally won't see duplicates. Many customers re-run exports monthly as a check.",
       },
       {
         q: "Is there a Power BI integration too?",
@@ -248,9 +248,9 @@ export const SOLUTIONS: Solution[] = [
     keyword: "branch-coded voucher generation software",
     title: "Branch-Coded Voucher Generation Software | PayMint",
     description:
-      "Tamper-proof voucher numbers like KLY/0042/2627 — branch, sequence, fiscal year. Atomic per-branch counters. Zero duplicates, ever.",
+      "Tamper-proof voucher numbers like KLY/0042/2627, branch, sequence, fiscal year. Atomic per-branch counters. Zero duplicates, ever.",
     eyebrow: "Voucher System",
-    h1: "Branch-Coded Voucher Generation — Tamper-Proof, Audit-Ready.",
+    h1: "Branch-Coded Voucher Generation, Tamper-Proof, Audit-Ready.",
     subheadline:
       "Every payment gets a unique voucher number stamped with branch code, sequence, and fiscal year. Atomic transactions guarantee zero collisions even under concurrent load.",
     audience:
@@ -259,7 +259,7 @@ export const SOLUTIONS: Solution[] = [
       "Manual voucher numbering leads to duplicates, gaps, and disputes",
       "Branch-level numbering can't be reconciled at head office",
       "Re-generating PDFs creates conflicting numbers for the same payment",
-      "Auditors flag the lack of immutability — voucher numbers shouldn't be editable",
+      "Auditors flag the lack of immutability, voucher numbers shouldn't be editable",
     ],
     features: [
       {
@@ -268,7 +268,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Atomic per-branch counters",
-        body: "Issued inside Firestore transactions — concurrent makers across branches can never collide on the same number. Sequence is gap-free per branch.",
+        body: "Issued inside Firestore transactions, concurrent makers across branches can never collide on the same number. Sequence is gap-free per branch.",
       },
       {
         title: "Idempotent re-downloads",
@@ -284,7 +284,7 @@ export const SOLUTIONS: Solution[] = [
     faqs: [
       {
         q: "Why branch-coded vouchers instead of a single global counter?",
-        a: "Branch-coded numbers are instantly readable — auditors and ops staff can tell which branch issued a voucher just by looking at it. They also let each branch operate independently when offline; head office reconciles them later. A single global counter creates a write bottleneck and hides branch-level provenance.",
+        a: "Branch-coded numbers are instantly readable, auditors and ops staff can tell which branch issued a voucher just by looking at it. They also let each branch operate independently when offline; head office reconciles them later. A single global counter creates a write bottleneck and hides branch-level provenance.",
       },
       {
         q: "What if two branches submit at the exact same millisecond?",
@@ -300,7 +300,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "Can I customize the branch codes?",
-        a: "Yes. Branch codes are configured during onboarding — typically 3-letter abbreviations (KLY, BHP, CKD). They're tied to the branch record and used across vouchers, exports, and dashboards consistently.",
+        a: "Yes. Branch codes are configured during onboarding, typically 3-letter abbreviations (KLY, BHP, CKD). They're tied to the branch record and used across vouchers, exports, and dashboards consistently.",
       },
     ],
   },
@@ -313,9 +313,9 @@ export const SOLUTIONS: Solution[] = [
     description:
       "Maker → Authoriser → Accountant → Admin. Server-enforced roles, real-time queue, mobile-first approvals. Stop chasing managers on WhatsApp.",
     eyebrow: "Approval Workflows",
-    h1: "Expense Approval Workflow Software — One Queue, Zero Chasing.",
+    h1: "Expense Approval Workflow Software, One Queue, Zero Chasing.",
     subheadline:
-      "Maker submits, authoriser approves, accountant pays, admin oversees. Each role sees only their queue. Server-enforced — not a UI gate.",
+      "Maker submits, authoriser approves, accountant pays, admin oversees. Each role sees only their queue. Server-enforced, not a UI gate.",
     audience:
       "Indian businesses where approvers are getting WhatsApp pings, photo forwards, and email forwards instead of one clean queue.",
     painPoints: [
@@ -327,7 +327,7 @@ export const SOLUTIONS: Solution[] = [
     features: [
       {
         title: "5-role workflow out of the box",
-        body: "Maker · Authoriser · Accountant · Admin · Super Admin. Each role has scoped permissions enforced by server rules — even a compromised browser cannot bypass them.",
+        body: "Maker · Authoriser · Accountant · Admin · Super Admin. Each role has scoped permissions enforced by server rules, even a compromised browser cannot bypass them.",
       },
       {
         title: "Mobile-first approval queue",
@@ -339,7 +339,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Branch-scoped visibility",
-        body: "Authorisers at Kalyani branch see only Kalyani vouchers. Service-GMs see only service vouchers. Server-enforced — auditor-friendly by design.",
+        body: "Authorisers at Kalyani branch see only Kalyani vouchers. Service-GMs see only service vouchers. Server-enforced, auditor-friendly by design.",
       },
     ],
     testimonialAngle:
@@ -347,7 +347,7 @@ export const SOLUTIONS: Solution[] = [
     faqs: [
       {
         q: "Can we customize the approval chain for our company?",
-        a: "Yes. Within the 5 standard roles, every customer configures their own escalation logic — e.g., 'vouchers above ₹50,000 also need GM approval' or 'fuel vouchers go straight to accountant'. We help configure during onboarding.",
+        a: "Yes. Within the 5 standard roles, every customer configures their own escalation logic, e.g., 'vouchers above ₹50,000 also need GM approval' or 'fuel vouchers go straight to accountant'. We help configure during onboarding.",
       },
       {
         q: "What happens if an approver is on leave?",
@@ -355,7 +355,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "Do approvers need a desktop?",
-        a: "No. The entire approval flow is designed mobile-first. Most of our customers' approvers do 100% of approvals on their phones — checking the queue while traveling, approving in seconds.",
+        a: "No. The entire approval flow is designed mobile-first. Most of our customers' approvers do 100% of approvals on their phones, checking the queue while traveling, approving in seconds.",
       },
       {
         q: "Can I revoke an approval if I made a mistake?",
@@ -374,9 +374,9 @@ export const SOLUTIONS: Solution[] = [
     keyword: "real-time multi-branch expense tracker",
     title: "Real-Time Multi-Branch Expense Tracker | PayMint",
     description:
-      "Submit a voucher in any branch — head office sees it in 200ms. Real-time sync across every device, 24/7. Works offline, syncs automatically.",
+      "Submit a voucher in any branch, head office sees it in 200ms. Real-time sync across every device, 24/7. Works offline, syncs automatically.",
     eyebrow: "Real-Time Sync",
-    h1: "Real-Time Multi-Branch Expense Tracker — 24/7, Every Device.",
+    h1: "Real-Time Multi-Branch Expense Tracker, 24/7, Every Device.",
     subheadline:
       "Built on Firebase real-time streams. The moment a maker in Kalyani submits, every approver in head office sees it. Works offline; syncs the second connectivity returns.",
     audience:
@@ -398,7 +398,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Live executive dashboard",
-        body: "Head office sees today's, this week's, this month's spend per branch — all live, all the time. Filters update without page reloads.",
+        body: "Head office sees today's, this week's, this month's spend per branch, all live, all the time. Filters update without page reloads.",
       },
       {
         title: "Real-time push notifications",
@@ -418,11 +418,11 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "Will PayMint slow down as we add more branches?",
-        a: "No. Firebase scales horizontally — each branch is an independent partition. We've stress-tested with 50+ branches submitting concurrently with no measurable latency degradation.",
+        a: "No. Firebase scales horizontally, each branch is an independent partition. We've stress-tested with 50+ branches submitting concurrently with no measurable latency degradation.",
       },
       {
         q: "Is the real-time data secure across branches?",
-        a: "Yes. Each branch's data is isolated by Firestore Security Rules — server-enforced. A compromised browser at branch A still cannot read branch B's data. Authorised cross-branch viewers (head office, super admin) see what their role permits.",
+        a: "Yes. Each branch's data is isolated by Firestore Security Rules, server-enforced. A compromised browser at branch A still cannot read branch B's data. Authorised cross-branch viewers (head office, super admin) see what their role permits.",
       },
       {
         q: "Can I get push notifications on mobile?",
@@ -439,13 +439,13 @@ export const SOLUTIONS: Solution[] = [
     description:
       "Append-only audit log. Every action recorded with actor UID and timestamp. Server-enforced rules. Forensics-ready, day one. Built by a cybersecurity company.",
     eyebrow: "Audit & Compliance",
-    h1: "Audit-Grade Expense Tracking — Forensics-Ready, Day One.",
+    h1: "Audit-Grade Expense Tracking, Forensics-Ready, Day One.",
     subheadline:
-      "Every action recorded immutably. Every permission server-enforced. Every transaction traceable to actor and timestamp. Built by a cybersecurity company — not as a feature, as a baseline.",
+      "Every action recorded immutably. Every permission server-enforced. Every transaction traceable to actor and timestamp. Built by a cybersecurity company, not as a feature, as a baseline.",
     audience:
       "Finance heads, compliance officers, and CFOs who need expense data that holds up under audit, due-diligence, or legal scrutiny.",
     painPoints: [
-      "Spreadsheets are editable — no proof of who changed what when",
+      "Spreadsheets are editable, no proof of who changed what when",
       "Email approval chains are forgeable and unsearchable",
       "Auditors demand provenance you can't produce",
       "One bad actor with admin access can rewrite history",
@@ -453,15 +453,15 @@ export const SOLUTIONS: Solution[] = [
     features: [
       {
         title: "Append-only audit log",
-        body: "Every create, edit, approve, reject, pay action is recorded with actor UID and server timestamp. No one — including super admins — can erase their own history. Server rules block tampering.",
+        body: "Every create, edit, approve, reject, pay action is recorded with actor UID and server timestamp. No one, including super admins, can erase their own history. Server rules block tampering.",
       },
       {
         title: "Server-enforced permissions",
-        body: "All access control lives in Firestore Security Rules — not the client. A compromised browser cannot read another branch's data even if its JavaScript is rewritten.",
+        body: "All access control lives in Firestore Security Rules, not the client. A compromised browser cannot read another branch's data even if its JavaScript is rewritten.",
       },
       {
         title: "Atomic, idempotent operations",
-        body: "Voucher numbers, counters, payment status — all issued inside transactions. Concurrent operations never collide; replay attacks never produce duplicates.",
+        body: "Voucher numbers, counters, payment status, all issued inside transactions. Concurrent operations never collide; replay attacks never produce duplicates.",
       },
       {
         title: "Soft-delete with full recovery",
@@ -502,7 +502,7 @@ export const SOLUTIONS: Solution[] = [
     description:
       "Track fuel spend per branch, per vehicle, per driver. Real-time dashboards, instant approvals, Tally exports. Built for dealerships and fleet operators.",
     eyebrow: "Fleet & Fuel",
-    h1: "Fuel Expense Management — Per Branch, Per Vehicle, Per Driver.",
+    h1: "Fuel Expense Management, Per Branch, Per Vehicle, Per Driver.",
     subheadline:
       "Capture every fuel bill the moment it's spent. See real-time fuel cost per branch, identify outliers, and export to Tally without retyping.",
     audience:
@@ -510,7 +510,7 @@ export const SOLUTIONS: Solution[] = [
     painPoints: [
       "Drivers submit paper bills that go missing or get inflated",
       "No way to compare fuel cost per kilometer across vehicles",
-      "Branch managers approve without seeing the trend — overspend goes unnoticed",
+      "Branch managers approve without seeing the trend, overspend goes unnoticed",
       "Reconciling fuel bills with vehicle logs is a manual nightmare",
     ],
     features: [
@@ -532,7 +532,7 @@ export const SOLUTIONS: Solution[] = [
       },
     ],
     testimonialAngle:
-      "We caught two vehicles with 30% inflated fuel bills in the first month — paid for the system three times over.",
+      "We caught two vehicles with 30% inflated fuel bills in the first month, paid for the system three times over.",
     faqs: [
       {
         q: "Can I link fuel vouchers to specific vehicles?",
@@ -540,7 +540,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "Does PayMint compute cost per kilometer automatically?",
-        a: "Yes, when odometer readings are captured. We compute cost-per-km between consecutive fills and flag vehicles whose CPK suddenly changes — early signal of pilferage or maintenance issue.",
+        a: "Yes, when odometer readings are captured. We compute cost-per-km between consecutive fills and flag vehicles whose CPK suddenly changes, early signal of pilferage or maintenance issue.",
       },
       {
         q: "What if fuel is purchased on a fleet card vs cash?",
@@ -565,13 +565,13 @@ export const SOLUTIONS: Solution[] = [
     description:
       "Track parts, labour, and consumables per workshop, per job. Real-time profitability, branch-level visibility, audit-grade logs.",
     eyebrow: "Service & Workshop",
-    h1: "Workshop Expense Management — Per Job, Per Branch, Per Margin.",
+    h1: "Workshop Expense Management, Per Job, Per Branch, Per Margin.",
     subheadline:
       "Capture every parts bill, every consumable, every external invoice the moment it hits the workshop. See real workshop margin in real time.",
     audience:
       "Multi-branch automotive service centers and workshops that need to know which jobs make money and which leak.",
     painPoints: [
-      "Parts and consumables get expensed without job tagging — margin invisible",
+      "Parts and consumables get expensed without job tagging, margin invisible",
       "Branch workshops over-spend on consumables and head office only learns at month-end",
       "External labour invoices pile up, get approved late, payment terms slip",
       "No clean reconciliation between workshop cost and customer billing",
@@ -628,7 +628,7 @@ export const SOLUTIONS: Solution[] = [
     description:
       "Built for Indian SMEs scaling past 3 branches. Real-time visibility, role-based approvals, Tally exports. Deploy in days, not months.",
     eyebrow: "For Indian SMEs",
-    h1: "SME Expense Automation — Built for the Way India Actually Works.",
+    h1: "SME Expense Automation, Built for the Way India Actually Works.",
     subheadline:
       "Multi-branch, multi-role, Tally-native, mobile-first. Designed for the Indian SME owner who can't afford SAP and is tired of WhatsApp finance.",
     audience:
@@ -662,7 +662,7 @@ export const SOLUTIONS: Solution[] = [
     faqs: [
       {
         q: "Is PayMint affordable for an Indian SME?",
-        a: "Yes — we explicitly priced PayMint to be accessible to multi-branch SMEs that have outgrown Excel but can't justify SAP. Pricing scales with the number of branches; book a demo for a tailored quote.",
+        a: "Yes, we explicitly priced PayMint to be accessible to multi-branch SMEs that have outgrown Excel but can't justify SAP. Pricing scales with the number of branches; book a demo for a tailored quote.",
       },
       {
         q: "How long does deployment take for a 5-branch SME?",
@@ -670,7 +670,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "Do my staff need training?",
-        a: "Branch staff (makers): under 5 minutes — the form is intentionally simple. Approvers: under 15 minutes. We provide a Bengali user manual on request and train all key roles during onboarding.",
+        a: "Branch staff (makers): under 5 minutes, the form is intentionally simple. Approvers: under 15 minutes. We provide a Bengali user manual on request and train all key roles during onboarding.",
       },
       {
         q: "What if I outgrow PayMint?",
@@ -678,7 +678,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "Can I keep my existing accountant?",
-        a: "Yes — that's the design intent. PayMint exports clean Tally CSVs; your accountant continues using Tally Prime exactly as they always have, just with cleaner inputs and no manual data entry.",
+        a: "Yes, that's the design intent. PayMint exports clean Tally CSVs; your accountant continues using Tally Prime exactly as they always have, just with cleaner inputs and no manual data entry.",
       },
     ],
   },
@@ -689,9 +689,9 @@ export const SOLUTIONS: Solution[] = [
     keyword: "automotive dealer petty cash management app",
     title: "Automotive Dealer Petty Cash App | PayMint",
     description:
-      "Mobile-first petty cash management for car and bike dealers. Branch managers submit, head office approves, accountant pays — all in real time.",
+      "Mobile-first petty cash management for car and bike dealers. Branch managers submit, head office approves, accountant pays, all in real time.",
     eyebrow: "Dealer Operations",
-    h1: "Automotive Dealer Petty Cash — On Your Phone, Across Every Branch.",
+    h1: "Automotive Dealer Petty Cash, On Your Phone, Across Every Branch.",
     subheadline:
       "Built for the way Indian car and bike dealerships actually operate: branch managers on phones, head office in real-time visibility, accountants exporting to Tally.",
     audience:
@@ -754,7 +754,7 @@ export const SOLUTIONS: Solution[] = [
     description:
       "Give every branch financial autonomy. Give head office real-time oversight. PayMint reconciles both with audit-grade logs and instant Tally exports.",
     eyebrow: "Branch Finance",
-    h1: "Branch-Level Finance Control — Autonomy + Oversight, Done Right.",
+    h1: "Branch-Level Finance Control, Autonomy + Oversight, Done Right.",
     subheadline:
       "Branches operate independently for daily finance. Head office sees everything live. Audit trail captures every action. The classic tension, finally solved.",
     audience:
@@ -767,7 +767,7 @@ export const SOLUTIONS: Solution[] = [
     ],
     features: [
       {
-        title: "Branch operates independently — head office sees everything",
+        title: "Branch operates independently, head office sees everything",
         body: "Each branch has its own voucher numbering, its own petty-cash flow, its own approver. Head office gets a real-time consolidated view without injecting itself into every approval.",
       },
       {
@@ -776,7 +776,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Cross-branch reporting in two clicks",
-        body: "'Show me fuel spend by branch this month, ranked' — two clicks. 'Compare petty cash discipline across branches over 6 months' — two clicks.",
+        body: "'Show me fuel spend by branch this month, ranked', two clicks. 'Compare petty cash discipline across branches over 6 months', two clicks.",
       },
       {
         title: "Single audit log across all branches",
@@ -792,11 +792,11 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         q: "Can a head-office user override a branch decision?",
-        a: "Yes — super admin can revoke approvals, restore deleted vouchers, or reassign queues. Every override action is itself logged in the audit trail with reason captured.",
+        a: "Yes, super admin can revoke approvals, restore deleted vouchers, or reassign queues. Every override action is itself logged in the audit trail with reason captured.",
       },
       {
         q: "Do branches see each other's data?",
-        a: "By default, no — each branch is isolated. Optional 'peer visibility' modes can be configured for specific use cases (e.g., regional managers seeing all branches in their region).",
+        a: "By default, no, each branch is isolated. Optional 'peer visibility' modes can be configured for specific use cases (e.g., regional managers seeing all branches in their region).",
       },
       {
         q: "Can we add a branch later without disrupting existing ones?",

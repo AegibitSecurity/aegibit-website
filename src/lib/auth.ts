@@ -82,7 +82,7 @@ export async function getAdminSession(): Promise<AdminSession | null> {
  *   if (guard) return guard;
  *
  * Returns `null` when authorized, or a 401 NextResponse when not.
- * Never throws — caller doesn't need a try/catch around it.
+ * Never throws, caller doesn't need a try/catch around it.
  */
 export async function requireAdmin(): Promise<NextResponse | null> {
   try {

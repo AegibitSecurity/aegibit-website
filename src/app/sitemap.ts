@@ -9,7 +9,7 @@ import { blogPosts } from "@/content/blog-posts";
  *
  * Replaces the previous next-sitemap static-file generation. That
  * approach wrote public/sitemap.xml at build, but on Vercel the
- * post-build write never reached the served deployment — production
+ * post-build write never reached the served deployment, production
  * served a STALE committed public/sitemap.xml frozen at 2026-05-04,
  * silently missing every page shipped since (status, changelog,
  * careers, press, the MCP Shield scanner, …) and still advertising
@@ -17,7 +17,7 @@ import { blogPosts } from "@/content/blog-posts";
  * (automation/scripts/seo-live-audit.mjs).
  *
  * A native sitemap route is served by Next directly, so it can never
- * go stale — it always reflects the current code + content.
+ * go stale, it always reflects the current code + content.
  *
  * What's IN: every indexable surface.
  * What's OUT (by deliberate omission): internal/auth (/dashboard,
@@ -26,7 +26,7 @@ import { blogPosts } from "@/content/blog-posts";
  * /use-cases/*, /industries/*, /integrations/*, /glossary/*) plus the
  * retired /products/voicecore (which 308-redirects to /products/aira).
  * Listing a noindex'd or redirecting URL here is a sitemap-vs-noindex
- * contradiction that wastes crawl budget — so they stay out.
+ * contradiction that wastes crawl budget, so they stay out.
  */
 
 export const dynamic = "force-static";
@@ -87,7 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry(`/solutions/${s.slug}`, 0.9, "weekly"),
   );
 
-  // Blog posts — lastModified from frontmatter date (honest freshness)
+  // Blog posts, lastModified from frontmatter date (honest freshness)
   const blog: SitemapEntry[] = blogPosts.map((p) =>
     entry(`/blog/${p.slug}`, 0.9, "weekly", new Date(p.date)),
   );

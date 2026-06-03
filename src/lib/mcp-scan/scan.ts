@@ -1,5 +1,5 @@
 /**
- * MCP Shield web-scanner — dispatcher.
+ * MCP Shield web-scanner, dispatcher.
  *
  * One entry point: `scanManifest(raw)` takes a JSON string, parses it
  * into either a tool manifest or a server config, runs the
@@ -8,7 +8,7 @@
  * Findings are sorted by severity (critical → info) then by check_id
  * so the operator sees the highest-leverage items first.
  *
- * Pure function — no I/O, no globals, no network. The HTTP layer
+ * Pure function, no I/O, no globals, no network. The HTTP layer
  * (src/app/api/mcp-scan/route.ts) is responsible for auth, rate
  * limiting, payload caps, and observability; this module is purely
  * "given a manifest, return findings."

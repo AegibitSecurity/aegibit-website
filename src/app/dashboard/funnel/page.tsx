@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Users, MousePointerClick, FileText, CheckCircle2, TrendingDown, Sparkles } from "lucide-react";
 
 /**
- * /dashboard/funnel — Conversion funnel intelligence.
+ * /dashboard/funnel, Conversion funnel intelligence.
  *
  * Reads /api/admin/funnel and renders:
  *   1. Five-step funnel: visitors → CTA-click → form-start → form-submit → lead

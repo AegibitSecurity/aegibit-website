@@ -17,12 +17,12 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  *   - This is NOT a "tracking-cookie consent gate" of the kind GDPR-
  *     strict EU sites use. AEGIBIT does not currently set advertising
  *     or cross-site tracking cookies (see /privacy for the full
- *     inventory — vc_return, aegibit_session, sessionStorage UTM,
+ *     inventory, vc_return, aegibit_session, sessionStorage UTM,
  *     localStorage visitor-id; no Google Analytics, no Facebook Pixel).
  *     A heavy opt-in gate would be misleading about what we actually do.
  *   - This is also NOT a "by clicking you consent to processing"
  *     gate. The page tells visitors what we do and where to read
- *     more — explicit-notice model, which matches India's DPDP Act
+ *     more, explicit-notice model, which matches India's DPDP Act
  *     2023 requirement for clear disclosure of processing purposes.
  *
  * Storage:
@@ -41,7 +41,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  *     named landmark, not random floating content.
  *   - Dismiss button has aria-label="Acknowledge and close cookie notice".
  *   - First Tab inside the banner lands on the "Got it" button, then
- *     the privacy links, then dismiss — natural reading order.
+ *     the privacy links, then dismiss, natural reading order.
  *   - prefers-reduced-motion respected globally (PR #98) so the
  *     slide-in animation is suppressed for users who set it.
  */
@@ -49,7 +49,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 const STORAGE_KEY = "aegibit_cookie_notice_v1";
 
 /**
- * Lazy-initializer probe — reads the acknowledgement flag once during
+ * Lazy-initializer probe, reads the acknowledgement flag once during
  * the very first render. Mounted via MarketingChrome's `ssr: false`
  * dynamic import, so `window` is guaranteed to exist here. If storage
  * is blocked (private mode / embedded webviews) we choose to *show*
@@ -71,7 +71,7 @@ export function CookieNotice() {
   const [visible, setVisible] = useState(false);
 
   // 1.2s delay so the banner doesn't compete with first-paint animation
-  // budget on the hero. setVisible runs inside a setTimeout callback —
+  // budget on the hero. setVisible runs inside a setTimeout callback,
   // asynchronous, so it does not trigger react-hooks/set-state-in-effect.
   useEffect(() => {
     if (!shouldShow) return;
@@ -83,7 +83,7 @@ export function CookieNotice() {
     try {
       window.localStorage.setItem(STORAGE_KEY, String(Date.now()));
     } catch {
-      // Storage blocked — accepting the dismissal is still the right
+      // Storage blocked, accepting the dismissal is still the right
       // UX even if we can't persist; the visitor said they understand.
     }
     setVisible(false);

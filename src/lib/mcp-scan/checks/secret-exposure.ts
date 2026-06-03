@@ -1,12 +1,12 @@
 /**
- * AEG-MCP-003 — Secret Exposure Detection.
+ * AEG-MCP-003, Secret Exposure Detection.
  *
  * Faithful TypeScript port of
  *   scanner/aegibit_mcp_shield/checks/secret_exposure.py
  *
  * Detects API keys, access tokens, private keys, and other
  * credential material accidentally embedded in MCP tool
- * definitions — most often in tool descriptions, parameter examples,
+ * definitions, most often in tool descriptions, parameter examples,
  * default values, or fixed enum values.
  *
  * Pattern coverage mirrors the Python list verbatim (commit-pinned
@@ -75,7 +75,7 @@ function scanTool(tool: ToolDefinition): Finding[] {
     }
   }
 
-  // 2. Deep scan of the raw object — picks up default values, examples,
+  // 2. Deep scan of the raw object, picks up default values, examples,
   //    enum values, parameter descriptions.
   for (const hit of scanObject(tool.raw)) {
     out.push(makeFinding(tool.name, hit, hit.where));
@@ -152,14 +152,14 @@ function makeFinding(toolName: string, hit: SecretHit, where: string): Finding {
     detail:
       `Tool ${q(toolName)} contains what looks like a ${hit.pattern.label}, ` +
       `${where}: ${q(redact(hit.matched))}. Manifests ship to every client ` +
-      `that loads the tool — every embedded credential is publicly exposed.`,
+      `that loads the tool, every embedded credential is publicly exposed.`,
     remediation:
       "Rotate the exposed credential immediately. Replace the value in the " +
       "manifest with a placeholder or environment-variable reference. Add a " +
       "pre-commit scan (gitleaks, trufflehog) to your repo so this can't " +
       "recur.",
     cwe: "CWE-798",
-    owasp: "A07:2021 — Identification and Authentication Failures",
+    owasp: "A07:2021, Identification and Authentication Failures",
     references: [REF_OWASP_HARD_CODED],
   };
 }

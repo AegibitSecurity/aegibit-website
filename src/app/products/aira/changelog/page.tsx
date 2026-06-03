@@ -13,12 +13,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Aira Changelog — Every Release",
+  title: "Aira Changelog, Every Release",
   description:
-    "Full release history of Aira — AEGIBIT's voice-controlled desktop assistant. Every version, every fix, every new feature. Verify your download with the SHA256 checksum on every release.",
+    "Full release history of Aira, AEGIBIT's voice-controlled desktop assistant. Every version, every fix, every new feature. Verify your download with the SHA256 checksum on every release.",
   alternates: { canonical: "/products/aira/changelog" },
   openGraph: {
-    title: "Aira Changelog — Every Release",
+    title: "Aira Changelog, Every Release",
     description:
       "Every Aira release, indexed. SHA256 checksums included for download verification.",
     type: "website",
@@ -153,7 +153,7 @@ export default async function AiraChangelogPage() {
               className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
               style={{ color: "#A1A1AA" }}
             >
-              Every release, every fix, every new feature — in order. Each
+              Every release, every fix, every new feature, in order. Each
               installer is published with a SHA256 checksum so you can verify
               what you downloaded matches what we shipped.
             </p>
@@ -230,7 +230,7 @@ export default async function AiraChangelogPage() {
                     style={{ color: "#71717A" }}
                   >
                     The hash you see must match the SHA256 listed for that
-                    version above. If they differ — do not run the installer
+                    version above. If they differ, do not run the installer
                     and email{" "}
                     <a
                       href="mailto:contact@aegibit.com"
@@ -271,7 +271,7 @@ export default async function AiraChangelogPage() {
                     className="text-base font-medium mb-2"
                     style={{ color: "#fff" }}
                   >
-                    Code signing — transparency note
+                    Code signing, transparency note
                   </h3>
                   <p
                     className="text-sm leading-relaxed"
@@ -283,7 +283,7 @@ export default async function AiraChangelogPage() {
                     <em>More info → Run anyway</em> to proceed. Your SHA256
                     above is your guarantee that the file is unmodified. We
                     are actively procuring an EV code-signing certificate and
-                    will sign every release going forward — track progress on
+                    will sign every release going forward, track progress on
                     this page.
                   </p>
                 </div>

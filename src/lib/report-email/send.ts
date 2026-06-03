@@ -6,15 +6,15 @@
  * unit-testable and so the two endpoints can't accidentally diverge
  * on the lead-write contract:
  *
- *   1. sendReportEmail() — Resend send with html + text + subject.
+ *   1. sendReportEmail(), Resend send with html + text + subject.
  *      No-throw: returns { ok, error? } so the route can decide
  *      what to surface.
  *
- *   2. writeReportLead() — INSERT into Supabase `leads` table with
+ *   2. writeReportLead(), INSERT into Supabase `leads` table with
  *      source="snapshot_export" or "scan_export". Mirrors what
  *      /api/leads writes for first-touch leads, minus the Resend
  *      confirmation (the visitor is about to receive a real report
- *      — they don't also need a "we got your request" reply).
+ *, they don't also need a "we got your request" reply).
  */
 
 import { getServiceClient } from "@/lib/supabase-admin";

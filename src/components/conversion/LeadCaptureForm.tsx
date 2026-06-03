@@ -15,7 +15,7 @@ interface LeadCaptureFormProps {
 export function LeadCaptureForm({
   source = "waitlist",
   placeholder = "Enter your work email",
-  cta = "Join Waitlist — Free",
+  cta = "Join Waitlist, Free",
   compact = false,
 }: LeadCaptureFormProps) {
   const [email, setEmail] = useState("");

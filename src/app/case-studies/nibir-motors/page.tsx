@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 /**
- * Pillar case study — Nibir Motors.
+ * Pillar case study, Nibir Motors.
  *
  * Long-form (~2,000 words) authority asset. Goals:
  *   1. Rank for branded queries ("Nibir Motors PayMint", "PayMint case study")
@@ -29,7 +29,7 @@ import {
 export const metadata: Metadata = {
   title: "How Nibir Motors Automated 7 Branches with PayMint",
   description:
-    "Inside the Nibir Motors PayMint deployment — 7 branches across West Bengal, real-time voucher sync, audit-grade logging, ₹4.8L+ monthly transaction volume reconciled in real time.",
+    "Inside the Nibir Motors PayMint deployment, 7 branches across West Bengal, real-time voucher sync, audit-grade logging, ₹4.8L+ monthly transaction volume reconciled in real time.",
   alternates: { canonical: "/case-studies/nibir-motors" },
   openGraph: {
     title: "How Nibir Motors Automated 7 Branches with PayMint",
@@ -53,7 +53,7 @@ const ARTICLE_LD = {
   "@type": "Article",
   headline: "How Nibir Motors Automated 7 Branches with PayMint",
   description:
-    "Inside the Nibir Motors PayMint deployment — 7 branches across West Bengal, real-time voucher sync, audit-grade logging.",
+    "Inside the Nibir Motors PayMint deployment, 7 branches across West Bengal, real-time voucher sync, audit-grade logging.",
   image: "https://www.aegibit.com/opengraph-image",
   datePublished: "2026-05-04",
   dateModified: "2026-05-04",
@@ -191,9 +191,9 @@ export default function NibirMotorsCaseStudyPage() {
             <SectionTitle eyebrow="The Customer" title="Nibir Motors Pvt. Ltd." />
             <Para>
               Nibir Motors operates across <strong style={{ color: "#fff" }}>seven branches</strong>{" "}
-              spread through West Bengal — Berhampore (head office), Kalyani, Krishnagar,
+              spread through West Bengal, Berhampore (head office), Kalyani, Krishnagar,
               Chakdah, Plassey, Raghunathganj, and Kandi. Their operations span automotive
-              sales, service workshops, and parts distribution — three distinct expense
+              sales, service workshops, and parts distribution, three distinct expense
               streams, multiplied across seven physical locations, totaling{" "}
               <strong style={{ color: "#fff" }}>over 200 vouchers per month</strong> at
               monthly transaction volumes north of ₹4.8 lakh.
@@ -212,7 +212,7 @@ export default function NibirMotorsCaseStudyPage() {
             <BulletList
               items={[
                 "Voucher numbering conflicts: two branches occasionally issued the same number for different transactions, creating reconciliation disputes that took days to resolve.",
-                "Real-time visibility was nonexistent. The CFO learned about an over-spending branch only after the books closed — too late to intervene.",
+                "Real-time visibility was nonexistent. The CFO learned about an over-spending branch only after the books closed, too late to intervene.",
                 "WhatsApp-based receipts got lost. Photos went missing in scrolling chats. Some vouchers were paid against verbal approvals that left no audit trail.",
                 "Tally entry was a bottleneck. One accountant spent two-to-three full days a month just keying vouchers, with periodic errors that surfaced only at year-end audits.",
                 "Branch managers couldn't act fast. A workshop needed parts urgently, but procurement waited 36 hours for head-office approval over phone tag.",
@@ -226,7 +226,7 @@ export default function NibirMotorsCaseStudyPage() {
               We built PayMint specifically for this shape of operation: multi-branch SMEs in
               India that have outgrown spreadsheets but can&apos;t justify SAP. The deployment at
               Nibir went live across all seven branches within{" "}
-              <strong style={{ color: "#fff" }}>14 days</strong> — three days of
+              <strong style={{ color: "#fff" }}>14 days</strong>, three days of
               configuration and onboarding for the first branch, then 90-minute
               spin-ups for each subsequent branch. Branch managers were submitting real
               vouchers on day three.
@@ -237,13 +237,13 @@ export default function NibirMotorsCaseStudyPage() {
               title="Branch-coded voucher numbering"
               body={`Every payment now gets a tamper-proof voucher number stamped with three pieces of identity: branch code (KLY for Kalyani, BHP for Berhampore, etc.), per-branch sequence number, and Indian fiscal year. So Kalyani's 42nd voucher of FY 2026-27 reads 'KLY/0042/2627'. Auditors can read it once and instantly know which branch issued it, in what order, and in which fiscal cycle.
 
-The numbering is issued by atomic Firestore transactions on per-branch counters — concurrent submissions across branches cannot collide on the same number. Within a branch, the sequence is gap-free. Once assigned, voucher numbers are immutable by Firestore Security Rules; not even a super admin can edit them after the fact.`}
+The numbering is issued by atomic Firestore transactions on per-branch counters, concurrent submissions across branches cannot collide on the same number. Within a branch, the sequence is gap-free. Once assigned, voucher numbers are immutable by Firestore Security Rules; not even a super admin can edit them after the fact.`}
             />
 
             <FeatureBlock
               icon={RefreshCw}
               title="Real-time multi-device sync"
-              body={`When a maker in Kalyani submits a fuel voucher at 11:47 AM, the head-office finance team in Berhampore sees it in their pending queue at 11:47 AM and 0.3 seconds. PayMint runs on Firebase real-time streams — sub-300ms p95 latency from voucher creation to it appearing on every authorised device.
+              body={`When a maker in Kalyani submits a fuel voucher at 11:47 AM, the head-office finance team in Berhampore sees it in their pending queue at 11:47 AM and 0.3 seconds. PayMint runs on Firebase real-time streams, sub-300ms p95 latency from voucher creation to it appearing on every authorised device.
 
 The real win isn't the speed; it's what becomes possible because of the speed. Nibir's CFO can spot an over-spending branch the same day, not at month-end. Branch managers see approvals reflected immediately, so payments don't sit in limbo. Field staff at remote branches submit vouchers offline (the app caches to IndexedDB and queues writes); the moment connectivity returns, every queued voucher syncs with proper numbering preserved.`}
             />
@@ -251,19 +251,19 @@ The real win isn't the speed; it's what becomes possible because of the speed. N
             <FeatureBlock
               icon={ShieldCheck}
               title="Five-role approval workflow"
-              body={`Maker → Authoriser → Accountant → Admin → Super Admin. Each role has scoped permissions enforced server-side in Firestore Security Rules — a compromised browser cannot bypass them.
+              body={`Maker → Authoriser → Accountant → Admin → Super Admin. Each role has scoped permissions enforced server-side in Firestore Security Rules, a compromised browser cannot bypass them.
 
-Branch managers at Kalyani see only Kalyani vouchers. The service-GM sees only workshop vouchers. The CFO sees everything. The audit log records every action with actor UID and server timestamp, append-only, even from super admins. When an external auditor recently asked Nibir's team to produce the approval chain for a specific March voucher, the answer was a click — not a search through WhatsApp.`}
+Branch managers at Kalyani see only Kalyani vouchers. The service-GM sees only workshop vouchers. The CFO sees everything. The audit log records every action with actor UID and server timestamp, append-only, even from super admins. When an external auditor recently asked Nibir's team to produce the approval chain for a specific March voucher, the answer was a click, not a search through WhatsApp.`}
             />
 
             <FeatureBlock
               icon={TrendingUp}
-              title="Tally-ready exports — 20 minutes vs 3 days"
+              title="Tally-ready exports, 20 minutes vs 3 days"
               body={`The 11-column Tally CSV exports map straight into Tally Prime: voucher type, voucher number, date, ledger name, cost center, amount, GST split, narration, and three more. Cost centers like 'BERHAMPORE Branch' and 'KALYANI Service' auto-tag based on branch and expense type configured during onboarding.
 
-Nibir's monthly Tally entry — historically a 2-3 day exercise for one accountant — now takes 20 minutes. The accountant opens PayMint, clicks Export, drops the CSV into Tally Prime. Done.
+Nibir's monthly Tally entry, historically a 2-3 day exercise for one accountant, now takes 20 minutes. The accountant opens PayMint, clicks Export, drops the CSV into Tally Prime. Done.
 
-Voucher numbers in the export are immutable and idempotent — re-running the export doesn't create duplicates because Tally recognises the numbers it already imported. This means Nibir's team can re-export any historical month at any time without consequence, useful for cross-checks and audit prep.`}
+Voucher numbers in the export are immutable and idempotent, re-running the export doesn't create duplicates because Tally recognises the numbers it already imported. This means Nibir's team can re-export any historical month at any time without consequence, useful for cross-checks and audit prep.`}
             />
 
             {/* Section: Results */}
@@ -330,7 +330,7 @@ Voucher numbers in the export are immutable and idempotent — re-running the ex
             <Para>
               The pattern that emerged from the deployment is one we&apos;re seeing repeatedly
               at AEGIBIT: <strong style={{ color: "#fff" }}>multi-branch Indian SMEs don&apos;t
-              need lighter spreadsheets — they need an operating system.</strong> One that
+              need lighter spreadsheets, they need an operating system.</strong> One that
               respects branch autonomy, gives head office real-time oversight, and produces
               clean Tally inputs at the press of a button. PayMint is built to be exactly
               that.
@@ -360,12 +360,12 @@ Voucher numbers in the export are immutable and idempotent — re-running the ex
             </Para>
             <Para>
               PayMint at ₹999 per branch per month is roughly 50× cheaper than hiring a
-              dedicated finance staffer to do the same job — and it does it in real time,
+              dedicated finance staffer to do the same job, and it does it in real time,
               with full audit trail, across every branch, on every device, 24/7. Nibir
               Motors is one customer. The pattern repeats.
             </Para>
             <Para>
-              If your operation looks anything like this — book a 20-minute walkthrough.
+              If your operation looks anything like this, book a 20-minute walkthrough.
               We&apos;ll demo PayMint live, against your specific branch shape, and provide
               a sandbox link the same day.
             </Para>

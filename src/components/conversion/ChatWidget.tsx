@@ -6,12 +6,12 @@ import { track } from "@/lib/track";
 import type { ChatMessage } from "@/lib/aira-bot";
 
 /**
- * Aira chat widget — floating bottom-right launcher → expandable
+ * Aira chat widget, floating bottom-right launcher → expandable
  * conversation panel. Mounted via MarketingChrome on every public
  * marketing surface.
  *
  * Conversation state:
- *   - Held in component state. Lost on full page reload — that's fine
+ *   - Held in component state. Lost on full page reload, that's fine
  *     for v1; the visitor's intent rarely survives a refresh anyway.
  *   - Last 12 turns sent to /api/chat with each request. Server caps
  *     this again defensively.
@@ -31,9 +31,9 @@ import type { ChatMessage } from "@/lib/aira-bot";
  *      contact@aegibit.com" inline. Visitor still gets the address.
  *
  * Telemetry (via existing track helper):
- *   - chat_open       — fired once per session when widget is opened
- *   - chat_message    — fired on each user message sent
- *   - chat_lead       — fired on successful email capture
+ *   - chat_open, fired once per session when widget is opened
+ *   - chat_message, fired on each user message sent
+ *   - chat_lead, fired on successful email capture
  */
 
 type Mode = "chat" | "capture" | "captured";
@@ -47,7 +47,7 @@ const GREETING: UiMessage = {
   id: "g0",
   role: "model",
   text:
-    "I'm Aira. AEGIBIT's product guide. Ask me about PayMint, AIRA, VoiceCore, or pricing — or tell me what you're trying to fix and I'll point you to the right thing.",
+    "I'm Aira. AEGIBIT's product guide. Ask me about PayMint, AIRA, VoiceCore, or pricing, or tell me what you're trying to fix and I'll point you to the right thing.",
 };
 
 function newId() {
@@ -103,7 +103,7 @@ export function ChatWidget() {
       if (res.status === 429) {
         appendMessage(
           "model",
-          "Give me a few seconds — getting more questions than usual. Try again shortly.",
+          "Give me a few seconds, getting more questions than usual. Try again shortly.",
         );
         return;
       }
@@ -132,7 +132,7 @@ export function ChatWidget() {
     // Promote the visitor's actual questions to the top of the email
     // so the founder can read what they asked in 2 seconds, BEFORE
     // wading through the Aira transcript. The transcript is still
-    // included below for full context — but the question is the
+    // included below for full context, but the question is the
     // founder's primary need ("what do they want?") and should not
     // be buried.
     const visitorQuestions = messages
@@ -148,7 +148,7 @@ export function ChatWidget() {
     const formattedQuestions =
       visitorQuestions.length > 0
         ? visitorQuestions.map((q, i) => `${i + 1}. ${q}`).join("\n")
-        : "(no question captured — visitor handed over email immediately)";
+        : "(no question captured, visitor handed over email immediately)";
 
     const message =
       `WHAT THE VISITOR ASKED\n${formattedQuestions}\n\n` +
@@ -175,7 +175,7 @@ export function ChatWidget() {
     } catch {
       appendMessage(
         "model",
-        "Something hiccupped on our side — please reach out directly at contact@aegibit.com. Sorry about that.",
+        "Something hiccupped on our side, please reach out directly at contact@aegibit.com. Sorry about that.",
       );
     } finally {
       setBusy(false);
@@ -191,7 +191,7 @@ export function ChatWidget() {
       if (!isValidEmail(text)) {
         appendMessage(
           "model",
-          "That doesn't look right — mind double-checking the email?",
+          "That doesn't look right, mind double-checking the email?",
         );
         return;
       }
@@ -207,7 +207,7 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Launcher — visible when widget is closed. */}
+      {/* Launcher, visible when widget is closed. */}
       <AnimatePresence>
         {!open && (
           <motion.button
@@ -225,7 +225,7 @@ export function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Mobile launcher — icon-only floating button. */}
+      {/* Mobile launcher, icon-only floating button. */}
       <AnimatePresence>
         {!open && (
           <motion.button
@@ -242,7 +242,7 @@ export function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Panel — visible when widget is open. */}
+      {/* Panel, visible when widget is open. */}
       <AnimatePresence>
         {open && (
           <motion.div

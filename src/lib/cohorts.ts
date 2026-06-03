@@ -1,11 +1,11 @@
 /**
- * AEGIBIT cohort engine — segment-based personalization.
+ * AEGIBIT cohort engine, segment-based personalization.
  *
  * Design philosophy
  *   - Cohort assignment is computed CLIENT-SIDE from the existing
  *     visitor-store signals. No new endpoint, no server roundtrip,
  *     no new schema.
- *   - Cohorts are SEGMENT-based, never per-user fingerprinted —
+ *   - Cohorts are SEGMENT-based, never per-user fingerprinted,
  *     respects the charter's privacy posture (no PII to LLMs, no
  *     individual targeting).
  *   - Decisions are explainable: getCohort() returns the matched
@@ -13,32 +13,32 @@
  *   - Hard fallback: when no cohort matches, return "default" and
  *     render the canonical experience.
  *
- * Active cohorts (in matching priority order — first match wins)
- *   1. high_intent  — visitor clicked any CTA + visited /pricing or
+ * Active cohorts (in matching priority order, first match wins)
+ *   1. high_intent, visitor clicked any CTA + visited /pricing or
  *                     /alternatives. Strongest signal: ready to convert.
  *                     Overrides UTM because engagement on-site beats
  *                     where they came from.
- *   2. from_paid    — utm_medium=cpc OR utm_source ∈ {google_ads,
+ *   2. from_paid, utm_medium=cpc OR utm_source ∈ {google_ads,
  *                     google, facebook, meta, bing}. They clicked a
  *                     paid placement based on a search/intent signal.
  *                     Copy validates the intent: "you searched for X,
  *                     here's how we deliver X."
- *   3. from_social  — utm_source ∈ {linkedin, twitter, x, instagram,
+ *   3. from_social, utm_source ∈ {linkedin, twitter, x, instagram,
  *                     youtube}. They clicked a thought-leadership /
  *                     org-social post. Copy is more relationship-led
  *                     because trust precedes intent here.
- *   4. from_email   — utm_medium=email. They clicked through from our
+ *   4. from_email, utm_medium=email. They clicked through from our
  *                     own newsletter / nurture sequence. Already-warm
- *                     tone — no need to re-introduce AEGIBIT.
- *   5. returning    — has the vc_return cookie set by useVisitorTracking
+ *                     tone, no need to re-introduce AEGIBIT.
+ *   5. returning, has the vc_return cookie set by useVisitorTracking
  *                     on a prior session. Generic "you've been here
- *                     before" — used only if no UTM identifies WHY.
- *   6. default      — first-time visitor, no UTM, no signal yet.
+ *                     before", used only if no UTM identifies WHY.
+ *   6. default, first-time visitor, no UTM, no signal yet.
  *
  * Future cohorts (still on backlog)
- *   - geo:india / geo:us — needs IP-geo lookup (server-side header)
- *   - device:mobile / device:desktop — already in store, just unused
- *   - role:engineer / role:founder — needs explicit signal (form data)
+ *   - geo:india / geo:us, needs IP-geo lookup (server-side header)
+ *   - device:mobile / device:desktop, already in store, just unused
+ *   - role:engineer / role:founder, needs explicit signal (form data)
  */
 
 import { useVisitorStore } from "@/stores/visitor-store";
@@ -89,7 +89,7 @@ export function classifyUtm(utm: UtmInputs): CohortAssignment | null {
 }
 
 /**
- * Assign the current visitor to exactly one cohort. Pure function —
+ * Assign the current visitor to exactly one cohort. Pure function,
  * given the same store state, always returns the same cohort. The
  * reason string is for the operator dashboard ("why did this visitor
  * see variant X?").
@@ -99,7 +99,7 @@ export function classifyUtm(utm: UtmInputs): CohortAssignment | null {
  */
 export function getCohort(): CohortAssignment {
   if (typeof window === "undefined") {
-    // SSR no-op — render default and let client-side hydration do
+    // SSR no-op, render default and let client-side hydration do
     // the assignment. Stops hydration mismatches.
     return { id: "default", reason: "ssr" };
   }
@@ -117,7 +117,7 @@ export function getCohort(): CohortAssignment {
   }
 
   // 2-4. UTM-based cohorts. These tell us WHY the visitor is here today
-  //      — more useful for fresh personalization than just "you've been
+  //, more useful for fresh personalization than just "you've been
   //      here before". Beats `returning` for that reason.
   const utm = classifyUtm({
     source: s.utmSource,

@@ -5,13 +5,13 @@ import { sendSlack, type SlackBlock } from "@/lib/slack";
 import { buildHotBlocks } from "@/lib/slack-hot-lead";
 
 /**
- * /api/admin/slack-debug — short-lived diagnostic for the hot-lead push.
+ * /api/admin/slack-debug, short-lived diagnostic for the hot-lead push.
  *
  * Lives behind the same DASHBOARD_SECRET bearer auth as deploy-notify
- * (server-to-server only — never reachable from a browser bundle).
+ * (server-to-server only, never reachable from a browser bundle).
  *
  * Returns:
- *   - masked state of `SLACK_HOT_LEAD_WEBHOOK_URL` (length, prefix, suffix —
+ *   - masked state of `SLACK_HOT_LEAD_WEBHOOK_URL` (length, prefix, suffix,
  *     never the full secret) so we can confirm Vercel env propagation.
  *   - the actual Slack response for three increasingly complex payloads:
  *       1. plain text only          (matches Slack's Sample-curl test)
@@ -49,7 +49,7 @@ function maskUrl(url: string | undefined): {
 /**
  * Mask GEMINI_API_KEY for safe diagnostic dumping. Reports presence,
  * length, prefix shape (Google keys start with "AIza"), trailing
- * 4 chars, and a `hasWhitespace` flag — the #1 silent bug when
+ * 4 chars, and a `hasWhitespace` flag, the #1 silent bug when
  * pasting keys into Vercel from the Google AI Studio UI.
  *
  * Also fires a real Gemini call with the key so we know it WORKS,
@@ -58,7 +58,7 @@ function maskUrl(url: string | undefined): {
 /**
  * Mask GROQ_API_KEY for safe diagnostic dumping. Reports presence,
  * length, prefix shape (Groq keys start with "gsk_"), trailing
- * 4 chars, and whitespace-contamination flags — common silent bugs
+ * 4 chars, and whitespace-contamination flags, common silent bugs
  * when pasting keys into Vercel.
  */
 function maskGroqKey(key: string | undefined): {
@@ -160,16 +160,16 @@ export async function GET(req: NextRequest) {
 
   const env = maskUrl(process.env.SLACK_HOT_LEAD_WEBHOOK_URL);
 
-  // Probe 1 — plain text only. Mirrors Slack's "Sample curl" exactly.
+  // Probe 1, plain text only. Mirrors Slack's "Sample curl" exactly.
   const text = await sendSlack({
-    text: "🩺 slack-debug probe 1 — plain text",
+    text: "🩺 slack-debug probe 1, plain text",
   });
 
-  // Probe 2 — minimal Block Kit, no attachments wrapper, no color.
+  // Probe 2, minimal Block Kit, no attachments wrapper, no color.
   const minimalBlocks: SlackBlock[] = [
     {
       type: "section",
-      text: { type: "mrkdwn", text: "🩺 slack-debug probe 2 — minimal Block Kit" },
+      text: { type: "mrkdwn", text: "🩺 slack-debug probe 2, minimal Block Kit" },
     },
   ];
   const blockMinimal = await sendSlack({
@@ -177,14 +177,14 @@ export async function GET(req: NextRequest) {
     blocks: minimalBlocks,
   });
 
-  // Probe 3 — attachments + color (the exact wrapper notifySlackLead uses).
+  // Probe 3, attachments + color (the exact wrapper notifySlackLead uses).
   const blockColored = await sendSlack({
     text: "🩺 slack-debug probe 3 fallback",
     blocks: minimalBlocks,
     color: "#EF4444",
   });
 
-  // Probe 4 — same blocks our hot-lead path produces, sent through
+  // Probe 4, same blocks our hot-lead path produces, sent through
   // sendSlack so we capture Slack's actual error body (notifySlackLead
   // discards it in favor of a boolean return).
   const hotLeadBlocks = buildHotBlocks({
@@ -194,13 +194,13 @@ export async function GET(req: NextRequest) {
     phone: "+10000000000",
     source: "demo",
     page: "/__diag/slack",
-    message: "Probe 4 — synthetic hot-lead Block Kit firing through buildHotBlocks.",
+    message: "Probe 4, synthetic hot-lead Block Kit firing through buildHotBlocks.",
     heat: "hot",
     journey: null,
     siteUrl: "https://www.aegibit.com",
   });
   const hotLead = await sendSlack({
-    text: "🩺 slack-debug probe 4 — full hot-lead Block Kit",
+    text: "🩺 slack-debug probe 4, full hot-lead Block Kit",
     blocks: hotLeadBlocks,
     color: "#EF4444",
   });

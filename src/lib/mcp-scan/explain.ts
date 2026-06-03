@@ -1,5 +1,5 @@
 /**
- * MCP Shield web-scanner — Groq narrative layer.
+ * MCP Shield web-scanner, Groq narrative layer.
  *
  * Takes a structured ScanResult and asks Groq Llama 3.3 70B to
  * produce a plain-English 2-paragraph summary for the operator:
@@ -13,10 +13,10 @@
  *     substance.
  *   - Knowledge boundary: Groq sees ONLY the structured findings
  *     and the manifest kind. The raw manifest is NOT included in
- *     the prompt — that's the privacy guarantee for visitors who
+ *     the prompt, that's the privacy guarantee for visitors who
  *     paste sensitive configs. Groq cannot hallucinate findings
  *     because it has no manifest to reference.
- *   - Voice: matches the AEGIBIT brand voice — calm authority, no
+ *   - Voice: matches the AEGIBIT brand voice, calm authority, no
  *     hyperbole, no exclamation marks. Same system-prompt
  *     discipline as the Aira chatbot.
  */
@@ -34,12 +34,12 @@ VOICE
 - Do NOT invent findings the structured list doesn't contain.
 - Do NOT recommend products. The findings already include remediation guidance.
 
-PARAGRAPH 1 — "What to fix first"
+PARAGRAPH 1, "What to fix first"
 - Open with the count of CRITICAL and HIGH findings.
 - Identify the single most urgent finding and explain it in one sentence.
 - If there are no CRITICAL/HIGH findings, say so plainly.
 
-PARAGRAPH 2 — "What looks reasonable"
+PARAGRAPH 2, "What looks reasonable"
 - Note any structural good practices the manifest demonstrates (well-constrained schemas, version-pinned packages, TLS in use, etc.). If none apply, say "Nothing further to call out at this severity level."
 
 FORMAT
@@ -53,7 +53,7 @@ export async function explainFindings(result: ScanResult): Promise<string | null
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) return null;
 
-  // Build the user message — structured findings only, never the
+  // Build the user message, structured findings only, never the
   // raw manifest. Cap by character length so a pathological manifest
   // with hundreds of findings doesn't blow our token budget.
   const userMessage = buildPrompt(result);
@@ -72,7 +72,7 @@ export async function explainFindings(result: ScanResult): Promise<string | null
           { role: "user", content: userMessage },
         ],
         max_tokens: 250,
-        temperature: 0.2, // Low — we want grounded restatement, not creative writing.
+        temperature: 0.2, // Low, we want grounded restatement, not creative writing.
       }),
     });
 
@@ -98,7 +98,7 @@ export async function explainFindings(result: ScanResult): Promise<string | null
 const MAX_FINDINGS_IN_PROMPT = 20;
 
 /**
- * Build the user message for Groq. Pure function — exported for
+ * Build the user message for Groq. Pure function, exported for
  * testing. Includes only structured fields; never the raw manifest.
  */
 export function buildPrompt(result: ScanResult): string {
@@ -119,7 +119,7 @@ export function buildPrompt(result: ScanResult): string {
 
   const more =
     result.findings.length > MAX_FINDINGS_IN_PROMPT
-      ? `\n(${result.findings.length - MAX_FINDINGS_IN_PROMPT} more findings omitted — same severity-or-lower as those listed.)`
+      ? `\n(${result.findings.length - MAX_FINDINGS_IN_PROMPT} more findings omitted, same severity-or-lower as those listed.)`
       : "";
 
   return `${headline}\n\nTop findings (already sorted by severity):\n${top.join("\n")}${more}`;

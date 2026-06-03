@@ -9,7 +9,7 @@ const COUNT = 2000;
 // impure and would fail react-hooks/purity if called inside useMemo (whose
 // body must be a pure function of the render). useState's initializer
 // callback is explicitly allowed to be impure and runs exactly once per
-// mount — the canonical React pattern for "compute once, never change."
+// mount, the canonical React pattern for "compute once, never change."
 function buildParticleField(): { positions: Float32Array; colors: Float32Array } {
   const positions = new Float32Array(COUNT * 3);
   const colors = new Float32Array(COUNT * 3);

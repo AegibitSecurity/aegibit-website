@@ -11,16 +11,16 @@ import {
 } from "lucide-react";
 
 /**
- * HomeProducts — AEGIBIT product showcase.
+ * HomeProducts, AEGIBIT product showcase.
  *
  * The homepage section directly under the hero. Communicates that AEGIBIT
  * is a multi-product company building an industry OS, not a single tool.
  *
  * Product status badges:
- *   • LIVE        — In production, paying customers
- *   • EARLY ACCESS — Buildable, design-partner-only
- *   • EMBEDDED    — Layered across all products (Aira AI)
- *   • COMING 2026 — On the roadmap, not yet code
+ *   • LIVE, In production, paying customers
+ *   • EARLY ACCESS, Buildable, design-partner-only
+ *   • EMBEDDED, Layered across all products (Aira AI)
+ *   • COMING 2026, On the roadmap, not yet code
  *
  * Each card has its own CTA so visitors with different intent (PayMint
  * buyer vs VoiceCore early-adopter vs general AEGIBIT prospect) all
@@ -67,7 +67,7 @@ const PRODUCTS: Product[] = [
     name: "Aira",
     tagline: "Voice control for your desktop.",
     description:
-      "Free desktop assistant for Windows. Wake by voice — opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English. Voice biometric. Local-first. Built in India.",
+      "Free desktop assistant for Windows. Wake by voice, opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English. Voice biometric. Local-first. Built in India.",
     status: "FREE · WINDOWS",
     icon: Mic,
     iconColor: "#60A5FA",
@@ -91,7 +91,7 @@ const PRODUCTS: Product[] = [
     name: "Industry OS",
     tagline: "The full operational suite.",
     description:
-      "DealerCRM. ServiceOps. InventoryIQ. AegiPay. The complete AEGIBIT platform for dealerships and multi-branch SMEs — shipping over 2026-27.",
+      "DealerCRM. ServiceOps. InventoryIQ. AegiPay. The complete AEGIBIT platform for dealerships and multi-branch SMEs, shipping over 2026-27.",
     status: "COMING 2026",
     icon: Layers,
     iconColor: "#10B981",

@@ -1,5 +1,5 @@
 /**
- * PayMint Snapshot — single entry point.
+ * PayMint Snapshot, single entry point.
  *
  * Mirror of src/lib/mcp-scan/scan.ts: parse → analyze → optional
  * Groq narrative → return the structured result.

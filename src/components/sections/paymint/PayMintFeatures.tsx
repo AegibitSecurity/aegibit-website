@@ -15,13 +15,13 @@ const FEATURES = [
     Icon: GitBranch,
     title: 'Branch-Coded Vouchers',
     body:
-      'Every payment is stamped with a tamper-proof voucher like KLY/0001/2627 — branch code, sequence, fiscal year. Atomic per-branch counters guarantee zero duplicates, even under concurrent writes.',
+      'Every payment is stamped with a tamper-proof voucher like KLY/0001/2627, branch code, sequence, fiscal year. Atomic per-branch counters guarantee zero duplicates, even under concurrent writes.',
   },
   {
     Icon: Users,
     title: 'Role-Based Approvals',
     body:
-      'Maker → Authoriser → Accountant → Admin → Super Admin. Each role sees only what their job demands. Server-enforced rules — not a UI gate.',
+      'Maker → Authoriser → Accountant → Admin → Super Admin. Each role sees only what their job demands. Server-enforced rules, not a UI gate.',
   },
   {
     Icon: RefreshCw,
@@ -33,7 +33,7 @@ const FEATURES = [
     Icon: ScrollText,
     title: 'Audit-Grade Logging',
     body:
-      'Every action — create, edit, approve, reject, pay — is captured in an append-only audit trail. Server rules block tampering. Forensics-ready, day one.',
+      'Every action, create, edit, approve, reject, pay, is captured in an append-only audit trail. Server rules block tampering. Forensics-ready, day one.',
   },
   {
     Icon: FileSpreadsheet,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 /**
- * /integrations/* — emergency noindex.
+ * /integrations/*, emergency noindex.
  *
  * Same disposition as /alternatives/* and /use-cases/*: integration
  * pages were authored around the VoiceCore positioning. Most of them

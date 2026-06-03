@@ -41,17 +41,17 @@ async function sendConfirmation(data: {
 }): Promise<{ ok: boolean; error?: string; id?: string }> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error("[email] confirmation skipped — RESEND_API_KEY not set");
+    console.error("[email] confirmation skipped, RESEND_API_KEY not set");
     return { ok: false, error: "RESEND_API_KEY not configured" };
   }
 
   const isPayMint = data.source === "paymint_demo";
   const subject = isPayMint
-    ? "Your PayMint demo is being prepared — AEGIBIT"
-    : "We received your request — AEGIBIT";
+    ? "Your PayMint demo is being prepared, AEGIBIT"
+    : "We received your request, AEGIBIT";
   const heading = isPayMint
     ? "Your PayMint demo is on the way."
-    : "Thanks — we received your request.";
+    : "Thanks, we received your request.";
   const intro = isPayMint
     ? "A PayMint specialist will reach out within 24 business hours to schedule a 20-minute live demo, walk you through multi-branch expense management, and answer anything specific to your operation."
     : "A member of the AEGIBIT team will reach out within 24 business hours.";
@@ -84,13 +84,13 @@ async function sendConfirmation(data: {
           ${
             isPayMint
               ? `<div style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:18px;margin-bottom:28px;">
-                  <p style="font-size:13px;color:#A1A1AA;margin:0 0 12px;font-weight:600;">While you wait — try the live web app:</p>
+                  <p style="font-size:13px;color:#A1A1AA;margin:0 0 12px;font-weight:600;">While you wait, try the live web app:</p>
                   <a href="https://nibir-vault.web.app" style="display:inline-block;background:linear-gradient(135deg,#F97316,#EA6C0A);color:#fff;text-decoration:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.01em;">Launch PayMint →</a>
                 </div>`
               : ""
           }
           <p style="font-size:13px;color:#52525B;line-height:1.6;margin:0;">
-            Questions? Reply directly to this email — it routes to the AEGIBIT team inbox.
+            Questions? Reply directly to this email, it routes to the AEGIBIT team inbox.
           </p>
           <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:28px 0;"/>
           <p style="font-size:11px;color:#52525B;margin:0;">
@@ -127,7 +127,7 @@ async function notifyTeam(data: {
 }): Promise<{ ok: boolean; error?: string; id?: string }> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error("[email][team] skipped — RESEND_API_KEY not set");
+    console.error("[email][team] skipped, RESEND_API_KEY not set");
     return { ok: false, error: "RESEND_API_KEY not configured" };
   }
 
@@ -148,8 +148,8 @@ async function notifyTeam(data: {
     // everything. Hot leads include time-on-site + scroll depth so the
     // urgency is obvious from the inbox preview alone.
     const subject = isHot
-      ? `🔥 HOT LEAD — ${data.name ? `${data.name} · ` : ""}${data.email}${data.journey ? ` · ${data.journey.pages_viewed.length} pages · ${Math.floor(data.journey.time_on_site_seconds / 60)}m on site` : ""}`
-      : `🔔 New ${label} — ${data.email}`;
+      ? `🔥 HOT LEAD, ${data.name ? `${data.name} · ` : ""}${data.email}${data.journey ? ` · ${data.journey.pages_viewed.length} pages · ${Math.floor(data.journey.time_on_site_seconds / 60)}m on site` : ""}`
+      : `🔔 New ${label}, ${data.email}`;
 
     const heatBadge = isHot
       ? `<span style="background:#EF4444;color:#fff;font-weight:700;padding:4px 10px;border-radius:6px;font-size:12px;letter-spacing:0.1em;">🔥 HOT LEAD</span>`
@@ -160,7 +160,7 @@ async function notifyTeam(data: {
       : `New lead from aegibit.com`;
 
     const subhead = isHot
-      ? `<p style="color:#FCA5A5;font-size:13px;margin:0 0 20px;line-height:1.6;">Inbound leads contacted within 5 minutes are ~9× more likely to convert vs. within an hour. The visitor's session below shows what they cared about — open with that.</p>`
+      ? `<p style="color:#FCA5A5;font-size:13px;margin:0 0 20px;line-height:1.6;">Inbound leads contacted within 5 minutes are ~9× more likely to convert vs. within an hour. The visitor's session below shows what they cared about, open with that.</p>`
       : "";
 
     const replyButton = isHot
@@ -263,7 +263,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Pull the visitor's session before composing the team email so the
-  // hot-lead enrichment has data to work with. Best-effort — null
+  // hot-lead enrichment has data to work with. Best-effort, null
   // journey just falls back to the standard email body.
   const journey = await fetchVisitorJourney(data.visitorId ?? null);
   const heat = classifyLead({
@@ -273,7 +273,7 @@ export async function POST(req: NextRequest) {
   });
 
   // Fire team email + Slack push + lead confirmation email in parallel.
-  // All three are best-effort — lead capture has already succeeded by
+  // All three are best-effort, lead capture has already succeeded by
   // this point and a downstream notifier outage must not 500 the form.
   // Slack only fires when SLACK_HOT_LEAD_WEBHOOK_URL is set; absent =
   // silent skip.

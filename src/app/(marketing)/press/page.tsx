@@ -6,7 +6,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { Download, Mail } from "lucide-react";
 
 /**
- * /press — AEGIBIT press & brand resources.
+ * /press, AEGIBIT press & brand resources.
  *
  * Discipline call:
  *   A press page is a list of artifacts a journalist or analyst can use
@@ -33,12 +33,12 @@ import { Download, Mail } from "lucide-react";
  */
 
 export const metadata: Metadata = {
-  title: "Press & Brand — AEGIBIT",
+  title: "Press & Brand, AEGIBIT",
   description:
-    "Press inbox, brand assets, and ready-to-use company descriptions for AEGIBIT — cybersecurity-first operational software, built in India, live with Nibir Motors across 7 branches.",
+    "Press inbox, brand assets, and ready-to-use company descriptions for AEGIBIT, cybersecurity-first operational software, built in India, live with Nibir Motors across 7 branches.",
   alternates: { canonical: "/press" },
   openGraph: {
-    title: "Press & Brand Resources — AEGIBIT",
+    title: "Press & Brand Resources, AEGIBIT",
     description:
       "Press inbox, brand assets, ready-to-use descriptions. Cybersecurity-first operational software, built in India.",
     type: "website",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Press & Brand — AEGIBIT",
+    title: "Press & Brand, AEGIBIT",
     description: "Press inbox, brand assets, ready-to-use descriptions.",
   },
 };
@@ -63,7 +63,7 @@ const DESCRIPTIONS = [
   },
   {
     length: "Long (≈80 words)",
-    body: "AEGIBIT builds operational software for multi-branch businesses, dealerships, and mission-critical SMEs — categories where a single data leak ends the company. The thesis is to invert the conventional ordering of product over security: at AEGIBIT, the security architecture is the load-bearing primitive and the product surface is the expression of it. PayMint, the flagship multi-branch expense platform, is live with Nibir Motors. MCP Shield, the open-source security scanner for the Model Context Protocol, ships under MIT license at v0.2.1.",
+    body: "AEGIBIT builds operational software for multi-branch businesses, dealerships, and mission-critical SMEs, categories where a single data leak ends the company. The thesis is to invert the conventional ordering of product over security: at AEGIBIT, the security architecture is the load-bearing primitive and the product surface is the expression of it. PayMint, the flagship multi-branch expense platform, is live with Nibir Motors. MCP Shield, the open-source security scanner for the Model Context Protocol, ships under MIT license at v0.2.1.",
   },
 ] as const;
 
@@ -79,9 +79,9 @@ const COLORS = [
 const FACTS = [
   { label: "Founded", value: "2026" },
   { label: "Headquarters", value: "Kolkata, India" },
-  { label: "Flagship product", value: "PayMint — multi-branch expense platform" },
-  { label: "Open-source product", value: "MCP Shield — MIT v0.2.1" },
-  { label: "Live customers", value: "Nibir Motors — 7 branches, West Bengal" },
+  { label: "Flagship product", value: "PayMint, multi-branch expense platform" },
+  { label: "Open-source product", value: "MCP Shield, MIT v0.2.1" },
+  { label: "Live customers", value: "Nibir Motors, 7 branches, West Bengal" },
   { label: "Press contact", value: "contact@aegibit.com" },
 ] as const;
 
@@ -153,7 +153,7 @@ export default function PressPage() {
               >
                 contact@aegibit.com
               </TrackedLink>{" "}
-              — we reply same business day in IST.
+              we reply same business day in IST.
             </p>
           </div>
         </section>
@@ -460,7 +460,7 @@ export default function PressPage() {
               className="text-base md:text-lg mb-8 max-w-2xl mx-auto"
               style={{ color: "#A1A1AA", lineHeight: 1.7 }}
             >
-              contact@aegibit.com — same business day in IST. Mention the
+              contact@aegibit.com, same business day in IST. Mention the
               publication and the angle in the subject line and you&apos;ll
               hit a faster lane.
             </p>

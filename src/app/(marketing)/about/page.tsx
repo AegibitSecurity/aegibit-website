@@ -5,36 +5,36 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { ArrowRight, Shield, Boxes } from "lucide-react";
 
 /**
- * /about — AEGIBIT company page.
+ * /about, AEGIBIT company page.
  *
- * Brand voice rule (carried over from PR #76 — the company-first
+ * Brand voice rule (carried over from PR #76, the company-first
  * voice sweep): the entity AEGIBIT is the protagonist of every
  * sentence, not the founder personally. Premium enterprise buyers
- * — CISOs, finance directors, compliance heads — want a *company*
+ *, CISOs, finance directors, compliance heads, want a *company*
  * on the other side of the conversation. Person-led copy ("started
  * by X after seeing Y") signals fragility, not durability.
  *
  * Every claim on this page is defensible:
- *   - "Built in India" — true (Kolkata-anchored, India-first by design)
- *   - "Cybersecurity-first" — defensible from next.config.ts header
+ *   - "Built in India", true (Kolkata-anchored, India-first by design)
+ *   - "Cybersecurity-first", defensible from next.config.ts header
  *     posture + MCP Shield product
- *   - "Live with Nibir Motors across 7 branches" — true (real customer
+ *   - "Live with Nibir Motors across 7 branches", true (real customer
  *     with a /case-studies/nibir-motors deep dive)
- *   - "Two products shipped, one in early access" — accurate count
+ *   - "Two products shipped, one in early access", accurate count
  *     (PayMint live, MCP Shield live, Aira early access)
  *
  * Things deliberately NOT on this page:
- *   - SOC 2 certified claim — we're in progress (see /security).
- *   - Founder personal bio / photo — entity-first per the brand
+ *   - SOC 2 certified claim, we're in progress (see /security).
+ *   - Founder personal bio / photo, entity-first per the brand
  *     positioning. If later we want a /about/team or /about/founders
  *     page, that's the place for personal presence.
- *   - Headcount / funding — irrelevant to buyer trust at this stage.
- *   - Regulatory overclaims (RBI / HIPAA / FERPA) — gone everywhere
+ *   - Headcount / funding, irrelevant to buyer trust at this stage.
+ *   - Regulatory overclaims (RBI / HIPAA / FERPA), gone everywhere
  *     after PR #77.
  */
 
 export const metadata: Metadata = {
-  title: "About AEGIBIT — Cybersecurity-first software for businesses that can't afford a leak",
+  title: "About AEGIBIT, Cybersecurity-first software for businesses that can't afford a leak",
   description:
     "AEGIBIT builds operational software for multi-branch businesses where a single leak ends the company. Cybersecurity-first by default. Built in India, global mandate. Live with Nibir Motors across 7 branches in West Bengal.",
   keywords: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About AEGIBIT — Built for businesses that can't afford a leak",
+    title: "About AEGIBIT, Built for businesses that can't afford a leak",
     description:
       "Cybersecurity-first software for multi-branch operations. PayMint live with Nibir Motors. MCP Shield open-source. India-first, global mandate.",
     type: "website",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About AEGIBIT — Built for businesses that can't afford a leak",
+    title: "About AEGIBIT, Built for businesses that can't afford a leak",
     description:
       "Cybersecurity-first software for multi-branch operations. Live with Nibir Motors. MCP Shield open-source. Built in India.",
   },
@@ -143,7 +143,7 @@ export default function AboutPage() {
             >
               AEGIBIT builds operational software for multi-branch businesses
               where a single security or audit failure ends the company.
-              Cybersecurity-first by default — not bolted on. Real-time
+              Cybersecurity-first by default, not bolted on. Real-time
               across every branch. Engineered to outlast the trends.
             </p>
           </div>
@@ -385,8 +385,8 @@ export default function AboutPage() {
             >
               <p>
                 AEGIBIT is anchored in India because the operators who
-                feel the multi-branch pain most acutely — multi-state
-                retail, services, dealerships, clinic chains, distribution —
+                feel the multi-branch pain most acutely, multi-state
+                retail, services, dealerships, clinic chains, distribution,
                 are concentrated here. India also forces a discipline that
                 the global market then benefits from: DPDP Act compliance,
                 low-bandwidth resilience, multi-language ops, branch-led

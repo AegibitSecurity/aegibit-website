@@ -2,7 +2,7 @@ import { Logo } from "@/components/shared/Logo";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 
 // Footer navigation. Hrefs are resolved against routes that actually
-// exist — see /sitemap.xml. Two regressions fixed during the $1B
+// exist, see /sitemap.xml. Two regressions fixed during the $1B
 // credibility sprint:
 //   - Product.Changelog used to point at /blog (different page entirely)
 //   - Company.Careers used to point at /about#careers (dead anchor)

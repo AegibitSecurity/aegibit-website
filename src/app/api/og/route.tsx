@@ -16,7 +16,7 @@ export const dynamic = "force-dynamic";
  * on SVG support. ImageResponse from next/og handles font fallbacks,
  * sizing, and edge-cacheable generation for us.
  *
- * Cached for 24h at the edge — same page hit twice doesn't re-render.
+ * Cached for 24h at the edge, same page hit twice doesn't re-render.
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
           }}
         >
           <svg width="50" height="50" viewBox="0 0 512 512" fill="none">
-            {/* AEGIBIT "A" mark — white left blade, orange right blade */}
+            {/* AEGIBIT "A" mark, white left blade, orange right blade */}
             <path d="M286 100 L224 130 L124 426 L196 426 Z" fill="#FFFFFF" />
             <path d="M272 162 L328 182 L388 426 L322 426 Z" fill="#F97316" />
           </svg>

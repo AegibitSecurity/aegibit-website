@@ -18,7 +18,7 @@ import { getDeviceType, getBrowser, getOS } from "@/lib/behavior-engine";
  *   The previous shape was `const store = useVisitorStore()` which
  *   returns an unstable reference and trips
  *   react-hooks/exhaustive-deps unless we add `store` to every dep
- *   array — which then re-runs each effect on every store change,
+ *   array, which then re-runs each effect on every store change,
  *   breaking the intended one-shot / on-change-only semantics.
  *
  *   The idiomatic Zustand pattern is to subscribe to the *specific
@@ -30,7 +30,7 @@ import { getDeviceType, getBrowser, getOS } from "@/lib/behavior-engine";
 export function useVisitorTracking() {
   const pathname = usePathname();
   // visitorId is the only reactive store value this hook needs to
-  // re-subscribe to — when it transitions from null to a server-issued
+  // re-subscribe to, when it transitions from null to a server-issued
   // id after the first /api/visitors response, the scroll effect needs
   // to start posting events. sessionId is read inline via getState()
   // because it's set once at store init and never changes.
@@ -49,7 +49,7 @@ export function useVisitorTracking() {
     // an earlier paint > null. URL params are present only on the
     // entry page; sessionStorage carries them across SPA navigations
     // and tab refreshes, dies on tab close (which matches per-visit
-    // semantics — UTM identifies WHY they're here today, not WHO).
+    // semantics, UTM identifies WHY they're here today, not WHO).
     const utmSource =
       params.get("utm_source") ?? sessionStorage.getItem("aegibit_utm_source");
     const utmMedium =

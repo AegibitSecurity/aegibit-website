@@ -70,7 +70,7 @@ export const PRICING_PLANS = [
     description: "Custom deployment for regulated industries with full data sovereignty.",
     features: [
       "Everything in Business",
-      "Sudo Mode — Dual Approval",
+      "Sudo Mode, Dual Approval",
       "SIEM integration",
       "On-premise deployment option",
       "India data residency SLA",
@@ -101,7 +101,7 @@ export const FAQS = [
   },
   {
     q: "Where is our data stored? Can we keep it in India?",
-    a: "Enterprise plans include an India data residency SLA — all voice data, transcripts, and audit logs remain in Indian data centers. We support both cloud-hosted and on-premise deployments for full data sovereignty.",
+    a: "Enterprise plans include an India data residency SLA, all voice data, transcripts, and audit logs remain in Indian data centers. We support both cloud-hosted and on-premise deployments for full data sovereignty.",
   },
   {
     q: "What integrations are supported out of the box?",

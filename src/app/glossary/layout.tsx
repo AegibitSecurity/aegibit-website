@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 /**
- * /glossary/* — emergency noindex.
+ * /glossary/*, emergency noindex.
  *
  * The Phase 4 audit flagged glossary entries as one-paragraph stubs
  * with related terms not even rendered as links. Thin content +

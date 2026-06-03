@@ -5,7 +5,7 @@ import { requireAdmin } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 /**
- * /api/admin/tool-activity — usage telemetry for the two free
+ * /api/admin/tool-activity, usage telemetry for the two free
  * acquisition tools shipped on /products/paymint and
  * /products/mcp-shield.
  *
@@ -69,7 +69,7 @@ interface ToolMetrics {
 
 // cta_id matchers per tool. The frontend instrumentation (in
 // PayMintSnapshotSection.tsx and McpScannerSection.tsx) is the
-// authoritative source of these strings — keep them in sync.
+// authoritative source of these strings, keep them in sync.
 const TOOL_DEFINITIONS: Record<
   ToolKey,
   {
@@ -96,7 +96,7 @@ const TOOL_DEFINITIONS: Record<
       "mcp_shield_scanner_sample_tools",
       "mcp_shield_scanner_sample_servers",
     ],
-    uploadIds: [], // scanner doesn't have an upload action — paste-only
+    uploadIds: [], // scanner doesn't have an upload action, paste-only
     emailClickId: "mcp_shield_scanner_email",
     leadSource: "scan_export",
   },

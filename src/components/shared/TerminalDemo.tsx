@@ -71,7 +71,7 @@ export function TerminalDemo() {
         <span className="w-3 h-3 rounded-full bg-[#EF4444]" />
         <span className="w-3 h-3 rounded-full bg-[#F59E0B]" />
         <span className="w-3 h-3 rounded-full bg-[#10B981]" />
-        <span className="ml-3 text-xs text-[#6B7280]">voicecore — terminal</span>
+        <span className="ml-3 text-xs text-[#6B7280]">voicecore, terminal</span>
       </div>
 
       {/* Terminal body */}

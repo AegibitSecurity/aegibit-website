@@ -6,7 +6,7 @@ import { McpScannerSection } from "@/components/sections/mcp-shield/McpScannerSe
 import { Shield, ExternalLink, ArrowRight, Eye, Lock, Search } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "AEGIBIT MCP Shield — Security for the Model Context Protocol",
+  title: "AEGIBIT MCP Shield, Security for the Model Context Protocol",
   description:
     "Open-source security scanner and runtime firewall for Model Context Protocol (MCP) servers. Detects tool poisoning, prompt injection, hidden-Unicode steganography, secret exposure, and unsafe stdio launch patterns. MIT licensed. Built after Anthropic's April 2026 MCP-RCE disclosure.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/products/mcp-shield" },
   openGraph: {
-    title: "AEGIBIT MCP Shield — Security for the Protocol Anthropic Refused to Secure",
+    title: "AEGIBIT MCP Shield, Security for the Protocol Anthropic Refused to Secure",
     description:
       "Open-source scanner + runtime for Model Context Protocol servers. Catches tool poisoning, prompt injection, hidden-Unicode attacks, and unsafe stdio launches. MIT licensed.",
     type: "website",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AEGIBIT MCP Shield — Security for the Model Context Protocol",
+    title: "AEGIBIT MCP Shield, Security for the Model Context Protocol",
     description:
       "Open-source security scanner and runtime for MCP servers. The layer Anthropic refused to build.",
   },
@@ -49,7 +49,7 @@ const CHECKS = [
   {
     id: "AEG-MCP-002",
     name: "Schema Hardness Audit",
-    detail: "Path/URL/command parameters without validation — directory traversal, SSRF, and injection risk.",
+    detail: "Path/URL/command parameters without validation, directory traversal, SSRF, and injection risk.",
   },
   {
     id: "AEG-MCP-003",
@@ -139,7 +139,7 @@ export default function McpShieldPage() {
               style={{ color: "#A1A1AA" }}
             >
               In April 2026, security researchers disclosed a critical RCE
-              vulnerability in Anthropic&apos;s Model Context Protocol —
+              vulnerability in Anthropic&apos;s Model Context Protocol,
               affecting <span style={{ color: "#fff", fontWeight: 500 }}>150 million SDK downloads</span>
               <a
                 href="#sources"
@@ -250,7 +250,7 @@ export default function McpShieldPage() {
               className="text-base md:text-lg leading-relaxed max-w-3xl mb-12"
               style={{ color: "#A1A1AA" }}
             >
-              Five checks across two manifest shapes — your MCP tool definitions
+              Five checks across two manifest shapes, your MCP tool definitions
               and your MCP server configurations. Static scan or live probe of a
               running server. JSON output drops directly into your CI pipeline.
             </p>
@@ -319,7 +319,7 @@ export default function McpShieldPage() {
               <p style={{ color: "#A1A1AA", lineHeight: 1.6 }}>
                 Drop a JSON manifest into{" "}
                 <code style={{ color: "#F97316", fontFamily: "monospace" }}>aegibit-mcp scan</code>{" "}
-                — get a full security report in under a second. Auto-detects whether
+                get a full security report in under a second. Auto-detects whether
                 the file is a tool manifest or a server config and runs the
                 relevant checks.
               </p>
@@ -340,7 +340,7 @@ export default function McpShieldPage() {
               <p style={{ color: "#A1A1AA", lineHeight: 1.6 }}>
                 Connect to a real running MCP server over stdio or HTTP, fetch
                 its live tool list, run every check on the actual response your
-                agent will see. Stdlib-only client — no extra dependencies.
+                agent will see. Stdlib-only client, no extra dependencies.
               </p>
             </div>
             <div>
@@ -380,7 +380,7 @@ export default function McpShieldPage() {
           disclosure thread and (b) the AEGIBIT research note that
           re-derived the production-server count from public registry
           telemetry. Keep this list in sync with the README's
-          #background section — single source of truth.
+          #background section, single source of truth.
         */}
         <section
           id="sources"
@@ -521,7 +521,7 @@ export default function McpShieldPage() {
             >
               Install the scanner, scan your first manifest, and drop the
               findings into your CI in under five minutes. The Runtime alpha
-              opens shortly — join the waitlist for early access.
+              opens shortly, join the waitlist for early access.
             </p>
             <TrackedLink
               href="https://shield.aegibit.com"

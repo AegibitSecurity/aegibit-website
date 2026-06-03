@@ -1,4 +1,4 @@
-// Stripe client — server-side only
+// Stripe client, server-side only
 // Import only inside API routes, never in client components
 
 let _stripe: unknown = null;

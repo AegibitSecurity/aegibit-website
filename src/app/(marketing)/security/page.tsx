@@ -5,7 +5,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { ArrowRight, Shield, ShieldCheck, ShieldAlert } from "lucide-react";
 
 /**
- * /security — AEGIBIT security posture.
+ * /security, AEGIBIT security posture.
  *
  * Rewritten 2026-05-10 as part of the C-2 VoiceCore → PayMint rewrite.
  *
@@ -13,9 +13,9 @@ import { ArrowRight, Shield, ShieldCheck, ShieldAlert } from "lucide-react";
  *   - Sold deprecated VoiceCore ("Voice Biometric Authentication",
  *     "Voice data encrypted", "ML Anomaly Detection")
  *   - Fabricated specifics (">99.5% accuracy" with no source)
- *   - Undefendable compliance claims (HIPAA — we're not US healthcare,
- *     ISO 27001 — not certified, RBI Cybersecurity Framework — not
- *     registered, SEBI CSCRF — not applicable to us)
+ *   - Undefendable compliance claims (HIPAA, we're not US healthcare,
+ *     ISO 27001, not certified, RBI Cybersecurity Framework, not
+ *     registered, SEBI CSCRF, not applicable to us)
  *   - Dead CTA "Get Private Access" → /signup
  *
  * This rewrite: every claim is defensible against a CISO asking
@@ -24,7 +24,7 @@ import { ArrowRight, Shield, ShieldCheck, ShieldAlert } from "lucide-react";
  * artifact, the claim is not on this page.
  *
  * What this page DOES NOT claim:
- *   - SOC 2 Type II Certified (we're in progress — that's the only
+ *   - SOC 2 Type II Certified (we're in progress, that's the only
  *     honest framing)
  *   - HIPAA / ISO 27001 / RBI / SEBI alignment (no audit underwrites
  *     any of those today)
@@ -32,19 +32,19 @@ import { ArrowRight, Shield, ShieldCheck, ShieldAlert } from "lucide-react";
  *   - "Zero Trust Architecture" as a feature (it's category labeling,
  *     not specifics)
  *
- * What this page DOES claim — each anchored to a real source:
- *   - CSP + HSTS + Permissions-Policy + COOP — visible in next.config.ts
- *   - Per-IP rate limiting via Upstash hybrid — src/lib/rate-limiter.ts
- *   - httpOnly cookie sessions + scrypt password hashing — src/lib/auth.ts
- *   - Append-only audit trail on agent actions — supabase/schema.sql
+ * What this page DOES claim, each anchored to a real source:
+ *   - CSP + HSTS + Permissions-Policy + COOP, visible in next.config.ts
+ *   - Per-IP rate limiting via Upstash hybrid, src/lib/rate-limiter.ts
+ *   - httpOnly cookie sessions + scrypt password hashing, src/lib/auth.ts
+ *   - Append-only audit trail on agent actions, supabase/schema.sql
  *     `agent_actions` table
- *   - PayMint voucher trail with photo + geo + timestamp — product fact
- *   - MCP Shield as proof point — we open-sourced security tooling
+ *   - PayMint voucher trail with photo + geo + timestamp, product fact
+ *   - MCP Shield as proof point, we open-sourced security tooling
  *     for the MCP ecosystem after Anthropic's April 2026 RCE disclosure
  */
 
 export const metadata: Metadata = {
-  title: "Security — AEGIBIT's posture, written plainly",
+  title: "Security, AEGIBIT's posture, written plainly",
   description:
     "AEGIBIT's security posture. CSP-hardened headers, per-IP rate limiting, httpOnly cookie auth, append-only audit trail, geo-tagged voucher capture, open-source MCP security tooling. Every claim defensible. DPDP-aware. SOC 2 Type II in progress.",
   keywords: [
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/security" },
   openGraph: {
-    title: "Security — AEGIBIT's posture, written plainly",
+    title: "Security, AEGIBIT's posture, written plainly",
     description:
       "Every security claim defensible against a CISO's first question. CSP-hardened headers, per-IP rate limiting, httpOnly cookie auth, append-only agent audit trail, MCP Shield open-source tooling.",
     type: "website",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Security — AEGIBIT's posture, written plainly",
+    title: "Security, AEGIBIT's posture, written plainly",
     description:
       "Every security claim defensible. DPDP-aware. SOC 2 Type II in progress. Read the configuration, not the marketing.",
   },
@@ -97,7 +97,7 @@ const POSTURE = [
   {
     n: "03",
     title: "httpOnly cookie sessions, scrypt-hashed admin credentials",
-    body: "Iron-session encrypted cookies (SameSite=Lax, Secure in production, 8-hour TTL). Admin password stored as scrypt:salt:derived format with N=2^14 and 64 MB maxmem — explicitly bounded so a misconfigured runtime can't OOM. No bearer tokens in client bundles, ever.",
+    body: "Iron-session encrypted cookies (SameSite=Lax, Secure in production, 8-hour TTL). Admin password stored as scrypt:salt:derived format with N=2^14 and 64 MB maxmem, explicitly bounded so a misconfigured runtime can't OOM. No bearer tokens in client bundles, ever.",
     proof: "src/lib/auth.ts + src/lib/session.ts",
   },
   {
@@ -108,13 +108,13 @@ const POSTURE = [
   },
   {
     n: "05",
-    title: "PayMint voucher capture — auditor-grade from the field",
+    title: "PayMint voucher capture, auditor-grade from the field",
     body: "Every voucher captured at the branch is anchored to a photograph, a GPS coordinate, and a server-issued timestamp at the moment of submission. The visibility window for headquarters is same-day instead of the 5-9 days typical of paper-based reconciliation.",
-    proof: "PayMint product feature — see /products/paymint",
+    proof: "PayMint product feature, see /products/paymint",
   },
   {
     n: "06",
-    title: "MCP Shield — we open-sourced our own security tooling",
+    title: "MCP Shield, we open-sourced our own security tooling",
     body: "After Anthropic's April 2026 MCP-RCE disclosure, we shipped MCP Shield: a free, MIT-licensed scanner + runtime for Model Context Protocol servers. Detects tool poisoning, hidden-Unicode steganography, prompt injection markers, secret exposure, unsafe stdio launches. Public code, public issues, public reports.",
     proof: "github.com/AegibitSecurity/mcp-shield + /products/mcp-shield",
   },
@@ -132,18 +132,18 @@ const COMPLIANCE_TODAY = [
     note: "Internal controls + audit-trail discipline mapped to the Trust Services Criteria. Formal Type II audit window has not yet opened. We will not display a SOC 2 badge until the auditor issues the report.",
   },
   {
-    name: "GDPR — EU visitor data",
+    name: "GDPR, EU visitor data",
     status: "Aware",
     note: "EU-resident visitors who submit forms can request data export or deletion via contact@aegibit.com. We do not currently market into the EU; if AEGIBIT begins selling there, we will publish a formal DPA.",
   },
 ];
 
 const NOT_CLAIMED = [
-  "ISO 27001 — not certified",
-  "HIPAA — not applicable (we are not a US healthcare entity or covered associate)",
-  "RBI Cybersecurity Framework — we are not a regulated bank or NBFC",
-  "SEBI CSCRF — not applicable",
-  "FedRAMP, IRAP, C5 — not pursued",
+  "ISO 27001, not certified",
+  "HIPAA, not applicable (we are not a US healthcare entity or covered associate)",
+  "RBI Cybersecurity Framework, we are not a regulated bank or NBFC",
+  "SEBI CSCRF, not applicable",
+  "FedRAMP, IRAP, C5, not pursued",
 ];
 
 export default function SecurityPage() {
@@ -230,7 +230,7 @@ export default function SecurityPage() {
               className="font-light leading-tight mb-12 max-w-3xl"
               style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", color: "#fff" }}
             >
-              Six things AEGIBIT actually does — each anchored to a
+              Six things AEGIBIT actually does, each anchored to a
               file you can read or a public artifact you can audit.
             </h2>
 
@@ -283,7 +283,7 @@ export default function SecurityPage() {
           </div>
         </section>
 
-        {/* ───────── Compliance — honest framing ───────── */}
+        {/* ───────── Compliance, honest framing ───────── */}
         <section
           className="py-20 md:py-28 px-6 lg:px-12"
           style={{ background: "#000" }}
@@ -297,7 +297,7 @@ export default function SecurityPage() {
                 fontSize: "11px",
               }}
             >
-              Compliance status — today
+              Compliance status, today
             </p>
             <h2
               className="font-light leading-tight mb-12 max-w-3xl"
@@ -376,7 +376,7 @@ export default function SecurityPage() {
               >
                 If your buying process requires a specific certification
                 that&apos;s not on the &quot;today&quot; list above, the
-                AEGIBIT team can share our Trust Center roadmap — reach
+                AEGIBIT team can share our Trust Center roadmap, reach
                 out at{" "}
                 <a
                   href="mailto:contact@aegibit.com"
@@ -414,7 +414,7 @@ export default function SecurityPage() {
               className="font-light leading-tight mb-8 max-w-3xl"
               style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", color: "#fff" }}
             >
-              Found a vulnerability? Tell us — we&apos;ll fix it and
+              Found a vulnerability? Tell us, we&apos;ll fix it and
               credit you.
             </h2>
             <div

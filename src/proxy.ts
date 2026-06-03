@@ -21,7 +21,7 @@ import { shouldGateProtectedApi } from "@/lib/proxy-gate";
  *      authoritatively guarded by `requireAdmin` inside each route handler.
  *      The proxy only exists to short-circuit the obvious pre-auth case
  *      before it hits Node + DB.
- *    - `/api/leads` POST is the PUBLIC lead-capture endpoint — every form
+ *    - `/api/leads` POST is the PUBLIC lead-capture endpoint, every form
  *      on the marketing site submits to it. It is explicitly exempted in
  *      `shouldGateProtectedApi` (see src/lib/proxy-gate.ts). Only the admin
  *      GET / PATCH / DELETE methods are proxy-gated.
@@ -71,7 +71,7 @@ export function proxy(req: NextRequest) {
   }
 
   // ── 2. Admin gate ──────────────────────────────────────────────────
-  // (canonical host or localhost dev — fall through to admin checks)
+  // (canonical host or localhost dev, fall through to admin checks)
   if (pathname.startsWith(DASHBOARD_PREFIX) && !hasSessionCookie(req)) {
     const url = req.nextUrl.clone();
     url.pathname = "/admin/login";

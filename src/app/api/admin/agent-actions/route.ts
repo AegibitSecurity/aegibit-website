@@ -14,7 +14,7 @@ import {
 export const dynamic = "force-dynamic";
 
 /**
- * /api/admin/agent-actions — Multi-Agent Orchestrator audit log API.
+ * /api/admin/agent-actions, Multi-Agent Orchestrator audit log API.
  *
  * GET (cookie auth via requireAdmin):
  *   List recent agent_actions rows.
@@ -33,7 +33,7 @@ export const dynamic = "force-dynamic";
  *     { op: "record", ...AgentActionStart, ...AgentActionFinish, duration_ms?: number }
  *       → { id: "uuid" }
  *
- * The bearer auth on POST is intentional — automation scripts run
+ * The bearer auth on POST is intentional, automation scripts run
  * outside the browser and authenticate server-to-server via the
  * rotated DASHBOARD_SECRET. The same secret already gates
  * /api/admin/deploy-notify, so the operational pattern is consistent.
@@ -70,7 +70,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  // Bearer auth — automation scripts authenticate server-to-server.
+  // Bearer auth, automation scripts authenticate server-to-server.
   const auth = req.headers.get("authorization");
   if (!process.env.DASHBOARD_SECRET || auth !== `Bearer ${process.env.DASHBOARD_SECRET}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

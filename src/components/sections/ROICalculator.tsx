@@ -122,7 +122,7 @@ export function ROICalculator() {
             {results.roi > 0 && (
               <div className="rounded-sm bg-[rgba(249,115,22,0.08)] border border-[rgba(249,115,22,0.15)] px-4 py-3">
                 <p className="text-[#F97316] font-semibold text-sm">
-                  That&apos;s {fmt(results.annualSavings)} per year — {results.roi}x ROI on Business plan
+                  That&apos;s {fmt(results.annualSavings)} per year, {results.roi}x ROI on Business plan
                 </p>
               </div>
             )}
@@ -131,7 +131,7 @@ export function ROICalculator() {
               href="/signup"
               className="group flex items-center justify-center gap-2 w-full bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold py-3 rounded-md text-sm transition-colors"
             >
-              See Your Savings in Action — Start Free Trial
+              See Your Savings in Action, Start Free Trial
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </motion.div>

@@ -3,7 +3,7 @@ import { Redis } from "@upstash/redis";
 import { RateLimiterMemory } from "rate-limiter-flexible";
 
 /**
- * AEGIBIT rate-limiter — serverless-safe.
+ * AEGIBIT rate-limiter, serverless-safe.
  *
  * Why this exists: `RateLimiterMemory` lives inside one lambda instance.
  * On Vercel, a single attacker hits N parallel cold-start lambdas and
@@ -11,13 +11,13 @@ import { RateLimiterMemory } from "rate-limiter-flexible";
  * stops working under exactly the conditions where it matters.
  *
  * The fix: route rate-limit state through an out-of-process store. We
- * use Upstash Redis (free tier, atomic INCR with TTL — the textbook
+ * use Upstash Redis (free tier, atomic INCR with TTL, the textbook
  * pattern). It's the same library Vercel uses in their own templates.
  *
  * If UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN are not set, we
  * fall back to the in-memory limiter (preserves the old broken-but-
  * acceptable behavior) and log a single warning. This means the deploy
- * is safe to ship before Upstash is configured — operators add the env
+ * is safe to ship before Upstash is configured, operators add the env
  * vars when ready and a redeploy upgrades the limiter automatically.
  *
  * Failure mode: if Upstash itself returns an error, we fail OPEN (allow
@@ -98,7 +98,7 @@ export const reportExportLimiter: LimiterConfig = {
 };
 
 // ── Upstash backend (lazy-initialised so module import doesn't crash
-//    when env vars are absent — only callers of checkRateLimit see it). ──
+//    when env vars are absent, only callers of checkRateLimit see it). ──
 
 let _redis: Redis | null = null;
 const _upstashCache = new Map<string, Ratelimit>();
@@ -145,7 +145,7 @@ function getMemoryLimiter(cfg: LimiterConfig): RateLimiterMemory {
   return lim;
 }
 
-// ── Public API (unchanged signature — callers don't move) ──────────
+// ── Public API (unchanged signature, callers don't move) ──────────
 
 export async function checkRateLimit(
   cfg: LimiterConfig,
@@ -163,19 +163,19 @@ export async function checkRateLimit(
             retryAfter: Math.max(1, Math.ceil((res.reset - Date.now()) / 1000)),
           };
     } catch (err) {
-      // Fail open — we'd rather let a legit visitor through than block
+      // Fail open, we'd rather let a legit visitor through than block
       // every form submission because Upstash had a bad minute.
       console.error("[ratelimit] upstash error, failing open:", err);
       return { allowed: true };
     }
   }
 
-  // Path B: in-memory fallback — broken under multi-lambda but
+  // Path B: in-memory fallback, broken under multi-lambda but
   // preserves old behavior so a deploy without Upstash configured does
   // not regress anything.
   if (!_warnedAboutFallback) {
     console.warn(
-      "[ratelimit] UPSTASH_REDIS_REST_URL/TOKEN not set — falling back to " +
+      "[ratelimit] UPSTASH_REDIS_REST_URL/TOKEN not set, falling back to " +
         "in-memory limiter. Per-instance counters DO NOT enforce limits " +
         "across parallel lambdas. Set Upstash env vars to fix.",
     );

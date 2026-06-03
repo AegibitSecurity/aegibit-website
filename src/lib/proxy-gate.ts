@@ -20,7 +20,7 @@
  * Set of API pathnames whose admin-only methods require a session
  * cookie. The proxy short-circuits unauthenticated requests with a 401
  * before they hit Node + DB. Each route handler ALSO calls
- * `requireAdmin` defensively — proxy is short-circuit only, not
+ * `requireAdmin` defensively, proxy is short-circuit only, not
  * authoritative.
  */
 export const PROTECTED_API_PATHS: ReadonlySet<string> = new Set([

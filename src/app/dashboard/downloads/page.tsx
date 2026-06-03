@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Download, Smartphone, FileText, Monitor, Users, ExternalLink } from "lucide-react";
 
 /**
- * /dashboard/downloads — download event intelligence.
+ * /dashboard/downloads, download event intelligence.
  *
  * Reads /api/admin/downloads and renders:
  *   1. Total downloads + distinct visitors over the selected window
@@ -375,7 +375,7 @@ function AssetCard({ asset }: { asset: AssetRow }) {
         </div>
       </div>
 
-      {/* Daily bar list — last 14 days */}
+      {/* Daily bar list, last 14 days */}
       {asset.daily.length > 0 && (
         <div className="mb-4">
           <p className="text-[10px] uppercase tracking-wider mb-2" style={{ color: "#6B7280" }}>
@@ -436,7 +436,7 @@ function AssetCard({ asset }: { asset: AssetRow }) {
 
 function shortDate(iso: string): string {
   // Render the "since" timestamp as a friendly local date. For "all"
-  // time the API returns the epoch — render that as "launch."
+  // time the API returns the epoch, render that as "launch."
   const d = new Date(iso);
   if (d.getTime() < 1000) return "launch";
   return d.toISOString().slice(0, 10);

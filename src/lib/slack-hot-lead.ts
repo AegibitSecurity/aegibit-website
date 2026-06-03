@@ -5,13 +5,13 @@ import type { LeadHeat, VisitorJourney } from "@/lib/hot-lead";
  * Format a hot-lead payload as Block Kit for Slack push.
  *
  * Layout (designed for the iPhone push preview + the in-app feed):
- *   • Header: 🔥 HOT LEAD — name · company
+ *   • Header: 🔥 HOT LEAD, name · company
  *   • One-line lead summary (used as fallback push text too)
  *   • Two-column field grid: source, page, score, time-on-site, etc.
  *   • Visitor journey panel: pages + CTAs in code-block formatting
  *   • Action: open mailto / view dashboard
  *
- * Warm leads get a much shorter, less urgent message — keeps the
+ * Warm leads get a much shorter, less urgent message, keeps the
  * channel from becoming background noise for the founder.
  */
 export interface NotifyHotLeadInput {
@@ -132,7 +132,7 @@ export function buildHotBlocks(input: NotifyHotLeadInput): SlackBlock[] {
   }
 
   // Actions: mailto + dashboard. We deliberately do NOT add a tel:
-  // button — Slack's button `url` field only accepts http(s):// and
+  // button, Slack's button `url` field only accepts http(s):// and
   // mailto: schemes, and a tel: URL fails schema validation with
   // `invalid_blocks`, killing the entire message. The phone number is
   // already displayed in the identity section above; mobile Slack
@@ -174,7 +174,7 @@ function buildWarmBlocks(input: NotifyHotLeadInput): SlackBlock[] {
 }
 
 /**
- * Send the lead notification to Slack. No-throw — caller doesn't have
+ * Send the lead notification to Slack. No-throw, caller doesn't have
  * to handle errors. Returns whether the message was delivered.
  */
 export async function notifySlackLead(input: NotifyHotLeadInput): Promise<boolean> {
@@ -184,7 +184,7 @@ export async function notifySlackLead(input: NotifyHotLeadInput): Promise<boolea
   // Fallback text (used in push notifications + accessibility readers).
   // Mobile push truncates ~80 chars, so put the punchline first.
   const fallback = isHot
-    ? `🔥 HOT LEAD — ${input.name ?? input.email}${input.company ? ` · ${input.company}` : ""}${input.journey ? ` · ${input.journey.pages_viewed.length} pages · ${Math.floor(input.journey.time_on_site_seconds / 60)}m on site` : ""} — reply now`
+    ? `🔥 HOT LEAD, ${input.name ?? input.email}${input.company ? ` · ${input.company}` : ""}${input.journey ? ` · ${input.journey.pages_viewed.length} pages · ${Math.floor(input.journey.time_on_site_seconds / 60)}m on site` : ""}, reply now`
     : `🔔 New ${SOURCE_LABELS[input.source] ?? input.source}: ${input.email}`;
 
   const result = await sendSlack({

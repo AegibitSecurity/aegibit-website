@@ -15,7 +15,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { track } from "@/lib/track";
 
 /**
- * PayMint Snapshot — interactive lead-magnet on /products/paymint.
+ * PayMint Snapshot, interactive lead-magnet on /products/paymint.
  *
  * Mirror of McpScannerSection: paste-or-upload CSV → POST to
  * /api/paymint-snapshot → render structured snapshot + Groq
@@ -81,9 +81,9 @@ const SAMPLE_CSV = `Date,Vch No.,Particulars,Cost Centre,Debit Amount,Credit Amo
 07-04-2026,V013,Tea/coffee,Salt Lake Branch,1800,0
 08-04-2026,V014,Cleaning supplies,Howrah Branch,950,0
 08-04-2026,V015,Repair,Salt Lake Branch,3400,0
-09-04-2026,V016,Unaccounted expense,,2200,0
+09-04-2026,V016,Unaccounted expense,2200,0
 10-04-2026,V017,Fuel,Howrah Branch,4200,0
-11-04-2026,V018,Misc,,1500,0
+11-04-2026,V018,Misc,1500,0
 12-04-2026,V019,Office milk,Salt Lake Branch,650,0
 13-04-2026,V020,Bonus payment,Salt Lake Branch,42000,0
 `;
@@ -246,7 +246,7 @@ export function PayMintSnapshotSection() {
           Paste a Tally CSV export (or upload one), and the tool returns
           a structural snapshot in under a second: branch totals, date
           range, variance, anomaly rows, and rows that ship without a
-          branch tag — the audit gap PayMint closes. We do not store the
+          branch tag, the audit gap PayMint closes. We do not store the
           CSV, the rows, or your IP.
         </p>
 
@@ -555,7 +555,7 @@ export function PayMintSnapshotSection() {
                 </summary>
                 <ul className="mt-3 space-y-1.5 text-sm" style={{ color: "#A1A1AA" }}>
                   {result.snapshot.warnings.map((w, i) => (
-                    <li key={i}>— {w}</li>
+                    <li key={i}>• {w}</li>
                   ))}
                 </ul>
               </details>
@@ -579,7 +579,7 @@ export function PayMintSnapshotSection() {
                     <p className="text-sm mt-1" style={{ color: "#A1A1AA", lineHeight: 1.6 }}>
                       Check the inbox in a few seconds. The PayMint team will reach
                       out separately within 24 business hours to walk through your
-                      real numbers — no obligation.
+                      real numbers, no obligation.
                     </p>
                   </div>
                 </div>
@@ -594,7 +594,7 @@ export function PayMintSnapshotSection() {
                   <p className="mb-4 text-sm" style={{ color: "#A1A1AA", lineHeight: 1.6 }}>
                     We&apos;ll send the full snapshot (formatted for Slack / Teams /
                     forward) to your work email. The PayMint team follows up only
-                    once — no drip sequence, no list-spam.
+                    once, no drip sequence, no list-spam.
                   </p>
                   <div className="grid sm:grid-cols-[1fr_1fr_auto] gap-3">
                     <input

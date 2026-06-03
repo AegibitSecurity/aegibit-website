@@ -40,9 +40,9 @@ export default function VisitorsPage() {
               <tr><td colSpan={5} className="px-5 py-8 text-center text-[#374151]">No visitors tracked yet.</td></tr>
             ) : visitors.map((v) => (
               <tr key={v.id} className="border-b border-[rgba(37,99,235,0.08)] hover:bg-[rgba(37,99,235,0.04)] transition-colors">
-                <td className="px-5 py-3 text-[#D1D5DB] font-mono text-xs">{v.ip_address ?? "—"}</td>
-                <td className="px-5 py-3 text-[#6B7280]">{v.device ?? "—"}</td>
-                <td className="px-5 py-3 text-[#6B7280]">{v.country ?? "—"}</td>
+                <td className="px-5 py-3 text-[#D1D5DB] font-mono text-xs">{v.ip_address ?? "-"}</td>
+                <td className="px-5 py-3 text-[#6B7280]">{v.device ?? "-"}</td>
+                <td className="px-5 py-3 text-[#6B7280]">{v.country ?? "-"}</td>
                 <td className={`px-5 py-3 font-bold ${scoreColor(v.behavior_score)}`}>{v.behavior_score}</td>
                 <td className="px-5 py-3 text-[#6B7280]">{new Date(v.created_at).toLocaleDateString()}</td>
               </tr>

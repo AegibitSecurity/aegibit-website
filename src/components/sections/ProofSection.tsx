@@ -6,14 +6,14 @@ import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
 /**
  * Numbers section.
  *
- * Every metric here is anchored to Nibir Motors — our first lighthouse
+ * Every metric here is anchored to Nibir Motors, our first lighthouse
  * customer (7 dealerships, West Bengal). We deliberately do NOT show:
  *   - "99.99% Uptime SLA" (we have no SLA contract that says 99.99%)
  *   - "<50ms Voice Response" (VoiceCore-era, not our product anymore)
  *   - "500+ Enterprise Teams" (we have one customer; this number was a lie)
  *   - "Zero Data Breaches" (vacuously true for low-traffic; misleading)
  *
- * As more customers ship, additional metrics get added — but every one
+ * As more customers ship, additional metrics get added, but every one
  * must be a real number we can defend if a CISO asks "where does this
  * come from?". That's the bar for a $1B-grade company. Specifics > vibes.
  */
@@ -56,7 +56,7 @@ export function ProofSection() {
             href="/case-studies/nibir-motors"
             className="text-[#A1A1AA] hover:text-white underline-offset-4 hover:underline transition-colors"
           >
-            Nibir Motors — 7 dealerships, West Bengal
+            Nibir Motors, 7 dealerships, West Bengal
           </a>
         </motion.p>
 

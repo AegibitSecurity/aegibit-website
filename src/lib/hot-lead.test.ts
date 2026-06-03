@@ -91,7 +91,7 @@ describe("classifyLead", () => {
     expect(classifyLead({ source: "contact", journey: j })).toBe("warm");
   });
 
-  it("pricing visit alone (no CTA click) is NOT enough — stays warm", () => {
+  it("pricing visit alone (no CTA click) is NOT enough, stays warm", () => {
     const j: VisitorJourney = { ...cold, visited_pricing: true };
     expect(classifyLead({ source: "contact", journey: j })).toBe("warm");
   });

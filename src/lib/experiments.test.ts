@@ -13,7 +13,7 @@ describe("getExperimentVariant", () => {
     expect(getExperimentVariant(null, "hero_cta_copy")).toBe("control_explore");
   });
 
-  it("is deterministic — same visitorId always gets same variant", () => {
+  it("is deterministic, same visitorId always gets same variant", () => {
     const v1 = getExperimentVariant("visitor-abc-123", "hero_cta_copy");
     const v2 = getExperimentVariant("visitor-abc-123", "hero_cta_copy");
     const v3 = getExperimentVariant("visitor-abc-123", "hero_cta_copy");

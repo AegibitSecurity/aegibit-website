@@ -10,7 +10,7 @@ import { PayMintSnapshotSection } from "@/components/sections/paymint/PayMintSna
 import { PayMintCTA } from "@/components/sections/paymint/PayMintCTA";
 
 export const metadata: Metadata = {
-  title: "PayMint — Multi-Branch Expense & Payments Platform",
+  title: "PayMint, Multi-Branch Expense & Payments Platform",
   description:
     "PayMint is the secure, real-time expense management platform built by AEGIBIT for multi-branch businesses. Branch-coded vouchers, role-based approvals, audit-grade logging, Tally-ready exports.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/products/paymint" },
   openGraph: {
-    title: "PayMint — Multi-Branch Expense & Payments Platform",
+    title: "PayMint, Multi-Branch Expense & Payments Platform",
     description:
       "Secure expense management built by a cybersecurity company. Real-time sync, role-based approvals, audit-grade logs.",
     type: "website",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PayMint — Multi-Branch Expense & Payments Platform",
+    title: "PayMint, Multi-Branch Expense & Payments Platform",
     description:
       "Secure expense management built by a cybersecurity company.",
   },

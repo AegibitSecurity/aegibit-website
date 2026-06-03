@@ -1,5 +1,5 @@
 /**
- * MCP Shield web-scanner — explain.ts tests.
+ * MCP Shield web-scanner, explain.ts tests.
  *
  * The load-bearing assertion here is the PRIVACY GUARANTEE: the raw
  * manifest a visitor paste must never leave our process unless they
@@ -23,7 +23,7 @@ const fixtureResult: ScanResult = {
       tool_name: "charge",
       severity: "critical",
       title: "AWS Access Key ID embedded in tool definition",
-      // The detail field is what we WANT Groq to see — and it's the
+      // The detail field is what we WANT Groq to see, and it's the
       // REDACTED version (the actual check redacts to "AKIA...PLE  (len=20)")
       detail: "Tool charge contains what looks like an AWS Access Key ID: \"AKIA...PLE (len=20)\". Manifests ship to every client.",
       remediation: "Rotate the exposed credential immediately.",
@@ -34,7 +34,7 @@ const fixtureResult: ScanResult = {
   ],
 };
 
-describe("buildPrompt — privacy guarantees", () => {
+describe("buildPrompt, privacy guarantees", () => {
   it("never embeds the raw manifest in the prompt", () => {
     const prompt = buildPrompt(fixtureResult);
     expect(prompt).not.toContain(SENSITIVE_TOKEN);

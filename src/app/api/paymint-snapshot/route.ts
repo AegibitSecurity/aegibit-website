@@ -7,7 +7,7 @@ import { checkRateLimit, paymintSnapshotLimiter } from "@/lib/rate-limiter";
 /**
  * POST /api/paymint-snapshot
  *
- * The PayMint Snapshot endpoint. Public — no auth (it's a marketing-
+ * The PayMint Snapshot endpoint. Public, no auth (it's a marketing-
  * site lead-magnet, every visitor uses it). Rate-limited per IP via
  * Upstash so a single visitor can't burn the Groq free-tier quota
  * for the whole site.
@@ -22,8 +22,8 @@ import { checkRateLimit, paymintSnapshotLimiter } from "@/lib/rate-limiter";
  *   }
  *
  * Response codes:
- *   400 — malformed JSON / missing csv field / payload over 512 KB
- *   429 — visitor hit the per-IP rate limit; Retry-After header set
+ *   400, malformed JSON / missing csv field / payload over 512 KB
+ *   429, visitor hit the per-IP rate limit; Retry-After header set
  *
  * Privacy posture (mirrored from /api/mcp-scan):
  *   The endpoint does NOT persist the CSV, the parsed rows, or the
@@ -36,7 +36,7 @@ interface SnapshotRequestBody {
   csv?: string;
 }
 
-const CSV_BYTE_CAP = 512 * 1024; // 512 KB — covers ~6 months of small-business expense data; hard cap on abuse.
+const CSV_BYTE_CAP = 512 * 1024; // 512 KB, covers ~6 months of small-business expense data; hard cap on abuse.
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";

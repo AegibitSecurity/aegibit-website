@@ -10,7 +10,7 @@ import { GridPlane } from "./GridPlane";
 function CameraRig() {
   const { camera, mouse } = useThree();
   // React Three Fiber explicitly designs for direct mutation of three.js
-  // objects inside useFrame — that's how every camera-follow, parallax,
+  // objects inside useFrame, that's how every camera-follow, parallax,
   // and animation example in the R3F docs is written. The
   // react-hooks/immutability rule is React-pure-render oriented and
   // doesn't model R3F's mutation-first render loop. Disabling for the

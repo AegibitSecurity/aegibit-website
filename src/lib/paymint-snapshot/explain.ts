@@ -1,5 +1,5 @@
 /**
- * PayMint Snapshot — Groq narrative layer.
+ * PayMint Snapshot, Groq narrative layer.
  *
  * Takes a Snapshot and asks Groq Llama 3.3 70B to produce a calm,
  * 3-paragraph operator summary in AEGIBIT brand voice. The
@@ -10,7 +10,7 @@
  *   Para 2: where the operational risk shows up (variance,
  *           anomalies, missing-branch rows)
  *   Para 3: which PayMint capability addresses each risk, in
- *           one sentence — never pitching beyond what the data
+ *           one sentence, never pitching beyond what the data
  *           justifies
  *
  * Privacy: Groq sees ONLY the aggregated Snapshot, never the raw
@@ -33,16 +33,16 @@ VOICE
 - Never invent numbers the snapshot doesn't contain.
 - Never claim PayMint will reduce a number by a specific amount.
 
-PARAGRAPH 1 — What this data shows
+PARAGRAPH 1, What this data shows
 - State the row count, branch count, and date range.
 - Name the top branch by total spend.
 
-PARAGRAPH 2 — Where the operational risk is
+PARAGRAPH 2, Where the operational risk is
 - If branch variance CV > 0.5, say "concentration risk" and name it.
 - If there are anomalies, state the count and the top branch they cluster in.
-- If rows_missing_branch > 0, call it out as "rows without a branch tag" — the audit gap PayMint closes.
+- If rows_missing_branch > 0, call it out as "rows without a branch tag", the audit gap PayMint closes.
 
-PARAGRAPH 3 — Where PayMint fits
+PARAGRAPH 3, Where PayMint fits
 - One sentence per risk identified above, naming the PayMint capability that addresses it (branch-coded voucher capture, real-time sync, audit-grade attribution, Tally-ready exports).
 - End with: "For a 12-minute walkthrough on your real numbers, request a PayMint demo."
 
@@ -89,7 +89,7 @@ export async function explainSnapshot(snapshot: Snapshot): Promise<string | null
 }
 
 /**
- * Build the user message for Groq. Pure function — exported for
+ * Build the user message for Groq. Pure function, exported for
  * testing. Includes ONLY structural aggregates; never raw row data.
  *
  * Privacy contract: this function's output is the entire surface
@@ -120,7 +120,7 @@ export function buildPrompt(snapshot: Snapshot): string {
   const varianceLine =
     snapshot.branch_variance_cv === null
       ? "Branch variance: not computable (fewer than 2 branches)"
-      : `Branch variance CV: ${snapshot.branch_variance_cv.toFixed(2)} ${snapshot.branch_variance_cv > 0.5 ? "(high — concentration risk)" : "(within normal range)"}`;
+      : `Branch variance CV: ${snapshot.branch_variance_cv.toFixed(2)} ${snapshot.branch_variance_cv > 0.5 ? "(high, concentration risk)" : "(within normal range)"}`;
 
   return [
     `Rows parsed: ${snapshot.rows_parsed}`,

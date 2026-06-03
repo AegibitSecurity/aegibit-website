@@ -1,12 +1,12 @@
 /**
- * Slack Incoming Webhook sender — operational alerts.
+ * Slack Incoming Webhook sender, operational alerts.
  *
  * One channel, two consumers:
- *   1. Hot-lead push (P3-S5) — when /api/leads classifies a lead as
+ *   1. Hot-lead push (P3-S5), when /api/leads classifies a lead as
  *      "hot", we POST a Block Kit message so the founder's phone
  *      vibrates within ~1 second of form submit. 9× conversion lift
  *      vs waiting on email.
- *   2. Agent auto-disable alert (P3-S5b, follow-up) — when an agent
+ *   2. Agent auto-disable alert (P3-S5b, follow-up), when an agent
  *      hits the consecutive-failure threshold, ping ops so it doesn't
  *      sit dark for hours.
  *
@@ -75,7 +75,7 @@ export async function sendSlack(msg: SlackMessage): Promise<SlackResult> {
   }
 
   const text = truncate(msg.text);
-  // Body composition rules — learned the hard way (PR #61):
+  // Body composition rules, learned the hard way (PR #61):
   //
   // Slack rejects `actions` (and a few other block types) when they
   // appear inside `attachments[].blocks[]`. The webhook returns

@@ -24,7 +24,7 @@ import {
  *   if (variant === "variant_demo") return <Button>Get a demo</Button>;
  *   return <Button>Explore Our Products</Button>;
  *
- * The exposure event is the load-bearing piece for stats analysis —
+ * The exposure event is the load-bearing piece for stats analysis,
  * sample size = distinct visitors with experiment_exposure for this
  * (experiment, variant) pair. Conversion rate = leads attributed to
  * each variant's distinct cta_id. The dashboard funnel view already
@@ -32,7 +32,7 @@ import {
  *
  * Why compute on render (not useState + useEffect):
  *   The variant is a deterministic function of (visitorId, experimentId)
- *   via FNV-1a bucketing in `getExperimentVariant` — a pure function.
+ *   via FNV-1a bucketing in `getExperimentVariant`, a pure function.
  *   Computing on render with `visitorId` as a Zustand-tracked dependency
  *   gives correct re-render semantics without the cascading-render
  *   anti-pattern that `useEffect(setState)` trips

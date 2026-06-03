@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 
 /**
- * /dpdp — India-specific Digital Personal Data Protection Act
+ * /dpdp, India-specific Digital Personal Data Protection Act
  * notice. C-3 ship.
  *
  * AEGIBIT is an Indian entity processing the personal data of
@@ -15,7 +15,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  * DPDP Act and to provide a single India-anchored reference for
  * data-principal rights.
  *
- * The general privacy policy lives at /privacy — this page is the
+ * The general privacy policy lives at /privacy, this page is the
  * Indian-statute-specific overlay. Anywhere the DPDP Act and the
  * general policy differ, the DPDP-required language on this page
  * is authoritative for Indian data principals.
@@ -74,7 +74,7 @@ export default function DpdpPage() {
             <P>
               Under the DPDP Act, AEGIBIT is the{" "}
               <strong style={{ color: "#fff" }}>Data Fiduciary</strong>{" "}
-              and you — the visitor, the lead, the customer — are
+              and you, the visitor, the lead, the customer, are
               the{" "}
               <strong style={{ color: "#fff" }}>Data Principal</strong>.
               This page describes what data we process, why, and how
@@ -91,34 +91,34 @@ export default function DpdpPage() {
           <Section title="What we collect from you (lawful basis)">
             <P>
               We process your personal data only with your consent
-              — given when you submit a form, send a chat message,
-              or download a product — and only for the specific
+              given when you submit a form, send a chat message,
+              or download a product, and only for the specific
               purpose you submitted it for. Under the DPDP Act, this
               is the &quot;consent&quot; ground (§4).
             </P>
             <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Form submissions</strong>{" "}
-                — email, name, company, phone (when you provide them)
+                email, name, company, phone (when you provide them)
                 are processed to respond to the inquiry you submitted.
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Chat with Aira</strong>{" "}
-                — your message text is sent to the Groq LLM service
+                your message text is sent to the Groq LLM service
                 so the bot can reply. If you provide your email in
                 chat, it goes into the lead pipeline the same as a
                 form submission.
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Engagement signals</strong>{" "}
-                — pages visited, time on site, scroll depth,
+                pages visited, time on site, scroll depth,
                 anonymized IP-derived country. Used in aggregate to
                 improve the site; never sold; never used to target
                 you individually.
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Free product downloads</strong>{" "}
-                — when you download MCP Shield from GitHub or Aira
+                when you download MCP Shield from GitHub or Aira
                 from this site, AEGIBIT itself does not collect any
                 personal data tied to that download (GitHub may; the
                 Aira free Windows installer is local-first and does
@@ -150,32 +150,32 @@ export default function DpdpPage() {
             <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Right to access information (§11)</strong>{" "}
-                — request a summary of the personal data we hold
+                request a summary of the personal data we hold
                 about you and the identities of any Data Processors
                 we&apos;ve shared it with.
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Right to correction and erasure (§12)</strong>{" "}
-                — ask us to correct anything inaccurate or to delete
+                ask us to correct anything inaccurate or to delete
                 your data entirely. We will comply unless we are
                 legally required to retain (e.g. tax records under
                 the Income Tax Act).
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Right to nominate (§13)</strong>{" "}
-                — designate another person to exercise these rights
+                designate another person to exercise these rights
                 on your behalf in the event of your death or
                 incapacity. Email us the nomination details.
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Right of grievance redressal (§14)</strong>{" "}
-                — if you&apos;re unsatisfied with how we&apos;ve
+                if you&apos;re unsatisfied with how we&apos;ve
                 handled a request, you can escalate to the Data
                 Protection Board of India (see below).
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Right to withdraw consent</strong>{" "}
-                — at any point. The processing that already happened
+                at any point. The processing that already happened
                 under your previous consent remains lawful, but we
                 stop further processing once you withdraw.
               </Bullet>
@@ -186,7 +186,7 @@ export default function DpdpPage() {
             <P>
               Some of our sub-processors are located outside India
               (Vercel in the USA, Resend in the USA, Groq in the
-              USA, Supabase in Singapore — see{" "}
+              USA, Supabase in Singapore, see{" "}
               <Link href="/privacy">/privacy</Link> for the full
               list). The DPDP Act permits cross-border transfer to
               any country except those the Central Government
@@ -240,7 +240,7 @@ export default function DpdpPage() {
             </P>
           </Section>
 
-          <Section title="Grievance redressal — Data Protection Board of India">
+          <Section title="Grievance redressal, Data Protection Board of India">
             <P>
               If we have not resolved your concern to your
               satisfaction, you have the right to file a complaint
@@ -324,14 +324,14 @@ export default function DpdpPage() {
           <Section title="Companion documents">
             <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               <Bullet>
-                <Link href="/privacy">/privacy</Link> — general
+                <Link href="/privacy">/privacy</Link>, general
                 (multi-jurisdictional) privacy policy.
               </Bullet>
               <Bullet>
-                <Link href="/terms">/terms</Link> — terms of service.
+                <Link href="/terms">/terms</Link>, terms of service.
               </Bullet>
               <Bullet>
-                <Link href="/security">/security</Link> — technical
+                <Link href="/security">/security</Link>, technical
                 security posture.
               </Bullet>
             </ul>

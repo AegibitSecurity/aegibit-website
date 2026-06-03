@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 
 /**
- * /terms — AEGIBIT Terms of Service.
+ * /terms, AEGIBIT Terms of Service.
  *
  * Created 2026-05-10 (C-3 ship). Footer linked here before this
  * page existed (404). This document covers public use of
@@ -13,7 +13,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  * Paid contracts are governed by a separate MSA agreed at signing.
  *
  * Drafting principle: plain English, what users can/can't do,
- * what AEGIBIT promises, what AEGIBIT doesn't. Honest about scope —
+ * what AEGIBIT promises, what AEGIBIT doesn't. Honest about scope,
  * the disclaimer block explicitly says this will be reviewed by
  * counsel before AEGIBIT scales to enterprise contracts.
  */
@@ -107,7 +107,7 @@ export default function TermsPage() {
                 each.
               </Bullet>
               <Bullet>
-                Quote or reference us in good faith — research, blog
+                Quote or reference us in good faith, research, blog
                 posts, comparison pages, podcasts. We&apos;d love
                 a link back to{" "}
                 <Link href="https://www.aegibit.com">www.aegibit.com</Link>
@@ -126,7 +126,7 @@ export default function TermsPage() {
                 Try to break into the site or admin surfaces, run
                 automated scans against production traffic, or
                 bypass rate limits. (Good-faith security research is
-                welcome — see the responsible disclosure path on{" "}
+                welcome, see the responsible disclosure path on{" "}
                 <Link href="/security">/security</Link>.)
               </Bullet>
               <Bullet>
@@ -138,7 +138,7 @@ export default function TermsPage() {
                 Reverse-engineer security controls (CSP, rate
                 limiting, audit trail) for the purpose of evading
                 them. Reverse-engineering for compatibility or
-                interoperability — fine.
+                interoperability, fine.
               </Bullet>
               <Bullet>
                 Scrape the site at a rate that interferes with other
@@ -167,7 +167,7 @@ export default function TermsPage() {
             </P>
             <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               <Bullet>
-                <strong style={{ color: "#fff" }}>MCP Shield</strong> —
+                <strong style={{ color: "#fff" }}>MCP Shield</strong>,
                 MIT licensed. Full text in the GitHub repository at{" "}
                 <Link href="https://github.com/AegibitSecurity/mcp-shield">
                   github.com/AegibitSecurity/mcp-shield
@@ -176,14 +176,14 @@ export default function TermsPage() {
                 terms.
               </Bullet>
               <Bullet>
-                <strong style={{ color: "#fff" }}>Aira (Free)</strong> —
+                <strong style={{ color: "#fff" }}>Aira (Free)</strong>,
                 free for personal and commercial use. EULA shipped
                 inside the Windows installer. No telemetry leaves
                 your machine without your explicit action (e.g.
                 submitting an Aira Pro waitlist email).
               </Bullet>
               <Bullet>
-                <strong style={{ color: "#fff" }}>PayMint</strong> —
+                <strong style={{ color: "#fff" }}>PayMint</strong>,
                 pricing and subscription terms are published at{" "}
                 <Link href="/pricing">/pricing</Link>. Active
                 customers are governed by the MSA signed at the start
@@ -282,15 +282,15 @@ export default function TermsPage() {
           <Section title="Companion documents">
             <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               <Bullet>
-                <Link href="/privacy">/privacy</Link> — how we
+                <Link href="/privacy">/privacy</Link>, how we
                 collect, store, and use data.
               </Bullet>
               <Bullet>
-                <Link href="/dpdp">/dpdp</Link> — India-specific
+                <Link href="/dpdp">/dpdp</Link>, India-specific
                 DPDP Act 2023 notice.
               </Bullet>
               <Bullet>
-                <Link href="/security">/security</Link> — technical
+                <Link href="/security">/security</Link>, technical
                 security posture.
               </Bullet>
             </ul>

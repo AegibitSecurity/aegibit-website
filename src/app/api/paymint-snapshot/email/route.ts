@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
   });
 
   // Even if the lead-write fails (DB error) we still confirm the
-  // email send — the visitor got value and we have observability via
+  // email send, the visitor got value and we have observability via
   // server logs to reconcile later.
   return NextResponse.json({
     ok: true,

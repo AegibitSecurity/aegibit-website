@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Send, Copy, Check, MessageSquare, Mail, Sparkles, AlertTriangle } from "lucide-react";
 
 /**
- * /dashboard/outbound — Interactive Outbound Playbook
+ * /dashboard/outbound, Interactive Outbound Playbook
  *
  * Operator tool for the AEGIBIT founders. Centralises:
  *   • 3 LinkedIn DM templates (cold open, follow-up, breakup)
@@ -17,7 +17,7 @@ import { Send, Copy, Check, MessageSquare, Mail, Sparkles, AlertTriangle } from 
  * demo back to the message variant that produced it.
  *
  * Note: This is intentionally a CONTENT page, not a sender. We never auto-
- * send DMs/emails on the founder's behalf — relationship integrity matters.
+ * send DMs/emails on the founder's behalf, relationship integrity matters.
  * The founder copies, personalises further if needed, and sends manually
  * (LinkedIn) or via their existing outbound tool (Lemlist, Apollo, etc.)
  * for email.
@@ -47,8 +47,8 @@ const LINKEDIN_DMS = [
     label: "Touch 1: Cold open",
     purpose:
       "First message. Goal: pattern interrupt + earn a reply. Short, no link, no pitch.",
-    when: "Day 0 — connection request acceptance day",
-    body: `Hi {{firstName}}, saw {{company}} runs {{branchCount}} branches across {{city}} — impressive ops.
+    when: "Day 0, connection request acceptance day",
+    body: `Hi {{firstName}}, saw {{company}} runs {{branchCount}} branches across {{city}}, impressive ops.
 
 Quick question (no pitch, promise): how do you currently track petty cash + fuel + workshop expenses across branches? Excel? WhatsApp? Tally entries?
 
@@ -60,7 +60,7 @@ Working on something specific to multi-branch dealers and curious if the standar
     purpose:
       "After they reply OR after 48h silence. Brings the value angle in. One link, one ask.",
     when: "Day 2-3 after Touch 1",
-    body: `Thanks {{firstName}} — what you described ({{painPoint}}) is exactly the pattern.
+    body: `Thanks {{firstName}}, what you described ({{painPoint}}) is exactly the pattern.
 
 We built PayMint to solve this for Indian multi-branch dealers. Live with Nibir Motors across 7 branches in West Bengal. Real-time sync, branch-coded vouchers, Tally-ready exports, audit log built in.
 
@@ -74,13 +74,13 @@ Worth a 20-min look? Quick demo here: aegibit.com/products/paymint/demo`,
     purpose:
       "Final message if no reply. Counter-intuitive: closing the door often opens it. Permission to forget.",
     when: "Day 7-8 after Touch 1",
-    body: `{{firstName}}, last message — I'll stop bothering you.
+    body: `{{firstName}}, last message, I'll stop bothering you.
 
 If multi-branch expense tracking is on the roadmap for {{company}} this quarter, the demo link is here: aegibit.com/products/paymint/demo
 
-If not, all good — I'll keep building, see you when the time is right.
+If not, all good, I'll keep building, see you when the time is right.
 
-— The AEGIBIT Team`,
+The AEGIBIT Team`,
   },
 ];
 
@@ -94,15 +94,15 @@ const COLD_EMAILS = [
     subject: "{{company}} + branch expense control?",
     body: `Hi {{firstName}},
 
-Saw {{company}} runs {{branchCount}} branches around {{city}}. Genuinely curious — when one of your branch managers spends ₹2,000 on fuel today, how does that voucher reach head-office reconciliation?
+Saw {{company}} runs {{branchCount}} branches around {{city}}. Genuinely curious, when one of your branch managers spends ₹2,000 on fuel today, how does that voucher reach head-office reconciliation?
 
 Most multi-branch dealers we talk to are still running on Excel + WhatsApp. Some on Tally direct entry. Both leak time and accuracy.
 
-We built PayMint specifically for this — branch-coded vouchers, real-time sync, audit trail, Tally-ready exports. Live with Nibir Motors (7 branches, West Bengal).
+We built PayMint specifically for this, branch-coded vouchers, real-time sync, audit trail, Tally-ready exports. Live with Nibir Motors (7 branches, West Bengal).
 
 Open to a 20-min walkthrough? Same-day sandbox link if you want to try it first.
 
-— The AEGIBIT Team
+The AEGIBIT Team
 aegibit.com/products/paymint/demo?utm_source=email&utm_campaign=cold_t1`,
   },
   {
@@ -112,7 +112,7 @@ aegibit.com/products/paymint/demo?utm_source=email&utm_campaign=cold_t1`,
     subject: "Re: {{company}} branch expense control",
     body: `{{firstName}},
 
-Quick follow-up — one specific scenario most multi-branch dealers tell us is painful:
+Quick follow-up, one specific scenario most multi-branch dealers tell us is painful:
 
   Month-end. Branch managers send petty-cash totals via WhatsApp. Head-office accountant manually keys 200+ vouchers into Tally. Two days lost. Some duplicates, some missing, some misclassified.
 
@@ -121,7 +121,7 @@ PayMint takes that from 2 days to 20 minutes. Vouchers flow live as they're spen
 Want to see it run on real numbers? 20-min screen-share, no prep needed:
 aegibit.com/products/paymint/demo?utm_source=email&utm_campaign=cold_t2
 
-— The AEGIBIT Team`,
+The AEGIBIT Team`,
   },
   {
     id: "email_3",
@@ -135,18 +135,18 @@ aegibit.com/case-studies/nibir-motors?utm_source=email&utm_campaign=cold_t3
 
 7 branches. Real-time vouchers. Tally exports. Audit log. Built by a cybersecurity company.
 
-— The AEGIBIT Team`,
+The AEGIBIT Team`,
   },
   {
     id: "email_4",
     label: "Touch 4: Pricing transparency",
     when: "Day 12",
-    subject: "PayMint pricing — ₹999/branch/month",
+    subject: "PayMint pricing, ₹999/branch/month",
     body: `{{firstName}},
 
 Realised I never sent the pricing. Transparent, no per-user fees, no hidden tiers:
 
-  ₹999 per branch per month — every feature, unlimited users
+  ₹999 per branch per month, every feature, unlimited users
   Free 14-day pilot, no credit card
   Cancel anytime, export everything as CSV
 
@@ -154,7 +154,7 @@ For {{company}}'s {{branchCount}} branches: ₹{{branchCount}}999/month. ROI mat
 
 Full pricing + ROI calculator: aegibit.com/pricing?utm_source=email&utm_campaign=cold_t4
 
-— The AEGIBIT Team`,
+The AEGIBIT Team`,
   },
   {
     id: "email_5",
@@ -163,16 +163,16 @@ Full pricing + ROI calculator: aegibit.com/pricing?utm_source=email&utm_campaign
     subject: "Closing the loop, {{firstName}}",
     body: `{{firstName}},
 
-Last note — promise.
+Last note, promise.
 
 If branch expense automation isn't a priority for {{company}} this quarter, totally understand. I'll move on and stop bothering you.
 
 If it is and you want to take a look, the 20-min demo is here whenever:
 aegibit.com/products/paymint/demo?utm_source=email&utm_campaign=cold_t5
 
-Either way — keep building.
+Either way, keep building.
 
-— The AEGIBIT Team`,
+The AEGIBIT Team`,
   },
 ];
 
@@ -180,17 +180,17 @@ Either way — keep building.
 
 const ICP = {
   primary: {
-    title: "Primary ICP — book here first",
+    title: "Primary ICP, book here first",
     items: [
       "Multi-brand car dealerships, 3-15 branches, India",
       "Two-wheeler dealerships (Hero, Honda, TVS, Bajaj channel), 2-10 branches",
       "Commercial vehicle dealerships (Tata, Ashok Leyland), any branch count",
-      "Used-car multi-location chains (Cars24-style — but smaller, regional)",
+      "Used-car multi-location chains (Cars24-style, but smaller, regional)",
       "Multi-branch automotive workshops (independent service chains)",
     ],
   },
   secondary: {
-    title: "Secondary ICP — warm later",
+    title: "Secondary ICP, warm later",
     items: [
       "Multi-location retail SMEs (clothing, electronics) with 5-20 branches",
       "Multi-branch restaurants / dark kitchens",
@@ -212,11 +212,11 @@ const ICP = {
   geo: {
     title: "Geographic priority order",
     items: [
-      "1. West Bengal + East India (warm — Nibir Motors social proof)",
+      "1. West Bengal + East India (warm, Nibir Motors social proof)",
       "2. Maharashtra + Gujarat (large dealer concentration, English-friendly)",
       "3. Tamil Nadu + Karnataka + Telangana (tech-forward SME market)",
       "4. Delhi NCR + Punjab (high-volume dealerships)",
-      "5. Tier-2 cities (Indore, Coimbatore, Lucknow — under-served by SaaS)",
+      "5. Tier-2 cities (Indore, Coimbatore, Lucknow, under-served by SaaS)",
     ],
   },
 };
@@ -237,7 +237,7 @@ export default function OutboundPlaybook() {
         </div>
         <p className="text-sm text-[#6B7280]">
           Ready-to-send LinkedIn DMs, cold email sequences, and ICP targeting. Edit
-          variables once — every template substitutes them live.
+          variables once, every template substitutes them live.
         </p>
       </div>
 
@@ -251,7 +251,7 @@ export default function OutboundPlaybook() {
       >
         <AlertTriangle size={18} style={{ color: "#F59E0B", flexShrink: 0, marginTop: 2 }} />
         <div className="text-xs leading-relaxed text-[#FBBF24]">
-          <strong>Aira never auto-sends</strong> — this is a content & personalisation tool.
+          <strong>Aira never auto-sends</strong>, this is a content & personalisation tool.
           The founder copies, customises further if context demands, and sends manually
           (LinkedIn) or via their existing outbound tool (Lemlist / Apollo / Instantly) for
           email. Relationship integrity matters.

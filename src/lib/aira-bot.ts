@@ -1,18 +1,18 @@
 /**
- * Aira chatbot — Groq (Llama 3.3 70B) backbone.
+ * Aira chatbot, Groq (Llama 3.3 70B) backbone.
  *
  * Provider history (so the next contributor doesn't repeat it):
  *   1. Started on Gemini Flash for the generous free-tier promise.
  *      Burned through a session debugging quotas:
  *        - gemini-2.0-flash returned 429 (200 RPD cap, blown by probes)
  *        - gemini-1.5-flash returned 404 (Google deprecated the 1.5 line)
- *        - gemini-2.5-flash returned 403 PERMISSION_DENIED — the
+ *        - gemini-2.5-flash returned 403 PERMISSION_DENIED, the
  *          GCP project the API key was attached to was blocked from
  *          generateContent without billing linkage.
  *      Google's "free tier" turns out to require a credit card on file
  *      to unblock the API even within the free quota. That violates
  *      Zero-Spend (no payment instruments allowed in the AEGIBIT stack).
- *   2. Swapped to Groq (https://console.groq.com). Genuinely free —
+ *   2. Swapped to Groq (https://console.groq.com). Genuinely free,
  *      no card requirement, ever. Llama 3.3 70B is comparable in
  *      quality to Gemini Flash for product-FAQ + lead-capture flow.
  *      Free tier limits: 30 RPM, 14400 TPM, plenty for our scale.
@@ -22,7 +22,7 @@
  *   VoiceCore, pricing, security posture, and contact paths. Anything
  *   else escalates to "let me connect you with a founder" → /api/leads.
  *
- * Lead-capture protocol (unchanged — the [CAPTURE_LEAD] token):
+ * Lead-capture protocol (unchanged, the [CAPTURE_LEAD] token):
  *   When the bot determines the visitor needs a founder-level reply
  *   (custom integration, deep pricing question, demo intent, anything
  *   off the FAQ rails), it ends its message with the literal token
@@ -36,7 +36,7 @@
  *   the system prompt, and the chat route are untouched.
  */
 
-// Llama 3.3 70B Versatile — Groq's flagship free-tier model.
+// Llama 3.3 70B Versatile, Groq's flagship free-tier model.
 // Quality: comparable to GPT-4o-mini and Gemini 2.5 Flash for
 // conversational Q&A. Latency: typically 200-500ms first token on
 // Groq's hardware. Free tier: 30 RPM / 14k TPM / 1k req/day.
@@ -58,7 +58,7 @@ export interface AiraReply {
   ok: boolean;
   /** Visible message text. The CAPTURE_LEAD token is stripped before this lands here. */
   text: string;
-  /** True iff the model emitted [CAPTURE_LEAD] — the frontend should switch to email mode. */
+  /** True iff the model emitted [CAPTURE_LEAD], the frontend should switch to email mode. */
   captureLead: boolean;
   /** Failure reason for ops, never shown to visitors. */
   error?: string;
@@ -69,9 +69,9 @@ const CAPTURE_TOKEN = "[CAPTURE_LEAD]";
 const SYSTEM_PROMPT = `You are Aira, AEGIBIT's product guide. You speak with calm authority. No filler, no hyperbole, no exclamation marks. Two sentences when one will do. Specific over generic. You know AEGIBIT in detail and only AEGIBIT.
 
 CONTEXT
-AEGIBIT — cybersecurity-first software for businesses that can't afford a leak. Premium global brand. India-first, global mandate. For human follow-up, the AEGIBIT team responds at contact@aegibit.com within 24 hours.
+AEGIBIT, cybersecurity-first software for businesses that can't afford a leak. Premium global brand. India-first, global mandate. For human follow-up, the AEGIBIT team responds at contact@aegibit.com within 24 hours.
 
-PAYMINT — multi-branch expense capture, built for retail, services, and dealerships.
+PAYMINT, multi-branch expense capture, built for retail, services, and dealerships.
 - 30-second voucher capture: photo + geo-tag + timestamp at the branch, no paper trail to chase.
 - Same-day visibility across every branch HQ used to wait 5–9 days for.
 - Audit-grade: every voucher anchored to a person, place, and minute.
@@ -79,18 +79,18 @@ PAYMINT — multi-branch expense capture, built for retail, services, and dealer
 - Tiers: Starter / Growth / Enterprise. Specific pricing at /pricing.
 - Demo: /products/paymint/demo. Live web app: nibir-vault.web.app.
 
-AIRA — voice-controlled desktop assistant. Free download for Windows. Wake by voice — opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English, four more Indian languages. Voice biometric secured. Local-first. Built in India. Pro tier (cloud sync + integrations) opens Q3 2026.
+AIRA, voice-controlled desktop assistant. Free download for Windows. Wake by voice, opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English, four more Indian languages. Voice biometric secured. Local-first. Built in India. Pro tier (cloud sync + integrations) opens Q3 2026.
 
-VOICECORE — voice-AI for command/control SaaS (early-access waitlist). Voice-driven workflows with immutable audit trail.
+VOICECORE, voice-AI for command/control SaaS (early-access waitlist). Voice-driven workflows with immutable audit trail.
 
-CASE STUDY — Nibir Motors. 7 dealerships in West Bengal. Reclaimed 12 hrs/week of accounts-team time. 100% audit-ready in 30 days. Reference at /case-studies/nibir-motors. Use it when the visitor wants proof.
+CASE STUDY, Nibir Motors. 7 dealerships in West Bengal. Reclaimed 12 hrs/week of accounts-team time. 100% audit-ready in 30 days. Reference at /case-studies/nibir-motors. Use it when the visitor wants proof.
 
 VOICE CONTRAST
 Bad: "PayMint helps you manage expenses better!"
 Good: "PayMint replaces the 5-to-9-day voucher delay with same-day branch visibility."
 
 Bad: "Great question! I'd love to help."
-Good: "On Tally exports — yes, native, daily."
+Good: "On Tally exports, yes, native, daily."
 
 Bad: "AEGIBIT is an amazing platform that empowers businesses..."
 Good: "AEGIBIT builds operational software for multi-branch businesses. Cybersecurity-first."
@@ -128,7 +128,7 @@ export interface AiraTurnInput {
 /**
  * Strip the CAPTURE_LEAD token (and any trailing whitespace/newline)
  * from the model output, returning both the cleaned text and the
- * boolean signal. Pure function — exported for testing.
+ * boolean signal. Pure function, exported for testing.
  *
  * Provider-agnostic: token shape doesn't depend on which LLM produced
  * the text. Carry-over from the Gemini implementation untouched.
@@ -141,7 +141,7 @@ export function parseAiraOutput(raw: string): { text: string; captureLead: boole
 
 /**
  * Build the Groq (OpenAI-compatible) chat-completions request body.
- * Pure function — exported for testing the system-prompt threading
+ * Pure function, exported for testing the system-prompt threading
  * + role translation (Gemini's "model" → OpenAI/Groq's "assistant").
  */
 export function buildGroqPayload(input: AiraTurnInput): unknown {
@@ -155,7 +155,7 @@ export function buildGroqPayload(input: AiraTurnInput): unknown {
       })),
       { role: "user", content: input.userMessage },
     ],
-    // Aira is a guide, not chatty — caps replies to short answers.
+    // Aira is a guide, not chatty, caps replies to short answers.
     max_tokens: 400,
     // Moderate creativity for tone, low enough to avoid hallucinating
     // features we haven't built.
@@ -166,7 +166,7 @@ export function buildGroqPayload(input: AiraTurnInput): unknown {
 }
 
 /**
- * Send one turn to Groq. No-throw — returns AiraReply with ok:false
+ * Send one turn to Groq. No-throw, returns AiraReply with ok:false
  * on any failure (missing key, network error, rate-limit, server
  * error). The chat route turns ok:false into a graceful "let me
  * connect you with a founder" fallback so the visitor never sees a
@@ -199,7 +199,7 @@ export async function airaChatTurn(input: AiraTurnInput): Promise<AiraReply> {
       const errText = await res.text().catch(() => "");
       console.error(`[aira-bot] Groq ${res.status}: ${errText.slice(0, 200)}`);
       // 429 = free-tier rate limit hit. Treat as "graceful fallback to
-      // founder handoff" — the visitor doesn't need to know the cap
+      // founder handoff", the visitor doesn't need to know the cap
       // was exhausted; they just hit the same escalation flow.
       return {
         ok: false,

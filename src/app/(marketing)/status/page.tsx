@@ -5,7 +5,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { CheckCircle2, ExternalLink } from "lucide-react";
 
 /**
- * /status — AEGIBIT service-status page.
+ * /status, AEGIBIT service-status page.
  *
  * Discipline call:
  *   A status page only earns trust if it's wired to real signals. At
@@ -23,7 +23,7 @@ import { CheckCircle2, ExternalLink } from "lucide-react";
  *   - Current state per surface (Marketing, API, PayMint app subdomain,
  *     MCP Shield GitHub releases). Each state is sourced from an
  *     externally verifiable signal a reader can click through to.
- *   - Incident history (currently empty — said so).
+ *   - Incident history (currently empty, said so).
  *   - How to be notified (email path through the existing leads
  *     pipeline; explicit promise that this list is incident-only).
  *
@@ -35,14 +35,14 @@ import { CheckCircle2, ExternalLink } from "lucide-react";
  * When the next status-page upgrade happens, the trigger is one of:
  *   - First paid PayMint MSA with an uptime SLA clause attached
  *   - First independent monitoring vendor in the stack (Better Stack
- *     free tier is the likely first step — zero-spend compatible)
+ *     free tier is the likely first step, zero-spend compatible)
  *   - First inbound incident the system surfaced on its own
  */
 
 export const metadata: Metadata = {
-  title: "AEGIBIT Service Status — Live operational state",
+  title: "AEGIBIT Service Status, Live operational state",
   description:
-    "Current operational state of every AEGIBIT surface — marketing site, API endpoints, PayMint application, and MCP Shield public repositories. Honest scope, externally verifiable signals, no synthetic uptime histograms.",
+    "Current operational state of every AEGIBIT surface, marketing site, API endpoints, PayMint application, and MCP Shield public repositories. Honest scope, externally verifiable signals, no synthetic uptime histograms.",
   alternates: { canonical: "/status" },
   openGraph: {
     title: "AEGIBIT Service Status",
@@ -63,14 +63,14 @@ const SURFACES = [
   {
     name: "Marketing site",
     detail: "www.aegibit.com",
-    signal: "Vercel deployment status — bom1 Mumbai edge",
+    signal: "Vercel deployment status, bom1 Mumbai edge",
     state: "Operational",
     signalUrl: "https://www.vercel-status.com/",
     signalLabel: "Vercel platform status",
   },
   {
     name: "API endpoints",
-    detail: "/api/* — leads, contact, telemetry, rate limiter",
+    detail: "/api/*, leads, contact, telemetry, rate limiter",
     signal: "Vercel Function deploy status + Upstash Redis health",
     state: "Operational",
     signalUrl: "https://status.upstash.com/",
@@ -86,7 +86,7 @@ const SURFACES = [
   },
   {
     name: "MCP Shield repository",
-    detail: "github.com/AegibitSecurity/mcp-shield — public, MIT, v0.2.1",
+    detail: "github.com/AegibitSecurity/mcp-shield, public, MIT, v0.2.1",
     signal: "GitHub availability",
     state: "Operational",
     signalUrl: "https://www.githubstatus.com/",
@@ -172,7 +172,7 @@ export default function StatusPage() {
             >
               Live operational state of every AEGIBIT surface. We monitor via
               Vercel, Supabase, Upstash, and GitHub&apos;s own status pages
-              — every check on this page links out to the externally
+              every check on this page links out to the externally
               verifiable signal it&apos;s sourced from. No synthetic
               uptime histograms.
             </p>
@@ -314,12 +314,12 @@ export default function StatusPage() {
                 What we <span style={{ color: "#fff" }}>do</span> monitor:
                 Vercel deployment health, Supabase database availability,
                 Upstash Redis rate-limiter health, and GitHub public-repo
-                availability — each linked above to the upstream provider&apos;s
+                availability, each linked above to the upstream provider&apos;s
                 own status page so you can verify independently.
               </p>
               <p>
-                When the first paid PayMint MSA with an uptime SLA attaches —
-                or the first independent monitoring vendor enters the stack —
+                When the first paid PayMint MSA with an uptime SLA attaches,
+                or the first independent monitoring vendor enters the stack,
                 this page upgrades to the corresponding fidelity. Until then,
                 this is the honest scope.
               </p>
@@ -357,7 +357,7 @@ export default function StatusPage() {
             </h2>
             <p style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               When the first customer-impacting incident occurs, it will be
-              posted here with timestamps, scope, root cause, and remediation —
+              posted here with timestamps, scope, root cause, and remediation,
               the same level of detail we&apos;d expect a vendor to publish to
               us. Internal performance regressions and platform-side blips
               that didn&apos;t reach a customer are not posted here; they
@@ -407,7 +407,7 @@ export default function StatusPage() {
               style={{ color: "#A1A1AA", lineHeight: 1.7 }}
             >
               Email the team and ask to be added to the incident list. We use
-              the existing AEGIBIT mailing pipeline — incident-only, no
+              the existing AEGIBIT mailing pipeline, incident-only, no
               marketing on this list, no unsubscribe friction.
             </p>
             <TrackedLink

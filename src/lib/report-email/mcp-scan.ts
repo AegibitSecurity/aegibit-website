@@ -1,5 +1,5 @@
 /**
- * MCP Shield scan report — HTML email renderer.
+ * MCP Shield scan report, HTML email renderer.
  *
  * Renders a ScanResult into an email body designed to be forwarded
  * to a security team. Same design discipline as the PayMint snapshot
@@ -40,8 +40,8 @@ export function renderScanReportHtml(input: ScanReportInput): {
   const counts = countBySeverity(findings);
   const subject =
     findings.length === 0
-      ? `MCP Shield report — no findings on ${scanned_count} ${kind === "servers" ? "server" : "tool"}${scanned_count === 1 ? "" : "s"}`
-      : `MCP Shield report — ${counts.critical} critical, ${counts.high} high (${findings.length} total)`;
+      ? `MCP Shield report, no findings on ${scanned_count} ${kind === "servers" ? "server" : "tool"}${scanned_count === 1 ? "" : "s"}`
+      : `MCP Shield report, ${counts.critical} critical, ${counts.high} high (${findings.length} total)`;
 
   const findingsHtml = findings
     .slice(0, 30)
@@ -113,7 +113,7 @@ export function renderScanReportHtml(input: ScanReportInput): {
               <td style="padding:0 28px;">
                 <p style="margin:0 0 4px;color:${BRAND_ORANGE};font-size:11px;letter-spacing:0.16em;text-transform:uppercase;">Findings (${findings.length} total)</p>
                 <p style="margin:0 0 4px;color:${MUTED};font-size:12px;">Kind: ${kind} · Scanned: ${scanned_count} ${kind === "servers" ? "server" : "tool"}${scanned_count === 1 ? "" : "s"}</p>
-                ${findings.length === 0 ? `<p style="margin:16px 0 0;color:${TEXT};font-size:14px;">No findings — the manifest passed all five AEG-MCP checks in the web-preview set.</p>` : ""}
+                ${findings.length === 0 ? `<p style="margin:16px 0 0;color:${TEXT};font-size:14px;">No findings, the manifest passed all five AEG-MCP checks in the web-preview set.</p>` : ""}
                 <table cellpadding="0" cellspacing="0" border="0" width="100%">${findingsHtml}</table>
                 ${truncatedNote}
               </td>
@@ -162,11 +162,11 @@ function renderScanReportText(input: ScanReportInput): string {
   if (summary) lines.push("Plain-English summary:", "", summary, "");
 
   if (findings.length === 0) {
-    lines.push("No findings — the manifest passed all five AEG-MCP checks in the web-preview set.");
+    lines.push("No findings, the manifest passed all five AEG-MCP checks in the web-preview set.");
   } else {
     findings.slice(0, 30).forEach((f) => {
       lines.push(
-        `[${f.severity.toUpperCase()}] ${f.check_id}${f.cwe ? " · " + f.cwe : ""} — ${f.tool_name}`,
+        `[${f.severity.toUpperCase()}] ${f.check_id}${f.cwe ? " · " + f.cwe : ""}, ${f.tool_name}`,
       );
       lines.push(`  ${f.title}`);
       lines.push(`  ${f.detail}`);
@@ -184,7 +184,7 @@ function renderScanReportText(input: ScanReportInput): string {
     "",
     "CLI install: pip install aegibit-mcp-shield && aegibit-mcp scan path/to/manifest.json",
     "",
-    "AEGIBIT Global Consulting — contact@aegibit.com",
+    "AEGIBIT Global Consulting, contact@aegibit.com",
   );
   return lines.join("\n");
 }

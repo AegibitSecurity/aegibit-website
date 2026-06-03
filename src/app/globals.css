@@ -122,7 +122,7 @@
 .ping       { animation: ping 2s cubic-bezier(0,0,0.2,1) infinite; }
 .scroll-bounce { animation: scroll-bounce 1.8s ease-in-out infinite; }
 
-/* Shield back-glow pulse — expands and fades from behind */
+/* Shield back-glow pulse, expands and fades from behind */
 @keyframes shield-glow-pulse {
   0%, 100% { transform: scale(1);    opacity: 0.9; }
   50%       { transform: scale(1.4); opacity: 0;   }
@@ -134,7 +134,7 @@
   50%       { opacity: 0.82; }
 }
 
-/* Logo ring pulse — slow, 5s, premium */
+/* Logo ring pulse, slow, 5s, premium */
 /* Professional 2-ring expanding pulse */
 @keyframes logo-pulse {
   0%   { transform: scale(1);    opacity: 0.7; }
@@ -176,11 +176,11 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   Accessibility — WCAG 2.1 AA baseline (C-5)
+   Accessibility, WCAG 2.1 AA baseline (C-5)
 
    Adds global focus-visible rings to every interactive element so
    keyboard users get an unmistakable focus path. Mouse-clickers see
-   nothing — :focus-visible only triggers for keyboard navigation,
+   nothing, :focus-visible only triggers for keyboard navigation,
    matching the native browser UX. Brand-orange ring + 3px offset
    so the focus state reads as designed-in, not bolted-on.
 
@@ -205,7 +205,7 @@ summary:focus-visible,
   transition: outline-offset 0.15s ease;
 }
 
-/* Skip-to-content link — keyboard users press Tab on first focus
+/* Skip-to-content link, keyboard users press Tab on first focus
    and land here, can hit Enter to jump past the navbar. Visually
    hidden until focused. */
 .skip-to-content {
@@ -229,7 +229,7 @@ summary:focus-visible,
   outline-offset: 2px;
 }
 
-/* Respect user's reduced-motion preference — disables our fade-up,
+/* Respect user's reduced-motion preference, disables our fade-up,
    pulse, ping, scroll-bounce animations and instant-scrolls anchor
    links. Anyone who set "Reduce motion" in OS prefs doesn't get the
    marketing-site animations. */

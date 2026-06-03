@@ -28,7 +28,7 @@ import {
 import airaVersion from "@/data/aira-version.json";
 
 // ── Public download metadata ─────────────────────────────────────
-// Source of truth is src/data/aira-version.json — auto-updated by
+// Source of truth is src/data/aira-version.json, auto-updated by
 // the Sunday autonomous upgrade session whenever a new release ships.
 // The /latest/download/{name} URL auto-redirects to whichever release
 // is most recent, so the download URL stays stable across version
@@ -40,7 +40,7 @@ const AIRA_SHA256 = airaVersion.sha256;
 const AIRA_DOWNLOAD_SIZE = `${airaVersion.downloadSizeMB} MB`;
 
 /**
- * Aira — AEGIBIT's voice-controlled desktop assistant.
+ * Aira, AEGIBIT's voice-controlled desktop assistant.
  *
  * Page strategy (premium conversion funnel):
  *   • Hero shows Aira's face + the one-line promise: "Your Voice. Built Into Execution."
@@ -49,7 +49,7 @@ const AIRA_DOWNLOAD_SIZE = `${airaVersion.downloadSizeMB} MB`;
  *   • Reuses the proven VoiceCore page rhythm so design parity is automatic;
  *     copy is rewritten end-to-end for the executive-assistant positioning
  *
- * Color system locked to existing AEGIBIT-deploy tokens — no new palette.
+ * Color system locked to existing AEGIBIT-deploy tokens, no new palette.
  */
 
 export function AiraLanding() {
@@ -95,7 +95,7 @@ function Hero() {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
-        {/* LEFT — copy block */}
+        {/* LEFT, copy block */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
@@ -164,7 +164,7 @@ function Hero() {
             style={{ color: "#A1A1AA" }}
           >
             Aira is your voice-controlled desktop assistant. She lives on your
-            machine, answers in your language, and acts on your tools — opening
+            machine, answers in your language, and acts on your tools, opening
             apps, sending messages, scheduling reminders, drafting on demand.
             No keyboards. No tabs. No friction. Just say her name.
           </p>
@@ -235,7 +235,7 @@ function Hero() {
           </div>
         </motion.div>
 
-        {/* RIGHT — Aira portrait */}
+        {/* RIGHT, Aira portrait */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -255,7 +255,7 @@ function Hero() {
           >
             <Image
               src="/aira/aira_face.png"
-              alt="Aira — your voice-controlled desktop assistant"
+              alt="Aira, your voice-controlled desktop assistant"
               width={920}
               height={920}
               priority
@@ -338,21 +338,21 @@ const CAPABILITIES = [
     Icon: Brain,
     title: "Speaks the way you think",
     body:
-      "Hindi, Bengali, English — auto-detected mid-sentence, replied in the same warm Indian voice. Aira doesn't translate. She thinks in your language.",
+      "Hindi, Bengali, English, auto-detected mid-sentence, replied in the same warm Indian voice. Aira doesn't translate. She thinks in your language.",
     color: "#A855F7",
   },
   {
     Icon: Workflow,
     title: "30+ executor verbs, today",
     body:
-      "Open apps, draft emails, control windows, copy-paste, search files, dictate code, schedule reminders, drive your browser. Aira doesn't just answer — she acts.",
+      "Open apps, draft emails, control windows, copy-paste, search files, dictate code, schedule reminders, drive your browser. Aira doesn't just answer, she acts.",
     color: "#10B981",
   },
   {
     Icon: ShieldCheck,
     title: "Your voice is your password",
     body:
-      "Voice biometrics enrolled at setup. Sensitive actions require Boss-tier verification. Voice prints stored as one-way embeddings — even AEGIBIT can't reconstruct your voice.",
+      "Voice biometrics enrolled at setup. Sensitive actions require Boss-tier verification. Voice prints stored as one-way embeddings, even AEGIBIT can't reconstruct your voice.",
     color: "#F59E0B",
   },
 ];
@@ -394,7 +394,7 @@ function Capabilities() {
             style={{ color: "#A1A1AA" }}
           >
             Other voice assistants answer questions. Aira opens the app, drafts
-            the reply, and books the meeting — without you touching the keyboard.
+            the reply, and books the meeting, without you touching the keyboard.
           </p>
         </div>
 
@@ -501,7 +501,7 @@ function LanguagesSection() {
           >
             Most voice software is English-first with Indian languages bolted on.
             Aira understands and replies in the warm Indian voice you actually
-            recognise — Neerja, Swara, Tanishaa.
+            recognise, Neerja, Swara, Tanishaa.
           </p>
         </div>
 
@@ -541,22 +541,22 @@ const USECASES = [
   {
     role: "Founder",
     quote:
-      "\"Aira, draft a cold email to the Krishnagar dealership about the test drive\" — done in seconds, in your tone.",
+      "\"Aira, draft a cold email to the Krishnagar dealership about the test drive\", done in seconds, in your tone.",
   },
   {
     role: "Executive",
     quote:
-      "\"Remind me in 20 minutes that I have a board call\" — Aira speaks the reminder back, in your language, when it's time.",
+      "\"Remind me in 20 minutes that I have a board call\", Aira speaks the reminder back, in your language, when it's time.",
   },
   {
     role: "Operator",
     quote:
-      "\"Open Excel, the latest expense file, and read me the top 5 anomalies\" — keyboard never touched.",
+      "\"Open Excel, the latest expense file, and read me the top 5 anomalies\", keyboard never touched.",
   },
   {
     role: "Creator",
     quote:
-      "\"Translate this paragraph to Bengali and copy to clipboard\" — done before you finish the sentence.",
+      "\"Translate this paragraph to Bengali and copy to clipboard\", done before you finish the sentence.",
   },
 ];
 
@@ -665,7 +665,7 @@ const TIERS: Tier[] = [
       "30+ executor verbs (apps, files, windows, browser)",
       "Local LLM (Ollama, included)",
       "Local memory + reminders",
-      "100% local — no cloud, no account",
+      "100% local, no cloud, no account",
     ],
     ctaLabel: "Download for Windows",
     ctaHref: AIRA_DOWNLOAD_URL,
@@ -681,8 +681,8 @@ const TIERS: Tier[] = [
     tagline: "Cloud brain, memory sync, integrations.",
     features: [
       "Everything in Aira (Free)",
-      "Cloud brain — Claude / GPT routed for hard reasoning",
-      "Aira Cloud Memory — sync across devices",
+      "Cloud brain, Claude / GPT routed for hard reasoning",
+      "Aira Cloud Memory, sync across devices",
       "Native integrations (Gmail, Calendar, Slack, Notion)",
       "Companion mobile app for reminders on the go",
       "Priority support, founder channel access",
@@ -760,7 +760,7 @@ function Pricing() {
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mt-5"
             style={{ color: "#A1A1AA" }}
           >
-            Aira (Free) is the complete desktop assistant — no signup, no
+            Aira (Free) is the complete desktop assistant, no signup, no
             account, no asterisk. Pro adds the cloud brain. Sovereign is for
             regulated industries.
           </p>
@@ -778,7 +778,7 @@ function Pricing() {
           style={{ color: "#52525B" }}
         >
           The desktop version of Aira will remain free forever. Paid tiers add
-          cloud, sync, integrations, and enterprise features — never paywall
+          cloud, sync, integrations, and enterprise features, never paywall
           what already works on your machine.
         </p>
       </div>
@@ -1021,7 +1021,7 @@ function Waitlist() {
               className="text-[10px] uppercase font-medium"
               style={{ color: "#60A5FA", letterSpacing: "0.2em" }}
             >
-              Founder-tier pilot — limited seats
+              Founder-tier pilot, limited seats
             </span>
           </div>
           <h2
@@ -1215,19 +1215,19 @@ function Waitlist() {
 const FAQS = [
   {
     q: "How do I get Aira on my machine?",
-    a: "Download the free Windows installer from this page — Aira (Free) is the full desktop assistant, ready to use today on Windows 10 or 11 (64-bit). No signup, no account, no asterisk. Aira Pro (cloud brain + sync + integrations) opens in Q3 2026; early-access waitlist is open below for first access plus a permanent discount on Pro pricing.",
+    a: "Download the free Windows installer from this page, Aira (Free) is the full desktop assistant, ready to use today on Windows 10 or 11 (64-bit). No signup, no account, no asterisk. Aira Pro (cloud brain + sync + integrations) opens in Q3 2026; early-access waitlist is open below for first access plus a permanent discount on Pro pricing.",
   },
   {
     q: "What does Aira run on? Is it cloud or local?",
-    a: "Aira is local-first. Voice recognition, biometric auth, the wake word, and the executor all run on your machine. No audio is sent to the cloud during normal use. Aira Pro adds an optional cloud brain for harder reasoning, gated behind your account — your call.",
+    a: "Aira is local-first. Voice recognition, biometric auth, the wake word, and the executor all run on your machine. No audio is sent to the cloud during normal use. Aira Pro adds an optional cloud brain for harder reasoning, gated behind your account, your call.",
   },
   {
     q: "Does Aira work in Hindi and Bengali, or just English?",
-    a: "Aira understands and replies in Hindi, Bengali, English, Tamil, Telugu, Marathi, and Gujarati — auto-detected mid-conversation. The voice itself is the warm Indian female voice (Neerja / Swara / Tanishaa) most users actually recognise. No robotic American voice.",
+    a: "Aira understands and replies in Hindi, Bengali, English, Tamil, Telugu, Marathi, and Gujarati, auto-detected mid-conversation. The voice itself is the warm Indian female voice (Neerja / Swara / Tanishaa) most users actually recognise. No robotic American voice.",
   },
   {
     q: "How is voice biometric authentication secured?",
-    a: "At enrollment, your voice is converted to a one-way mathematical embedding. The audio is discarded; only the embedding is stored, locally. Even AEGIBIT cannot reconstruct your voice. Sensitive actions (payments, deletions, system commands) require your voice match — no one else's voice can act on your behalf.",
+    a: "At enrollment, your voice is converted to a one-way mathematical embedding. The audio is discarded; only the embedding is stored, locally. Even AEGIBIT cannot reconstruct your voice. Sensitive actions (payments, deletions, system commands) require your voice match, no one else's voice can act on your behalf.",
   },
   {
     q: "How does Aira fit into AEGIBIT's other products?",

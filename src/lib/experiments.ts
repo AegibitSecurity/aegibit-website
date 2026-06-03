@@ -1,5 +1,5 @@
 /**
- * AEGIBIT experiment engine — minimum viable A/B layer.
+ * AEGIBIT experiment engine, minimum viable A/B layer.
  *
  * Design philosophy
  *   - Experiments are typed config objects defined in this file (one
@@ -38,7 +38,7 @@
  *     guardrail is enough until we have real volume)
  *   - SSR-time variant rendering (current impl is client-only; a
  *     brief flicker is acceptable for marketing CTAs)
- *   - Targeting rules (audience filters, geo, device — none needed
+ *   - Targeting rules (audience filters, geo, device, none needed
  *     yet; the global 50/50 split serves us until traffic >10k/day)
  */
 
@@ -67,7 +67,7 @@ export type ExperimentVariant<E extends ExperimentId> =
   (typeof EXPERIMENTS)[E]["variants"][number];
 
 /**
- * FNV-1a 32-bit hash. Good enough for bucketing — uniform-ish
+ * FNV-1a 32-bit hash. Good enough for bucketing, uniform-ish
  * distribution, no deps, ~10ns per call. We never use this for
  * anything security-sensitive, only deterministic 0..99 buckets.
  */

@@ -8,7 +8,7 @@ const LAYERS = [
     Icon: Lock,
     title: 'Server-Enforced Rules',
     body:
-      'Permissions live in Firestore Security Rules — not the client. A compromised browser still can&apos;t read another branch&apos;s data.',
+      'Permissions live in Firestore Security Rules, not the client. A compromised browser still can&apos;t read another branch&apos;s data.',
   },
   {
     Icon: Eye,
@@ -20,7 +20,7 @@ const LAYERS = [
     Icon: Database,
     title: 'Atomic Transactions',
     body:
-      'Voucher numbers and counters are issued inside Firestore transactions — concurrent makers can never collide on the same number.',
+      'Voucher numbers and counters are issued inside Firestore transactions, concurrent makers can never collide on the same number.',
   },
   {
     Icon: Shield,
@@ -32,13 +32,13 @@ const LAYERS = [
     Icon: FileLock2,
     title: 'Soft-Delete Recovery',
     body:
-      'Records are never destroyed on user action — they are tombstoned. A clean restore path exists for ransomware-grade incidents.',
+      'Records are never destroyed on user action, they are tombstoned. A clean restore path exists for ransomware-grade incidents.',
   },
   {
     Icon: Server,
     title: 'OWASP-Hardened',
     body:
-      'Tested against the OWASP Top 10 before every release. Built by a cybersecurity company — not a feature, a baseline.',
+      'Tested against the OWASP Top 10 before every release. Built by a cybersecurity company, not a feature, a baseline.',
   },
 ];
 

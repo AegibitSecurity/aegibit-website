@@ -6,14 +6,14 @@ import {
 } from "lucide-react";
 
 /**
- * /dashboard/agents — Multi-Agent Orchestrator audit dashboard.
+ * /dashboard/agents, Multi-Agent Orchestrator audit dashboard.
  *
  * Reads /api/admin/agent-actions (cookie auth) and renders:
- *   1. KPI strip — last 24h: total runs, successes, failures, in-progress
- *   2. Per-agent summary — name, last run, success rate
- *   3. Recent activity stream — newest first, expandable rows
+ *   1. KPI strip, last 24h: total runs, successes, failures, in-progress
+ *   2. Per-agent summary, name, last run, success rate
+ *   3. Recent activity stream, newest first, expandable rows
  *
- * Auto-refreshes every 30s — agent runs land in real time when the
+ * Auto-refreshes every 30s, agent runs land in real time when the
  * cron triggers them.
  */
 
@@ -83,8 +83,8 @@ export default function AgentsDashboard() {
     // calls that happen *inside* load() (after the awaited fetch
     // resolves) don't show up to react-hooks/set-state-in-effect as
     // "synchronous setState in effect body". The cascading-render
-    // anti-pattern doesn't actually apply — load is a network fetch
-    // that always resumes after an await — but the lint rule can't
+    // anti-pattern doesn't actually apply, load is a network fetch
+    // that always resumes after an await, but the lint rule can't
     // trace through await boundaries.
     void Promise.resolve().then(load);
     const interval = setInterval(load, 30_000);
@@ -94,7 +94,7 @@ export default function AgentsDashboard() {
   // 24h cutoff captured per-render. `Date.now()` is impure (no inputs,
   // wall-clock dependent) which react-hooks/purity flags. The legitimate
   // pattern for "current wall-clock time at render" is to keep it as
-  // state and refresh on each poll, which is exactly what we're doing —
+  // state and refresh on each poll, which is exactly what we're doing,
   // load() fires every 30s and re-renders the dashboard with fresh rows;
   // we sample now at the same cadence. Disable with explanation.
   // eslint-disable-next-line react-hooks/purity
@@ -258,7 +258,7 @@ export default function AgentsDashboard() {
                       {r.summary ?? r.action}
                     </span>
                     <span className="text-[10px] text-[#52525B] flex-shrink-0">
-                      {r.duration_ms ? `${r.duration_ms}ms` : "—"}
+                      {r.duration_ms ? `${r.duration_ms}ms` : "-"}
                     </span>
                     <span className="text-[10px] text-[#52525B] flex-shrink-0 w-24 text-right">
                       {relativeTime(r.started_at)}

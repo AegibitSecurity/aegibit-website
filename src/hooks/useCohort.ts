@@ -16,7 +16,7 @@ import { getCohort, type CohortAssignment } from "@/lib/cohorts";
  * groups conversions per-cohort the same way it does per-experiment.
  *
  * Why piggyback on experiment_exposure rather than a new event type:
- * cohorts ARE de facto experiments — different segments seeing
+ * cohorts ARE de facto experiments, different segments seeing
  * different content. The funnel pipeline already groups by
  * experiment_exposure, so personalization gets per-cohort conversion
  * read-out for free.
@@ -32,7 +32,7 @@ import { getCohort, type CohortAssignment } from "@/lib/cohorts";
  *
  * Why the module-level snapshot cache:
  *   useSyncExternalStore requires getSnapshot() to return a stable
- *   reference when the underlying data hasn't changed — otherwise
+ *   reference when the underlying data hasn't changed, otherwise
  *   React detects a "change" on every render and loops. `getCohort()`
  *   returns a fresh object literal each call, so we cache the last
  *   assignment and only return a new reference when id+reason differ.
@@ -76,7 +76,7 @@ export function useCohort(): CohortAssignment {
     // moves from default → high_intent during their session we want a
     // second exposure so the dashboard attributes the post-transition
     // conversion to the new cohort. setState is *not* called inside
-    // this effect — only track() — so react-hooks/set-state-in-effect
+    // this effect, only track(), so react-hooks/set-state-in-effect
     // does not apply.
     if (visitorId && exposed.current !== cohort.id) {
       exposed.current = cohort.id;

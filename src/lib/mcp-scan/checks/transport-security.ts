@@ -1,5 +1,5 @@
 /**
- * AEG-MCP-005 — Transport Security.
+ * AEG-MCP-005, Transport Security.
  *
  * Faithful TypeScript port of
  *   scanner/aegibit_mcp_shield/checks/transport_security.py
@@ -112,7 +112,7 @@ function scanServer(server: ServerConfig): Finding[] {
       detail:
         `Server ${q(server.name)} declares a URL with embedded ${parsed.password ? "credentials" : "user info"}. ` +
         "URL-embedded credentials end up in browser history, server access " +
-        "logs, error reports, and process listings — every layer of the stack " +
+        "logs, error reports, and process listings, every layer of the stack " +
         "treats the URL as non-sensitive.",
       remediation:
         "Remove the userinfo from the URL. Pass credentials via an " +
@@ -130,7 +130,7 @@ function scanServer(server: ServerConfig): Finding[] {
         check_id: "AEG-MCP-005",
         tool_name: server.name,
         severity: "info",
-        title: "Plain HTTP localhost — dev pattern",
+        title: "Plain HTTP localhost, dev pattern",
         detail:
           `Server ${q(server.name)} connects over plain HTTP to ${host}. ` +
           "This is the standard dev-loopback pattern; flagging only to confirm " +
@@ -145,7 +145,7 @@ function scanServer(server: ServerConfig): Finding[] {
         check_id: "AEG-MCP-005",
         tool_name: server.name,
         severity: "critical",
-        title: "Plain HTTP — no TLS",
+        title: "Plain HTTP, no TLS",
         detail:
           `Server ${q(server.name)} connects to ${host} over plain HTTP. ` +
           "Tool invocations, parameters, and responses are visible to anyone " +
@@ -156,7 +156,7 @@ function scanServer(server: ServerConfig): Finding[] {
           "not yet support TLS, front it with a TLS-terminating proxy (Caddy, " +
           "nginx, Cloudflare Tunnel) before exposing it.",
         cwe: "CWE-319",
-        owasp: "A02:2021 — Cryptographic Failures",
+        owasp: "A02:2021, Cryptographic Failures",
         references: [REF_CWE_319, REF_OWASP_CRYPTO],
       });
     }
@@ -182,7 +182,7 @@ function scanServer(server: ServerConfig): Finding[] {
         title: `TLS validation disabled (${hint.key})`,
         detail:
           `Server ${q(server.name)} sets ${q(hint.key)}=${JSON.stringify(rawVal)} ` +
-          "— which disables certificate validation on the connection. Without " +
+          ", which disables certificate validation on the connection. Without " +
           "validation, a network attacker can impersonate the server.",
         remediation:
           `Remove the ${q(hint.key)} flag (or set it to the secure default). ` +
@@ -190,7 +190,7 @@ function scanServer(server: ServerConfig): Finding[] {
           "development, add the certificate to your trust store rather than " +
           "disabling validation globally.",
         cwe: "CWE-295",
-        owasp: "A02:2021 — Cryptographic Failures",
+        owasp: "A02:2021, Cryptographic Failures",
         references: [REF_CWE_295, REF_OWASP_CRYPTO],
       });
     }

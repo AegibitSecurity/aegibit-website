@@ -1,10 +1,10 @@
 /**
- * PayMint Snapshot — shared types.
+ * PayMint Snapshot, shared types.
  *
  * The Snapshot is a defensible structural read of a Tally-style
  * expense CSV: counts, distinct values, ranges, top-N, variance,
  * outliers. Every number traces back to rows actually present in
- * the visitor's upload — no fabrication, no extrapolation beyond
+ * the visitor's upload, no fabrication, no extrapolation beyond
  * what the data demonstrates.
  *
  * Discipline mirror of src/lib/mcp-scan/: the structural answer is
@@ -70,7 +70,7 @@ export interface Snapshot {
   branch_variance_cv: number | null;
   /** Top-5 anomaly rows by absolute Z-score within their branch. */
   anomalies: AnomalyRow[];
-  /** Number of rows with no branch attribution — operational blind spot. */
+  /** Number of rows with no branch attribution, operational blind spot. */
   rows_missing_branch: number;
   /** Parser warnings (column name guesses, date parse failures, dropped rows). */
   warnings: string[];

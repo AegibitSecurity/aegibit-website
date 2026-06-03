@@ -26,7 +26,7 @@ describe("hashPassword / verifyPassword", () => {
     expect(verifyPassword("", hash)).toBe(false);
   });
 
-  it("uses scrypt:salt:hash colon format (not $ — dotenv would mangle)", () => {
+  it("uses scrypt:salt:hash colon format (not $, dotenv would mangle)", () => {
     const hash = hashPassword("anything");
     expect(hash).toMatch(/^scrypt:[0-9a-f]{32}:[0-9a-f]{128}$/);
     expect(hash).not.toContain("$");

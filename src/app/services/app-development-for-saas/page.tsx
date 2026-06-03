@@ -53,10 +53,10 @@ export default function Page() {
         <div className="mt-20 rounded-xl border border-white/10 bg-white/5 p-8">
           <h2 className="text-2xl font-bold">Why SaaS companies choose AEGIBIT</h2>
           <ul className="mt-6 space-y-3 text-white/70">
-            <li>— Security-first development from a dedicated cybersecurity team</li>
-            <li>— Compliance-ready architectures (SOC 2, GDPR, HIPAA where applicable)</li>
-            <li>— Direct access to senior engineers, not account managers</li>
-            <li>— Fixed-price packages starting at $499/mo or $4,999 one-time</li>
+            <li>• Security-first development from a dedicated cybersecurity team</li>
+            <li>• Compliance-ready architectures (SOC 2, GDPR, HIPAA where applicable)</li>
+            <li>• Direct access to senior engineers, not account managers</li>
+            <li>• Fixed-price packages starting at $499/mo or $4,999 one-time</li>
           </ul>
         </div>
       </section>

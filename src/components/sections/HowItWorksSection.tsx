@@ -16,7 +16,7 @@ export function HowItWorksSection() {
       <SectionHeader
         label="HOW IT WORKS"
         title="Speak. Verify. Execute. Log."
-        subtitle="Four steps, zero trust, full auditability — every time."
+        subtitle="Four steps, zero trust, full auditability, every time."
       />
 
       <div className="mt-16 relative">

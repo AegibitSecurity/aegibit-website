@@ -18,7 +18,7 @@ import { useCohort } from "@/hooks/useCohort";
  * Each cohort gets a distinct cta_id so the funnel dashboard groups
  * conversions per-cohort automatically. No new dashboard code.
  *
- * The personalization is segment-based, not per-user fingerprinted —
+ * The personalization is segment-based, not per-user fingerprinted,
  * respects the charter privacy posture. UTM cohorts are per-visit
  * (sessionStorage); they identify WHY the visitor is here today, not
  * WHO they are.
@@ -44,7 +44,7 @@ const COPY = {
   from_social: {
     eyebrow: "Glad you came over",
     headline: "We meet on social\noften. Let's meet for real.",
-    body: "20 minutes, no pitch deck — just a frank conversation about what you're trying to fix. If AEGIBIT isn't the right shape, we'll point you to who is.",
+    body: "20 minutes, no pitch deck, just a frank conversation about what you're trying to fix. If AEGIBIT isn't the right shape, we'll point you to who is.",
     ctaLabel: "Talk to a founder",
     ctaHref: "/contact",
     ctaId: "home_cta_from_social",
@@ -52,7 +52,7 @@ const COPY = {
   from_email: {
     eyebrow: "Right link, right time",
     headline: "Ready to take\nthe next step?",
-    body: "You've been following AEGIBIT. The next move is the easy one — pick a slot, get the live walkthrough, decide on the spot.",
+    body: "You've been following AEGIBIT. The next move is the easy one, pick a slot, get the live walkthrough, decide on the spot.",
     ctaLabel: "Pick a demo slot",
     ctaHref: "/products/paymint/demo",
     ctaId: "home_cta_from_email",
@@ -60,7 +60,7 @@ const COPY = {
   returning: {
     eyebrow: "Welcome back",
     headline: "Pick up where you\nleft off.",
-    body: "You've been here before. Whatever brought you back — let's close the loop. 20 minutes of your time, real answers.",
+    body: "You've been here before. Whatever brought you back, let's close the loop. 20 minutes of your time, real answers.",
     ctaLabel: "Talk to a founder",
     ctaHref: "/contact",
     ctaId: "home_cta_returning",

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 /**
  * Close-on-navigate sidebar.
  *
- * Previous shape did `useEffect(() => setOpen(false), [pathname])` —
+ * Previous shape did `useEffect(() => setOpen(false), [pathname])`,
  * which trips react-hooks/set-state-in-effect (cascading-render
  * anti-pattern). Rewritten using React's documented "derive state
  * during render" pattern: track the last-seen pathname in state,

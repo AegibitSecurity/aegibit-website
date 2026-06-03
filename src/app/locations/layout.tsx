@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 /**
- * /locations/* — Programmatic location pages from AEGIBIT's earlier
+ * /locations/*, Programmatic location pages from AEGIBIT's earlier
  * services-shop positioning ("websites and apps starting at $499/month
  * for businesses in <City>").
  *
@@ -16,13 +16,13 @@ import type { Metadata } from "next";
  *   • Pages still serve normally for anyone with a direct link
  *
  * Long-term options:
- *   (a) Delete entirely (likely the right call — they have no traffic
+ *   (a) Delete entirely (likely the right call, they have no traffic
  *       value beyond the abandoned services positioning)
  *   (b) Rebrand each into a real "PayMint for <city> dealerships"
- *       page with the actual pricing and the Nibir Motors anchor —
+ *       page with the actual pricing and the Nibir Motors anchor,
  *       only worth doing if a city ever produces meaningful inbound
  *
- * Decision deferred — noindex stops the brand bleeding now.
+ * Decision deferred, noindex stops the brand bleeding now.
  */
 export const metadata: Metadata = {
   robots: {

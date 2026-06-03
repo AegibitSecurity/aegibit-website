@@ -12,7 +12,7 @@ const TERMS: Record<string, { term: string; definition: string; related: string[
   },
   "voice-biometrics": {
     term: "Voice Biometrics",
-    definition: "The use of an individual's unique vocal characteristics — including pitch, tone, cadence, and pronunciation patterns — to verify their identity. Voice biometrics provides continuous authentication across an entire spoken interaction, unlike one-time PIN entry.",
+    definition: "The use of an individual's unique vocal characteristics, including pitch, tone, cadence, and pronunciation patterns, to verify their identity. Voice biometrics provides continuous authentication across an entire spoken interaction, unlike one-time PIN entry.",
     related: ["Zero Trust", "Multi-Factor Authentication", "Speaker Verification"],
   },
   "rbac": {

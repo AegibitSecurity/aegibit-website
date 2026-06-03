@@ -24,7 +24,7 @@ interface VisitorState {
   // useVisitorTracking and persisted to sessionStorage so cohort
   // assignment remains stable across SPA navigations (URL params don't
   // survive client-side route changes). Cleared when the tab closes
-  // — UTM is a per-visit signal, not per-user.
+  //, UTM is a per-visit signal, not per-user.
   utmSource: string | null;
   utmMedium: string | null;
   utmCampaign: string | null;

@@ -1,17 +1,17 @@
 /**
- * PayMint Snapshot — CSV parser.
+ * PayMint Snapshot, CSV parser.
  *
  * Tally CSV exports vary widely in column naming. This parser uses
  * a column-aliases table to map ANY of a known set of header
  * synonyms onto our normalized schema. If a column we expect is
- * missing, we surface a warning but keep parsing — partial data is
+ * missing, we surface a warning but keep parsing, partial data is
  * better than no answer.
  *
  * The parser is intentionally permissive on quoting and date
  * formats. Tally exports come from a 30-year-old Windows app and
  * have edge cases that a strict RFC-4180 reader would reject.
  *
- * No I/O — pure function. The HTTP route enforces size limits.
+ * No I/O, pure function. The HTTP route enforces size limits.
  */
 
 import type { SnapshotRow } from "./types";
@@ -106,7 +106,7 @@ export function parseCsv(input: string): ParsedCsv {
   const columnIndex = resolveColumnIndex(header);
   const warnings: string[] = [];
 
-  // No critical columns recognised — bail with a clear warning.
+  // No critical columns recognised, bail with a clear warning.
   if (columnIndex.date === -1 && columnIndex.amount === -1 && columnIndex.debit === -1 && columnIndex.credit === -1) {
     return {
       rows: [],
@@ -120,10 +120,10 @@ export function parseCsv(input: string): ParsedCsv {
     };
   }
 
-  if (columnIndex.date === -1) warnings.push("No `Date` column found — date range will be empty.");
-  if (columnIndex.branch === -1) warnings.push("No `Branch` / `Cost Centre` column found — branch attribution will be blank.");
+  if (columnIndex.date === -1) warnings.push("No `Date` column found, date range will be empty.");
+  if (columnIndex.branch === -1) warnings.push("No `Branch` / `Cost Centre` column found, branch attribution will be blank.");
   if (columnIndex.amount === -1 && columnIndex.debit === -1 && columnIndex.credit === -1) {
-    warnings.push("No `Amount` / `Debit` / `Credit` column found — totals will be 0.");
+    warnings.push("No `Amount` / `Debit` / `Credit` column found, totals will be 0.");
   }
 
   const rows: SnapshotRow[] = [];
@@ -141,7 +141,7 @@ export function parseCsv(input: string): ParsedCsv {
     for (let c = 0; c < header.length; c++) raw[header[c]] = cells[c] ?? "";
 
     const date = parseDate(cell(cells, columnIndex.date));
-    // SnapshotRow.branch is `string | null` (per types.ts) — trimNonEmpty
+    // SnapshotRow.branch is `string | null` (per types.ts), trimNonEmpty
     // returns `string | undefined`. Normalise `undefined` → `null` here
     // so consumers see a single absence value.
     const branch = trimNonEmpty(cell(cells, columnIndex.branch)) ?? null;
