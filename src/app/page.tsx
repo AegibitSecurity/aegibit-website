@@ -32,7 +32,7 @@ const HOME_JSON_LD = {
       slogan: "Securing Tomorrow, Today",
       description:
         "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast — for dealerships, multi-branch SMEs, and mission-critical operations.",
-      foundingDate: "2024",
+      foundingDate: "2026",
       sameAs: [],
       contactPoint: {
         "@type": "ContactPoint",
