@@ -67,7 +67,7 @@ export function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-[rgba(255,255,255,0.05)]">
           <p className="text-[#3F3F46] text-xs">
-            © {new Date().getFullYear()} AEGIBIT Security Pvt. Ltd. All rights reserved.
+            © {new Date().getFullYear()} AEGIBIT Global Consulting. All rights reserved.
           </p>
           <p className="text-[#3F3F46] text-xs">🇮🇳 Built in India</p>
         </div>

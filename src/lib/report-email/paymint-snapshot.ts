@@ -144,7 +144,7 @@ export function renderSnapshotEmailHtml(args: {
             </tr>
             <tr>
               <td style="padding:0 28px 28px;">
-                <p style="margin:0;color:${MUTED};font-size:12px;line-height:1.6;">AEGIBIT Security Pvt. Ltd. • Built in India • contact@aegibit.com</p>
+                <p style="margin:0;color:${MUTED};font-size:12px;line-height:1.6;">AEGIBIT Global Consulting • Built in India • contact@aegibit.com</p>
               </td>
             </tr>
           </table>
@@ -210,7 +210,7 @@ export function renderSnapshotEmailText(
   lines.push(
     "Request a PayMint demo: https://www.aegibit.com/products/paymint/demo?utm_source=snapshot_email&utm_medium=email&utm_campaign=snapshot_report",
     "",
-    "AEGIBIT Security Pvt. Ltd. — contact@aegibit.com",
+    "AEGIBIT Global Consulting — contact@aegibit.com",
   );
 
   return lines.join("\n");

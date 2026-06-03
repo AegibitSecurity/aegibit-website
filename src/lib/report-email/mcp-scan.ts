@@ -128,7 +128,7 @@ export function renderScanReportHtml(input: ScanReportInput): {
             </tr>
             <tr>
               <td style="padding:0 28px 28px;">
-                <p style="margin:0;color:${MUTED};font-size:12px;line-height:1.6;">AEGIBIT Security Pvt. Ltd. • Built in India • contact@aegibit.com</p>
+                <p style="margin:0;color:${MUTED};font-size:12px;line-height:1.6;">AEGIBIT Global Consulting • Built in India • contact@aegibit.com</p>
               </td>
             </tr>
           </table>
@@ -184,7 +184,7 @@ function renderScanReportText(input: ScanReportInput): string {
     "",
     "CLI install: pip install aegibit-mcp-shield && aegibit-mcp scan path/to/manifest.json",
     "",
-    "AEGIBIT Security Pvt. Ltd. — contact@aegibit.com",
+    "AEGIBIT Global Consulting — contact@aegibit.com",
   );
   return lines.join("\n");
 }
