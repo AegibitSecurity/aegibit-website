@@ -77,7 +77,7 @@ const COLORS = [
 ] as const;
 
 const FACTS = [
-  { label: "Founded", value: "2024" },
+  { label: "Founded", value: "2026" },
   { label: "Headquarters", value: "Kolkata, India" },
   { label: "Flagship product", value: "PayMint — multi-branch expense platform" },
   { label: "Open-source product", value: "MCP Shield — MIT v0.2.1" },
