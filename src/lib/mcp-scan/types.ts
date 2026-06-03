@@ -1,5 +1,5 @@
 /**
- * MCP Shield web-scanner — shared types.
+ * MCP Shield web-scanner, shared types.
  *
  * Faithful TypeScript port of the data models in
  *   github.com/AegibitSecurity/mcp-shield → scanner/aegibit_mcp_shield/models.py
@@ -8,7 +8,7 @@
  *   The Python scanner ships as v0.2.1 MIT and is what the website's
  *   /products/mcp-shield page cites. Keeping the TS shapes identical
  *   means findings produced by the web preview are directly
- *   comparable to CLI findings — a buyer can run both and see the
+ *   comparable to CLI findings, a buyer can run both and see the
  *   same `check_id` + `severity` for the same input.
  *
  *   When the Python source adds a sub-detection or a field, the
@@ -27,22 +27,22 @@ export const SEVERITY_RANK: Record<Severity, number> = {
 };
 
 /**
- * A single MCP tool definition — what an MCP server returns from its
+ * A single MCP tool definition, what an MCP server returns from its
  * `tools/list` JSON-RPC method, or what a static tool manifest file
  * declares per entry.
  */
 export interface ToolDefinition {
   name: string;
   description: string;
-  /** The original raw JSON object — preserved so checks can recurse it. */
+  /** The original raw JSON object, preserved so checks can recurse it. */
   raw: Record<string, unknown>;
 }
 
 /**
- * An MCP server configuration entry — what claude_desktop_config.json
+ * An MCP server configuration entry, what claude_desktop_config.json
  * or a similar `mcp.json` file declares per server.
  *
- * `env_keys` / `headers_keys` carry KEY NAMES ONLY, never values —
+ * `env_keys` / `headers_keys` carry KEY NAMES ONLY, never values,
  * mirrored from the Python scanner's privacy-preserving design. The
  * web scanner takes manifests pasted by visitors, so this guarantee
  * is doubly important: no copy-pasted credential should ever round-
@@ -91,7 +91,7 @@ export interface ScanResult {
   scanned_count: number;
   /** All findings, sorted by severity desc. */
   findings: Finding[];
-  /** Parser warnings — non-fatal issues (e.g., "input was wrapped in extra braces"). */
+  /** Parser warnings, non-fatal issues (e.g., "input was wrapped in extra braces"). */
   warnings: string[];
 }
 

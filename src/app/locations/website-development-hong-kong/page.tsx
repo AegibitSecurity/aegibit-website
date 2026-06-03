@@ -19,7 +19,7 @@ export default function Page() {
           Local Service
         </p>
         <h1 className="mt-3 text-4xl md:text-6xl font-bold leading-tight">
-          Website Development in Hong Kong — Security-First
+          Website Development in Hong Kong, Security-First
         </h1>
         <p className="mt-6 text-xl text-white/70 max-w-2xl">
           AEGIBIT is a cybersecurity-first software company. We build websites, apps, and SaaS
@@ -53,10 +53,10 @@ export default function Page() {
         <div className="mt-20 rounded-xl border border-white/10 bg-white/5 p-8">
           <h2 className="text-2xl font-bold">Why Hong Kong businesses choose AEGIBIT</h2>
           <ul className="mt-6 space-y-3 text-white/70">
-            <li>— Security-first development from a dedicated cybersecurity team</li>
-            <li>— Compliance-ready architectures (SOC 2, GDPR, HIPAA where applicable)</li>
-            <li>— Direct access to senior engineers, not account managers</li>
-            <li>— Fixed-price packages starting at $499/mo or $4,999 one-time</li>
+            <li>• Security-first development from a dedicated cybersecurity team</li>
+            <li>• Compliance-ready architectures (SOC 2, GDPR, HIPAA where applicable)</li>
+            <li>• Direct access to senior engineers, not account managers</li>
+            <li>• Fixed-price packages starting at $499/mo or $4,999 one-time</li>
           </ul>
         </div>
       </section>

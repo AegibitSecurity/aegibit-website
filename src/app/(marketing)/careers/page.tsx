@@ -5,12 +5,12 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { ArrowRight } from "lucide-react";
 
 /**
- * /careers — AEGIBIT careers landing.
+ * /careers, AEGIBIT careers landing.
  *
  * Discipline call:
  *   AEGIBIT is early enough that there are no open roles to publish.
  *   The honest version of a careers page at this stage is a thesis +
- *   an introduction-channel + a contribution path — not a fake roles
+ *   an introduction-channel + a contribution path, not a fake roles
  *   grid with "engineering / design / GTM" placeholders that nobody
  *   can apply to.
  *
@@ -20,11 +20,11 @@ import { ArrowRight } from "lucide-react";
  *
  * What this page covers:
  *   - One-paragraph thesis (why AEGIBIT exists, what the next year
- *     looks like) — entity-first, defensible
+ *     looks like), entity-first, defensible
  *   - The honest hiring status ("not actively hiring yet")
  *   - How to be in the room when we are hiring (introduction email
  *     pattern; what we read in a good intro)
- *   - Open-source contribution path (MCP Shield is MIT — contributing
+ *   - Open-source contribution path (MCP Shield is MIT, contributing
  *     there is the highest-signal way to show up on our radar)
  *
  * Note on footer link:
@@ -36,7 +36,7 @@ import { ArrowRight } from "lucide-react";
  */
 
 export const metadata: Metadata = {
-  title: "Careers at AEGIBIT — How to be in the room when we hire",
+  title: "Careers at AEGIBIT, How to be in the room when we hire",
   description:
     "AEGIBIT is early enough that we're not actively hiring yet. Here's the thesis, how to introduce yourself, and the contribution path through MCP Shield (open-source, MIT licensed).",
   alternates: { canonical: "/careers" },
@@ -113,7 +113,7 @@ export default function CareersPage() {
             >
               AEGIBIT is early enough that publishing a roles grid would be
               fabrication. When we are hiring, the people we want already
-              know about it — through the open-source work, through warm
+              know about it, through the open-source work, through warm
               intros, through the work itself. Here&apos;s how to be in the
               room when that happens.
             </p>
@@ -153,8 +153,8 @@ export default function CareersPage() {
               style={{ color: "#A1A1AA", fontSize: "1.05rem", lineHeight: 1.75 }}
             >
               Most operational software is built like a product first and a
-              security artifact second. For multi-branch businesses — where
-              a single leak ends the company — that ordering is exactly
+              security artifact second. For multi-branch businesses, where
+              a single leak ends the company, that ordering is exactly
               backwards. AEGIBIT builds the inverse: cybersecurity-first
               operational software, with the security architecture as the
               load-bearing primitive and the product surface as the
@@ -270,7 +270,7 @@ export default function CareersPage() {
                   <span style={{ color: "#fff" }}>
                     Use a real customer&apos;s lens.
                   </span>{" "}
-                  AEGIBIT is in market with Nibir Motors across 7 branches —
+                  AEGIBIT is in market with Nibir Motors across 7 branches,
                   see{" "}
                   <TrackedLink
                     href="/case-studies/nibir-motors"
@@ -323,18 +323,15 @@ export default function CareersPage() {
               className="space-y-3 list-none m-0 p-0"
               style={{ color: "#A1A1AA", fontSize: "1rem", lineHeight: 1.7 }}
             >
-              <li>
-                — Not a venture-backed organization with funded headcount
+              <li>• Not a venture-backed organization with funded headcount
                 plans. AEGIBIT is bootstrapped and committed to staying
                 that way until paid scale justifies otherwise.
               </li>
-              <li>
-                — Not an &ldquo;interview-loop&rdquo; pipeline. When the first role
+              <li>• Not an &ldquo;interview-loop&rdquo; pipeline. When the first role
                 opens, we&apos;ll publish it here and the conversation
                 will be small, human, and grounded in real work.
               </li>
-              <li>
-                — Not a vehicle for résumé credentialing. Our bar is
+              <li>• Not a vehicle for résumé credentialing. Our bar is
                 contribution and judgment, not pedigree.
               </li>
             </ul>
@@ -370,7 +367,7 @@ export default function CareersPage() {
               className="text-base md:text-lg mb-8 max-w-2xl mx-auto"
               style={{ color: "#A1A1AA", lineHeight: 1.7 }}
             >
-              Until then — contact@aegibit.com is the front door.
+              Until then, contact@aegibit.com is the front door.
             </p>
             <TrackedLink
               href="mailto:contact@aegibit.com?subject=AEGIBIT%20introduction"

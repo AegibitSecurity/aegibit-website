@@ -1,5 +1,5 @@
 /**
- * AEG-MCP-004 — STDIO Launch Hardening.
+ * AEG-MCP-004, STDIO Launch Hardening.
  *
  * Faithful TypeScript port of
  *   scanner/aegibit_mcp_shield/checks/stdio_hardening.py
@@ -111,7 +111,7 @@ function scanServer(server: ServerConfig): Finding[] {
         detail:
           `Server ${q(server.name)} launches with command ${q(commandBasename)} ` +
           `and a shell-exec flag (${args.filter((a) => SHELL_EXEC_FLAGS.has(a)).join(" ")}). ` +
-          "Shell-wrapped launches surface every argument to the shell's parser — " +
+          "Shell-wrapped launches surface every argument to the shell's parser, " +
           "any tampering with args, environment, or the encoded command becomes " +
           "an arbitrary-code-execution vector.",
         remediation:
@@ -119,7 +119,7 @@ function scanServer(server: ServerConfig): Finding[] {
           "through a shell. If you need shell semantics for environment setup, " +
           "use the MCP server config's `env` field rather than a shell command.",
         cwe: "CWE-77",
-        owasp: "A03:2021 — Injection",
+        owasp: "A03:2021, Injection",
         references: [REF_OX_DISCLOSURE, REF_CWE_77],
       });
     }
@@ -143,7 +143,7 @@ function scanServer(server: ServerConfig): Finding[] {
           "an attacker who compromises the package registry account can still " +
           "publish a new version under the same name."
         : `Server ${q(server.name)} launches via ${commandBasename} ${q(pkgArg)} ` +
-          "with no version pin. Every server start re-resolves the package — " +
+          "with no version pin. Every server start re-resolves the package, " +
           "if the upstream account is compromised, your machine pulls the " +
           "attacker's code on the next start. This was the dominant attack " +
           "shape in the April 2026 OX disclosure.",
@@ -172,7 +172,7 @@ function scanServer(server: ServerConfig): Finding[] {
       detail:
         `Server ${q(server.name)} launches from ${q(fullPath)}. User-writable ` +
         "locations (`/tmp`, `~/Downloads`, etc.) are the easiest place for " +
-        "malware to drop and re-launch — every restart of the MCP client " +
+        "malware to drop and re-launch, every restart of the MCP client " +
         "loads whatever binary sits at that path.",
       remediation:
         "Move the server binary to a read-only system location (e.g., " +
@@ -192,7 +192,7 @@ function scanServer(server: ServerConfig): Finding[] {
         severity: "medium",
         title: `Credential-looking env key ${q(key)}`,
         detail:
-          `Server ${q(server.name)} declares the env key ${q(key)} — its name ` +
+          `Server ${q(server.name)} declares the env key ${q(key)}, its name ` +
           "suggests it carries a credential. We did not see the value (the " +
           "manifest paste pipeline strips env values), but the presence of " +
           "this key is worth auditing: ensure the value comes from a secrets " +

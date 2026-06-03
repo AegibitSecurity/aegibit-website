@@ -5,7 +5,7 @@ import { requireAdmin } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 /**
- * /api/admin/downloads — download event intelligence.
+ * /api/admin/downloads, download event intelligence.
  *
  * Auth: cookie session (sign in at /admin/login).
  *
@@ -113,7 +113,7 @@ export async function GET(req: NextRequest) {
   const supabase = getServiceClient();
 
   // Pull cta_click events in window. Same 50k defensive cap as
-  // /api/admin/funnel — covers a >70k-visitor week before we'd need
+  // /api/admin/funnel, covers a >70k-visitor week before we'd need
   // to move this to a Postgres aggregate function.
   const eventsRes = await supabase
     .from("visitor_events")
@@ -140,7 +140,7 @@ export async function GET(req: NextRequest) {
   const dailyCutoffIso = dailyCutoff.toISOString();
 
   // Per-asset aggregation, keyed by cta_id (so the two PayMint APK
-  // surfaces — hero + bottom — show up as distinct rows the operator
+  // surfaces, hero + bottom, show up as distinct rows the operator
   // can compare).
   const assets = new Map<
     string,

@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 
 /**
- * /privacy — AEGIBIT Privacy Policy.
+ * /privacy, AEGIBIT Privacy Policy.
  *
  * Created 2026-05-10 (C-3 ship). Footer linked here before this
  * page existed, returning 404. That's a real legal exposure for an
@@ -15,7 +15,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  * boilerplate. Every data category + third-party processor listed
  * here maps to actual code or actual integration. Where the policy
  * has not yet been reviewed by counsel, the page explicitly says so
- * — the audit's "every claim defensible" rule applies to legal copy
+ *, the audit's "every claim defensible" rule applies to legal copy
  * just as much as marketing copy.
  *
  * The companion India-specific DPDP notice lives at /dpdp. The
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
               The rest of this page lists every data category we
               collect, where each one ends up, and what your rights
               are. If your buying process requires a Data Processing
-              Agreement (DPA), we can provide one — contact us with
+              Agreement (DPA), we can provide one, contact us with
               the request and the AEGIBIT team will respond within
               5 business days.
             </P>
@@ -92,7 +92,7 @@ export default function PrivacyPage() {
             <P>
               <strong style={{ color: "#fff" }}>AEGIBIT</strong> (the
               brand) is operated from India by the founding team
-              behind the AEGIBIT product line — PayMint, MCP Shield,
+              behind the AEGIBIT product line, PayMint, MCP Shield,
               and Aira. Operational contact:{" "}
               <Link href="mailto:contact@aegibit.com">
                 contact@aegibit.com
@@ -112,7 +112,7 @@ export default function PrivacyPage() {
 
           <Section title="What we collect">
             <P>
-              We collect these categories — and only these — for the
+              We collect these categories, and only these, for the
               purposes listed.
             </P>
             <Table
@@ -145,7 +145,7 @@ export default function PrivacyPage() {
                 {
                   category: "Admin session data (admins only)",
                   examples: "iron-session httpOnly cookie containing an opaque session ID",
-                  purpose: "Authenticating admins to /admin and /dashboard surfaces — never set for public visitors",
+                  purpose: "Authenticating admins to /admin and /dashboard surfaces, never set for public visitors",
                 },
               ]}
             />
@@ -159,7 +159,7 @@ export default function PrivacyPage() {
             </P>
             <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               <Bullet>
-                <strong style={{ color: "#fff" }}>vc_return</strong> —
+                <strong style={{ color: "#fff" }}>vc_return</strong>,
                 a 30-day cookie that lets us recognize a returning
                 visitor and show appropriate copy (e.g.
                 &quot;welcome back&quot; instead of the first-time
@@ -167,19 +167,19 @@ export default function PrivacyPage() {
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>aegibit_session</strong>{" "}
-                — a httpOnly, Secure, SameSite=Lax encrypted cookie
+                a httpOnly, Secure, SameSite=Lax encrypted cookie
                 set only when an admin logs in to /admin. Never set
                 for public visitors.
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>sessionStorage</strong>{" "}
-                — short-lived browser-storage entries holding UTM
+                short-lived browser-storage entries holding UTM
                 attribution and chat-widget state. Cleared when you
                 close the tab.
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>localStorage</strong>{" "}
-                — first-visit marker (so we don&apos;t replay
+                first-visit marker (so we don&apos;t replay
                 one-time animations) and visitor ID. No personal
                 information.
               </Bullet>
@@ -226,7 +226,7 @@ export default function PrivacyPage() {
                   purpose: "Runs the Llama 3.3 70B model that powers the chatbot",
                 },
                 {
-                  category: "Slack (USA — internal channel)",
+                  category: "Slack (USA, internal channel)",
                   examples: "hot-lead notifications (email + a short summary of the lead context)",
                   purpose: "Notifying the AEGIBIT team in real time so high-intent leads get a same-hour reply",
                 },
@@ -264,11 +264,11 @@ export default function PrivacyPage() {
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Rate-limit state:</strong>{" "}
-                ephemeral — Redis TTL of 60 seconds. Never persisted.
+                ephemeral, Redis TTL of 60 seconds. Never persisted.
               </Bullet>
               <Bullet>
                 <strong style={{ color: "#fff" }}>Server logs:</strong>{" "}
-                ephemeral — Vercel runtime rotation; no long-term storage
+                ephemeral, Vercel runtime rotation; no long-term storage
                 of request logs.
               </Bullet>
             </ul>
@@ -280,26 +280,26 @@ export default function PrivacyPage() {
             </P>
             <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               <Bullet>
-                <strong style={{ color: "#fff" }}>Access</strong> — request
+                <strong style={{ color: "#fff" }}>Access</strong>, request
                 a copy of every piece of personal data we hold about
                 you.
               </Bullet>
               <Bullet>
-                <strong style={{ color: "#fff" }}>Correct</strong> — fix
+                <strong style={{ color: "#fff" }}>Correct</strong>, fix
                 anything that&apos;s wrong.
               </Bullet>
               <Bullet>
-                <strong style={{ color: "#fff" }}>Delete</strong> — ask
+                <strong style={{ color: "#fff" }}>Delete</strong>, ask
                 us to remove your data entirely (we will, except where
                 we have a regulatory obligation to retain, e.g. tax
                 records).
               </Bullet>
               <Bullet>
-                <strong style={{ color: "#fff" }}>Opt out</strong> — stop
+                <strong style={{ color: "#fff" }}>Opt out</strong>, stop
                 future processing, including any product-update emails.
               </Bullet>
               <Bullet>
-                <strong style={{ color: "#fff" }}>Complain</strong> — lodge
+                <strong style={{ color: "#fff" }}>Complain</strong>, lodge
                 a complaint with your local data protection regulator
                 (India: Data Protection Board of India once
                 operational; EU: your member-state DPA).
@@ -319,7 +319,7 @@ export default function PrivacyPage() {
           <Section title="Security">
             <P>
               The full security posture is documented at{" "}
-              <Link href="/security">/security</Link> — including
+              <Link href="/security">/security</Link>, including
               CSP-hardened headers, per-IP rate limiting, httpOnly
               cookie sessions, scrypt-hashed admin credentials, and
               an append-only audit trail on every automation action.
@@ -388,17 +388,17 @@ export default function PrivacyPage() {
           <Section title="Companion documents">
             <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
               <Bullet>
-                <Link href="/terms">/terms</Link> — terms of service
+                <Link href="/terms">/terms</Link>, terms of service
                 for using www.aegibit.com and AEGIBIT&apos;s
                 publicly-available products.
               </Bullet>
               <Bullet>
-                <Link href="/dpdp">/dpdp</Link> — India-specific DPDP
+                <Link href="/dpdp">/dpdp</Link>, India-specific DPDP
                 Act 2023 notice with the data-fiduciary disclosures
                 required by Indian law.
               </Bullet>
               <Bullet>
-                <Link href="/security">/security</Link> — technical
+                <Link href="/security">/security</Link>, technical
                 security posture with file-level proof pointers.
               </Bullet>
             </ul>

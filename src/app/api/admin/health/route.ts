@@ -5,7 +5,7 @@ import { requireAdmin } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 /**
- * /api/admin/health — operator pipeline diagnostic.
+ * /api/admin/health, operator pipeline diagnostic.
  *
  * Auth: cookie session (sign in at /admin/login). Single endpoint to
  * verify Supabase connectivity, Resend connectivity, recent lead
@@ -79,7 +79,7 @@ export async function GET(req: NextRequest) {
           from: "AEGIBIT <noreply@aegibit.com>",
           to: [testEmail],
           replyTo: ["contact@aegibit.com"],
-          subject: "AEGIBIT health check — pipeline OK",
+          subject: "AEGIBIT health check, pipeline OK",
           html: `<div style="font-family:sans-serif;padding:24px;background:#0a0a0a;color:#fff;border-radius:8px;">
             <h2 style="color:#F97316;margin:0 0 12px;">✓ Pipeline operational</h2>
             <p style="color:#A1A1AA;font-size:14px;line-height:1.6;margin:0;">

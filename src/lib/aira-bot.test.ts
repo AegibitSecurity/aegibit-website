@@ -13,8 +13,8 @@ import { buildGroqPayload, parseAiraOutput, type ChatMessage } from "./aira-bot"
 
 describe("parseAiraOutput", () => {
   it("strips a trailing CAPTURE_LEAD token and signals captureLead=true", () => {
-    const out = parseAiraOutput("Sure — what's your work email?\n[CAPTURE_LEAD]");
-    expect(out.text).toBe("Sure — what's your work email?");
+    const out = parseAiraOutput("Sure, what's your work email?\n[CAPTURE_LEAD]");
+    expect(out.text).toBe("Sure, what's your work email?");
     expect(out.captureLead).toBe(true);
   });
 
@@ -31,8 +31,8 @@ describe("parseAiraOutput", () => {
   });
 
   it("returns captureLead=false when the token is absent", () => {
-    const out = parseAiraOutput("PayMint pricing starts at the Starter tier — see /pricing.");
-    expect(out.text).toBe("PayMint pricing starts at the Starter tier — see /pricing.");
+    const out = parseAiraOutput("PayMint pricing starts at the Starter tier, see /pricing.");
+    expect(out.text).toBe("PayMint pricing starts at the Starter tier, see /pricing.");
     expect(out.captureLead).toBe(false);
   });
 
@@ -68,7 +68,7 @@ describe("buildGroqPayload", () => {
     const payload = buildGroqPayload({
       history: [
         { role: "user",  text: "Hi" },
-        { role: "model", text: "Hello — how can I help?" },
+        { role: "model", text: "Hello, how can I help?" },
       ],
       userMessage: "Tell me about pricing.",
     }) as { messages: { role: string; content: string }[] };
@@ -81,7 +81,7 @@ describe("buildGroqPayload", () => {
       "user",
     ]);
     expect(payload.messages[1].content).toBe("Hi");
-    expect(payload.messages[2].content).toBe("Hello — how can I help?");
+    expect(payload.messages[2].content).toBe("Hello, how can I help?");
     expect(payload.messages[3].content).toBe("Tell me about pricing.");
   });
 
@@ -95,7 +95,7 @@ describe("buildGroqPayload", () => {
     expect(payload.max_tokens).toBeLessThanOrEqual(500);
   });
 
-  it("temperature is moderate — creative tone, low hallucination risk", () => {
+  it("temperature is moderate, creative tone, low hallucination risk", () => {
     const payload = buildGroqPayload(baseInput) as { temperature?: number };
     const t = payload.temperature ?? 1;
     expect(t).toBeGreaterThanOrEqual(0.2);

@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     );
     session.destroy();
   } catch {
-    // SESSION_SECRET missing or invalid — fall through to redirect anyway.
+    // SESSION_SECRET missing or invalid, fall through to redirect anyway.
   }
   return NextResponse.redirect(new URL("/admin/login", req.url), { status: 303 });
 }

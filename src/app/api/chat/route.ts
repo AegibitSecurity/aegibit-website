@@ -7,7 +7,7 @@ import { checkRateLimit, chatLimiter } from "@/lib/rate-limiter";
 /**
  * POST /api/chat
  *
- * The Aira chatbot endpoint. Public — no auth (it's a marketing-site
+ * The Aira chatbot endpoint. Public, no auth (it's a marketing-site
  * widget, every visitor uses it). Rate-limited per IP via Upstash so
  * a single attacker can't burn the Gemini free-tier budget for the
  * whole site.
@@ -19,7 +19,7 @@ import { checkRateLimit, chatLimiter } from "@/lib/rate-limiter";
  *   - Gemini 429 / 5xx / network error → same canned fallback.
  *   - Visitor exceeds rate limit → 429 with Retry-After header.
  *
- * The visitor never sees a raw error — every failure mode lands on
+ * The visitor never sees a raw error, every failure mode lands on
  * the same path: "let me connect you with a founder."
  */
 
@@ -30,7 +30,7 @@ interface ChatRequestBody {
 
 // Single fallback reply used whenever Gemini is unreachable (missing
 // key, rate-limit, network error, safety-block). Kept terse and on-
-// brand so the visitor can't tell something failed — they just hit
+// brand so the visitor can't tell something failed, they just hit
 // the founder-handoff path one turn earlier than expected.
 const FALLBACK_REPLY =
   "Let me put you in touch with the AEGIBIT team directly. What's the best work email to reach you at?";

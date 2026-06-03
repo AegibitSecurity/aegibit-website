@@ -20,7 +20,7 @@ const OFFERINGS = [
   {
     num: "03",
     title: "Automation Infrastructure",
-    body: "Replace fragile manual workflows with auditable, self-healing automation. From process orchestration to intelligent routing — at enterprise scale.",
+    body: "Replace fragile manual workflows with auditable, self-healing automation. From process orchestration to intelligent routing, at enterprise scale.",
     href: "/features",
   },
   {

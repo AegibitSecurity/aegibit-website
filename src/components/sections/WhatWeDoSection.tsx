@@ -33,7 +33,7 @@ export function WhatWeDoSection() {
           className="text-[#A1A1AA] text-lg leading-relaxed max-w-2xl"
         >
           AEGIBIT combines AI, cybersecurity, and automation to build intelligent systems for modern enterprises.
-          We help companies operate faster, safer, and smarter — without compromising on security or control.
+          We help companies operate faster, safer, and smarter, without compromising on security or control.
         </motion.p>
       </div>
     </section>

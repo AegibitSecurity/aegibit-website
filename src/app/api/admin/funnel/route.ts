@@ -5,7 +5,7 @@ import { requireAdmin } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 /**
- * /api/admin/funnel — conversion funnel intelligence.
+ * /api/admin/funnel, conversion funnel intelligence.
  *
  * Auth: cookie session (sign in at /admin/login).
  *
@@ -67,7 +67,7 @@ export async function GET(req: NextRequest) {
 
   const supabase = getServiceClient();
 
-  // Visitors in window — single count query.
+  // Visitors in window, single count query.
   const visitorsRes = await supabase
     .from("visitors")
     .select("id", { count: "exact", head: true })
@@ -83,7 +83,7 @@ export async function GET(req: NextRequest) {
     .in("event_type", ["cta_click", "form_focus", "form_submit", "pageview"])
     .limit(50000);
 
-  // Leads in window — server-side truth on conversions.
+  // Leads in window, server-side truth on conversions.
   const leadsRes = await supabase
     .from("leads")
     .select("id, source, page", { count: "exact" })

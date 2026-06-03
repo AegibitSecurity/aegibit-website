@@ -32,11 +32,11 @@ export function ProductHighlight() {
           transition={{ duration:0.7, ease:"easeOut" }}>
           <span className="mono-label text-[#F97316] block mb-5">Product</span>
           <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold text-white leading-tight tracking-tight mb-5">
-            AEGIBIT —<br/>
+            AEGIBIT, <br/>
             <span style={{ color:"#F97316" }}>Voice-First Security</span>
           </h2>
           <p className="text-[#52525B] text-base leading-relaxed mb-10 max-w-[420px]">
-            Unified platform to manage operations, automate workflows, and control business logic — with biometric identity and audit logging on every spoken command.
+            Unified platform to manage operations, automate workflows, and control business logic, with biometric identity and audit logging on every spoken command.
           </p>
           <ul className="space-y-3 mb-10">
             {FEATURES.map(f => (
@@ -59,7 +59,7 @@ export function ProductHighlight() {
           </Link>
         </motion.div>
 
-        {/* Right — chat mockup */}
+        {/* Right, chat mockup */}
         <motion.div initial={{ opacity:0, x:24 }} animate={inView?{opacity:1,x:0}:{}}
           transition={{ duration:0.7, delay:0.12, ease:"easeOut" }}>
           <div className="rounded-2xl overflow-hidden"

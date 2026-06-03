@@ -11,7 +11,7 @@ const COMMANDS = [
     command: "deploy api-gateway v2.4.1 to production",
     steps: [
       { icon: "🎙", text: "Voice captured", status: "done" },
-      { icon: "🔐", text: "Biometric verified — Rohan M. [0.97]", status: "done" },
+      { icon: "🔐", text: "Biometric verified, Rohan M. [0.97]", status: "done" },
       { icon: "🛡", text: "RBAC check: role=admin → APPROVED", status: "done" },
       { icon: "🚀", text: "Deployed api-gateway@v2.4.1", status: "done" },
       { icon: "📋", text: "Audit log: tx-8f2a9c4b [immutable]", status: "done" },
@@ -23,9 +23,9 @@ const COMMANDS = [
     command: "export all customer records to CSV",
     steps: [
       { icon: "🎙", text: "Voice captured", status: "done" },
-      { icon: "🔐", text: "Biometric verified — Rohan M. [0.97]", status: "done" },
+      { icon: "🔐", text: "Biometric verified, Rohan M. [0.97]", status: "done" },
       { icon: "🛡", text: "RBAC check: role=analyst → DENIED", status: "denied" },
-      { icon: "🚨", text: "Action blocked — insufficient permissions", status: "denied" },
+      { icon: "🚨", text: "Action blocked, insufficient permissions", status: "denied" },
       { icon: "📋", text: "Audit log: denial recorded [immutable]", status: "done" },
     ],
   },
@@ -35,8 +35,8 @@ const COMMANDS = [
     command: "initiate wire transfer INR 50 lakh to vendor",
     steps: [
       { icon: "🎙", text: "Voice captured", status: "done" },
-      { icon: "🔐", text: "Biometric verified — Priya S. [0.99]", status: "done" },
-      { icon: "🔑", text: "Sudo Mode — dual approval required", status: "pending" },
+      { icon: "🔐", text: "Biometric verified, Priya S. [0.99]", status: "done" },
+      { icon: "🔑", text: "Sudo Mode, dual approval required", status: "pending" },
       { icon: "✅", text: "CFO approval received [biometric]", status: "done" },
       { icon: "📋", text: "Transfer initiated + audit logged", status: "done" },
     ],

@@ -1,15 +1,15 @@
 import { TrackedLink } from "@/components/shared/TrackedLink";
 import { HeroPrimaryCTA } from "@/components/sections/HeroPrimaryCTA";
 
-// Trust badges — every claim here must be defensible if a CISO asks.
-//   SOC 2 Type II is *in progress*, not certified — see /security.
+// Trust badges, every claim here must be defensible if a CISO asks.
+//   SOC 2 Type II is *in progress*, not certified, see /security.
 //     Until the audit closes, we don't claim it on the homepage.
 //   "99.99% Uptime SLA" was inherited from the dev-shop era; we don't
-//     have a customer with an SLA contract that says 99.99% — drop.
-//   "Zero Trust Architecture" is honest — defensible from next.config.ts
+//     have a customer with an SLA contract that says 99.99%, drop.
+//   "Zero Trust Architecture" is honest, defensible from next.config.ts
 //     headers + admin auth model.
-//   "Cybersecurity-First" is honest — it's the brand positioning.
-//   "Built for Multi-Branch Ops" is honest — it's the actual product.
+//   "Cybersecurity-First" is honest, it's the brand positioning.
+//   "Built for Multi-Branch Ops" is honest, it's the actual product.
 const TRUST = [
   { label: "Cybersecurity-First" },
   { label: "Built for Multi-Branch Ops" },
@@ -22,7 +22,7 @@ export function HeroSection() {
       className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-28 overflow-hidden"
       style={{ background: "#000000" }}
     >
-      {/* Subtle warm radial — matches reference ambient warmth */}
+      {/* Subtle warm radial, matches reference ambient warmth */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -34,14 +34,14 @@ export function HeroSection() {
       {/* Shield icon with back-glow pulse */}
       <div className="relative mb-7 flex items-center justify-center fade-up">
 
-        {/* Back-glow layer 1 — large slow pulse */}
+        {/* Back-glow layer 1, large slow pulse */}
         <div className="absolute" style={{
           width: 140, height: 140, borderRadius: "50%",
           background: "radial-gradient(circle, rgba(249,115,22,0.18) 0%, transparent 70%)",
           animation: "shield-glow-pulse 3s ease-in-out infinite",
         }}/>
 
-        {/* Back-glow layer 2 — tighter, delayed */}
+        {/* Back-glow layer 2, tighter, delayed */}
         <div className="absolute" style={{
           width: 100, height: 100, borderRadius: "50%",
           background: "radial-gradient(circle, rgba(249,115,22,0.28) 0%, transparent 70%)",
@@ -96,7 +96,7 @@ export function HeroSection() {
       </div>
 
       {/* ═══════════════════════════════════════
-          HEADLINE — exact spec match
+          HEADLINE, exact spec match
           Font: system-ui (Inter fallback)
           Weight: 500
           Letter-spacing: -0.03em
@@ -118,7 +118,7 @@ export function HeroSection() {
           maxWidth: "820px",
         }}
       >
-        {/* Line 1 — warm white. Two-word setup leading to the kicker. */}
+        {/* Line 1, warm white. Two-word setup leading to the kicker. */}
         <span
           style={{
             display: "block",
@@ -128,7 +128,7 @@ export function HeroSection() {
           Built to
         </span>
 
-        {/* Line 2 — gradient: white → orange → white. The kicker word.
+        {/* Line 2, gradient: white → orange → white. The kicker word.
             "Outlast" carries durability + decades + cybersec survival. */}
         <span
           style={{
@@ -148,7 +148,7 @@ export function HeroSection() {
         </span>
       </h1>
 
-      {/* Subtext — three short statements that earn the "outlast" claim. */}
+      {/* Subtext, three short statements that earn the "outlast" claim. */}
       <p
         className="fade-up delay-3 mb-10"
         style={{
@@ -161,15 +161,15 @@ export function HeroSection() {
       >
         We build operational software for businesses that can&apos;t afford a leak.
         Cybersecurity-first. Real-time across every branch. Engineered to run for
-        decades — long after the trends pass.
+        decades, long after the trends pass.
       </p>
 
-      {/* CTAs — company-level: explore products grid + Talk to AEGIBIT.
+      {/* CTAs, company-level: explore products grid + Talk to AEGIBIT.
            Specific product CTAs live one section below in HomeProducts.
            Brand voice rule: response promises always reference the
            AEGIBIT team, not the founder personally. */}
       <div className="fade-up delay-4 flex flex-col sm:flex-row items-center gap-4 mb-12">
-        {/* Primary CTA is wrapped in HeroPrimaryCTA — first live A/B
+        {/* Primary CTA is wrapped in HeroPrimaryCTA, first live A/B
             experiment (hero_cta_copy). Renders the control variant on
             server / first-paint to keep SSR stable, then swaps to the
             assigned variant once visitorId resolves. */}
@@ -193,7 +193,7 @@ export function HeroSection() {
         </TrackedLink>
       </div>
 
-      {/* Trust badges — more visible */}
+      {/* Trust badges, more visible */}
       <div className="fade-up delay-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
         {TRUST.map((t) => (
           <div key={t.label} className="flex items-center gap-2.5">

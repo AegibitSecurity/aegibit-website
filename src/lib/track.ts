@@ -40,7 +40,7 @@ export function track(
 ): void {
   if (typeof window === "undefined") return; // SSR no-op
 
-  // Read visitorId from the zustand store directly — works outside
+  // Read visitorId from the zustand store directly, works outside
   // React components (e.g. inline event handlers in server-rendered
   // markup that hydrate later).
   const visitorId = useVisitorStore.getState().visitorId;
@@ -48,7 +48,7 @@ export function track(
     if (!_warned && process.env.NODE_ENV !== "production") {
       _warned = true;
       console.warn(
-        "[track] visitorId not yet available — early CTAs may be dropped. " +
+        "[track] visitorId not yet available, early CTAs may be dropped. " +
           "This is expected on the first 100ms of a fresh visit.",
       );
     }
@@ -67,7 +67,7 @@ export function track(
     body: JSON.stringify({ visitorId, eventType, eventData: data, page }),
     keepalive: true,
   }).catch(() => {
-    /* swallow — telemetry is best-effort */
+    /* swallow, telemetry is best-effort */
   });
 
   // Update local visitor store for the behavior-score recalc, so the

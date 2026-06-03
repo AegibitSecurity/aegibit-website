@@ -42,7 +42,7 @@ interface FormState {
   role: string;
   branches: string;
   message: string;
-  // Honeypot — real users never fill this
+  // Honeypot, real users never fill this
   website: string;
 }
 
@@ -175,15 +175,15 @@ export function PayMintDemoForm() {
           >
             Book a 20-minute call with a PayMint specialist. We&apos;ll walk through
             multi-branch expense tracking, branch-coded vouchers, audit-grade logging,
-            and Tally-ready exports — tailored to your dealership or SME.
+            and Tally-ready exports, tailored to your dealership or SME.
           </p>
 
           {/* Trust strip */}
           <div className="space-y-4 mb-10">
             {[
-              { Icon: Clock,        text: 'No prep needed — we drive the demo' },
-              { Icon: ShieldCheck,  text: 'Built by a cybersecurity company — SOC 2 ready' },
-              { Icon: Building2,    text: 'Live with Nibir Motors — 7 branches, real-time sync' },
+              { Icon: Clock,        text: 'No prep needed, we drive the demo' },
+              { Icon: ShieldCheck,  text: 'Built by a cybersecurity company, SOC 2 ready' },
+              { Icon: Building2,    text: 'Live with Nibir Motors, 7 branches, real-time sync' },
               { Icon: Zap,          text: 'Get a live PayMint sandbox link the same day' },
             ].map(({ Icon, text }) => (
               <div key={text} className="flex items-center gap-3">
@@ -431,7 +431,7 @@ export function PayMintDemoForm() {
                     style={{ color: '#A1A1AA' }}
                   >
                     A PayMint specialist will reach out within 24 business hours to
-                    schedule your demo. Check your inbox — confirmation already sent.
+                    schedule your demo. Check your inbox, confirmation already sent.
                   </p>
                   <a
                     href="https://nibir-vault.web.app"
@@ -531,7 +531,7 @@ function Input({
 }
 
 /**
- * Custom premium dropdown — replaces the native <select>, whose <option>
+ * Custom premium dropdown, replaces the native <select>, whose <option>
  * list ignores our dark theme and renders with a browser-default white
  * background. The custom dropdown:
  *   • Matches the form's glass-dark aesthetic exactly

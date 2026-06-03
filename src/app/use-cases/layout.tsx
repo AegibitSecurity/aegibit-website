@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 /**
- * /use-cases/* — emergency noindex.
+ * /use-cases/*, emergency noindex.
  *
  * Same disposition as /alternatives/*: these pages were authored
  * during the VoiceCore positioning ("VoiceCore for SOC teams",

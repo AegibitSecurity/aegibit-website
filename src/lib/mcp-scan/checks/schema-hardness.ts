@@ -1,5 +1,5 @@
 /**
- * AEG-MCP-002 — Schema Hardness Audit.
+ * AEG-MCP-002, Schema Hardness Audit.
  *
  * Faithful TypeScript port of
  *   scanner/aegibit_mcp_shield/checks/schema_hardness.py
@@ -50,7 +50,7 @@ function scanTool(tool: ToolDefinition): Finding[] {
       title: "Tool has no inputSchema",
       detail:
         `Tool ${q(tool.name)} declares no input schema. Without a schema, ` +
-        `the agent has no contract for what parameters this tool accepts — ` +
+        `the agent has no contract for what parameters this tool accepts, ` +
         `every invocation is a free-form trust decision, and there is no ` +
         `programmatic way to sanitise inputs at the agent layer.`,
       remediation:

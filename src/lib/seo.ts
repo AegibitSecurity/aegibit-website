@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 /**
- * Canonical site URL — always includes the `www.` prefix even if the
+ * Canonical site URL, always includes the `www.` prefix even if the
  * env var is set to the apex domain. The Vercel proxy 308-redirects
  * apex → www, so apex URLs in JSON-LD/OG/canonical tags would force
  * Google to follow an extra hop and dilute ranking signals. This

@@ -38,7 +38,7 @@ export function ProductSpotlightSection() {
             className="text-[#A1A1AA] text-lg leading-relaxed mb-10"
           >
             A unified platform to manage operations, automate workflows, and control business logic.
-            Built for teams that need reliability, auditability, and speed — without compromise.
+            Built for teams that need reliability, auditability, and speed, without compromise.
           </motion.p>
 
           <motion.div
@@ -70,7 +70,7 @@ export function ProductSpotlightSection() {
               <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,255,255,0.08)]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,255,255,0.08)]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[rgba(255,255,255,0.08)]" />
-              <span className="ml-4 mono-label text-[#2A2A2A]">aegibit-flow — dashboard</span>
+              <span className="ml-4 mono-label text-[#2A2A2A]">aegibit-flow, dashboard</span>
             </div>
 
             <div className="p-5 space-y-4">

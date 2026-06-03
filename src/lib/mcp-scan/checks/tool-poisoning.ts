@@ -1,5 +1,5 @@
 /**
- * AEG-MCP-001 — Tool Poisoning Detection.
+ * AEG-MCP-001, Tool Poisoning Detection.
  *
  * Faithful TypeScript port of
  *   scanner/aegibit_mcp_shield/checks/tool_poisoning.py
@@ -77,7 +77,7 @@ export function detectHiddenChars(text: string): HiddenCharHit[] {
     } else if (codepoint >= 0xe0000 && codepoint <= 0xe007f) {
       hits.push({
         codepoint,
-        label: `U+${codepoint.toString(16).toUpperCase().padStart(4, "0")} (TAG character — known steganography vector)`,
+        label: `U+${codepoint.toString(16).toUpperCase().padStart(4, "0")} (TAG character, known steganography vector)`,
       });
     }
   }
@@ -111,7 +111,7 @@ function scanTool(tool: ToolDefinition): Finding[] {
           `Tool ${q(tool.name)} contains ${hits.length} hidden Unicode ` +
           `character(s) in its ${field}: ${hits.map((h) => h.label).join(", ")}. ` +
           `Zero-width and TAG-range characters are invisible to a human reviewer ` +
-          `but consumed verbatim by the LLM — a documented steganography vector ` +
+          `but consumed verbatim by the LLM, a documented steganography vector ` +
           `for instruction smuggling.`,
         remediation:
           "Strip all U+200B–U+200D, U+FEFF, U+2060–U+2064, and U+E0000–U+E007F " +
@@ -119,7 +119,7 @@ function scanTool(tool: ToolDefinition): Finding[] {
           "Most editors will show these as zero-width gaps when configured to " +
           "render invisible characters.",
         cwe: "CWE-94",
-        owasp: "A03:2021 — Injection",
+        owasp: "A03:2021, Injection",
         references: [REF_OX_DISCLOSURE, REF_TAG_STEGANOGRAPHY],
       });
     }
@@ -143,13 +143,13 @@ function scanTool(tool: ToolDefinition): Finding[] {
           "Remove instruction-override phrasing from tool descriptions. Tool " +
           "descriptions should describe what the tool does, never instruct the " +
           "LLM how to behave. If you need to influence agent behavior, do it in " +
-          "the agent's system prompt — not inside tool metadata that ships with " +
+          "the agent's system prompt, not inside tool metadata that ships with " +
           "the server.",
         cwe: "CWE-94",
-        owasp: "A03:2021 — Injection",
+        owasp: "A03:2021, Injection",
         references: [REF_OX_DISCLOSURE],
       });
-      break; // one finding per tool is enough — operator gets the signal
+      break; // one finding per tool is enough, operator gets the signal
     }
   }
 
@@ -163,7 +163,7 @@ function scanTool(tool: ToolDefinition): Finding[] {
       detail:
         `Tool ${q(tool.name)} has a description of ${tool.description.length} ` +
         `characters. Descriptions over ${LONG_DESCRIPTION_THRESHOLD} chars are a ` +
-        `common hiding place for prompt-injection payloads — the wall of legitimate ` +
+        `common hiding place for prompt-injection payloads, the wall of legitimate ` +
         `text obscures a small embedded instruction.`,
       remediation:
         "Tool descriptions should be 1–3 sentences. If a tool needs deeper " +
@@ -187,7 +187,7 @@ function scanTool(tool: ToolDefinition): Finding[] {
         detail:
           `Tool ${q(tool.name)} ${where} matches a dangerous-capability pattern ` +
           `(${pattern.source}). Tools that execute arbitrary commands or evaluate ` +
-          `code are the highest-risk class of MCP tool — they should require ` +
+          `code are the highest-risk class of MCP tool, they should require ` +
           `explicit allow-listing in the agent's tool policy, not be silently ` +
           `available based on their presence in the manifest.`,
         remediation:
@@ -195,7 +195,7 @@ function scanTool(tool: ToolDefinition): Finding[] {
           "model and require it to be explicitly enabled. If not, rename the " +
           "tool so its capability hint matches what it actually does.",
         cwe: "CWE-78",
-        owasp: "A03:2021 — Injection",
+        owasp: "A03:2021, Injection",
         references: [REF_OX_DISCLOSURE],
       });
       break;

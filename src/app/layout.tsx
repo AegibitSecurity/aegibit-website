@@ -30,16 +30,16 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   // Note: icons + opengraph image are auto-injected by Next.js from the
-  // file conventions in src/app — see icon.tsx, apple-icon.tsx,
+  // file conventions in src/app, see icon.tsx, apple-icon.tsx,
   // opengraph-image.tsx, twitter-image.tsx, and public/icon.svg.
   // We override only the bits the convention can't infer.
   manifest: "/manifest.webmanifest",
   title: {
-    default: "AEGIBIT — Built to Outlast | Cybersecurity-First Operational Software",
+    default: "AEGIBIT, Built to Outlast | Cybersecurity-First Operational Software",
     template: "%s | AEGIBIT",
   },
   description:
-    "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast — for dealerships, multi-branch SMEs, and mission-critical operations.",
+    "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast, for dealerships, multi-branch SMEs, and mission-critical operations.",
   keywords: [
     "AEGIBIT",
     "operational software",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://www.aegibit.com",
     siteName: "AEGIBIT",
-    title: "AEGIBIT — Built to Outlast",
+    title: "AEGIBIT, Built to Outlast",
     description:
       "Cybersecurity-first software company. Operational platforms for multi-branch businesses, dealerships, mission-critical SMEs. Built to outlast.",
   },
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@aegibit",
     creator: "@aegibit",
-    title: "AEGIBIT — Built to Outlast",
+    title: "AEGIBIT, Built to Outlast",
     description:
       "Operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time. Built to outlast.",
   },
@@ -88,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full flex flex-col bg-[#000] text-white">
         {/*
-          Skip-to-content link — first focusable element on every
+          Skip-to-content link, first focusable element on every
           page. Keyboard users hit Tab once and can jump past the
           navbar straight to <main>. Visually hidden until focused
           (see .skip-to-content in globals.css). Each page wraps
@@ -100,7 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <TrackingProvider>{children}</TrackingProvider>
         {/*
-          Site-wide marketing chrome — scroll progress, mobile CTA,
+          Site-wide marketing chrome, scroll progress, mobile CTA,
           social proof, exit-intent, live badge. Self-gates by pathname
           (renders null on /admin, /dashboard, /api, /signup, /login).
           Each child has its own internal triggers (engagement score,

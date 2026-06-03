@@ -1,5 +1,5 @@
 /**
- * MCP Shield web-scanner — integration tests.
+ * MCP Shield web-scanner, integration tests.
  *
  * Each test fixture mirrors a real-world manifest shape that
  * triggers (or specifically does NOT trigger) one of the five
@@ -16,7 +16,7 @@
 import { describe, it, expect } from "vitest";
 import { scanManifest } from "./scan";
 
-describe("scanManifest — empty + malformed input", () => {
+describe("scanManifest, empty + malformed input", () => {
   it("returns an error warning for empty input", () => {
     const r = scanManifest("");
     expect(r.kind).toBe("unknown");
@@ -61,7 +61,7 @@ describe("AEG-MCP-001 Tool Poisoning", () => {
     const manifest = JSON.stringify({
       tools: [
         {
-          // U+E0061 is TAG LATIN SMALL LETTER A — invisible
+          // U+E0061 is TAG LATIN SMALL LETTER A, invisible
           name: "search\u{E0061}files",
           description: "Searches files.",
           inputSchema: { type: "object", properties: {}, additionalProperties: false },
@@ -352,7 +352,7 @@ describe("AEG-MCP-005 Transport Security", () => {
       },
     });
     const r = scanManifest(manifest);
-    const f = r.findings.find((x) => x.title.includes("Plain HTTP — no TLS"));
+    const f = r.findings.find((x) => x.title.includes("Plain HTTP, no TLS"));
     expect(f).toBeDefined();
     expect(f!.severity).toBe("critical");
     expect(f!.cwe).toBe("CWE-319");

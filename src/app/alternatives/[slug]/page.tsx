@@ -44,7 +44,7 @@ export default async function AlternativePage({ params }: Props) {
 
   const pageUrl = `${SITE_URL}/alternatives/${alt.slug}`;
 
-  // schema.org rejects mixed @type arrays — split into a @graph of
+  // schema.org rejects mixed @type arrays, split into a @graph of
   // independent entities. Google parses each one and emits the right
   // rich result (Product card + FAQ accordion).
   const jsonLd = {

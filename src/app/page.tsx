@@ -6,14 +6,14 @@ import { WhatWeDo }         from "@/components/sections/WhatWeDo";
 import { ProofSection }     from "@/components/sections/ProofSection";
 import { HomeCTA }          from "@/components/sections/HomeCTA";
 
-// Structured data — AEGIBIT-the-company is the primary entity. PayMint
+// Structured data, AEGIBIT-the-company is the primary entity. PayMint
 // is one of three products in the OfferCatalog (PayMint paid SaaS,
 // MCP Shield open-source MIT, Aira free Windows). The Organization
 // carries brand identity; the top-level SoftwareApplication node
 // carries PayMint specifics because PayMint is the lead commercial
 // product Google should treat as the primary rich-result candidate.
 //
-// VoiceCore was dropped from this graph in 2026-05 — the product was
+// VoiceCore was dropped from this graph in 2026-05, the product was
 // deprecated, leaving it in Schema.org meant Google indexed an item
 // that didn't exist on the site, which (a) eroded the rich-result
 // trust signal and (b) violated the "every claim must be defensible"
@@ -31,7 +31,7 @@ const HOME_JSON_LD = {
       logo: "https://www.aegibit.com/icon.svg",
       slogan: "Securing Tomorrow, Today",
       description:
-        "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast — for dealerships, multi-branch SMEs, and mission-critical operations.",
+        "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast, for dealerships, multi-branch SMEs, and mission-critical operations.",
       foundingDate: "2026",
       sameAs: [],
       contactPoint: {

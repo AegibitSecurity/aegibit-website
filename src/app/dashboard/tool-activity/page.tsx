@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 /**
- * /dashboard/tool-activity — usage telemetry for the two free
+ * /dashboard/tool-activity, usage telemetry for the two free
  * acquisition tools (PayMint Snapshot + MCP Shield Scanner).
  *
  * Closes the observability gap from M-1/M-2: when those tools
@@ -479,7 +479,7 @@ function FunnelStep({
           {label}
         </p>
         <p className="text-sm" style={{ color: "#52525B" }}>
-          —
+,
         </p>
       </div>
     );

@@ -21,19 +21,19 @@ export function useDynamicCTA(): CTAConfig {
 
   // Priority order: highest-intent state wins
   if (score >= 76) {
-    return { label: "Get Priority Access — 3 Spots Left", href: "/signup", urgency: "high" };
+    return { label: "Get Priority Access, 3 Spots Left", href: "/signup", urgency: "high" };
   }
   if (score >= 51) {
-    return { label: "Claim Your Spot — Limited Beta", href: "/signup", urgency: "high" };
+    return { label: "Claim Your Spot, Limited Beta", href: "/signup", urgency: "high" };
   }
   if (onAlternativesPage || visitedAlternativesPage) {
-    return { label: "Switch to VoiceCore — Free Migration", href: "/signup", urgency: "medium" };
+    return { label: "Switch to VoiceCore, Free Migration", href: "/signup", urgency: "medium" };
   }
   if (isReturn) {
-    return { label: "Welcome Back — Resume Your Trial", href: "/signup", urgency: "medium" };
+    return { label: "Welcome Back, Resume Your Trial", href: "/signup", urgency: "medium" };
   }
   if (onPricingPage || visitedPricingPage) {
     return { label: "Start Your Free Trial", href: "/signup", urgency: "medium" };
   }
-  return { label: "Join the Waitlist — Free", href: "/signup", urgency: "low" };
+  return { label: "Join the Waitlist, Free", href: "/signup", urgency: "low" };
 }

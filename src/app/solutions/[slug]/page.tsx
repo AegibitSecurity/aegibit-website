@@ -52,7 +52,7 @@ export default async function SolutionDynamicPage({ params }: PageProps) {
   const solution = findSolution(slug);
   if (!solution) notFound();
 
-  // FAQ schema for Google rich results — appears on the page as a single
+  // FAQ schema for Google rich results, appears on the page as a single
   // <script type="application/ld+json"> tag, picked up by Googlebot.
   const faqLd = {
     "@context": "https://schema.org",

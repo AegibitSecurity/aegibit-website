@@ -1,7 +1,7 @@
 import { getServiceClient } from "@/lib/supabase-admin";
 
 /**
- * Agent action audit log — server-side writer.
+ * Agent action audit log, server-side writer.
  *
  * This is the chokepoint for the Multi-Agent Orchestrator (P2-S4 from
  * the Aira charter). Every autonomous agent action goes through here:
@@ -66,7 +66,7 @@ export interface AgentActionRow {
 }
 
 /**
- * Open an action record. Returns the row id — pass it to finishAction()
+ * Open an action record. Returns the row id, pass it to finishAction()
  * when the work completes (or fails). Returns null on DB error so the
  * caller can keep going without audit coverage.
  */

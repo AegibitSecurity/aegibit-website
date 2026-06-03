@@ -5,7 +5,7 @@ import { getServiceClient } from "@/lib/supabase-admin";
  *
  * Why this exists: industry data says contacting an inbound lead within
  * 5 minutes is ~9× more likely to convert than within an hour. The
- * default lead notification email is informational — by the time you
+ * default lead notification email is informational, by the time you
  * read it the lead has cooled. This module classifies inbound leads
  * by intent strength and enriches the highest-intent ones with the
  * full visitor session so the founder can act on them in one glance.
@@ -18,7 +18,7 @@ import { getServiceClient } from "@/lib/supabase-admin";
  *   - the visitor's recent event history shows pricing or alternatives
  *     visit + at least one cta_click (consideration signal)
  *
- * Anything else = "warm" — gets the standard notification.
+ * Anything else = "warm", gets the standard notification.
  */
 
 export type LeadHeat = "hot" | "warm";
@@ -28,7 +28,7 @@ const HOT_SOURCES = new Set([
   "demo",
   "voicecore_waitlist",
   "aira_waitlist",
-  // Chat leads are by definition high-intent — the visitor had a
+  // Chat leads are by definition high-intent, the visitor had a
   // conversation with Aira and explicitly handed over their email
   // (the bot only escalates on demo/pricing/custom-feature signals,
   // and the user passed the email validation gate). Always hot.
@@ -69,7 +69,7 @@ export interface VisitorJourney {
 }
 
 /**
- * Classify a lead by heat level. Pure function — given the inputs,
+ * Classify a lead by heat level. Pure function, given the inputs,
  * always returns the same heat. Used by /api/leads to decide which
  * email template to send.
  */
@@ -100,7 +100,7 @@ export function classifyLead(input: {
 
 /**
  * Pull the visitor's journey from Supabase: visitor row + recent events.
- * Returns null if no visitorId or DB error — the caller still sends the
+ * Returns null if no visitorId or DB error, the caller still sends the
  * email, just without enrichment.
  */
 export async function fetchVisitorJourney(
@@ -177,7 +177,7 @@ export async function fetchVisitorJourney(
 
 /**
  * Render the visitor-journey panel for embedding in the hot-lead email.
- * Plain inline-styled HTML — no template engine, works in every mail
+ * Plain inline-styled HTML, no template engine, works in every mail
  * client (Gmail strips many CSS features, hence inline).
  */
 export function renderJourneyHtml(j: VisitorJourney): string {
@@ -222,7 +222,7 @@ export function renderJourneyHtml(j: VisitorJourney): string {
         <tr><td style="padding:4px 0;color:#71717A;font-size:11px;">Time on site</td><td style="padding:4px 0;color:#fff;font-size:12px;font-weight:600;">${time}</td></tr>
         <tr><td style="padding:4px 0;color:#71717A;font-size:11px;">Scroll depth</td><td style="padding:4px 0;color:#fff;font-size:12px;">${j.scroll_depth_max}%</td></tr>
         <tr><td style="padding:4px 0;color:#71717A;font-size:11px;">Behavior score</td><td style="padding:4px 0;color:#F97316;font-size:12px;font-weight:700;">${j.behavior_score} / 100</td></tr>
-        <tr><td style="padding:4px 0;color:#71717A;font-size:11px;">Device</td><td style="padding:4px 0;color:#fff;font-size:12px;">${escape(j.device ?? "—")}</td></tr>
+        <tr><td style="padding:4px 0;color:#71717A;font-size:11px;">Device</td><td style="padding:4px 0;color:#fff;font-size:12px;">${escape(j.device ?? "-")}</td></tr>
         ${j.country ? `<tr><td style="padding:4px 0;color:#71717A;font-size:11px;">Country</td><td style="padding:4px 0;color:#fff;font-size:12px;">${escape(j.country)}</td></tr>` : ""}
         ${j.utm_source ? `<tr><td style="padding:4px 0;color:#71717A;font-size:11px;">UTM source</td><td style="padding:4px 0;color:#fff;font-size:12px;">${escape(j.utm_source)}${j.utm_campaign ? ` · ${escape(j.utm_campaign)}` : ""}</td></tr>` : ""}
         ${j.referrer ? `<tr><td style="padding:4px 0;color:#71717A;font-size:11px;">Referrer</td><td style="padding:4px 0;color:#fff;font-size:12px;font-family:monospace;word-break:break-all;">${escape(j.referrer)}</td></tr>` : ""}

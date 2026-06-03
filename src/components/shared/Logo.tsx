@@ -3,7 +3,7 @@ import Link from "next/link";
 interface LogoProps { size?: "sm" | "md" | "lg"; linkHref?: string; }
 
 /**
- * AEGIBIT logo lockup — the "A" mark + AEGI/BIT wordmark.
+ * AEGIBIT logo lockup, the "A" mark + AEGI/BIT wordmark.
  *
  * The mark is two angled strokes (no crossbar): the left leg is white,
  * the right leg is canonical brand orange (#F97316). A soft orange
@@ -19,7 +19,7 @@ export function Logo({ size = "md", linkHref = "/" }: LogoProps) {
   const content = (
     <div className="flex items-center gap-2.5 select-none">
 
-      {/* "A" mark — two offset blades (white left rises to apex,
+      {/* "A" mark, two offset blades (white left rises to apex,
           orange right splays from the notch), with a soft orange glow */}
       <div className="relative flex-shrink-0 flex items-center justify-center">
         <svg

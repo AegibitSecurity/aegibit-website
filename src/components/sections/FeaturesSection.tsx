@@ -40,7 +40,7 @@ const FEATURES = [
   {
     icon: <Key className="w-5 h-5" />,
     color: "#F59E0B",
-    title: "Sudo Mode — Dual Approval",
+    title: "Sudo Mode, Dual Approval",
     description: "High-risk commands require a second voice approval from a designated authority. No single point of compromise.",
     tags: ["Dual Auth", "4-Eyes", "High Risk"],
     accent: false,
@@ -65,7 +65,7 @@ const FEATURES = [
     icon: <Globe className="w-5 h-5" />,
     color: "#10B981",
     title: "India Data Residency",
-    description: "Enterprise plans guarantee data sovereignty — all voice data and logs stay within Indian data centers.",
+    description: "Enterprise plans guarantee data sovereignty, all voice data and logs stay within Indian data centers.",
     tags: ["DPDP", "Sovereignty", "On-Premise"],
     accent: false,
   },

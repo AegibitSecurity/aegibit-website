@@ -26,7 +26,7 @@ export function IntegrationsSection() {
         <SectionHeader
           label="INTEGRATIONS"
           title="Works with your existing tools"
-          subtitle="Plug VoiceCore into your stack in minutes — no rip-and-replace required."
+          subtitle="Plug VoiceCore into your stack in minutes, no rip-and-replace required."
         />
 
         <StaggerContainer staggerDelay={0.05} className="mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">

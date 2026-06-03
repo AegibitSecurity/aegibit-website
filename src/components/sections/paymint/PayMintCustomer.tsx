@@ -72,7 +72,7 @@ export function PayMintCustomer() {
             </h2>
             <p className="text-base md:text-lg leading-relaxed max-w-2xl mb-8" style={{ color: '#A1A1AA' }}>
               PayMint runs the day-to-day finance operations across seven Nibir Motors
-              branches in West Bengal — Berhampore, Kalyani, Krishnagar, Chakdah, Plassey,
+              branches in West Bengal, Berhampore, Kalyani, Krishnagar, Chakdah, Plassey,
               Raghunathganj, and Kandi. Every fuel bill, every workshop payment, every
               petty-cash voucher flows through a single audited pipeline.
             </p>

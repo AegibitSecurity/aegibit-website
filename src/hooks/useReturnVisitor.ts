@@ -56,7 +56,7 @@ export function useReturnVisitor(): boolean {
       try {
         window.localStorage.setItem(STORAGE_KEY, "1");
       } catch {
-        // Storage blocked (private mode, embedded webviews) — the
+        // Storage blocked (private mode, embedded webviews), the
         // hook will keep returning false for this visitor's session,
         // which is the safe degradation.
       }

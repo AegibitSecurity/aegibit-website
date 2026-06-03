@@ -24,7 +24,7 @@ export function CTASection() {
                   <span className="ping-green absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]" />
                 </span>
-                <span className="mono-label text-[#34D399]">BETA ACCESS — LIMITED SPOTS</span>
+                <span className="mono-label text-[#34D399]">BETA ACCESS, LIMITED SPOTS</span>
               </div>
             </div>
 

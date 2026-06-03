@@ -114,7 +114,7 @@ export function PayMintHero() {
             for businesses that can&apos;t afford a leak.
           </p>
 
-          {/* Soft-anchor to the free Snapshot tool — non-competing with the
+          {/* Soft-anchor to the free Snapshot tool, non-competing with the
               primary CTAs below but discoverable above the fold. */}
           <p className="mb-10 max-w-xl">
             <a
@@ -128,7 +128,7 @@ export function PayMintHero() {
             </a>
           </p>
 
-          {/* CTAs — primary is Book Demo (sales-led growth motion).
+          {/* CTAs, primary is Book Demo (sales-led growth motion).
                Launch + Download remain for existing users. */}
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-10">
             <a

@@ -10,7 +10,7 @@ import {
 import type { Comparison, ComparisonRow } from "@/content/comparisons";
 
 /**
- * ComparisonPage — premium head-to-head template.
+ * ComparisonPage, premium head-to-head template.
  *
  * Layout:
  *   1. Hero with PayMint vs {competitor} headline + CTAs
@@ -458,7 +458,7 @@ function FeatureRow({ row }: { row: ComparisonRow; competitorName: string }) {
 }
 
 function CellValue({ value, positive }: { value: string; positive: boolean }) {
-  if (value === "—") {
+  if (value === "-") {
     return (
       <div className="flex items-center gap-2 text-sm" style={{ color: "#52525B" }}>
         <Minus size={14} />

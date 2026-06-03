@@ -9,7 +9,7 @@ import { permanentRedirect } from "next/navigation";
  *
  * `permanentRedirect` issues a 308 (vs Next's default 307) so search
  * engines collapse link equity into the new URL. The function never
- * returns — its TS signature is `never` — so no content is rendered.
+ * returns, its TS signature is `never`, so no content is rendered.
  *
  * Note: the file path itself is queued for retirement (separate task)
  * once we confirm there are no inbound links worth preserving. The

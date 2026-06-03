@@ -1,5 +1,5 @@
 /**
- * PayMint Snapshot — integration tests.
+ * PayMint Snapshot, integration tests.
  *
  * Pins three contracts:
  *   1. The parser tolerates Tally's column-naming variation.
@@ -116,7 +116,7 @@ describe("analyze", () => {
 
   it("detects Z-score anomalies on a realistic-size fixture", () => {
     // 8 routine rows around INR 1000-1500 plus one clear INR 80000
-    // outlier — with N=9 the std stabilises enough that the outlier's
+    // outlier, with N=9 the std stabilises enough that the outlier's
     // Z-score clears the 2.0 threshold. Mirrors what a real PayMint
     // CSV looks like (many small rows, occasional unusual entry).
     const csv = `Date,Particulars,Cost Centre,Amount
@@ -158,7 +158,7 @@ describe("analyze", () => {
 
 // ── Groq prompt privacy contract ──────────────────────────────────
 
-describe("buildPrompt — privacy", () => {
+describe("buildPrompt, privacy", () => {
   it("never includes raw row narration text", () => {
     const { rows } = parseCsv(SENSITIVE_CSV);
     const snap = analyze(rows, []);

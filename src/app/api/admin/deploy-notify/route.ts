@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 /**
- * /api/admin/deploy-notify — Aira's "I just shipped X" notifier.
+ * /api/admin/deploy-notify, Aira's "I just shipped X" notifier.
  *
  * Auth: Bearer token must equal DASHBOARD_SECRET env var.
  *
@@ -15,13 +15,13 @@ export const dynamic = "force-dynamic";
  *
  * Body shape (POST JSON):
  *   {
- *     "title":     "string — short ship label",
+ *     "title":     "string, short ship label",
  *     "category":  "feature" | "fix" | "content" | "infra" | "ops" | "security",
- *     "summary":   "1-3 sentences — what shipped and why",
- *     "impact":    "1-2 sentences — expected business effect",
+ *     "summary":   "1-3 sentences, what shipped and why",
+ *     "impact":    "1-2 sentences, expected business effect",
  *     "commit":    "git short SHA",
  *     "urls":      [{ "label": "name", "url": "/path" }, ...]
- *     "nextMove":  "optional — what Aira is building next"
+ *     "nextMove":  "optional, what Aira is building next"
  *   }
  */
 
@@ -186,7 +186,7 @@ export async function POST(req: NextRequest) {
     <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:24px 0;"/>
 
     <div style="font-size:11px;color:#52525B;line-height:1.6;">
-      Sent automatically by <strong style="color:#71717A;">Aira</strong> — your AI co-founder.<br/>
+      Sent automatically by <strong style="color:#71717A;">Aira</strong>, your AI co-founder.<br/>
       Reply to this email to course-correct. The next ship will reflect your input.<br/><br/>
       <a href="https://www.aegibit.com/dashboard/aira" style="color:#F97316;text-decoration:none;">Open Aira Ops dashboard →</a>
     </div>

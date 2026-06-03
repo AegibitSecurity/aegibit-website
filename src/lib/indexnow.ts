@@ -1,5 +1,5 @@
 /**
- * IndexNow — submit URLs to Bing/Yandex/Seznam for near-instant indexing.
+ * IndexNow, submit URLs to Bing/Yandex/Seznam for near-instant indexing.
  *
  * Why this and not the legacy Google/Bing sitemap-ping endpoints:
  * Google deprecated /ping?sitemap= in June 2023; Bing followed. Both
@@ -41,7 +41,7 @@ export async function submitToIndexNow(urls: string[]): Promise<IndexNowResult> 
   const host = new URL(SITE_URL).host;
   const keyLocation = `${SITE_URL}/${INDEXNOW_KEY}.txt`;
 
-  // Chunk to 1000 per request — defensive against the 10k limit.
+  // Chunk to 1000 per request, defensive against the 10k limit.
   const chunks: string[][] = [];
   for (let i = 0; i < urls.length; i += 1000) {
     chunks.push(urls.slice(i, i + 1000));

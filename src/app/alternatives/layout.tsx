@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 /**
- * /alternatives/* — emergency noindex.
+ * /alternatives/*, emergency noindex.
  *
  * Why: a Google search for "Aegibit company" surfaces these pages
- * actively selling **AEGIBIT VoiceCore** — a product that was
+ * actively selling **AEGIBIT VoiceCore**, a product that was
  * renamed to Aira months ago. The alternatives templates were
  * authored during the VoiceCore positioning and now actively
  * misrepresent AEGIBIT to anyone searching the brand name.

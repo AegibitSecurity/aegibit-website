@@ -6,12 +6,12 @@ import { SOLUTIONS } from "@/content/solutions";
 import { ArrowRight, CalendarCheck, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Solutions — PayMint for Every Branch Operation",
+  title: "Solutions, PayMint for Every Branch Operation",
   description:
     "Tailored PayMint solutions for car dealerships, multi-branch SMEs, fleet operators, automotive workshops, and more. Real-time expense automation, audit-grade.",
   alternates: { canonical: "/solutions" },
   openGraph: {
-    title: "Solutions — PayMint for Every Branch Operation",
+    title: "Solutions, PayMint for Every Branch Operation",
     description:
       "Real-time multi-branch expense automation, tailored to your industry and operational shape.",
     type: "website",
@@ -80,7 +80,7 @@ export default function SolutionsIndexPage() {
               style={{ color: "#A1A1AA" }}
             >
               PayMint is built for multi-branch businesses that can&apos;t afford a
-              leak — dealerships, SMEs, workshops, fleet operators. Pick the
+              leak, dealerships, SMEs, workshops, fleet operators. Pick the
               shape closest to yours.
             </p>
           </div>
@@ -181,7 +181,7 @@ export default function SolutionsIndexPage() {
               className="text-lg max-w-xl mx-auto leading-relaxed mb-10"
               style={{ color: "#A1A1AA" }}
             >
-              PayMint is multi-branch by design — we adapt to your specific
+              PayMint is multi-branch by design, we adapt to your specific
               operation. Book a 20-min call and we&apos;ll tailor the demo to
               your shape.
             </p>

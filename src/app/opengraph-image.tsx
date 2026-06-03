@@ -11,7 +11,7 @@ import { ImageResponse } from "next/og";
  * reference exactly.
  */
 
-export const alt = "AEGIBIT — Securing Tomorrow, Today";
+export const alt = "AEGIBIT, Securing Tomorrow, Today";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -31,7 +31,7 @@ export default function OpenGraphImage() {
             "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
         }}
       >
-        {/* Subtle warm radial — matches the live homepage hero */}
+        {/* Subtle warm radial, matches the live homepage hero */}
         <div
           style={{
             position: "absolute",
@@ -41,7 +41,7 @@ export default function OpenGraphImage() {
           }}
         />
 
-        {/* "A" mark — two angled strokes, white left + orange right */}
+        {/* "A" mark, two angled strokes, white left + orange right */}
         <div
           style={{
             display: "flex",
@@ -58,7 +58,7 @@ export default function OpenGraphImage() {
           </svg>
         </div>
 
-        {/* Wordmark — AEGI white, BIT orange (the official lockup) */}
+        {/* Wordmark, AEGI white, BIT orange (the official lockup) */}
         <div
           style={{
             fontSize: 96,

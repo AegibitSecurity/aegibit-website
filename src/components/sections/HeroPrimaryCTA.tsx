@@ -4,14 +4,14 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { useExperiment } from "@/hooks/useExperiment";
 
 /**
- * Hero primary CTA — first live A/B experiment.
+ * Hero primary CTA, first live A/B experiment.
  *
  * Experiment: hero_cta_copy
  *   control_explore  → "Explore Our Products" → /#products
  *   variant_demo     → "Get a demo"           → /products/paymint/demo
  *
  * The two cta_ids are intentionally distinct so the existing funnel
- * dashboard groups them as separate rows — per-variant conversion
+ * dashboard groups them as separate rows, per-variant conversion
  * read-out for free, no new dashboard code.
  */
 export function HeroPrimaryCTA() {
@@ -40,7 +40,7 @@ export function HeroPrimaryCTA() {
     );
   }
 
-  // control_explore — current copy
+  // control_explore, current copy
   return (
     <TrackedLink
       href="#products"

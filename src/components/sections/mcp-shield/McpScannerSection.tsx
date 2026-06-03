@@ -16,7 +16,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { track } from "@/lib/track";
 
 /**
- * /products/mcp-shield — interactive web-scanner section.
+ * /products/mcp-shield, interactive web-scanner section.
  *
  * Posts the visitor's manifest to /api/mcp-scan, renders the
  * structured findings + Groq narrative. Honest framing throughout:
@@ -28,7 +28,7 @@ import { track } from "@/lib/track";
  *   - "We do not store the manifest, the findings, or your IP."
  *   - Visitors should still avoid pasting production credentials.
  *     The AEG-MCP-003 secret-detection check will catch most slip-ups
- *     and redact them before showing — but the safer pattern is
+ *     and redact them before showing, but the safer pattern is
  *     scrubbing before paste.
  */
 
@@ -226,7 +226,7 @@ export function McpScannerSection() {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Clipboard blocked — silent failure, the command is visible in the UI.
+      // Clipboard blocked, silent failure, the command is visible in the UI.
     }
   }
 
@@ -276,7 +276,7 @@ export function McpScannerSection() {
           Paste an MCP tool manifest or server config below. The scanner
           runs the five AEG-MCP checks live and returns findings ranked
           by severity. We do not store the manifest, the findings, or
-          your IP — everything happens in one request.
+          your IP, everything happens in one request.
         </p>
 
         {/* ── Input + samples ─────────────────────────────────────── */}
@@ -423,7 +423,7 @@ export function McpScannerSection() {
                   <CheckCircle2 size={20} style={{ color: "#22C55E", marginTop: "0.15rem" }} />
                   <div>
                     <p className="font-medium" style={{ color: "#fff", fontSize: "1.05rem" }}>
-                      No findings — the manifest passed all five AEG-MCP checks.
+                      No findings, the manifest passed all five AEG-MCP checks.
                     </p>
                     <p
                       className="text-sm mt-1"
@@ -497,7 +497,7 @@ export function McpScannerSection() {
                 </p>
                 <ul className="space-y-1 text-sm" style={{ color: "#FCD34D" }}>
                   {result.warnings.map((w, i) => (
-                    <li key={i}>— {w}</li>
+                    <li key={i}>• {w}</li>
                   ))}
                 </ul>
               </div>
@@ -649,7 +649,7 @@ export function McpScannerSection() {
                   style={{ color: "#A1A1AA", lineHeight: 1.6 }}
                 >
                   We&apos;ll send the full scan as a forward-friendly HTML
-                  report (no PDF attachment — Slack-grade rendering). No
+                  report (no PDF attachment, Slack-grade rendering). No
                   drip sequence, no list-spam.
                 </p>
                 <div className="grid sm:grid-cols-[1fr_1fr_auto] gap-3">

@@ -5,15 +5,15 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { ArrowRight, Boxes, Shield, Mic, Layers } from "lucide-react";
 
 /**
- * /features — AEGIBIT platform thesis.
+ * /features, AEGIBIT platform thesis.
  *
  * Rewritten 2026-05-10 (C-2 third ship). Previous page was the
  * canonical "vague filler" surface the audit called out:
  *   - Single H1 just said "AEGIBIT" with subhead "The operating
- *     system for intelligent, secure automation" — meaningless
+ *     system for intelligent, secure automation", meaningless
  *   - 6 feature cards: "Voice-Driven Control", "Zero Trust
  *     Architecture", "SOC 2 Ready", "Enterprise Integrations
- *     — Connect to 15+ enterprise tools (Slack, Jira, ServiceNow,
+ *, Connect to 15+ enterprise tools (Slack, Jira, ServiceNow,
  *     Splunk, PagerDuty, GitHub)", "Immutable Audit Logs",
  *     "RBAC Per Command"
  *   - "Join 50+ enterprise teams on the waitlist" (fabricated)
@@ -21,7 +21,7 @@ import { ArrowRight, Boxes, Shield, Mic, Layers } from "lucide-react";
  *
  * What was wrong (per the audit + tonight's claim-discipline rule):
  *   - "SOC 2 Ready" contradicts /security saying "in progress"
- *   - "Connect to 15+ enterprise tools" was a hard overclaim — none
+ *   - "Connect to 15+ enterprise tools" was a hard overclaim, none
  *     of those integrations exist today
  *   - "50+ enterprise teams on the waitlist" was fabricated
  *   - Voice-Driven Control sold deprecated VoiceCore
@@ -45,7 +45,7 @@ import { ArrowRight, Boxes, Shield, Mic, Layers } from "lucide-react";
  */
 
 export const metadata: Metadata = {
-  title: "Platform — AEGIBIT, written as architecture",
+  title: "Platform, AEGIBIT, written as architecture",
   description:
     "AEGIBIT is a multi-product platform with a single security-first DNA. PayMint for multi-branch expense capture. MCP Shield for AI-infrastructure security. Aira for voice control. Every product inherits the same hardened security substrate.",
   keywords: [
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/features" },
   openGraph: {
-    title: "Platform — AEGIBIT, written as architecture",
+    title: "Platform, AEGIBIT, written as architecture",
     description:
       "Three products, one security-first DNA. PayMint live. MCP Shield open-source. Aira on Windows. Shared hardened substrate across every product.",
     type: "website",
@@ -69,9 +69,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Platform — AEGIBIT, written as architecture",
+    title: "Platform, AEGIBIT, written as architecture",
     description:
-      "Three products, one security-first DNA. PayMint, MCP Shield, Aira — all sharing the same hardened substrate.",
+      "Three products, one security-first DNA. PayMint, MCP Shield, Aira, all sharing the same hardened substrate.",
   },
 };
 
@@ -102,7 +102,7 @@ const PRODUCTS = [
     icon: Mic,
     tagline: "Voice control for your desktop.",
     detail:
-      "Wake by voice — opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English, four more Indian languages. Voice biometric. Local-first.",
+      "Wake by voice, opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English, four more Indian languages. Voice biometric. Local-first.",
     href: "/products/aira",
     ctaId: "features_product_aira",
   },
@@ -112,7 +112,7 @@ const SUBSTRATE = [
   {
     title: "Hardened response headers",
     detail:
-      "Explicit Content Security Policy, HSTS + includeSubDomains, Permissions-Policy denying camera/mic/geo/payment/sensors, COOP same-origin-allow-popups — applied to every request from every AEGIBIT product.",
+      "Explicit Content Security Policy, HSTS + includeSubDomains, Permissions-Policy denying camera/mic/geo/payment/sensors, COOP same-origin-allow-popups, applied to every request from every AEGIBIT product.",
     proof: "next.config.ts",
   },
   {
@@ -124,7 +124,7 @@ const SUBSTRATE = [
   {
     title: "Cookie-only admin auth",
     detail:
-      "Iron-session encrypted httpOnly cookies. scrypt-hashed admin credentials with explicit memory bounds. No bearer tokens leak into client bundles — ever.",
+      "Iron-session encrypted httpOnly cookies. scrypt-hashed admin credentials with explicit memory bounds. No bearer tokens leak into client bundles, ever.",
     proof: "src/lib/auth.ts",
   },
   {
@@ -194,9 +194,9 @@ export default function FeaturesPage() {
               style={{ color: "#A1A1AA" }}
             >
               AEGIBIT is a platform, not a feature list. Each product
-              solves a specific operational problem — multi-branch
+              solves a specific operational problem, multi-branch
               expense capture, AI-infrastructure security, desktop
-              voice control — but they all inherit the same hardened
+              voice control, but they all inherit the same hardened
               substrate. The configuration files are listed below.
             </p>
           </div>
@@ -382,8 +382,8 @@ export default function FeaturesPage() {
               className="mt-12 text-sm"
               style={{ color: "#52525B", lineHeight: 1.7 }}
             >
-              The complete security posture — including responsible
-              disclosure and compliance status — lives on{" "}
+              The complete security posture, including responsible
+              disclosure and compliance status, lives on{" "}
               <TrackedLink
                 href="/security"
                 ctaId="features_link_security"
@@ -442,8 +442,8 @@ export default function FeaturesPage() {
                 claim.
               </p>
               <p>
-                For a roadmap discussion — what AEGIBIT is building
-                next and which buyers shape the priority queue — the
+                For a roadmap discussion, what AEGIBIT is building
+                next and which buyers shape the priority queue, the
                 AEGIBIT team responds at{" "}
                 <a
                   href="mailto:contact@aegibit.com"
@@ -489,7 +489,7 @@ export default function FeaturesPage() {
               style={{ color: "#A1A1AA", lineHeight: 1.7 }}
             >
               Book a 12-minute PayMint demo. We walk the architecture
-              and the product together — configuration files open, no
+              and the product together, configuration files open, no
               slideware.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">

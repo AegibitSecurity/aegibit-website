@@ -62,7 +62,7 @@ export function SecuritySection() {
           <SectionHeader
             label="SECURITY ARCHITECTURE"
             title="Zero Trust is not a feature. It's the foundation."
-            subtitle="We don't add security on top — we build from the assumption that every request is hostile until proven otherwise."
+            subtitle="We don't add security on top, we build from the assumption that every request is hostile until proven otherwise."
             centered={false}
           />
 

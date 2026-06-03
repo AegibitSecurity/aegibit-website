@@ -46,7 +46,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
     setErrors((e) => ({ ...e, [field]: undefined }));
     setStartedForm();
     recalculate();
-    // Fire form_focus exactly once per form-instance — first user
+    // Fire form_focus exactly once per form-instance, first user
     // touch is the funnel "engagement" signal. Subsequent fields
     // are noise for funnel math.
     if (!focusFired.current) {
@@ -178,7 +178,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
             <motion.div key="step3" custom={dir} variants={slideVariants} initial="enter" animate="center" exit="exit"
               transition={{ duration: 0.25, ease: "easeOut" }}>
               <p className="mono-label text-[#52525B] mb-2">Step 3 of 3</p>
-              <h3 className="text-xl font-bold text-white mb-6 tracking-tight">Last step — almost there.</h3>
+              <h3 className="text-xl font-bold text-white mb-6 tracking-tight">Last step, almost there.</h3>
               <div className="space-y-3">
                 <div>
                   <p className="text-[#A1A1AA] text-xs mb-2">Team size</p>

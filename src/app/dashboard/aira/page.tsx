@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 /**
- * /dashboard/aira — Aira Ops Dashboard
+ * /dashboard/aira, Aira Ops Dashboard
  *
  * Real-time operator view for the AEGIBIT founders. Single screen showing:
  *   • Total leads + today / this week / month
@@ -136,7 +136,7 @@ export default function AiraOpsDashboard() {
             <h1 className="text-2xl font-bold text-[#F9FAFB]">Aira Ops</h1>
           </div>
           <p className="text-sm text-[#6B7280]">
-            Real-time view of every lead, every demo, every signal — auto-refreshing every 60s.
+            Real-time view of every lead, every demo, every signal, auto-refreshing every 60s.
           </p>
         </div>
         <button
@@ -235,7 +235,7 @@ export default function AiraOpsDashboard() {
       </div>
 
       {/* ── Recent leads table ────────────────────────────────────── */}
-      <Panel title="Recent leads" subtitle="Last 10 — newest first">
+      <Panel title="Recent leads" subtitle="Last 10, newest first">
         {leads && leads.length > 0 ? (
           <div className="overflow-x-auto -mx-5 -mb-5">
             <table className="w-full text-sm">
@@ -264,8 +264,8 @@ export default function AiraOpsDashboard() {
                           {l.email}
                         </a>
                       </td>
-                      <td className="px-5 py-3 text-xs text-[#D1D5DB]">{l.name || "—"}</td>
-                      <td className="px-5 py-3 text-xs text-[#D1D5DB]">{l.company || "—"}</td>
+                      <td className="px-5 py-3 text-xs text-[#D1D5DB]">{l.name || "-"}</td>
+                      <td className="px-5 py-3 text-xs text-[#D1D5DB]">{l.company || "-"}</td>
                       <td className="px-5 py-3">
                         <span
                           className="px-2 py-0.5 rounded text-[10px] font-medium"

@@ -1,5 +1,5 @@
 /**
- * PayMint Snapshot report — HTML email renderer.
+ * PayMint Snapshot report, HTML email renderer.
  *
  * Renders a Snapshot into an email body designed to be forwarded
  * in Slack / Teams / email threads. No tracking pixels. No
@@ -36,7 +36,7 @@ export function renderSnapshotEmailHtml(args: {
     ? `${snapshot.date_range.first} → ${snapshot.date_range.last}`
     : "no parseable date range";
 
-  const subject = `Your PayMint Snapshot — ${snapshot.branches_distinct} branches, ${snapshot.anomalies.length} anomaly row${snapshot.anomalies.length === 1 ? "" : "s"}`;
+  const subject = `Your PayMint Snapshot, ${snapshot.branches_distinct} branches, ${snapshot.anomalies.length} anomaly row${snapshot.anomalies.length === 1 ? "" : "s"}`;
 
   const topBranchesHtml = snapshot.top_branches
     .map(
@@ -92,7 +92,7 @@ export function renderSnapshotEmailHtml(args: {
             <tr>
               <td style="padding:18px 28px 0;">
                 <p style="margin:0;color:${TEXT};font-size:15px;line-height:1.6;">${greeting}</p>
-                <p style="margin:12px 0 0;color:${TEXT};font-size:15px;line-height:1.6;">Here is the snapshot you just generated on /products/paymint. Every number below traces to rows in the CSV you uploaded — we did not store the CSV, the parsed rows, or this report after sending it.</p>
+                <p style="margin:12px 0 0;color:${TEXT};font-size:15px;line-height:1.6;">Here is the snapshot you just generated on /products/paymint. Every number below traces to rows in the CSV you uploaded, we did not store the CSV, the parsed rows, or this report after sending it.</p>
               </td>
             </tr>
             <tr>
@@ -169,11 +169,11 @@ export function renderSnapshotEmailText(
     : "no parseable date range";
 
   const lines: string[] = [
-    "PayMint Snapshot — your branch snapshot is ready.",
+    "PayMint Snapshot, your branch snapshot is ready.",
     "",
     greeting,
     "",
-    "Here is the snapshot you just generated on /products/paymint. Every number below traces to rows in the CSV you uploaded — we did not store the CSV, the parsed rows, or this report after sending it.",
+    "Here is the snapshot you just generated on /products/paymint. Every number below traces to rows in the CSV you uploaded, we did not store the CSV, the parsed rows, or this report after sending it.",
     "",
     `Rows parsed:           ${snapshot.rows_parsed}`,
     `Distinct branches:     ${snapshot.branches_distinct}`,
@@ -210,7 +210,7 @@ export function renderSnapshotEmailText(
   lines.push(
     "Request a PayMint demo: https://www.aegibit.com/products/paymint/demo?utm_source=snapshot_email&utm_medium=email&utm_campaign=snapshot_report",
     "",
-    "AEGIBIT Global Consulting — contact@aegibit.com",
+    "AEGIBIT Global Consulting, contact@aegibit.com",
   );
 
   return lines.join("\n");

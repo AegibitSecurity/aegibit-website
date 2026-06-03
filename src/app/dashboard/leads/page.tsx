@@ -35,8 +35,8 @@ export default function LeadsPage() {
             ) : leads.map((lead) => (
               <tr key={lead.id} className="border-b border-[rgba(37,99,235,0.08)] hover:bg-[rgba(37,99,235,0.04)] transition-colors">
                 <td className="px-5 py-3 text-[#D1D5DB]">{lead.email}</td>
-                <td className="px-5 py-3 text-[#6B7280]">{lead.name ?? "—"}</td>
-                <td className="px-5 py-3 text-[#6B7280]">{lead.company ?? "—"}</td>
+                <td className="px-5 py-3 text-[#6B7280]">{lead.name ?? "-"}</td>
+                <td className="px-5 py-3 text-[#6B7280]">{lead.company ?? "-"}</td>
                 <td className="px-5 py-3"><Badge variant="outline" className="border-[rgba(37,99,235,0.3)] text-[#60A5FA] mono-label">{lead.source}</Badge></td>
                 <td className="px-5 py-3"><span className="badge-active rounded px-2 py-0.5 text-xs mono-label">{lead.status}</span></td>
                 <td className="px-5 py-3 text-[#6B7280]">{new Date(lead.created_at).toLocaleDateString()}</td>

@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 
 /**
- * /changelog — AEGIBIT ship log.
+ * /changelog, AEGIBIT ship log.
  *
  * Discipline call:
  *   Every entry must trace to an actual merged PR or shipped artifact.
@@ -28,9 +28,9 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  */
 
 export const metadata: Metadata = {
-  title: "AEGIBIT Changelog — What shipped, when",
+  title: "AEGIBIT Changelog, What shipped, when",
   description:
-    "Public ship log for AEGIBIT — every meaningful change to the website, the platform, and the open-source products. Each entry links to the merged pull request so the work is verifiable.",
+    "Public ship log for AEGIBIT, every meaningful change to the website, the platform, and the open-source products. Each entry links to the merged pull request so the work is verifiable.",
   alternates: { canonical: "/changelog" },
   openGraph: {
     title: "AEGIBIT Changelog",
@@ -61,9 +61,9 @@ const ENTRIES: Entry[] = [
   {
     date: "2026-05-14",
     tag: "Site",
-    title: "Brand-chrome pages — /status, /changelog, /careers, /press",
+    title: "Brand-chrome pages, /status, /changelog, /careers, /press",
     detail:
-      "Four entity-level pages added. Honest scope on each — no fake uptime histograms, no listed roles when we're not hiring yet, no fabricated press coverage.",
+      "Four entity-level pages added. Honest scope on each, no fake uptime histograms, no listed roles when we're not hiring yet, no fabricated press coverage.",
     prNumber: 102,
   },
   {
@@ -87,13 +87,13 @@ const ENTRIES: Entry[] = [
     tag: "Site",
     title: "Cookie / data-collection notice banner",
     detail:
-      "First-visit notice for DPDP Act §4 explicit-disclosure compliance. Not an opt-in gate (AEGIBIT doesn't set tracking cookies) — clear-disclosure model that matches what the site actually does.",
+      "First-visit notice for DPDP Act §4 explicit-disclosure compliance. Not an opt-in gate (AEGIBIT doesn't set tracking cookies), clear-disclosure model that matches what the site actually does.",
     prNumber: 99,
   },
   {
     date: "2026-05-13",
     tag: "Site",
-    title: "Accessibility pass — focus-visible, skip-to-content, aria-labels",
+    title: "Accessibility pass, focus-visible, skip-to-content, aria-labels",
     detail:
       "WCAG 2.1 AA pass. Global :focus-visible outline, skip-to-content anchor, dynamic aria-label on the mobile menu, prefers-reduced-motion suppression. Footer body-text contrast bumped from 2.4:1 to 6.1:1.",
     prNumber: 98,
@@ -101,7 +101,7 @@ const ENTRIES: Entry[] = [
   {
     date: "2026-05-13",
     tag: "Site",
-    title: "Brand color unification — single #F97316 orange",
+    title: "Brand color unification, single #F97316 orange",
     detail:
       "24-file sed sweep collapsed three different orange values (#FF5A1F, #FF6A00, #F97316) and their RGBA variants into the canonical Tailwind orange-500. Hover variant #EA580C matches orange-600.",
     prNumber: 97,
@@ -109,7 +109,7 @@ const ENTRIES: Entry[] = [
   {
     date: "2026-05-13",
     tag: "Site",
-    title: "Legal pages — /privacy, /terms, /dpdp",
+    title: "Legal pages, /privacy, /terms, /dpdp",
     detail:
       "Three companion documents. /dpdp is the India-specific DPDP Act 2023 overlay with statute references and the five Data Principal rights. /privacy lists every sub-processor and per-category retention. /terms keeps liability-cap honest at ₹0 on free-tier.",
     prNumber: 96,
@@ -117,7 +117,7 @@ const ENTRIES: Entry[] = [
   {
     date: "2026-05-13",
     tag: "Site",
-    title: "/features rewritten — platform thesis, three products",
+    title: "/features rewritten, platform thesis, three products",
     detail:
       "Replaced AI-buzzword positioning with the actual platform thesis: three products (PayMint, MCP Shield, Aira) and five shared substrate primitives, each with a ↳ proof pointer to source. Includes an explicit 'what we are not yet' non-claim block.",
     prNumber: 95,
@@ -125,7 +125,7 @@ const ENTRIES: Entry[] = [
   {
     date: "2026-05-12",
     tag: "Site",
-    title: "/security rewritten — defensible posture, honest compliance status",
+    title: "/security rewritten, defensible posture, honest compliance status",
     detail:
       "Six posture items each with a ↳ proof pointer to a real file. Honest compliance status (Aligning / In progress / Aware) and an explicit 'what we do NOT claim' block listing ISO 27001 / HIPAA / RBI / SEBI / FedRAMP / IRAP / C5 with reasons. Responsible-disclosure path with 48h ack, 7d remediation, no-legal-action commitment.",
     prNumber: 94,
@@ -133,7 +133,7 @@ const ENTRIES: Entry[] = [
   {
     date: "2026-04-22",
     tag: "MCP Shield",
-    title: "MCP Shield v0.2.1 — five checks, MIT licensed, public",
+    title: "MCP Shield v0.2.1, five checks, MIT licensed, public",
     detail:
       "Open-source security scanner and runtime for Model Context Protocol servers. Five checks shipped: AEG-MCP-001 tool poisoning, -002 schema hardness, -003 secret exposure, -004 stdio launch hardening, -005 transport security. Built after the April 2026 MCP-RCE disclosure.",
   },

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 /**
- * /services/* — Programmatic services pages from AEGIBIT's earlier
+ * /services/*, Programmatic services pages from AEGIBIT's earlier
  * services-shop positioning ("we build websites and apps for X industry").
  *
  * AEGIBIT has since pivoted to a product-company posture (PayMint,
  * VoiceCore, Aira AI). The services pages now create brand confusion
- * in Google search results — a prospect researching "AEGIBIT" sees us
+ * in Google search results, a prospect researching "AEGIBIT" sees us
  * described as a contracting agency, contradicting our actual positioning.
  *
  * Treatment (until we make a permanent disposition decision):
@@ -19,7 +19,7 @@ import type { Metadata } from "next";
  *   (b) Rebrand as "AEGIBIT software solutions for X industry" with
  *       PayMint / VoiceCore positioning instead of contracting framing
  *
- * Decision deferred — noindex stops the brand bleeding immediately.
+ * Decision deferred, noindex stops the brand bleeding immediately.
  */
 export const metadata: Metadata = {
   robots: {

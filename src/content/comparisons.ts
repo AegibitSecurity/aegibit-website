@@ -1,12 +1,12 @@
 /**
- * AEGIBIT — Programmatic comparison pages.
+ * AEGIBIT, Programmatic comparison pages.
  *
- * Each entry generates /compare/{slug} — a head-to-head landing page
+ * Each entry generates /compare/{slug}, a head-to-head landing page
  * targeting the high-intent "X vs Y" search query for buyers actively
  * evaluating PayMint against an alternative.
  *
  * Editorial discipline:
- *   • Be honest about what the competitor does well — we earn trust by not
+ *   • Be honest about what the competitor does well, we earn trust by not
  *     pretending alternatives are useless.
  *   • Position PayMint where it OBJECTIVELY wins (multi-branch ops, real-time
  *     sync, audit-grade logs). Concede the categories where the competitor
@@ -17,8 +17,8 @@
 
 export interface ComparisonRow {
   feature: string;
-  paymint: string | "✓" | "—";
-  competitor: string | "✓" | "—";
+  paymint: string | "✓" | "-";
+  competitor: string | "✓" | "-";
   /** Optional note that explains the row in plain English. */
   note?: string;
 }
@@ -37,7 +37,7 @@ export interface Comparison {
   slug: string;
   competitorName: string;
   competitorTagline: string;
-  /** Short respect statement — concede what they do well. */
+  /** Short respect statement, concede what they do well. */
   competitorStrengths: string[];
   /** Where PayMint clearly wins. Honest framing. */
   paymintWins: string[];
@@ -51,7 +51,7 @@ export interface Comparison {
   subhead: string;
   /** Detailed feature comparison table, grouped by section. */
   table: ComparisonSection[];
-  /** Buyer-facing FAQs — also feeds Google rich results. */
+  /** Buyer-facing FAQs, also feeds Google rich results. */
   faqs: ComparisonFAQ[];
   /** When PayMint is the right choice (clear positioning). */
   pickPaymintIf: string[];
@@ -64,7 +64,7 @@ export const COMPARISONS: Comparison[] = [
   {
     slug: "paymint-vs-tally",
     competitorName: "Tally",
-    competitorTagline: "Tally Prime — India's most-used accounting software.",
+    competitorTagline: "Tally Prime, India's most-used accounting software.",
     competitorStrengths: [
       "Decades of trust in Indian SME accounting",
       "Deep ledger and double-entry accounting depth",
@@ -73,28 +73,28 @@ export const COMPARISONS: Comparison[] = [
     ],
     paymintWins: [
       "Real-time multi-branch expense tracking (Tally is single-user / single-PC by default)",
-      "Mobile-first voucher capture — branch staff submit on phones in seconds",
+      "Mobile-first voucher capture, branch staff submit on phones in seconds",
       "Branch-coded voucher numbering with atomic per-branch counters",
       "Server-enforced role-based approval workflow (Maker → Authoriser → Accountant → Admin)",
       "Append-only audit log with actor + timestamp on every action",
-      "Cloud-native — works offline, syncs automatically when connectivity returns",
+      "Cloud-native, works offline, syncs automatically when connectivity returns",
       "Tally-ready CSV export so you keep using Tally for accounting",
     ],
-    title: "PayMint vs Tally — Honest Comparison for Multi-Branch SMEs",
+    title: "PayMint vs Tally, Honest Comparison for Multi-Branch SMEs",
     description:
       "Should you use PayMint or Tally for multi-branch expense management? Honest comparison: where each wins, when to pick which. Built by AEGIBIT.",
     headline: "PayMint vs Tally.",
     subhead:
-      "Tally runs your books. PayMint runs your branches. Most Indian dealerships and multi-branch SMEs need both — and they integrate perfectly.",
+      "Tally runs your books. PayMint runs your branches. Most Indian dealerships and multi-branch SMEs need both, and they integrate perfectly.",
     table: [
       {
         title: "Multi-branch operations",
         rows: [
-          { feature: "Real-time sync across branches", paymint: "✓ 200ms p95", competitor: "—", note: "Tally is single-user / single-PC by default; multi-branch requires Tally on Cloud (extra cost) or sync setups." },
-          { feature: "Branch-coded voucher numbers (e.g. KLY/0042/2627)", paymint: "✓ Native", competitor: "—" },
-          { feature: "Atomic per-branch counters", paymint: "✓ Transaction-safe", competitor: "—" },
+          { feature: "Real-time sync across branches", paymint: "✓ 200ms p95", competitor: "-", note: "Tally is single-user / single-PC by default; multi-branch requires Tally on Cloud (extra cost) or sync setups." },
+          { feature: "Branch-coded voucher numbers (e.g. KLY/0042/2627)", paymint: "✓ Native", competitor: "-" },
+          { feature: "Atomic per-branch counters", paymint: "✓ Transaction-safe", competitor: "-" },
           { feature: "Mobile voucher capture by branch staff", paymint: "✓ Mobile-first", competitor: "Limited" },
-          { feature: "Offline-capable with auto-sync", paymint: "✓ IndexedDB", competitor: "—" },
+          { feature: "Offline-capable with auto-sync", paymint: "✓ IndexedDB", competitor: "-" },
         ],
       },
       {
@@ -103,13 +103,13 @@ export const COMPARISONS: Comparison[] = [
           { feature: "Role-based approval workflow", paymint: "✓ 5 roles, server-enforced", competitor: "Limited" },
           { feature: "Append-only audit log", paymint: "✓ Every action logged", competitor: "Audit trail (editable in some versions)" },
           { feature: "Server-enforced permissions", paymint: "✓ Firestore Security Rules", competitor: "Local user permissions" },
-          { feature: "Forensics-ready (immutable history)", paymint: "✓", competitor: "—" },
+          { feature: "Forensics-ready (immutable history)", paymint: "✓", competitor: "-" },
         ],
       },
       {
         title: "Accounting & exports",
         rows: [
-          { feature: "Full double-entry accounting ledger", paymint: "—", competitor: "✓ Depth & maturity", note: "PayMint is built for expense ops — exports clean data into Tally for full accounting." },
+          { feature: "Full double-entry accounting ledger", paymint: "-", competitor: "✓ Depth & maturity", note: "PayMint is built for expense ops, exports clean data into Tally for full accounting." },
           { feature: "GST split (CGST/SGST/IGST)", paymint: "✓ Captured at voucher", competitor: "✓ Native" },
           { feature: "Tally-ready CSV export (11 columns)", paymint: "✓ One-click", competitor: "✓ Native (it IS Tally)" },
           { feature: "Power BI dashboards from same data", paymint: "✓ Same export", competitor: "Indirect (third-party)" },
@@ -127,10 +127,10 @@ export const COMPARISONS: Comparison[] = [
       {
         title: "Security",
         rows: [
-          { feature: "Built by a cybersecurity company", paymint: "✓", competitor: "—" },
+          { feature: "Built by a cybersecurity company", paymint: "✓", competitor: "-" },
           { feature: "Encrypted in transit and at rest", paymint: "✓ HTTPS + Firestore encryption", competitor: "Depends on deployment" },
-          { feature: "Device binding for new logins", paymint: "✓ Admin approval required", competitor: "—" },
-          { feature: "Tested against OWASP Top 10", paymint: "✓ Every release", competitor: "—" },
+          { feature: "Device binding for new logins", paymint: "✓ Admin approval required", competitor: "-" },
+          { feature: "Tested against OWASP Top 10", paymint: "✓ Every release", competitor: "-" },
         ],
       },
     ],
@@ -150,11 +150,11 @@ export const COMPARISONS: Comparison[] = [
     faqs: [
       {
         q: "Does PayMint replace Tally?",
-        a: "No — and we don't recommend trying. Tally is a mature double-entry accounting system; PayMint is a multi-branch operational expense system. Most of our customers run both, with PayMint feeding Tally via the 11-column CSV export. PayMint solves what Tally is weakest at (real-time multi-branch ops, mobile capture, role-based workflow, audit-grade logging); Tally solves what PayMint doesn't try to do (full accounting ledger, balance sheet, P&L).",
+        a: "No, and we don't recommend trying. Tally is a mature double-entry accounting system; PayMint is a multi-branch operational expense system. Most of our customers run both, with PayMint feeding Tally via the 11-column CSV export. PayMint solves what Tally is weakest at (real-time multi-branch ops, mobile capture, role-based workflow, audit-grade logging); Tally solves what PayMint doesn't try to do (full accounting ledger, balance sheet, P&L).",
       },
       {
         q: "Can PayMint export directly to Tally Prime?",
-        a: "Yes — and the export schema follows Tally's standard 11-column import format: Voucher Type, Voucher Number, Date, Reference, Narration, Cost Center, Ledger Name, Amount, GST split, Approver, Source. Drop the file straight into Tally Prime; no manual cleanup. Cost-center and ledger mappings are configured once during onboarding.",
+        a: "Yes, and the export schema follows Tally's standard 11-column import format: Voucher Type, Voucher Number, Date, Reference, Narration, Cost Center, Ledger Name, Amount, GST split, Approver, Source. Drop the file straight into Tally Prime; no manual cleanup. Cost-center and ledger mappings are configured once during onboarding.",
       },
       {
         q: "Why not just use Tally on Cloud for multi-branch?",
@@ -162,11 +162,11 @@ export const COMPARISONS: Comparison[] = [
       },
       {
         q: "How does Tally's audit trail compare to PayMint's?",
-        a: "Tally's audit trail (TallyPrime 2.x onwards) tracks edits to vouchers, but the trail itself is editable by users with sufficient permissions in some configurations. PayMint's audit log is append-only at the database level — Firestore Security Rules deny edits to historical entries even from super-admin credentials. For SOC 2 / forensics-grade compliance, PayMint is the stronger position.",
+        a: "Tally's audit trail (TallyPrime 2.x onwards) tracks edits to vouchers, but the trail itself is editable by users with sufficient permissions in some configurations. PayMint's audit log is append-only at the database level, Firestore Security Rules deny edits to historical entries even from super-admin credentials. For SOC 2 / forensics-grade compliance, PayMint is the stronger position.",
       },
       {
         q: "Can my Tally accountant continue working as before?",
-        a: "Yes. That's the design intent. Your accountant continues using Tally Prime exactly as they always have — they just stop manually keying 200+ vouchers a month. PayMint's CSV export drops straight into Tally; the accountant's job becomes verification, not data entry. Most accountants love it.",
+        a: "Yes. That's the design intent. Your accountant continues using Tally Prime exactly as they always have, they just stop manually keying 200+ vouchers a month. PayMint's CSV export drops straight into Tally; the accountant's job becomes verification, not data entry. Most accountants love it.",
       },
     ],
   },
@@ -175,7 +175,7 @@ export const COMPARISONS: Comparison[] = [
   {
     slug: "paymint-vs-zoho-books",
     competitorName: "Zoho Books",
-    competitorTagline: "Zoho Books — cloud-native accounting for SMEs.",
+    competitorTagline: "Zoho Books, cloud-native accounting for SMEs.",
     competitorStrengths: [
       "Modern cloud-native UI (better than Tally for digital-first teams)",
       "Built-in invoicing, banking, GST filing for end-to-end accounting",
@@ -183,25 +183,25 @@ export const COMPARISONS: Comparison[] = [
       "Pay-monthly subscription model",
     ],
     paymintWins: [
-      "Branch-first architecture — Zoho Books treats branches as a customisation; PayMint is multi-branch native",
+      "Branch-first architecture, Zoho Books treats branches as a customisation; PayMint is multi-branch native",
       "Branch-coded voucher numbering with atomic per-branch counters",
       "Server-enforced 5-role approval workflow specifically for branch ops",
       "Audit-grade logging engineered by a cybersecurity company",
       "Mobile-first voucher capture for branch staff (not finance staff)",
-      "Tally export — important when your accountant uses Tally, not Zoho",
+      "Tally export, important when your accountant uses Tally, not Zoho",
     ],
-    title: "PayMint vs Zoho Books — When Each is the Right Pick",
+    title: "PayMint vs Zoho Books, When Each is the Right Pick",
     description:
       "PayMint vs Zoho Books for multi-branch expense management. Honest comparison of features, pricing, and use-case fit. Built by AEGIBIT.",
     headline: "PayMint vs Zoho Books.",
     subhead:
-      "Zoho Books is a strong cloud-native accounting suite. PayMint is a purpose-built multi-branch operations layer. Different jobs — sometimes complementary.",
+      "Zoho Books is a strong cloud-native accounting suite. PayMint is a purpose-built multi-branch operations layer. Different jobs, sometimes complementary.",
     table: [
       {
         title: "Multi-branch ops",
         rows: [
           { feature: "Multi-branch as a first-class concept", paymint: "✓ Native", competitor: "Add-on / customisation" },
-          { feature: "Branch-coded voucher numbers", paymint: "✓ KLY/0042/2627", competitor: "—" },
+          { feature: "Branch-coded voucher numbers", paymint: "✓ KLY/0042/2627", competitor: "-" },
           { feature: "Per-branch atomic counters", paymint: "✓ Transaction-safe", competitor: "Sequence numbering shared" },
           { feature: "Real-time sync across branches", paymint: "✓ 200ms p95", competitor: "✓ Cloud-native" },
           { feature: "Mobile-first voucher capture", paymint: "✓ Branch staff", competitor: "Mobile app for finance team" },
@@ -218,17 +218,17 @@ export const COMPARISONS: Comparison[] = [
       {
         title: "Accounting features",
         rows: [
-          { feature: "Full accounting (P&L, balance sheet)", paymint: "—", competitor: "✓ Native", note: "PayMint is expense ops; Zoho is full accounting." },
-          { feature: "Banking integration", paymint: "—", competitor: "✓ India bank feeds" },
-          { feature: "Built-in invoicing", paymint: "—", competitor: "✓ Native" },
-          { feature: "GST filing (GSTR-1, 3B, etc.)", paymint: "—", competitor: "✓ Native" },
+          { feature: "Full accounting (P&L, balance sheet)", paymint: "-", competitor: "✓ Native", note: "PayMint is expense ops; Zoho is full accounting." },
+          { feature: "Banking integration", paymint: "-", competitor: "✓ India bank feeds" },
+          { feature: "Built-in invoicing", paymint: "-", competitor: "✓ Native" },
+          { feature: "GST filing (GSTR-1, 3B, etc.)", paymint: "-", competitor: "✓ Native" },
           { feature: "Tally-compatible export", paymint: "✓ 11-column CSV", competitor: "Limited (Zoho is its own ecosystem)" },
         ],
       },
       {
         title: "Pricing & deployment",
         rows: [
-          { feature: "Pricing model", paymint: "₹999 / branch / month", competitor: "₹749/user/month (Standard) — scales with users" },
+          { feature: "Pricing model", paymint: "₹999 / branch / month", competitor: "₹749/user/month (Standard), scales with users" },
           { feature: "Per-user fees", paymint: "Unlimited users included", competitor: "Per-user pricing" },
           { feature: "Free trial", paymint: "14-day pilot, no card", competitor: "14-day trial" },
         ],
@@ -236,7 +236,7 @@ export const COMPARISONS: Comparison[] = [
       {
         title: "Security",
         rows: [
-          { feature: "Built by a cybersecurity company", paymint: "✓", competitor: "—" },
+          { feature: "Built by a cybersecurity company", paymint: "✓", competitor: "-" },
           { feature: "Tested against OWASP Top 10", paymint: "✓ Every release", competitor: "Standard cloud SaaS posture" },
           { feature: "India data residency", paymint: "✓ Mumbai region available", competitor: "Multi-region" },
         ],
@@ -262,7 +262,7 @@ export const COMPARISONS: Comparison[] = [
       },
       {
         q: "Is Zoho Books better than Tally for Indian SMEs?",
-        a: "Different fits. Zoho is more modern UX and cloud-native; Tally has deeper India-specific accounting depth and is what most senior Indian accountants know cold. The choice depends on your accounting team. PayMint is agnostic — we feed clean data into either.",
+        a: "Different fits. Zoho is more modern UX and cloud-native; Tally has deeper India-specific accounting depth and is what most senior Indian accountants know cold. The choice depends on your accounting team. PayMint is agnostic, we feed clean data into either.",
       },
       {
         q: "Does PayMint do invoicing?",
@@ -270,11 +270,11 @@ export const COMPARISONS: Comparison[] = [
       },
       {
         q: "How does pricing actually compare for a 5-branch dealership?",
-        a: "PayMint: 5 × ₹999 = ₹4,995/month (unlimited users). Zoho Books Standard: ~₹749/user/month — at 15 users (typical for a 5-branch operation: 5 makers + 5 approvers + 3 accountants + 2 admins) that's ~₹11,235/month. PayMint is roughly half, includes mobile-first branch capture, and your accountant keeps using Tally.",
+        a: "PayMint: 5 × ₹999 = ₹4,995/month (unlimited users). Zoho Books Standard: ~₹749/user/month, at 15 users (typical for a 5-branch operation: 5 makers + 5 approvers + 3 accountants + 2 admins) that's ~₹11,235/month. PayMint is roughly half, includes mobile-first branch capture, and your accountant keeps using Tally.",
       },
       {
         q: "Will my data be safe in PayMint?",
-        a: "Yes. End-to-end encrypted in transit and at rest. Server-enforced role permissions (Firestore Security Rules) — even a compromised browser can't read other branches' data. Append-only audit log. Built by AEGIBIT, a cybersecurity-first company. Tested against OWASP Top 10 every release. India data residency available (Mumbai region).",
+        a: "Yes. End-to-end encrypted in transit and at rest. Server-enforced role permissions (Firestore Security Rules), even a compromised browser can't read other branches' data. Append-only audit log. Built by AEGIBIT, a cybersecurity-first company. Tested against OWASP Top 10 every release. India data residency available (Mumbai region).",
       },
     ],
   },
@@ -283,7 +283,7 @@ export const COMPARISONS: Comparison[] = [
   {
     slug: "paymint-vs-quickbooks",
     competitorName: "QuickBooks",
-    competitorTagline: "QuickBooks — Intuit's global SMB accounting platform.",
+    competitorTagline: "QuickBooks, Intuit's global SMB accounting platform.",
     competitorStrengths: [
       "Globally trusted brand, especially in US/UK/Canada SMB markets",
       "Mature double-entry accounting with strong reporting",
@@ -294,30 +294,30 @@ export const COMPARISONS: Comparison[] = [
       "Built specifically for Indian multi-branch operational shape (Tally export, GST split, fiscal year, branch codes)",
       "Real-time multi-branch sync as a core architectural primitive",
       "Mobile-first voucher capture by branch staff (not just by finance)",
-      "Branch-coded voucher numbering — unique to PayMint's architecture",
+      "Branch-coded voucher numbering, unique to PayMint's architecture",
       "Append-only server-enforced audit log",
       "Per-branch pricing scales linearly with operational footprint",
     ],
-    title: "PayMint vs QuickBooks — Which Fits Your Operation",
+    title: "PayMint vs QuickBooks, Which Fits Your Operation",
     description:
-      "PayMint vs QuickBooks for multi-branch expense management — when each is the right pick, with honest feature comparison. Built by AEGIBIT.",
+      "PayMint vs QuickBooks for multi-branch expense management, when each is the right pick, with honest feature comparison. Built by AEGIBIT.",
     headline: "PayMint vs QuickBooks.",
     subhead:
-      "QuickBooks is global accounting. PayMint is India-first multi-branch operations. They solve different problems — and they integrate via clean CSV export.",
+      "QuickBooks is global accounting. PayMint is India-first multi-branch operations. They solve different problems, and they integrate via clean CSV export.",
     table: [
       {
         title: "Architecture & origin",
         rows: [
-          { feature: "Built for India / Tally ecosystem", paymint: "✓ Native", competitor: "—" },
+          { feature: "Built for India / Tally ecosystem", paymint: "✓ Native", competitor: "-" },
           { feature: "Built for multi-branch ops first", paymint: "✓ Architecture-level", competitor: "Add-on" },
-          { feature: "Built by a cybersecurity company", paymint: "✓ AEGIBIT", competitor: "—" },
+          { feature: "Built by a cybersecurity company", paymint: "✓ AEGIBIT", competitor: "-" },
         ],
       },
       {
         title: "Operations layer",
         rows: [
-          { feature: "Branch-coded voucher numbers", paymint: "✓ KLY/0042/2627", competitor: "—" },
-          { feature: "Atomic per-branch counters", paymint: "✓", competitor: "—" },
+          { feature: "Branch-coded voucher numbers", paymint: "✓ KLY/0042/2627", competitor: "-" },
+          { feature: "Atomic per-branch counters", paymint: "✓", competitor: "-" },
           { feature: "Real-time multi-device sync", paymint: "✓ 200ms p95", competitor: "Cloud-native" },
           { feature: "Offline-capable with auto-sync", paymint: "✓ IndexedDB", competitor: "Limited offline" },
           { feature: "Mobile-first voucher capture by branch staff", paymint: "✓", competitor: "Limited" },
@@ -326,7 +326,7 @@ export const COMPARISONS: Comparison[] = [
       {
         title: "Accounting features",
         rows: [
-          { feature: "Full P&L / balance sheet / cash flow", paymint: "—", competitor: "✓ Mature" },
+          { feature: "Full P&L / balance sheet / cash flow", paymint: "-", competitor: "✓ Mature" },
           { feature: "Indian GST split (CGST/SGST/IGST)", paymint: "✓ Native", competitor: "Configurable" },
           { feature: "Indian fiscal year (Apr–Mar)", paymint: "✓ Native (FY 2026-27)", competitor: "Configurable" },
           { feature: "Tally-ready CSV export", paymint: "✓ 11 columns", competitor: "Indirect (CSV-only)" },

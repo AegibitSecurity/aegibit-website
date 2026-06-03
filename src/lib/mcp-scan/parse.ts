@@ -1,18 +1,18 @@
 /**
- * MCP Shield web-scanner — manifest parser.
+ * MCP Shield web-scanner, manifest parser.
  *
  * Auto-detects which of the two MCP manifest shapes the visitor
  * pasted, normalises into ToolDefinition[] OR ServerConfig[], and
- * returns parser warnings (never throws — every error surfaces as a
+ * returns parser warnings (never throws, every error surfaces as a
  * caller-readable string).
  *
  * Supported shapes:
  *
- *   1. Tool manifest — flat array of `{ name, description?, inputSchema? }`
+ *   1. Tool manifest, flat array of `{ name, description?, inputSchema? }`
  *      objects, OR an object with `tools: [...]` (mcp tools/list JSON-RPC
  *      response shape).
  *
- *   2. Server config — object with `mcpServers: { name: { ... }, ... }`
+ *   2. Server config, object with `mcpServers: { name: { ... }, ... }`
  *      (claude_desktop_config.json shape) OR object with `servers: { ... }`
  *      (some mcp.json variants).
  *
@@ -68,19 +68,19 @@ export function parseManifest(raw: string): ParseResult {
     };
   }
 
-  // Branch A — flat array of tool definitions.
+  // Branch A, flat array of tool definitions.
   if (Array.isArray(parsed)) {
     return { ...extractTools(parsed, []), kind: "tools" };
   }
 
   const obj = parsed as Record<string, unknown>;
 
-  // Branch B — { tools: [...] } (MCP tools/list response shape).
+  // Branch B, { tools: [...] } (MCP tools/list response shape).
   if (Array.isArray(obj.tools)) {
     return { ...extractTools(obj.tools, []), kind: "tools" };
   }
 
-  // Branch C — { mcpServers: { ... } } (claude_desktop_config.json shape).
+  // Branch C, { mcpServers: { ... } } (claude_desktop_config.json shape).
   if (obj.mcpServers && typeof obj.mcpServers === "object") {
     return {
       ...extractServers(obj.mcpServers as Record<string, unknown>, []),
@@ -88,7 +88,7 @@ export function parseManifest(raw: string): ParseResult {
     };
   }
 
-  // Branch D — { servers: { ... } } (some mcp.json variants).
+  // Branch D, { servers: { ... } } (some mcp.json variants).
   if (obj.servers && typeof obj.servers === "object") {
     return {
       ...extractServers(obj.servers as Record<string, unknown>, []),
@@ -96,7 +96,7 @@ export function parseManifest(raw: string): ParseResult {
     };
   }
 
-  // Branch E — single tool definition object (the visitor pasted just one).
+  // Branch E, single tool definition object (the visitor pasted just one).
   if (typeof obj.name === "string") {
     return {
       ...extractTools([obj], [
@@ -127,7 +127,7 @@ function extractTools(
   for (let i = 0; i < arr.length; i++) {
     const entry = arr[i];
     if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
-      warnings.push(`tools[${i}] is not an object — skipped.`);
+      warnings.push(`tools[${i}] is not an object, skipped.`);
       continue;
     }
     const obj = entry as Record<string, unknown>;
@@ -146,7 +146,7 @@ function extractServers(
   const servers: ServerConfig[] = [];
   for (const [name, value] of Object.entries(map)) {
     if (!value || typeof value !== "object" || Array.isArray(value)) {
-      warnings.push(`Server ${r(name)} is not an object — skipped.`);
+      warnings.push(`Server ${r(name)} is not an object, skipped.`);
       continue;
     }
     const obj = value as Record<string, unknown>;
@@ -195,7 +195,7 @@ function extractServers(
   return { tools: [], servers, warnings };
 }
 
-// Helper to JSON-quote a name in a warning message — pulled out so the
+// Helper to JSON-quote a name in a warning message, pulled out so the
 // emit is visually consistent across this file.
 function r(s: string): string {
   return JSON.stringify(s);

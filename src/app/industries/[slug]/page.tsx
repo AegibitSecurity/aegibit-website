@@ -44,7 +44,7 @@ export default async function IndustryPage({ params }: Props) {
       {
         "@type": "SoftwareApplication",
         "@id": `${pageUrl}#app`,
-        name: `AEGIBIT VoiceCore — ${ind.name}`,
+        name: `AEGIBIT VoiceCore, ${ind.name}`,
         description: ind.description,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web, iOS, Android",

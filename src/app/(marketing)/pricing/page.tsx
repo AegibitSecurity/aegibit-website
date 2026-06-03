@@ -6,7 +6,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { motion } from "framer-motion";
 
 /**
- * PayMint pricing — public, transparent, conversion-focused.
+ * PayMint pricing, public, transparent, conversion-focused.
  *
  * Strategy:
  *   • Per-branch pricing scales with customer value (clear mental model)
@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
  *   • Free 14-day pilot, no card required → reduces commitment friction
  *   • Custom enterprise tier for 25+ branches → land-and-expand for groups
  *
- * Every CTA funnels to /products/paymint/demo — single conversion path.
+ * Every CTA funnels to /products/paymint/demo, single conversion path.
  */
 
 const PLANS = [
@@ -52,7 +52,7 @@ const PLANS = [
       "Audit-grade logging (forever)",
       "Mobile + Android APK + Web app",
       "Priority email + WhatsApp support",
-      "OTA updates — features ship live",
+      "OTA updates, features ship live",
     ],
     cta: "Book a Demo",
     href: "/products/paymint/demo",
@@ -94,11 +94,11 @@ const FAQ = [
   },
   {
     q: "Do you charge per user?",
-    a: "No. Per branch only. You can add unlimited users (makers, approvers, accountants, admins) at no extra cost. Most customers run 5-25 users per branch — all included.",
+    a: "No. Per branch only. You can add unlimited users (makers, approvers, accountants, admins) at no extra cost. Most customers run 5-25 users per branch, all included.",
   },
   {
     q: "What happens if I add a branch mid-month?",
-    a: "Pro-rated billing. Add a branch on day 10 — you pay only for the remaining 20 days at the per-branch rate.",
+    a: "Pro-rated billing. Add a branch on day 10, you pay only for the remaining 20 days at the per-branch rate.",
   },
   {
     q: "Is GST extra?",
@@ -114,7 +114,7 @@ const FAQ = [
   },
   {
     q: "What if I want to cancel?",
-    a: "Cancel anytime via email — no minimum lock-in on the Branch tier. Your data is exportable as CSV at any point. We'll keep your account in read-only mode for 30 days post-cancellation in case you change your mind.",
+    a: "Cancel anytime via email, no minimum lock-in on the Branch tier. Your data is exportable as CSV at any point. We'll keep your account in read-only mode for 30 days post-cancellation in case you change your mind.",
   },
 ];
 

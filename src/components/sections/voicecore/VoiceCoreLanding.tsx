@@ -15,14 +15,14 @@ import {
 } from "lucide-react";
 
 /**
- * VoiceCore — second AEGIBIT product, currently in early access.
+ * VoiceCore, second AEGIBIT product, currently in early access.
  *
  * Page strategy:
- *   • Position VoiceCore as "voice-first business operations" — a
+ *   • Position VoiceCore as "voice-first business operations", a
  *     distinct product from PayMint with its own use case
  *   • Capture early-access waitlist signups via inline form using
  *     existing /api/leads infrastructure (source = voicecore_waitlist)
- *   • Reinforce AEGIBIT-platform narrative — VoiceCore + PayMint +
+ *   • Reinforce AEGIBIT-platform narrative, VoiceCore + PayMint +
  *     Aira AI all in one operating-system vision
  */
 
@@ -124,7 +124,7 @@ function Hero() {
           style={{ color: "#A1A1AA" }}
         >
           VoiceCore is AEGIBIT&apos;s voice-first operations platform. Approve
-          vouchers, query reports, dispatch tasks, audit access — all by
+          vouchers, query reports, dispatch tasks, audit access, all by
           speaking, in Hindi, Bengali, English, or any major Indian language.
           Biometric voice authentication. Built by a cybersecurity company.
         </p>
@@ -175,7 +175,7 @@ const CAPABILITIES = [
     Icon: Lock,
     title: "Biometric voice authentication",
     body:
-      "Your voice is your password. Voice prints are stored as one-way embeddings — even AEGIBIT can't reconstruct your voice. Action approval requires the right voice, every time.",
+      "Your voice is your password. Voice prints are stored as one-way embeddings, even AEGIBIT can't reconstruct your voice. Action approval requires the right voice, every time.",
     color: "#A855F7",
   },
   {
@@ -657,11 +657,11 @@ const FAQS = [
   },
   {
     q: "How does voice biometric authentication work?",
-    a: "Your voice is converted to a one-way embedding (mathematical fingerprint) at enrollment. The original audio is discarded; we store only the embedding. Subsequent commands are matched against the embedding with sub-2-second latency. Even AEGIBIT cannot reconstruct your voice from the stored data — it's mathematically irreversible.",
+    a: "Your voice is converted to a one-way embedding (mathematical fingerprint) at enrollment. The original audio is discarded; we store only the embedding. Subsequent commands are matched against the embedding with sub-2-second latency. Even AEGIBIT cannot reconstruct your voice from the stored data, it's mathematically irreversible.",
   },
   {
     q: "Will VoiceCore work in noisy branch environments (workshops, showrooms)?",
-    a: "Yes. We've trained the speech recognition model specifically on Indian operational environments — workshop background noise, showroom customer chatter, vehicle ambient sound. Wake-word activation prevents accidental triggers; biometric auth prevents unauthorized voices from acting on your behalf.",
+    a: "Yes. We've trained the speech recognition model specifically on Indian operational environments, workshop background noise, showroom customer chatter, vehicle ambient sound. Wake-word activation prevents accidental triggers; biometric auth prevents unauthorized voices from acting on your behalf.",
   },
   {
     q: "Is my voice data sent to a third-party API like ChatGPT?",
@@ -669,7 +669,7 @@ const FAQS = [
   },
   {
     q: "Does VoiceCore integrate with PayMint?",
-    a: "Yes — that's the design intent. Voice approve PayMint vouchers, voice-query expense reports, voice-trigger Tally exports. PayMint customers get integrated VoiceCore at GA. Standalone VoiceCore (without PayMint) is also planned.",
+    a: "Yes, that's the design intent. Voice approve PayMint vouchers, voice-query expense reports, voice-trigger Tally exports. PayMint customers get integrated VoiceCore at GA. Standalone VoiceCore (without PayMint) is also planned.",
   },
 ];
 

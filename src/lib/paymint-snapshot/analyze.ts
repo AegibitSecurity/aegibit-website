@@ -1,5 +1,5 @@
 /**
- * PayMint Snapshot — analyzer.
+ * PayMint Snapshot, analyzer.
  *
  * Turns parsed CSV rows into the defensible Snapshot structure
  * surfaced on /products/paymint. Every aggregate traces to rows
@@ -8,11 +8,11 @@
  *   - branch totals: sum over rows where row.branch === b
  *   - branch variance: coefficient of variation across branch totals
  *   - anomalies: per-branch Z-score on amount, top-5 by |Z|
- *   - rows_missing_branch: count of rows with no branch attribution —
+ *   - rows_missing_branch: count of rows with no branch attribution,
  *     PayMint's wedge; this is the "you can't audit what you can't
  *     attribute" gap that the platform closes
  *
- * No I/O, no globals — pure function. Tested in analyze.test.ts.
+ * No I/O, no globals, pure function. Tested in analyze.test.ts.
  */
 
 import type {
@@ -116,7 +116,7 @@ export function analyze(rows: SnapshotRow[], parseWarnings: string[]): Snapshot 
 
   if (missingBranch > 0) {
     warnings.push(
-      `${missingBranch} row(s) have no branch attribution — PayMint's branch-coded ` +
+      `${missingBranch} row(s) have no branch attribution, PayMint's branch-coded ` +
         "voucher capture eliminates this gap by tagging branch at the moment of expense.",
     );
   }
