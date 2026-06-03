@@ -49,7 +49,7 @@ export default async function IndustryPage({ params }: Props) {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web, iOS, Android",
         url: pageUrl,
-        brand: { "@type": "Organization", name: "AEGIBIT Security", url: SITE_URL },
+        brand: { "@type": "Organization", name: "AEGIBIT Global Consulting", url: SITE_URL },
         audience: { "@type": "BusinessAudience", audienceType: ind.name },
         offers: {
           "@type": "Offer",

@@ -57,7 +57,7 @@ export default async function BlogPost({ params }: Props) {
         },
         publisher: {
           "@type": "Organization",
-          name: "AEGIBIT Security",
+          name: "AEGIBIT Global Consulting",
           url: SITE_URL,
           logo: { "@type": "ImageObject", url: `${SITE_URL}/icon.svg` },
         },
