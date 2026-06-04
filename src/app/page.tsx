@@ -4,6 +4,7 @@ import { HeroSection }      from "@/components/sections/HeroSection";
 import { HomeProducts }     from "@/components/sections/HomeProducts";
 import { WhatWeDo }         from "@/components/sections/WhatWeDo";
 import { ProofSection }     from "@/components/sections/ProofSection";
+import { SelectedWork }     from "@/components/sections/SelectedWork";
 import { HomeCTA }          from "@/components/sections/HomeCTA";
 
 // Structured data, AEGIBIT-the-company is the primary entity. PayMint
@@ -129,7 +130,8 @@ export default function HomePage() {
         {/* 2 */ }<HomeProducts />
         {/* 3 */ }<WhatWeDo />
         {/* 4 */ }<ProofSection />
-        {/* 5 */ }<HomeCTA />
+        {/* 5 */ }<SelectedWork />
+        {/* 6 */ }<HomeCTA />
       </main>
 
       <Footer />
