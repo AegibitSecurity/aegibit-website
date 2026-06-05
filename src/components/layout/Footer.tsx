@@ -23,6 +23,7 @@ const COLS = {
     { label:"Contact", href:"/contact" },
     { label:"Careers", href:"/careers" },
     { label:"Press",   href:"/press"   },
+    { label:"Web Development Kolkata", href:"/website-development-company-kolkata" },
   ],
   Legal: [
     { label:"Privacy",       href:"/privacy" },
