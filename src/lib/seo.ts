@@ -41,7 +41,10 @@ export function buildMetadata(opts: {
   const url = `${BASE_URL}${opts.path ?? ""}`;
   return {
     metadataBase: new URL(BASE_URL),
-    title: `${opts.title} | ${SITE_NAME}`,
+    // Bare title, the root layout's title.template ("%s | AEGIBIT")
+    // appends the brand suffix. Adding it here too would double it
+    // ("... | AEGIBIT | AEGIBIT").
+    title: opts.title,
     description: opts.description,
     keywords: opts.keywords,
     openGraph: {

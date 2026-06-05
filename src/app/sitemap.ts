@@ -65,6 +65,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/case-studies/nibir-motors", 0.9, "monthly"),
     entry("/blog", 0.7, "weekly"),
 
+    // Local SEO landing (pairs with the Kolkata Google Business Profile)
+    entry("/website-development-company-kolkata", 0.9, "weekly"),
+
     // Brand chrome
     entry("/status", 0.5, "weekly"),
     entry("/changelog", 0.6, "weekly"),
