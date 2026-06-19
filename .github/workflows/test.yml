@@ -23,6 +23,8 @@ jobs:
           node-version: "20"
           cache: "npm"
       - run: npm ci
+      - name: No em-dashes (hard brand rule)
+        run: node automation/scripts/check-no-emdash.mjs
       - name: Type-check
         run: npx tsc --noEmit
       # Repo-wide lint gate. Previously scoped to src/lib + proxy +

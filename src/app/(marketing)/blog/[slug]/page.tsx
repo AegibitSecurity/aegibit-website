@@ -14,7 +14,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return { title: "Not Found" };
   return {
-    title: `${post.title} | AEGIBIT VoiceCore`,
+    // Bare title; the root layout title.template appends " | AEGIBIT".
+    // (Previously appended a stale " | AEGIBIT VoiceCore", which also
+    // double-suffixed once the root template ran.)
+    title: post.title,
     description: post.description,
     keywords: post.tags,
     authors: [{ name: post.author.name }],
