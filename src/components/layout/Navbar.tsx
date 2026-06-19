@@ -11,6 +11,7 @@ import { Menu, X } from "lucide-react";
 const NAV_LINKS = [
   { label: "PayMint",    href: "/products/paymint"     },
   { label: "MCP Shield", href: "/products/mcp-shield"  },
+  { label: "Work",       href: "/work"                 },
   { label: "Solutions",  href: "/solutions"            },
   { label: "Pricing",    href: "/pricing"              },
   { label: "Security",   href: "/security"             },
