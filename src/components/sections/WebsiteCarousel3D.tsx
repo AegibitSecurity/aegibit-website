@@ -80,7 +80,11 @@ export function WebsiteCarousel3D() {
     dragging.current = true;
     lastX.current = e.clientX;
     moved.current = 0;
-    e.currentTarget.setPointerCapture?.(e.pointerId);
+    // NOTE: deliberately NOT calling setPointerCapture here. Capturing the
+    // pointer on this container retargets the synthetic click to the
+    // container, so the card <a> never navigates. Pointer-move still
+    // bubbles up from the cards for the drag-to-spin, and a real drag is
+    // suppressed in the card onClick via the moved threshold.
   };
   const onMove = (e: React.PointerEvent) => {
     if (!dragging.current) return;
