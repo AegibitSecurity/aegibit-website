@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SelectedWork } from "@/components/sections/SelectedWork";
-import { WebsiteGallery } from "@/components/sections/WebsiteGallery";
+import { WebsiteCarousel3D } from "@/components/sections/WebsiteCarousel3D";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 import { buildMetadata, buildBreadcrumbJsonLd, SITE_URL } from "@/lib/seo";
 import { Search, ShieldCheck, Rocket, LifeBuoy, ArrowRight } from "lucide-react";
@@ -117,8 +117,8 @@ export default function WorkPage() {
         {/* Real clients (single source of truth) */}
         <SelectedWork />
 
-        {/* Premium gallery of websites we have built */}
-        <WebsiteGallery />
+        {/* Eye-catching 3D cylinder carousel of websites we have built */}
+        <WebsiteCarousel3D />
 
         {/* How we work */}
         <section className="px-6 lg:px-12 py-20 md:py-24 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
