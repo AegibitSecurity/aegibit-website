@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Smartphone, Download, ShieldCheck, Zap, CalendarCheck, FileText } from 'lucide-react';
+import { DownloadCountBadge } from "@/components/shared/DownloadCountBadge";
 import { track } from '@/lib/track';
 
 const PAYMINT_APP_URL = 'https://nibir-vault.web.app';
@@ -197,6 +198,11 @@ export function PayMintHero() {
                 </span>
               </span>
             </a>
+          </div>
+
+          {/* Exact live download count, all channels (standing rule) */}
+          <div className="mt-5">
+            <DownloadCountBadge app="paymint" source="all channels" />
           </div>
 
           {/* Trust */}
