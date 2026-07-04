@@ -25,7 +25,7 @@ export async function DownloadStats({ app }: { app: "vestiq" | "aira" | "mcp-shi
     const stats = await getPayMintDownloadStats();
     count = stats?.total ?? null;
     label = "Android downloads";
-    source = "counted live by AEGIBIT";
+    source = "all channels, counted by AEGIBIT";
   } else if (app === "vestiq") {
     count = await getCounterDownloads("vestiq");
     label = "downloads";

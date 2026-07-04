@@ -103,11 +103,24 @@ const PAYMINT_DOWNLOAD_CTA_IDS = [
 ];
 
 /**
- * PayMint Android downloads, counted from real recorded click telemetry
- * (visitor_events in Supabase). Unlike Vestiq's cold-start counter,
- * these events have been recorded since PayMint's download buttons
- * shipped, so this is a true historical number. `today` uses IST
- * midnight (the business operates in India).
+ * PayMint download baseline: 100 downloads across all distribution
+ * channels through 2026-07-04, per Rahul's offline distribution
+ * tracker (owner-attested on 2026-07-04). PayMint was distributed
+ * directly to dealership staff (WhatsApp / hands-on installs), which
+ * the website's click telemetry never saw, website clicks recorded
+ * only 1 by that date. The site counts live on top of this baseline:
+ * displayed total = 100 + website download clicks since the baseline
+ * date. Do not change the baseline without an updated owner-attested
+ * record.
+ */
+const PAYMINT_OFFLINE_BASELINE = 100;
+const PAYMINT_BASELINE_SINCE = "2026-07-03T18:30:00.000Z"; // 2026-07-04 00:00 IST
+
+/**
+ * PayMint Android downloads: owner-attested offline baseline plus real
+ * recorded click telemetry (visitor_events in Supabase) since the
+ * baseline date. `today` uses IST midnight (the business operates in
+ * India).
  */
 export async function getPayMintDownloadStats(): Promise<{ total: number; today: number } | null> {
   try {
@@ -125,12 +138,15 @@ export async function getPayMintDownloadStats(): Promise<{ total: number; today:
     ist.setUTCHours(0, 0, 0, 0);
     const istMidnightUtc = new Date(ist.getTime() - istOffsetMs).toISOString();
 
-    const [totalRes, todayRes] = await Promise.all([
-      base(),
+    const [sinceBaselineRes, todayRes] = await Promise.all([
+      base().gte("timestamp", PAYMINT_BASELINE_SINCE),
       base().gte("timestamp", istMidnightUtc),
     ]);
-    if (totalRes.error || todayRes.error) return null;
-    return { total: totalRes.count ?? 0, today: todayRes.count ?? 0 };
+    if (sinceBaselineRes.error || todayRes.error) return null;
+    return {
+      total: PAYMINT_OFFLINE_BASELINE + (sinceBaselineRes.count ?? 0),
+      today: todayRes.count ?? 0,
+    };
   } catch {
     return null;
   }
