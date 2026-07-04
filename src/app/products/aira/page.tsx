@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AiraLanding } from "@/components/sections/aira/AiraLanding";
+import { DownloadStats } from "@/components/shared/DownloadStats";
 
 export const metadata: Metadata = {
   title: "Aira, Voice control for your desktop",
@@ -37,12 +38,18 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function AiraPage() {
+export const revalidate = 3600; // refresh the GitHub download count
+
+export default async function AiraPage() {
   return (
     <>
       <Navbar />
       <main id="main-content">
         <AiraLanding />
+        {/* Exact lifetime download count, counted by GitHub Releases */}
+        <div style={{ background: "#000" }}>
+          <DownloadStats app="aira" />
+        </div>
       </main>
       <Footer />
     </>

@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 import { McpScannerSection } from "@/components/sections/mcp-shield/McpScannerSection";
+import { DownloadStats } from "@/components/shared/DownloadStats";
 import { Shield, ExternalLink, ArrowRight, Eye, Lock, Search } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -68,7 +69,9 @@ const CHECKS = [
   },
 ];
 
-export default function McpShieldPage() {
+export const revalidate = 3600; // refresh the PyPI install count
+
+export default async function McpShieldPage() {
   return (
     <>
       <Navbar />
@@ -541,6 +544,9 @@ export default function McpShieldPage() {
             </TrackedLink>
           </div>
         </section>
+
+        {/* Exact installs in the last 30 days, PyPI public stats */}
+        <DownloadStats app="mcp-shield" />
       </main>
       <Footer />
     </>
