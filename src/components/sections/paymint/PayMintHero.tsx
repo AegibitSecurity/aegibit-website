@@ -201,13 +201,13 @@ export function PayMintHero() {
           </div>
 
           {/* Exact live download count, all channels (standing rule) */}
-          <div className="mt-5">
+          <div className="mt-7">
             <DownloadCountBadge app="paymint" source="all channels" />
           </div>
 
           {/* Trust */}
           <div
-            className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm"
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm"
             style={{ color: '#52525B' }}
           >
             {[
