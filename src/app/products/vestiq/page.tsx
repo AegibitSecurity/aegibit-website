@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { buildMetadata, buildBreadcrumbJsonLd, SITE_URL } from "@/lib/seo";
+import { DownloadStats } from "@/components/shared/DownloadStats";
 import {
   Receipt, FileText, MessageCircle, Users, Wallet, Repeat,
   BarChart3, ShieldCheck, Scissors, RefreshCw, ArrowRight,
@@ -17,6 +18,8 @@ import {
  * is live in production today (per the product brief); the two upcoming
  * items are clearly marked "Coming soon". Honesty bar unchanged.
  */
+
+export const revalidate = 300; // refresh the live download counter
 
 const PAGE_PATH = "/products/vestiq";
 const APP_URL = "https://vestiq.aegibit.com";
@@ -100,7 +103,7 @@ function productJsonLd() {
   };
 }
 
-export default function VestiqPage() {
+export default async function VestiqPage() {
   const breadcrumb = buildBreadcrumbJsonLd([
     { name: "Home", href: "/" },
     { name: "Vestiq", href: PAGE_PATH },
@@ -146,7 +149,7 @@ export default function VestiqPage() {
                 Get Vestiq for your boutique <ArrowRight size={16} />
               </a>
               <a
-                href={APK_URL}
+                href={`${SITE_URL}/api/download/vestiq`}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
               >
@@ -164,6 +167,9 @@ export default function VestiqPage() {
             </div>
           </div>
         </section>
+
+        {/* Exact live download count (standing rule: real numbers only) */}
+        <DownloadStats app="vestiq" />
 
         {/* Features */}
         <section className="px-6 lg:px-12 py-20 md:py-24 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
@@ -267,7 +273,7 @@ export default function VestiqPage() {
                 Get Vestiq for your boutique <ArrowRight size={16} />
               </a>
               <a
-                href={APK_URL}
+                href={`${SITE_URL}/api/download/vestiq`}
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
               >
