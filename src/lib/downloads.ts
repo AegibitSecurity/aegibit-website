@@ -1,4 +1,5 @@
 import { Redis } from "@upstash/redis";
+import { getServiceClient } from "@/lib/supabase-admin";
 
 /**
  * Download counting, the honest way (standing rule from Rahul: the site
@@ -91,6 +92,45 @@ export async function getMcpShieldMonthlyDownloads(): Promise<number | null> {
     const data: { data?: { last_month?: number } } = await res.json();
     const n = data.data?.last_month;
     return typeof n === "number" ? n : null;
+  } catch {
+    return null;
+  }
+}
+
+const PAYMINT_DOWNLOAD_CTA_IDS = [
+  "paymint_hero_download_apk",
+  "paymint_bottom_download_apk",
+];
+
+/**
+ * PayMint Android downloads, counted from real recorded click telemetry
+ * (visitor_events in Supabase). Unlike Vestiq's cold-start counter,
+ * these events have been recorded since PayMint's download buttons
+ * shipped, so this is a true historical number. `today` uses IST
+ * midnight (the business operates in India).
+ */
+export async function getPayMintDownloadStats(): Promise<{ total: number; today: number } | null> {
+  try {
+    const supabase = getServiceClient();
+    const base = () =>
+      supabase
+        .from("visitor_events")
+        .select("id", { count: "exact", head: true })
+        .eq("event_type", "cta_click")
+        .in("event_data->>cta_id", PAYMINT_DOWNLOAD_CTA_IDS);
+
+    const nowUtcMs = Date.now();
+    const istOffsetMs = 5.5 * 60 * 60 * 1000;
+    const ist = new Date(nowUtcMs + istOffsetMs);
+    ist.setUTCHours(0, 0, 0, 0);
+    const istMidnightUtc = new Date(ist.getTime() - istOffsetMs).toISOString();
+
+    const [totalRes, todayRes] = await Promise.all([
+      base(),
+      base().gte("timestamp", istMidnightUtc),
+    ]);
+    if (totalRes.error || todayRes.error) return null;
+    return { total: totalRes.count ?? 0, today: todayRes.count ?? 0 };
   } catch {
     return null;
   }
