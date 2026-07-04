@@ -6,6 +6,7 @@ import {
   Mic,
   Shield,
   Layers,
+  ShoppingBag,
   ArrowRight,
   Zap,
 } from "lucide-react";
@@ -85,6 +86,18 @@ const PRODUCTS: Product[] = [
     iconColor: "#F97316",
     href: "https://shield.aegibit.com",
     ctaLabel: "Explore MCP Shield",
+  },
+  {
+    id: "vestiq",
+    name: "Vestiq",
+    tagline: "The Boutique OS.",
+    description:
+      "Mobile-first billing and shop management for Indian boutiques and tailoring businesses. Branded PDF bills, WhatsApp-native sharing, payment tracking, exchanges, and leakage protection. Android and web. Powered by AEGIBIT.",
+    status: "LIVE",
+    icon: ShoppingBag,
+    iconColor: "#A855F7",
+    href: "/products/vestiq",
+    ctaLabel: "Explore Vestiq",
   },
   {
     id: "industry-os",

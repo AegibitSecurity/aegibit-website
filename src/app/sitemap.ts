@@ -52,6 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/products/paymint", 0.95, "weekly"),
     entry("/products/paymint/demo", 0.85, "monthly"),
     entry("/products/mcp-shield", 0.9, "weekly"),
+    entry("/products/vestiq", 0.9, "weekly"),
     entry("/products/aira", 0.85, "weekly"),
     entry("/products/aira/changelog", 0.6, "weekly"),
 

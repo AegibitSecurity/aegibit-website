@@ -10,6 +10,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 const COLS = {
   Product: [
     { label:"PayMint",    href:"/products/paymint"    },
+    { label:"Vestiq",     href:"/products/vestiq"     },
     { label:"MCP Shield", href:"/products/mcp-shield" },
     { label:"Platform",   href:"/features"            },
     { label:"Security",   href:"/security"            },

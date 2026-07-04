@@ -75,6 +75,16 @@ const HOME_JSON_LD = {
                 "Voice-controlled desktop assistant by AEGIBIT. Free for Windows. Hindi, Bengali, English. Local-first. Voice biometric.",
             },
           },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "SoftwareApplication",
+              name: "Vestiq",
+              url: "https://www.aegibit.com/products/vestiq",
+              description:
+                "Boutique OS by AEGIBIT. Mobile-first billing and shop management for Indian boutiques and tailoring businesses. Android and web.",
+            },
+          },
         ],
       },
     },
