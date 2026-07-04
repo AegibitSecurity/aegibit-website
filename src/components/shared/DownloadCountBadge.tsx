@@ -50,22 +50,41 @@ export function DownloadCountBadge({ app, source }: { app: string; source?: stri
 
   return (
     <div
-      className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
-      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.10)" }}
+      className="inline-flex items-center rounded-full"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.10)",
+        padding: "8px 6px 8px 14px",
+      }}
     >
-      <Download size={13} style={{ color: "#F97316" }} />
-      <span className="text-sm font-semibold" style={{ color: "#fff" }}>
-        {count.toLocaleString("en-IN")}
+      {/* icon + count block */}
+      <div className="flex items-center gap-2">
+        <Download size={14} style={{ color: "#F97316" }} />
+        <span className="font-bold leading-none tabular-nums" style={{ color: "#fff", fontSize: "15px" }}>
+          {count.toLocaleString("en-IN")}
+        </span>
+        <span className="leading-none" style={{ color: "#A1A1AA", fontSize: "14px" }}>downloads</span>
+        {source ? (
+          <span className="leading-none" style={{ color: "#52525B", fontSize: "12px" }}>&middot; {source}</span>
+        ) : null}
+      </div>
+
+      {/* divider */}
+      <span className="mx-3 inline-block" style={{ width: "1px", height: "16px", background: "rgba(255,255,255,0.14)" }} aria-hidden />
+
+      {/* live tag */}
+      <span
+        className="inline-flex items-center gap-1.5 rounded-full"
+        style={{ background: "rgba(16,185,129,0.10)", border: "1px solid rgba(16,185,129,0.28)", padding: "3px 9px 3px 7px" }}
+      >
+        <span className="relative flex h-1.5 w-1.5" aria-hidden>
+          <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style={{ background: "#10B981" }} />
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: "#10B981" }} />
+        </span>
+        <span className="font-semibold uppercase leading-none" style={{ color: "#10B981", fontSize: "10px", letterSpacing: "0.12em" }}>
+          Live
+        </span>
       </span>
-      <span className="text-sm" style={{ color: "#A1A1AA" }}>downloads</span>
-      {source ? (
-        <span className="text-xs" style={{ color: "#52525B" }}>· {source}</span>
-      ) : null}
-      <span className="relative flex h-1.5 w-1.5" aria-hidden>
-        <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style={{ background: "#10B981" }} />
-        <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: "#10B981" }} />
-      </span>
-      <span className="text-xs" style={{ color: "#10B981" }}>live</span>
     </div>
   );
 }
