@@ -3,6 +3,7 @@ import {
   getAiraDownloads,
   getCounterDownloads,
   getMcpShieldMonthlyDownloads,
+  getPayMintDownloadStats,
 } from "@/lib/downloads";
 import { LiveDownloadCount } from "@/components/shared/LiveDownloadCount";
 
@@ -15,12 +16,17 @@ import { LiveDownloadCount } from "@/components/shared/LiveDownloadCount";
  * the moment anyone downloads. Renders nothing when the source is
  * unreachable, a missing number is more honest than a made-up one.
  */
-export async function DownloadStats({ app }: { app: "vestiq" | "aira" | "mcp-shield" }) {
+export async function DownloadStats({ app }: { app: "vestiq" | "aira" | "mcp-shield" | "paymint" }) {
   let count: number | null = null;
   let label = "downloads";
   let source = "";
 
-  if (app === "vestiq") {
+  if (app === "paymint") {
+    const stats = await getPayMintDownloadStats();
+    count = stats?.total ?? null;
+    label = "Android downloads";
+    source = "counted live by AEGIBIT";
+  } else if (app === "vestiq") {
     count = await getCounterDownloads("vestiq");
     label = "downloads";
     source = "counted live by AEGIBIT";

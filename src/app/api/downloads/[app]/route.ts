@@ -3,6 +3,7 @@ import {
   getAiraDownloads,
   getCounterDownloads,
   getMcpShieldMonthlyDownloads,
+  getPayMintDownloadStats,
 } from "@/lib/downloads";
 
 /**
@@ -24,7 +25,7 @@ import {
 
 export const dynamic = "force-dynamic";
 
-const LIVE_APPS = new Set(["vestiq", "aira", "mcp-shield"]);
+const LIVE_APPS = new Set(["vestiq", "aira", "mcp-shield", "paymint"]);
 
 export async function GET(
   _req: Request,
@@ -36,12 +37,17 @@ export async function GET(
   }
 
   let count: number | null;
+  let today: number | null = null;
   if (app === "aira") count = await getAiraDownloads();
   else if (app === "mcp-shield") count = await getMcpShieldMonthlyDownloads();
-  else count = await getCounterDownloads(app);
+  else if (app === "paymint") {
+    const stats = await getPayMintDownloadStats();
+    count = stats?.total ?? null;
+    today = stats?.today ?? null;
+  } else count = await getCounterDownloads(app);
 
   return NextResponse.json(
-    { app, count },
+    { app, count, ...(today !== null ? { today } : {}) },
     { headers: { "Cache-Control": "no-store" } },
   );
 }

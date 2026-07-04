@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PayMintHero } from "@/components/sections/paymint/PayMintHero";
+import { DownloadStats } from "@/components/shared/DownloadStats";
 import { PayMintFeatures } from "@/components/sections/paymint/PayMintFeatures";
 import { PayMintSecurity } from "@/components/sections/paymint/PayMintSecurity";
 import { PayMintScreenshots } from "@/components/sections/paymint/PayMintScreenshots";
@@ -45,6 +46,10 @@ export default function PayMintPage() {
       <Navbar />
       <main id="main-content">
         <PayMintHero />
+        {/* Exact live Android download count, from real click telemetry */}
+        <div style={{ background: "#000" }}>
+          <DownloadStats app="paymint" />
+        </div>
         <PayMintFeatures />
         <PayMintSnapshotSection />
         <PayMintSecurity />
