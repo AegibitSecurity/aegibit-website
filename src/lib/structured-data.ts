@@ -15,7 +15,11 @@ export const organizationSchema = {
     contactType: "sales",
     areaServed: "IN",
   },
-  sameAs: [],
+  sameAs: [
+    "https://www.instagram.com/aegibitglobal",
+    "https://x.com/aegibitsec",
+    "https://github.com/AegibitSecurity",
+  ],
 };
 
 export const softwareAppSchema = {
