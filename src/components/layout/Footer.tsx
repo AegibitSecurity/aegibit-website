@@ -11,6 +11,7 @@ const COLS = {
   Product: [
     { label:"PayMint",    href:"/products/paymint"    },
     { label:"Vestiq",     href:"/products/vestiq"     },
+    { label:"LeadSync",   href:"/products/leadsync"   },
     { label:"MCP Shield", href:"/products/mcp-shield" },
     { label:"Platform",   href:"/features"            },
     { label:"Security",   href:"/security"            },

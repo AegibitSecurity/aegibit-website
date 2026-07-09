@@ -25,7 +25,7 @@ import {
 
 export const dynamic = "force-dynamic";
 
-const LIVE_APPS = new Set(["vestiq", "aira", "mcp-shield", "paymint"]);
+const LIVE_APPS = new Set(["vestiq", "aira", "mcp-shield", "paymint", "leadsync"]);
 
 export async function GET(
   _req: Request,

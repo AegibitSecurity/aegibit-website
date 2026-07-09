@@ -79,6 +79,16 @@ const HOME_JSON_LD = {
             "@type": "Offer",
             itemOffered: {
               "@type": "SoftwareApplication",
+              name: "LeadSync",
+              url: "https://www.aegibit.com/products/leadsync",
+              description:
+                "Dealership operating system by AEGIBIT. Lead to delivery on one canvas for automobile dealerships. Android and web.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "SoftwareApplication",
               name: "Vestiq",
               url: "https://www.aegibit.com/products/vestiq",
               description:
