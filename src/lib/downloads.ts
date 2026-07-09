@@ -22,6 +22,8 @@ import { getServiceClient } from "@/lib/supabase-admin";
 // Allowlist of apps served through the counting redirect.
 export const DOWNLOAD_TARGETS: Record<string, string> = {
   vestiq: "https://vestiq.aegibit.com/Vestiq.apk",
+  // Pinned release tag (NOT repo "latest": Aira's installer uses latest).
+  leadsync: "https://github.com/AegibitSecurity/aegibit-website/releases/download/leadsync-v0.1.0/Leadsync.apk",
 };
 
 let _redis: Redis | null = null;

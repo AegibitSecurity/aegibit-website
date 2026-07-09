@@ -7,6 +7,7 @@ import {
   Shield,
   Layers,
   ShoppingBag,
+  Car,
   ArrowRight,
   Zap,
 } from "lucide-react";
@@ -98,6 +99,18 @@ const PRODUCTS: Product[] = [
     iconColor: "#A855F7",
     href: "/products/vestiq",
     ctaLabel: "Explore Vestiq",
+  },
+  {
+    id: "leadsync",
+    name: "LeadSync",
+    tagline: "The Dealership OS.",
+    description:
+      "A premium mobile operating system for automobile dealerships: lead to delivery on one canvas, command dashboard, field-proven reliability, silent updates. Live in the field. Android and web. Powered by AEGIBIT.",
+    status: "LIVE",
+    icon: Car,
+    iconColor: "#38BDF8",
+    href: "/products/leadsync",
+    ctaLabel: "Explore LeadSync",
   },
   {
     id: "industry-os",
