@@ -22,8 +22,13 @@ import { getServiceClient } from "@/lib/supabase-admin";
 // Allowlist of apps served through the counting redirect.
 export const DOWNLOAD_TARGETS: Record<string, string> = {
   vestiq: "https://vestiq.aegibit.com/Vestiq.apk",
-  // Pinned release tag (NOT repo "latest": Aira's installer uses latest).
-  leadsync: "https://github.com/AegibitSecurity/aegibit-website/releases/download/leadsync-v0.1.0/Leadsync.apk",
+  // Evergreen "latest" is SAFE here (unlike this repo's releases, which Aira's
+  // installer shares): leadsync-releases is a dedicated single-product repo, so
+  // /releases/latest always resolves to the newest LeadSync APK. The LeadSync
+  // app's in-app updater also downloads through /api/download/leadsync, so this
+  // one target keeps the website button AND in-app updates on the same file
+  // with zero future edits — publish a new release there and both pick it up.
+  leadsync: "https://github.com/AegibitSecurity/leadsync-releases/releases/latest/download/Leadsync.apk",
 };
 
 let _redis: Redis | null = null;
