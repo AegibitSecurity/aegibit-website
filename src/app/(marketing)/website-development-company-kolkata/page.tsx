@@ -98,7 +98,11 @@ function localBusinessJsonLd() {
       "Website development", "Web application development", "Mobile app development",
       "Custom software development", "Digital transformation", "Cybersecurity",
     ],
-    sameAs: [],
+    sameAs: [
+      "https://www.instagram.com/aegibitglobal",
+      "https://x.com/aegibitsec",
+      "https://github.com/AegibitSecurity",
+    ],
   };
 }
 
@@ -241,6 +245,36 @@ export default function KolkataPage() {
                 <span key={a} className="text-sm px-4 py-2 rounded-full" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "#D4D4D8" }}>
                   {a}
                 </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Honest guides (cornerstone content, internal links) */}
+        <section className="px-6 lg:px-12 py-16 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+          <div className="max-w-4xl mx-auto">
+            <p className="text-[11px] uppercase font-medium mb-5 text-center" style={{ color: "#F97316", letterSpacing: "0.2em" }}>
+              Honest guides for Kolkata buyers
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                { t: "How much does a website cost in Kolkata in 2026?", h: "/blog/website-cost-kolkata-2026" },
+                { t: "How to choose a web development company in Kolkata", h: "/blog/choose-web-development-company-kolkata" },
+                { t: "How much does app development cost in Kolkata?", h: "/blog/app-development-cost-kolkata-2026" },
+                { t: "Digital transformation for Kolkata SMEs: a 90-day roadmap", h: "/blog/digital-transformation-kolkata-smes" },
+              ].map((g) => (
+                <TrackedLink
+                  key={g.h}
+                  href={g.h}
+                  ctaId={"kolkata_guide_" + (g.h.split("/").pop() ?? "guide")}
+                  ctaLabel={g.t}
+                  ctaSection="kolkata_guides"
+                  className="group flex items-start justify-between gap-3 rounded-xl p-5 transition-colors hover:bg-white/5"
+                  style={{ background: "#0D0D0D", border: "1px solid rgba(255,255,255,0.07)" }}
+                >
+                  <span className="text-sm leading-relaxed" style={{ color: "#D4D4D8" }}>{g.t}</span>
+                  <ArrowRight size={15} className="flex-shrink-0 mt-0.5 transition-transform group-hover:translate-x-1" style={{ color: "#F97316" }} />
+                </TrackedLink>
               ))}
             </div>
           </div>

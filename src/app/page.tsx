@@ -34,7 +34,11 @@ const HOME_JSON_LD = {
       description:
         "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast, for dealerships, multi-branch SMEs, and mission-critical operations.",
       foundingDate: "2026",
-      sameAs: [],
+      sameAs: [
+        "https://www.instagram.com/aegibitglobal",
+        "https://x.com/aegibitsec",
+        "https://github.com/AegibitSecurity",
+      ],
       contactPoint: {
         "@type": "ContactPoint",
         email: "contact@aegibit.com",
