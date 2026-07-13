@@ -27,7 +27,7 @@ export const DOWNLOAD_TARGETS: Record<string, string> = {
   // /releases/latest always resolves to the newest LeadSync APK. The LeadSync
   // app's in-app updater also downloads through /api/download/leadsync, so this
   // one target keeps the website button AND in-app updates on the same file
-  // with zero future edits — publish a new release there and both pick it up.
+  // with zero future edits: publish a new release there and both pick it up.
   leadsync: "https://github.com/AegibitSecurity/leadsync-releases/releases/latest/download/Leadsync.apk",
 };
 

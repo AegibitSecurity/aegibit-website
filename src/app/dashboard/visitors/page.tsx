@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 
 interface Visitor { id: string; ip_address?: string; device?: string; country?: string; behavior_score: number; created_at: string; }
+interface Daily { today: number; yesterday: number; last7: number; last30: number; days: { date: string; count: number }[]; }
 
 export default function VisitorsPage() {
   const [visitors, setVisitors] = useState<Visitor[]>([]);
+  const [daily, setDaily] = useState<Daily | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,7 +14,15 @@ export default function VisitorsPage() {
       .then((r) => r.json())
       .then((d) => { setVisitors(d.visitors ?? []); setLoading(false); })
       .catch(() => setLoading(false));
+    fetch("/api/admin/visitors-daily", { credentials: "include" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d && !d.error) setDaily(d); })
+      .catch(() => {});
   }, []);
+
+  const maxDay = daily ? Math.max(1, ...daily.days.map((d) => d.count)) : 1;
+  const fmtDay = (iso: string) =>
+    new Date(iso + "T00:00:00").toLocaleDateString("en-IN", { day: "2-digit", month: "short" });
 
   function scoreColor(score: number) {
     if (score >= 76) return "text-[#EF4444]";
@@ -24,6 +34,45 @@ export default function VisitorsPage() {
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold text-[#F9FAFB] mb-6">Visitors</h1>
+
+      {/* Daily summary (IST) */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        {[
+          { label: "Today", value: daily?.today },
+          { label: "Yesterday", value: daily?.yesterday },
+          { label: "Last 7 days", value: daily?.last7 },
+          { label: "Last 30 days", value: daily?.last30 },
+        ].map((s) => (
+          <div key={s.label} className="rounded-xl border border-[rgba(37,99,235,0.15)] bg-[#070d1a] p-5">
+            <p className="text-[11px] uppercase tracking-wider text-[#6B7280] mb-2">{s.label}</p>
+            <p className="text-3xl font-bold text-[#F9FAFB] tabular-nums">
+              {s.value === undefined ? "…" : s.value.toLocaleString("en-IN")}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Visitors per day, last 30 days (IST) */}
+      <div className="rounded-xl border border-[rgba(37,99,235,0.15)] bg-[#070d1a] p-5 mb-6">
+        <p className="text-[11px] uppercase tracking-wider text-[#6B7280] mb-4">Visitors per day (last 30 days, IST)</p>
+        {!daily ? (
+          <p className="text-[#374151] text-sm">Loading…</p>
+        ) : (
+          <div className="space-y-1.5">
+            {daily.days.slice().reverse().map((d) => (
+              <div key={d.date} className="flex items-center gap-3 text-sm">
+                <span className="w-16 flex-shrink-0 text-[#6B7280] tabular-nums">{fmtDay(d.date)}</span>
+                <div className="flex-1 h-4 rounded bg-[rgba(37,99,235,0.06)] overflow-hidden">
+                  <div className="h-full rounded" style={{ width: `${(d.count / maxDay) * 100}%`, background: "#F97316", minWidth: d.count > 0 ? "3px" : "0" }} />
+                </div>
+                <span className="w-10 flex-shrink-0 text-right font-semibold text-[#D1D5DB] tabular-nums">{d.count}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <p className="text-[11px] uppercase tracking-wider text-[#6B7280] mb-3">Recent visitor sessions</p>
       <div className="rounded-xl border border-[rgba(37,99,235,0.15)] bg-[#070d1a] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
