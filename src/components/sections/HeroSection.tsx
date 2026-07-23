@@ -63,9 +63,13 @@ export function HeroSection() {
             display: "flex", alignItems: "center", justifyContent: "center",
           }}
         >
-          <svg width="28" height="32" viewBox="0 0 28 32" fill="none">
-            <path d="M14 2L2 6.5V15C2 23 7.5 29.5 14 31.5C20.5 29.5 26 23 26 15V6.5L14 2Z" fill="#F97316" opacity="0.95"/>
-            <path d="M9 15.5L12.5 19L19 12" stroke="#fff" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round"/>
+          {/* Registered AEGIBIT offset-blade A mark (locked trademark
+              artwork; geometry matches public/icon.svg). The previous
+              shield glyph here predated the trademark logo and survived
+              the logo propagation by accident. */}
+          <svg width="36" height="36" viewBox="0 0 512 512" fill="none" role="img" aria-label="AEGIBIT mark">
+            <path d="M286 100 L224 130 L124 426 L196 426 Z" fill="#FFFFFF" />
+            <path d="M272 162 L328 182 L388 426 L322 426 Z" fill="#F97316" />
           </svg>
         </div>
       </div>
