@@ -56,8 +56,8 @@ function itemListJsonLd() {
           position: 1,
           item: {
             "@type": "CreativeWork",
-            name: "Nibir Motors: PayMint rollout",
-            about: "Multi-branch expense automation across 7 dealerships in West Bengal",
+            name: "Nibir Motors: PayMint, LeadSync, and corporate website",
+            about: "Repeat client: multi-branch expense automation, a dealership operating system, and the corporate website for a 7-dealership group in West Bengal",
             url: `${SITE_URL}/case-studies/nibir-motors`,
             creator: { "@type": "Organization", name: "AEGIBIT Global Consulting" },
           },

@@ -1,5 +1,5 @@
 import { TrackedLink } from "@/components/shared/TrackedLink";
-import { Building2, Dumbbell, ArrowRight, ArrowUpRight, Briefcase } from "lucide-react";
+import { Building2, Dumbbell, Car, Scissors, ArrowRight, ArrowUpRight, Briefcase } from "lucide-react";
 
 /**
  * SelectedWork, real delivered client work.
@@ -28,16 +28,42 @@ interface Work {
 const WORK: Work[] = [
   {
     id: "nibir-motors",
-    category: "Operational software",
+    category: "Repeat client · 3 engagements",
     name: "Nibir Motors",
-    role: "Multi-branch expense automation, 7 dealerships, West Bengal",
+    role: "PayMint, LeadSync, and the corporate website · 7 dealerships, West Bengal",
     description:
-      "We rolled out PayMint across all seven Nibir Motors dealerships, branch-coded vouchers, role-based approvals, and Tally-ready exports that took them to fully audit-ready in 30 days.",
-    chips: ["PayMint rollout", "7 branches", "Audit-ready in 30 days"],
+      "It started with PayMint taking all seven dealerships fully audit-ready in 30 days. Nibir Motors then came back twice: first commissioning LeadSync, their dealership operating system, and then their corporate website. When a client keeps returning, the work speaks for itself.",
+    chips: ["PayMint rollout", "LeadSync platform", "Corporate website"],
     icon: Building2,
     accent: "#F97316",
     href: "/case-studies/nibir-motors",
     ctaLabel: "Read the case study",
+  },
+  {
+    id: "ss-auto-trader",
+    category: "Operational software",
+    name: "SS Auto Trader LLP",
+    role: "PayMint adoption · Authorized Bajaj Dealership",
+    description:
+      "The second automotive group to put its expense operations on PayMint: branch-coded vouchers, role-based approvals, and audit-grade logs, the same discipline that proved itself at Nibir Motors, now running a Bajaj dealership's books.",
+    chips: ["PayMint", "Bajaj dealership", "Audit-grade logs"],
+    icon: Car,
+    accent: "#38BDF8",
+    href: "/products/paymint",
+    ctaLabel: "Explore PayMint",
+  },
+  {
+    id: "burimar-abha",
+    category: "Repeat client · Industry-specific software",
+    name: "Burimar Abha Boutique",
+    role: "Vestiq Boutique OS and the boutique website",
+    description:
+      "We built their website first. Then we built Vestiq, a boutique management platform developed exclusively around how Burimar Abha actually operates: billing, WhatsApp-native customer flows, and leakage protection. Industry-specific software, not a generic app.",
+    chips: ["Vestiq Boutique OS", "Boutique website", "WhatsApp-native"],
+    icon: Scissors,
+    accent: "#A855F7",
+    href: "/products/vestiq",
+    ctaLabel: "Explore Vestiq",
   },
   {
     id: "ojas-fitness",
@@ -108,8 +134,9 @@ export function SelectedWork() {
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
             style={{ color: "#A1A1AA" }}
           >
-            A small, growing track record. Every project here is real, live, and
-            built to our cybersecurity-first standard.
+            Real businesses, real deployments, and clients who came back for
+            more. Every project here is verifiable and built to our
+            cybersecurity-first standard.
           </p>
         </div>
 

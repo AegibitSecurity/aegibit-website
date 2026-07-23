@@ -372,6 +372,26 @@ Voucher numbers in the export are immutable and idempotent, re-running the expor
           </div>
         </article>
 
+        {/* ── Repeat client: the relationship continued ────────────── */}
+        <section className="py-20 px-6 lg:px-12 border-t" style={{ borderColor: "rgba(255,255,255,0.06)", background: "#000" }}>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-[11px] uppercase font-medium mb-4" style={{ color: "#F97316", letterSpacing: "0.2em" }}>
+              What happened next
+            </p>
+            <h2 className="font-light mb-6" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: "#fff" }}>
+              Nibir Motors came back. Twice.
+            </h2>
+            <p className="text-base leading-relaxed mb-4" style={{ color: "#A1A1AA" }}>
+              After PayMint took all seven branches fully audit-ready, Nibir Motors commissioned a second
+              platform from AEGIBIT: LeadSync, their dealership operating system for the showroom floor.
+              Then they trusted us with their corporate website as well.
+            </p>
+            <p className="text-base leading-relaxed" style={{ color: "#A1A1AA" }}>
+              Three engagements, one client. That is what happens when software actually delivers.
+            </p>
+          </div>
+        </section>
+
         {/* ── CTA ─────────────────────────────────────────────────── */}
         <section
           className="py-24 md:py-32 px-6 lg:px-12 relative overflow-hidden"

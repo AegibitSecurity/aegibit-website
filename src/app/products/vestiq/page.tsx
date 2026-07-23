@@ -136,7 +136,8 @@ export default async function VestiqPage() {
               </span>
             </h1>
             <p className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-9" style={{ color: "#A1A1AA" }}>
-              Mobile-first billing and shop management for Indian boutiques and tailoring businesses. Branded bills,
+              Born inside Burimar Abha Boutique, its founding client, and built around how a real boutique actually
+              runs. Mobile-first billing and shop management for Indian boutiques and tailoring businesses. Branded bills,
               WhatsApp-native sharing, airtight payment tracking, and leakage protection. Runs as an Android app and in
               any browser. Powered by AEGIBIT.
             </p>

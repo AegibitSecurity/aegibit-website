@@ -67,14 +67,16 @@ export function PayMintCustomer() {
                   backgroundClip: 'text',
                 }}
               >
-                Nibir Motors Pvt. Ltd.
+                Nibir Motors & SS Auto Trader LLP
               </span>
             </h2>
             <p className="text-base md:text-lg leading-relaxed max-w-2xl mb-8" style={{ color: '#A1A1AA' }}>
               PayMint runs the day-to-day finance operations across seven Nibir Motors
               branches in West Bengal, Berhampore, Kalyani, Krishnagar, Chakdah, Plassey,
               Raghunathganj, and Kandi. Every fuel bill, every workshop payment, every
-              petty-cash voucher flows through a single audited pipeline.
+              petty-cash voucher flows through a single audited pipeline. And the model
+              is spreading: SS Auto Trader LLP, an Authorized Bajaj Dealership, has now
+              adopted PayMint as its second automotive group.
             </p>
 
             <div

@@ -117,8 +117,9 @@ export default function LeadSyncPage() {
             </h1>
             <p className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-9" style={{ color: "#A1A1AA" }}>
               A premium mobile operating system for automobile dealerships. Lead to delivery on one canvas, with an
-              interface your customers can see and reliability rules proven on a live dealership floor. Runs as an
-              Android app and in any browser. Powered by AEGIBIT.
+              interface your customers can see and reliability rules proven on a live dealership floor. Chosen by
+              Nibir Motors as their second AEGIBIT platform after PayMint proved itself across all seven branches.
+              Runs as an Android app and in any browser. Powered by AEGIBIT.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <a
