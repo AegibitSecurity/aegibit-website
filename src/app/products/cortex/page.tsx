@@ -25,6 +25,13 @@ import {
 const PAGE_PATH = "/products/cortex";
 const APP_URL = "https://cortex.aegibit.com";
 const REGISTER_URL = "https://cortex.aegibit.com/register";
+// Direct download of the signed Android APK. Hosted as a GitHub release on the
+// public aegibit-website repo under the moving `cortex-latest` tag (same pattern
+// as Aira/LeadSync). Re-uploading the asset to that tag with --clobber keeps this
+// URL permanent, so the site always serves the newest build with no code change.
+const ANDROID_APK_URL =
+  "https://github.com/AegibitSecurity/aegibit-website/releases/download/cortex-latest/cortex.apk";
+const ANDROID_VERSION = "1.1.0";
 
 export const metadata: Metadata = buildMetadata({
   title: "AEGIBIT Cortex: The AI CRM That Does the Data Entry For You",
@@ -158,6 +165,14 @@ export default function CortexPage() {
                 <Globe size={15} /> Open Cortex on your computer
               </a>
               <a
+                href={ANDROID_APK_URL}
+                download
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm"
+                style={{ border: "1px solid rgba(129,140,248,0.35)", color: "#fff", background: "rgba(129,140,248,0.10)" }}
+              >
+                <Smartphone size={15} /> Download Android app
+              </a>
+              <a
                 href="mailto:contact@aegibit.com?subject=Cortex demo for my team"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
@@ -166,7 +181,9 @@ export default function CortexPage() {
               </a>
             </div>
             <p className="mt-6 text-xs" style={{ color: "#52525B" }}>
-              Cortex runs in any modern browser, nothing to install, plus native Android and iOS apps for the field.
+              Cortex runs in any modern browser, nothing to install. Prefer the field app?{" "}
+              Download the Android APK (v{ANDROID_VERSION}) above, tap the file, and allow install
+              from your browser when Android asks. On iPhone? Email us, an iOS build is on the way.
             </p>
           </div>
         </section>
@@ -339,6 +356,14 @@ export default function CortexPage() {
                 style={{ border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
               >
                 <Globe size={15} /> Open Cortex
+              </a>
+              <a
+                href={ANDROID_APK_URL}
+                download
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm"
+                style={{ border: "1px solid rgba(129,140,248,0.35)", color: "#fff", background: "rgba(129,140,248,0.10)" }}
+              >
+                <Smartphone size={15} /> Download Android app
               </a>
             </div>
           </div>
