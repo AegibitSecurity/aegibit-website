@@ -8,6 +8,7 @@ import {
   Layers,
   ShoppingBag,
   Car,
+  BrainCircuit,
   ArrowRight,
   Zap,
 } from "lucide-react";
@@ -113,16 +114,16 @@ const PRODUCTS: Product[] = [
     ctaLabel: "Explore LeadSync",
   },
   {
-    id: "industry-os",
-    name: "Industry OS",
-    tagline: "The full operational suite.",
+    id: "cortex",
+    name: "AEGIBIT Cortex",
+    tagline: "The AI CRM that does the data entry for you.",
     description:
-      "DealerCRM. ServiceOps. InventoryIQ. AegiPay. The complete AEGIBIT platform for dealerships and multi-branch SMEs, shipping over 2026-27.",
-    status: "COMING 2026",
-    icon: Layers,
-    iconColor: "#10B981",
-    href: "/contact?topic=roadmap",
-    ctaLabel: "View Roadmap",
+      "A multi-tenant CRM, sales-automation, and quotation platform where the software does the admin. Zero-entry AI capture, a built-in data-quality engine, native CPQ and invoicing, transparent pricing, and a real offline mobile app. Runs in any browser.",
+    status: "LIVE",
+    icon: BrainCircuit,
+    iconColor: "#818CF8",
+    href: "/products/cortex",
+    ctaLabel: "Explore Cortex",
   },
 ];
 

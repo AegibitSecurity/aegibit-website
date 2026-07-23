@@ -9,6 +9,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 // Both now resolve to dedicated routes that ship in PR #102.
 const COLS = {
   Product: [
+    { label:"AEGIBIT Cortex", href:"/products/cortex"     },
     { label:"PayMint",    href:"/products/paymint"    },
     { label:"Vestiq",     href:"/products/vestiq"     },
     { label:"LeadSync",   href:"/products/leadsync"   },
