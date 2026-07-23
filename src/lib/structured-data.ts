@@ -7,6 +7,11 @@ export const organizationSchema = {
   "@type": "Organization",
   name: "AEGIBIT Global Consulting",
   alternateName: "AEGIBIT",
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "Udyam Registration Number (MSME, Government of India)",
+    value: "UDYAM-WB-10-0209203",
+  },
   url: BASE,
   logo: `${BASE}/icon.svg`,
   contactPoint: {

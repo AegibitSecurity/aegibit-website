@@ -5,6 +5,7 @@ import { HomeProducts }     from "@/components/sections/HomeProducts";
 import { WhatWeDo }         from "@/components/sections/WhatWeDo";
 import { ProofSection }     from "@/components/sections/ProofSection";
 import { SelectedWork }     from "@/components/sections/SelectedWork";
+import { GovRegistrations } from "@/components/sections/GovRegistrations";
 import { HomeCTA }          from "@/components/sections/HomeCTA";
 
 // Structured data, AEGIBIT-the-company is the primary entity. PayMint
@@ -33,7 +34,12 @@ const HOME_JSON_LD = {
       slogan: "Securing Tomorrow, Today",
       description:
         "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast, for dealerships, multi-branch SMEs, and mission-critical operations.",
-      foundingDate: "2026",
+      foundingDate: "2026-06-04",
+      identifier: {
+        "@type": "PropertyValue",
+        propertyID: "Udyam Registration Number (MSME, Government of India)",
+        value: "UDYAM-WB-10-0209203",
+      },
       sameAs: [
         "https://www.instagram.com/aegibitglobal",
         "https://x.com/aegibitsec",
@@ -154,8 +160,9 @@ export default function HomePage() {
         {/* 2 */ }<HomeProducts />
         {/* 3 */ }<WhatWeDo />
         {/* 4 */ }<ProofSection />
-        {/* 5 */ }<SelectedWork />
-        {/* 6 */ }<HomeCTA />
+        {/* 5 */ }<GovRegistrations />
+        {/* 6 */ }<SelectedWork />
+        {/* 7 */ }<HomeCTA />
       </main>
 
       <Footer />
