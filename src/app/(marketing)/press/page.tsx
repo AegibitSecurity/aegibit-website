@@ -77,7 +77,9 @@ const COLORS = [
 ] as const;
 
 const FACTS = [
-  { label: "Founded", value: "2026" },
+  { label: "Founded", value: "4 June 2026" },
+  { label: "MSME Udyam Reg. No.", value: "UDYAM-WB-10-0209203" },
+  { label: "Trademark", value: "AEGIBIT (application filed, 2026)" },
   { label: "Headquarters", value: "Kolkata, India" },
   { label: "Flagship product", value: "PayMint, multi-branch expense platform" },
   { label: "Open-source product", value: "MCP Shield, MIT v0.2.1" },

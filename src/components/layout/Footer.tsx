@@ -73,6 +73,7 @@ export function Footer() {
           <p className="text-[#3F3F46] text-xs">
             © {new Date().getFullYear()} AEGIBIT Global Consulting. All rights reserved.
           </p>
+          <p className="text-[#3F3F46] text-xs">MSME Registered · UDYAM-WB-10-0209203</p>
           <p className="text-[#3F3F46] text-xs">🇮🇳 Built in India</p>
         </div>
       </div>
