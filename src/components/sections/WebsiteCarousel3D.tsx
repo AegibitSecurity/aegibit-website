@@ -27,11 +27,13 @@ interface Site {
 }
 
 const SITES: Site[] = [
+  { name: "Nibir Motors", category: "Automotive dealership", url: "https://www.ssgroupindia.net/", img: "/work/nibir-motors-website.jpg", live: true },
+  { name: "Voyage Luxe", category: "Luxury travel", url: "https://voyage-luxe.vercel.app/", img: "/work/voyage-luxe.jpg" },
   { name: "Kris Cross Gym", category: "Fitness studio", url: "https://kris-cross-gym.vercel.app/", img: "/work/kris-cross-gym.jpg" },
   { name: "AURELIA", category: "Fine dining", url: "https://aurelia-ebon.vercel.app/", img: "/work/aurelia-ebon.jpg" },
   { name: "Vyom Estates", category: "Luxury real estate", url: "https://vyom-estates.vercel.app/", img: "/work/vyom-estates.jpg" },
   { name: "OJAS Fitness O.9", category: "Fitness studio", url: "https://ojasfitness09.com/", img: "/work/ojas-fitness.jpg", live: true },
-  { name: "Burimar Abha Boutique", category: "Boutique and fashion", url: "https://burimar-abha-boutique.vercel.app/", img: "/work/burimar-abha-boutique.jpg" },
+  { name: "Burimar Abha Boutique", category: "Boutique and fashion", url: "https://burimar-abha-boutique.vercel.app/", img: "/work/burimar-abha-boutique.jpg", live: true },
 ];
 
 const N = SITES.length;

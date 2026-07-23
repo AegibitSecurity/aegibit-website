@@ -56,7 +56,7 @@ const PRODUCTS: Product[] = [
     name: "PayMint",
     tagline: "Multi-branch expense automation.",
     description:
-      "Real-time vouchers, role-based approvals, audit-grade logs, Tally-ready exports. Live with Nibir Motors across 7 branches in West Bengal.",
+      "Real-time vouchers, role-based approvals, audit-grade logs, Tally-ready exports. Trusted by multiple automotive dealerships: Nibir Motors (7 branches) and SS Auto Trader LLP, an Authorized Bajaj Dealership.",
     status: "LIVE",
     icon: Wallet,
     iconColor: "#F97316",
@@ -93,7 +93,7 @@ const PRODUCTS: Product[] = [
     name: "Vestiq",
     tagline: "The Boutique OS.",
     description:
-      "Mobile-first billing and shop management for Indian boutiques and tailoring businesses. Branded PDF bills, WhatsApp-native sharing, payment tracking, exchanges, and leakage protection. Android and web. Powered by AEGIBIT.",
+      "Mobile-first billing and shop management for Indian boutiques and tailoring businesses, built with founding client Burimar Abha Boutique. Branded PDF bills, WhatsApp-native sharing, payment tracking, and leakage protection. Android and web. Powered by AEGIBIT.",
     status: "LIVE",
     icon: ShoppingBag,
     iconColor: "#A855F7",
@@ -105,7 +105,7 @@ const PRODUCTS: Product[] = [
     name: "LeadSync",
     tagline: "The Dealership OS.",
     description:
-      "A premium mobile operating system for automobile dealerships: lead to delivery on one canvas, command dashboard, field-proven reliability, silent updates. Live in the field. Android and web. Powered by AEGIBIT.",
+      "A premium mobile operating system for automobile dealerships: lead to delivery on one canvas, command dashboard, field-proven reliability, silent updates. Chosen by Nibir Motors as their second AEGIBIT platform. Android and web. Powered by AEGIBIT.",
     status: "LIVE",
     icon: Car,
     iconColor: "#38BDF8",

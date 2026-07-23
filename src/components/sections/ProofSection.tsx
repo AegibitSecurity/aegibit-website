@@ -43,7 +43,7 @@ export function ProofSection() {
           transition={{ duration: 0.5 }}
           className="mono-label text-[#F97316] text-center mb-3"
         >
-          Real numbers, one customer
+          Real numbers, real customers
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -58,6 +58,7 @@ export function ProofSection() {
           >
             Nibir Motors, 7 dealerships, West Bengal
           </a>
+          , now also live with SS Auto Trader LLP (Authorized Bajaj Dealership)
         </motion.p>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
