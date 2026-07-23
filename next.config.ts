@@ -48,6 +48,20 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**" },
     ],
   },
+  // Branded, shareable download links on our own domain that forward to the
+  // GitHub release asset. Kept as 302 (permanent:false) because the target
+  // asset is replaced in place on every new build — the short URL is stable,
+  // the file behind it changes.
+  async redirects() {
+    return [
+      {
+        source: "/download/cortex-android",
+        destination:
+          "https://github.com/AegibitSecurity/aegibit-website/releases/download/cortex-latest/cortex.apk",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {

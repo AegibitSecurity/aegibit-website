@@ -25,12 +25,10 @@ import {
 const PAGE_PATH = "/products/cortex";
 const APP_URL = "https://cortex.aegibit.com";
 const REGISTER_URL = "https://cortex.aegibit.com/register";
-// Direct download of the signed Android APK. Hosted as a GitHub release on the
-// public aegibit-website repo under the moving `cortex-latest` tag (same pattern
-// as Aira/LeadSync). Re-uploading the asset to that tag with --clobber keeps this
-// URL permanent, so the site always serves the newest build with no code change.
-const ANDROID_APK_URL =
-  "https://github.com/AegibitSecurity/aegibit-website/releases/download/cortex-latest/cortex.apk";
+// Branded download link on our own domain. It 302-redirects (see next.config.ts)
+// to the GitHub release asset on the fixed `cortex-latest` tag, so the shareable
+// URL stays clean and stable while the file behind it is replaced each build.
+const ANDROID_APK_URL = "/download/cortex-android";
 const ANDROID_VERSION = "1.1.0";
 
 export const metadata: Metadata = buildMetadata({
