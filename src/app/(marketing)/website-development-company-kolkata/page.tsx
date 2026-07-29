@@ -23,12 +23,12 @@ import {
  * positioning is the differentiator no generic Kolkata agency can
  * credibly claim, and we back it with MCP Shield + PayMint.
  *
- * NAP must stay consistent with the GBP: phone +91 90888 90047,
+ * NAP must stay consistent with the GBP: phone +91 86971 81731,
  * name "AEGIBIT Global Consulting", service area Kolkata.
  */
 
-const PHONE_DISPLAY = "+91 90888 90047";
-const PHONE_E164 = "+919088890047";
+const PHONE_DISPLAY = "+91 86971 81731";
+const PHONE_E164 = "+918697181731";
 const PAGE_PATH = "/website-development-company-kolkata";
 
 export const metadata: Metadata = buildMetadata({
