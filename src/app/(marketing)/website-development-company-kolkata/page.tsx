@@ -6,7 +6,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 import { buildMetadata, buildBreadcrumbJsonLd, SITE_URL } from "@/lib/seo";
 import {
   Globe, Code2, Smartphone, Boxes, ShieldCheck, Sparkles,
-  ArrowRight, MapPin, Phone, Check,
+  ArrowRight, MapPin, Mail, Check,
 } from "lucide-react";
 
 /**
@@ -23,12 +23,11 @@ import {
  * positioning is the differentiator no generic Kolkata agency can
  * credibly claim, and we back it with MCP Shield + PayMint.
  *
- * NAP must stay consistent with the GBP: phone +91 86971 81731,
- * name "AEGIBIT Global Consulting", service area Kolkata.
+ * Name and service area stay consistent with the GBP: "AEGIBIT Global
+ * Consulting", Kolkata. Phone is intentionally NOT shown anywhere on the
+ * website (standing rule: never expose the business number on the site).
  */
 
-const PHONE_DISPLAY = "+91 86971 81731";
-const PHONE_E164 = "+918697181731";
 const PAGE_PATH = "/website-development-company-kolkata";
 
 export const metadata: Metadata = buildMetadata({
@@ -81,7 +80,6 @@ function localBusinessJsonLd() {
     image: `${SITE_URL}/brand/AEGIBIT%20LOGO.png`,
     logo: `${SITE_URL}/icon.svg`,
     url: `${SITE_URL}${PAGE_PATH}`,
-    telephone: PHONE_DISPLAY,
     email: "contact@aegibit.com",
     priceRange: "$$",
     description:
@@ -171,11 +169,11 @@ export default function KolkataPage() {
                 Talk to a founder <ArrowRight size={16} />
               </TrackedLink>
               <a
-                href={`tel:${PHONE_E164}`}
+                href="mailto:contact@aegibit.com?subject=Website%20or%20software%20project"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-colors"
                 style={{ border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
               >
-                <Phone size={15} /> {PHONE_DISPLAY}
+                <Mail size={15} /> Email us
               </a>
             </div>
           </div>
@@ -319,11 +317,11 @@ export default function KolkataPage() {
                 Talk to a founder <ArrowRight size={16} />
               </TrackedLink>
               <a
-                href={`tel:${PHONE_E164}`}
+                href="mailto:contact@aegibit.com?subject=Website%20or%20software%20project"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
               >
-                <Phone size={15} /> {PHONE_DISPLAY}
+                <Mail size={15} /> Email us
               </a>
             </div>
           </div>
