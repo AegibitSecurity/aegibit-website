@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildGroqPayload, parseAiraOutput, type ChatMessage } from "./aira-bot";
+import { buildGroqPayload, filterSources, parseAiraOutput, type ChatMessage } from "./aira-bot";
 
 /**
  * Pure-function tests for the Aira chatbot. We don't test the Groq
@@ -106,5 +106,41 @@ describe("buildGroqPayload", () => {
     const payload = buildGroqPayload(baseInput) as { model?: string };
     expect(typeof payload.model).toBe("string");
     expect(payload.model).toBeTruthy();
+  });
+});
+
+describe("filterSources (cite what the answer uses, not what retrieval read)", () => {
+  const SRC = [
+    { url: "/", title: "AEGIBIT" },
+    { url: "/products/cortex", title: "AEGIBIT Cortex" },
+    { url: "/products/vestiq", title: "Vestiq" },
+  ];
+
+  it("keeps only sources whose URL the reply mentions", () => {
+    const out = filterSources("Details are available at /products/cortex.", SRC);
+    expect(out.map((s) => s.url)).toEqual(["/products/cortex"]);
+  });
+
+  it("matches by product slug when the URL is not written out", () => {
+    const out = filterSources("I recommend AEGIBIT Cortex for this.", SRC);
+    expect(out.map((s) => s.url)).toEqual(["/products/cortex"]);
+  });
+
+  it("keeps multiple sources when the answer genuinely uses both", () => {
+    const out = filterSources(
+      "Cortex handles your CRM; for boutique billing, Vestiq fits.",
+      SRC,
+    );
+    expect(out.map((s) => s.url)).toEqual(["/products/cortex", "/products/vestiq"]);
+  });
+
+  it("falls back to the top non-homepage hit when nothing is cited", () => {
+    const out = filterSources("Happy to help with that.", SRC);
+    expect(out.map((s) => s.url)).toEqual(["/products/cortex"]);
+  });
+
+  it("never emits the bare homepage chip", () => {
+    const out = filterSources("See our homepage for more.", [{ url: "/", title: "AEGIBIT" }]);
+    expect(out).toEqual([]);
   });
 });

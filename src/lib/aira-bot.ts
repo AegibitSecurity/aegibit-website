@@ -183,6 +183,33 @@ export function retrievalQuery(input: AiraTurnInput): string {
 }
 
 /**
+ * Keep only the sources the ANSWER actually uses, not everything
+ * retrieval read while thinking. Retrieval casts a wide net (that is
+ * its job); citing the whole net confused visitors (a Cortex answer
+ * once carried a Vestiq chip because the visitor's message mentioned
+ * WhatsApp). Rule: a source is cited when the reply mentions its URL
+ * or its product slug. If nothing matches (model answered without
+ * naming pages), fall back to the single top retrieval hit, except
+ * the bare homepage which renders as a meaningless "/" chip.
+ * Pure function, exported for testing.
+ */
+export function filterSources(
+  replyText: string,
+  sources: RetrievedSource[],
+): RetrievedSource[] {
+  const t = replyText.toLowerCase();
+  const cited = sources.filter((s) => {
+    if (s.url !== "/" && t.includes(s.url.toLowerCase())) return true;
+    const slug = s.url.split("/").filter(Boolean).pop() ?? "";
+    if (!slug) return false;
+    return t.includes(slug.toLowerCase()) || t.includes(slug.replace(/-/g, " ").toLowerCase());
+  });
+  if (cited.length > 0) return cited;
+  const fallback = sources.find((s) => s.url !== "/");
+  return fallback ? [fallback] : [];
+}
+
+/**
  * Send one turn to Groq with retrieved knowledge. No-throw, returns
  * AiraReply with ok:false on any failure (missing key, network error,
  * rate-limit, server error). The chat route turns ok:false into a
@@ -225,7 +252,7 @@ export async function airaChatTurn(input: AiraTurnInput): Promise<AiraReply> {
     }
 
     const { text, captureLead } = parseAiraOutput(raw);
-    return { ok: true, text, captureLead, sources: kb.sources.slice(0, 3) };
+    return { ok: true, text, captureLead, sources: filterSources(text, kb.sources).slice(0, 3) };
   } catch (err) {
     const m = err instanceof Error ? err.message : String(err);
     console.error("[aira-bot] network error:", m);
