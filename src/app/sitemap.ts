@@ -49,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/", 1.0, "weekly"),
 
     // Products (flagship landing pages)
+    entry("/products/cortex", 0.9, "weekly"),
     entry("/products/paymint", 0.95, "weekly"),
     entry("/products/paymint/demo", 0.85, "monthly"),
     entry("/products/mcp-shield", 0.9, "weekly"),

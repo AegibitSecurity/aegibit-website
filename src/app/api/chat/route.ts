@@ -86,5 +86,8 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({
     text: reply.text,
     captureLead: reply.captureLead,
+    // Pages the answer was grounded in; the widget renders these as
+    // "sources" links so visitors can verify and click deeper.
+    sources: reply.sources ?? [],
   });
 }

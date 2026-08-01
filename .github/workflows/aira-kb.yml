@@ -1,0 +1,50 @@
+# Aira knowledge-base auto-refresh.
+#
+# The "continuous learning" half of Aira's RAG architecture: re-crawls
+# the live site and commits the refreshed index ONLY when page content
+# actually changed. New product page ships -> next run -> Aira knows it.
+# No prompts edited, no code touched.
+#
+# Loop safety: the commit only touches src/data/aira-kb.json; when a
+# re-run finds no content change, git diff is clean and nothing is
+# committed, so the cycle terminates naturally.
+name: aira-kb-refresh
+
+on:
+  schedule:
+    # Mondays 02:30 UTC (08:00 IST), after the weekend content drops.
+    - cron: "30 2 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Rebuild Aira knowledge base from the live site
+        run: node automation/scripts/build-aira-kb.mjs
+
+      - name: Guard, index must stay em-dash clean
+        run: node automation/scripts/check-no-emdash.mjs
+
+      - name: Commit when knowledge changed
+        run: |
+          if git diff --quiet -- src/data/aira-kb.json; then
+            echo "No content changes, Aira's knowledge is current."
+            exit 0
+          fi
+          git config user.name "aira-kb-bot"
+          git config user.email "contact@aegibit.com"
+          git add src/data/aira-kb.json
+          git commit -m "chore(aira): refresh knowledge base from live site"
+          git push
