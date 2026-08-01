@@ -53,15 +53,43 @@ const GREETING: UiMessage = {
 };
 
 /**
- * Consultative conversation starters. Business pains, not product
- * names: the visitor picks the problem, Aira demonstrates the
- * diagnose-and-recommend behavior on the first turn.
+ * The empty-state sales funnel. One option per flagship offering, each
+ * leading with the product name (brand positioning) plus its sharpest
+ * outcome hook. Tapping one fires a high-intent question so Aira's
+ * first answer is a targeted pitch for that product, top of funnel to
+ * qualified conversation in one tap.
  */
-const SUGGESTIONS = [
-  "We lose track of branch expenses",
-  "My sales team runs on WhatsApp and Excel",
-  "Employees fake their attendance",
-  "We need a website that converts",
+const FUNNEL = [
+  {
+    tag: "Cortex",
+    hook: "The AI CRM that does the data entry for you",
+    send: "My team wastes hours on CRM data entry and follow-ups. How does AEGIBIT Cortex fix that?",
+  },
+  {
+    tag: "PayMint",
+    hook: "Every branch expense, audit-ready",
+    send: "We lose track of expenses across our branches. How does PayMint make them audit-ready?",
+  },
+  {
+    tag: "LeadSync",
+    hook: "Never lose a showroom lead again",
+    send: "Our dealership loses leads between enquiry and delivery. How does LeadSync stop that?",
+  },
+  {
+    tag: "Vestiq",
+    hook: "Boutique billing and customer dues, sorted",
+    send: "I run a boutique and billing plus customer dues are a mess. What does Vestiq do?",
+  },
+  {
+    tag: "Web Studio",
+    hook: "A premium website that converts",
+    send: "We need a premium website that actually converts visitors. What does AEGIBIT offer?",
+  },
+  {
+    tag: "Pricing",
+    hook: "Straight numbers, or book a live demo",
+    send: "Give me a quick overview of AEGIBIT pricing and how to book a demo.",
+  },
 ] as const;
 
 function newId() {
@@ -324,14 +352,25 @@ export function ChatWidget() {
                 </div>
               ))}
               {messages.length === 1 && mode === "chat" && !busy && (
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {SUGGESTIONS.map((sug) => (
+                <div className="flex flex-col gap-2 pt-1">
+                  <p className="text-[11px] uppercase tracking-[0.14em] text-[#52525B] px-1">
+                    What can we solve for you?
+                  </p>
+                  {FUNNEL.map((f) => (
                     <button
-                      key={sug}
-                      onClick={() => void sendChatTurn(sug)}
-                      className="px-3 py-1.5 rounded-full text-xs text-[#A1A1AA] border border-[rgba(255,255,255,0.12)] hover:border-[rgba(249,115,22,0.5)] hover:text-white transition-colors text-left"
+                      key={f.tag}
+                      onClick={() => void sendChatTurn(f.send)}
+                      className="group flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] hover:border-[rgba(249,115,22,0.45)] hover:bg-[rgba(249,115,22,0.06)] transition-colors"
                     >
-                      {sug}
+                      <span className="shrink-0 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-[0.08em] text-[#F97316] border border-[rgba(249,115,22,0.35)] bg-[rgba(249,115,22,0.08)]">
+                        {f.tag}
+                      </span>
+                      <span className="flex-1 text-xs text-[#D4D4D8] group-hover:text-white transition-colors">
+                        {f.hook}
+                      </span>
+                      <span className="text-[#52525B] group-hover:text-[#F97316] transition-colors text-sm">
+                        &rsaquo;
+                      </span>
                     </button>
                   ))}
                 </div>
