@@ -85,9 +85,9 @@ describe("buildGroqPayload", () => {
     expect(payload.messages[3].content).toBe("Tell me about pricing.");
   });
 
-  it("includes a stop sequence for CAPTURE_LEAD so we don't waste tokens", () => {
+  it("does NOT use CAPTURE_LEAD as a stop sequence (stop sequences are excluded from output, which silently broke lead capture)", () => {
     const payload = buildGroqPayload(baseInput) as { stop?: string[] };
-    expect(payload.stop).toContain("[CAPTURE_LEAD]");
+    expect(payload.stop ?? []).not.toContain("[CAPTURE_LEAD]");
   });
 
   it("caps max_tokens (Aira is a guide, not a chatty bot)", () => {

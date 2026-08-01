@@ -160,8 +160,12 @@ export function buildGroqPayload(input: AiraTurnInput): unknown {
     max_tokens: 450,
     // Low enough to stay grounded, warm enough not to sound canned.
     temperature: 0.35,
-    // Stop on the capture token so we don't waste tokens after it.
-    stop: [CAPTURE_TOKEN],
+    // NOTE deliberately NO `stop: [CAPTURE_TOKEN]` here. OpenAI-style
+    // APIs EXCLUDE the stop sequence from the returned text, so using
+    // the capture token as a stop meant parseAiraOutput never saw it
+    // and captureLead never fired (latent since v1, caught by the v2
+    // live smoke test). The token is ~5 tokens of cost; we let the
+    // model emit it and strip it in parseAiraOutput instead.
   };
 }
 
