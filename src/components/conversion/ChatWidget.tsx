@@ -41,14 +41,28 @@ type Mode = "chat" | "capture" | "captured";
 interface UiMessage extends ChatMessage {
   /** Stable key across re-renders for AnimatePresence. */
   id: string;
+  /** Pages the reply was grounded in (RAG citations), rendered as links. */
+  sources?: { url: string; title: string }[];
 }
 
 const GREETING: UiMessage = {
   id: "g0",
   role: "model",
   text:
-    "I'm Aira. AEGIBIT's product guide. Ask me about PayMint, AIRA, VoiceCore, or pricing, or tell me what you're trying to fix and I'll point you to the right thing.",
+    "I'm Aira, AEGIBIT's AI consultant. Tell me what's slowing your business down, expenses, sales, attendance, billing, anything, and I'll point you to the right solution. Or ask me about any AEGIBIT product.",
 };
+
+/**
+ * Consultative conversation starters. Business pains, not product
+ * names: the visitor picks the problem, Aira demonstrates the
+ * diagnose-and-recommend behavior on the first turn.
+ */
+const SUGGESTIONS = [
+  "We lose track of branch expenses",
+  "My sales team runs on WhatsApp and Excel",
+  "Employees fake their attendance",
+  "We need a website that converts",
+] as const;
 
 function newId() {
   return Math.random().toString(36).slice(2, 10);
@@ -81,8 +95,12 @@ export function ChatWidget() {
     }
   }
 
-  function appendMessage(role: ChatMessage["role"], text: string) {
-    setMessages((m) => [...m, { id: newId(), role, text }]);
+  function appendMessage(
+    role: ChatMessage["role"],
+    text: string,
+    sources?: { url: string; title: string }[],
+  ) {
+    setMessages((m) => [...m, { id: newId(), role, text, sources }]);
   }
 
   async function sendChatTurn(userText: string) {
@@ -109,10 +127,14 @@ export function ChatWidget() {
       }
       const data = await res.json();
       const replyText = (data.text as string | undefined) ?? "";
+      const sources = Array.isArray(data.sources)
+        ? (data.sources as { url: string; title: string }[]).slice(0, 3)
+        : undefined;
       appendMessage(
         "model",
         replyText ||
           "Let me put you in touch with the AEGIBIT team directly. What's the best work email to reach you?",
+        sources,
       );
       if (data.captureLead) setMode("capture");
     } catch {
@@ -285,9 +307,35 @@ export function ChatWidget() {
                     style={{ whiteSpace: "pre-wrap" }}
                   >
                     {m.text}
+                    {m.sources && m.sources.length > 0 && (
+                      <span className="block mt-2 pt-2 border-t border-[rgba(255,255,255,0.08)]">
+                        {m.sources.map((s) => (
+                          <a
+                            key={s.url}
+                            href={s.url}
+                            className="inline-block mr-2 mb-1 px-2 py-0.5 rounded-full text-[11px] text-[#FDBA74] border border-[rgba(249,115,22,0.3)] hover:bg-[rgba(249,115,22,0.12)] transition-colors"
+                          >
+                            {s.url}
+                          </a>
+                        ))}
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
+              {messages.length === 1 && mode === "chat" && !busy && (
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {SUGGESTIONS.map((sug) => (
+                    <button
+                      key={sug}
+                      onClick={() => void sendChatTurn(sug)}
+                      className="px-3 py-1.5 rounded-full text-xs text-[#A1A1AA] border border-[rgba(255,255,255,0.12)] hover:border-[rgba(249,115,22,0.5)] hover:text-white transition-colors text-left"
+                    >
+                      {sug}
+                    </button>
+                  ))}
+                </div>
+              )}
               {busy && (
                 <div className="flex justify-start">
                   <div className="bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2">
