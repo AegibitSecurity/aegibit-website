@@ -50,6 +50,15 @@ export const leadLimiter: LimiterConfig = {
   durationSec: 60,
 };
 
+// Live-presence heartbeat: legit cadence is ~2/min per open tab. 8/min
+// tolerates multi-tab visitors while keeping one machine from inflating
+// the live counter meaningfully.
+export const presenceLimiter: LimiterConfig = {
+  name: "presence",
+  points: 8,
+  durationSec: 60,
+};
+
 // Chat is chattier than form submits but every message is an LLM
 // roundtrip. 20/min keeps a single visitor from burning the Gemini
 // free tier (1500 req/day = ~1 sustained req/min across all visitors).

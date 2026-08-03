@@ -7,7 +7,26 @@ interface Daily { today: number; yesterday: number; last7: number; last30: numbe
 export default function VisitorsPage() {
   const [visitors, setVisitors] = useState<Visitor[]>([]);
   const [daily, setDaily] = useState<Daily | null>(null);
+  const [liveNow, setLiveNow] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Real-time "on the site right now" tile: poll every 8s while this
+  // dashboard tab is visible. Backed by the presence heartbeat every
+  // visitor's browser sends (see useVisitorTracking effect 0).
+  useEffect(() => {
+    let stop = false;
+    const poll = () => {
+      if (stop || document.visibilityState !== "visible") return;
+      fetch("/api/admin/visitors-now", { credentials: "include" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => { if (!stop && d) setLiveNow(typeof d.now === "number" ? d.now : null); })
+        .catch(() => {});
+    };
+    poll();
+    const t = setInterval(poll, 8000);
+    document.addEventListener("visibilitychange", poll);
+    return () => { stop = true; clearInterval(t); document.removeEventListener("visibilitychange", poll); };
+  }, []);
 
   useEffect(() => {
     fetch("/api/analytics", { credentials: "include" })
@@ -34,6 +53,25 @@ export default function VisitorsPage() {
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold text-[#F9FAFB] mb-6">Visitors</h1>
+
+      {/* Live right now (real-time presence) */}
+      <div className="rounded-xl border border-[rgba(16,185,129,0.35)] bg-[#06120d] p-5 mb-4 flex items-center justify-between">
+        <div>
+          <p className="text-[11px] uppercase tracking-wider text-[#10B981] mb-1 flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B981]" />
+            </span>
+            Live · on the site right now
+          </p>
+          <p className="text-4xl font-bold text-[#F9FAFB] tabular-nums">
+            {liveNow === null ? "…" : liveNow.toLocaleString("en-IN")}
+          </p>
+        </div>
+        <p className="text-[11px] text-[#374151] max-w-[220px] text-right">
+          Distinct visitors whose browser pinged in the last 75 seconds. Updates every 8s.
+        </p>
+      </div>
 
       {/* Daily summary (IST) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">

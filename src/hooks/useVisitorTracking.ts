@@ -37,6 +37,34 @@ export function useVisitorTracking() {
   const visitorId = useVisitorStore((s) => s.visitorId);
   const initialized = useRef(false);
 
+  // ── 0. Live-presence heartbeat ────────────────────────────────────
+  // Tells /api/presence "this visitor is on the site right now" every
+  // 30s while the tab is visible, so the admin dashboard can show a
+  // real-time count. Pauses when the tab is hidden; sends one final
+  // ping on return. Fire-and-forget: presence must never affect UX.
+  useEffect(() => {
+    if (!visitorId) return;
+    let timer: ReturnType<typeof setInterval> | null = null;
+
+    const ping = () => {
+      if (document.visibilityState !== "visible") return;
+      void fetch("/api/presence", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ vid: visitorId }),
+        keepalive: true,
+      }).catch(() => {});
+    };
+
+    ping();
+    timer = setInterval(ping, 30_000);
+    document.addEventListener("visibilitychange", ping);
+    return () => {
+      if (timer) clearInterval(timer);
+      document.removeEventListener("visibilitychange", ping);
+    };
+  }, [visitorId]);
+
   // ── 1. One-shot init ──────────────────────────────────────────────
   useEffect(() => {
     if (initialized.current) return;
