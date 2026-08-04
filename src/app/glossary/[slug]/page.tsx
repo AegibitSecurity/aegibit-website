@@ -3,67 +3,57 @@ import { Footer } from "@/components/layout/Footer";
 import { SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { GLOSSARY, getTerm } from "@/content/glossary";
 
-const TERMS: Record<string, { term: string; definition: string; related: string[] }> = {
-  "zero-trust": {
-    term: "Zero Trust",
-    definition: "A security model that requires strict identity verification for every person and device trying to access resources, regardless of whether they are inside or outside the network perimeter. Zero Trust operates on the principle of 'never trust, always verify.'",
-    related: ["Voice Biometrics", "RBAC", "Audit Logs"],
-  },
-  "voice-biometrics": {
-    term: "Voice Biometrics",
-    definition: "The use of an individual's unique vocal characteristics, including pitch, tone, cadence, and pronunciation patterns, to verify their identity. Voice biometrics provides continuous authentication across an entire spoken interaction, unlike one-time PIN entry.",
-    related: ["Zero Trust", "Multi-Factor Authentication", "Speaker Verification"],
-  },
-  "rbac": {
-    term: "Role-Based Access Control (RBAC)",
-    definition: "A method of regulating access to systems based on the roles of individual users within an organization. In RBAC, permissions are assigned to roles rather than individuals, and users are assigned to roles based on their responsibilities.",
-    related: ["Zero Trust", "Least Privilege", "Access Control List"],
-  },
-  "audit-log": {
-    term: "Audit Log",
-    definition: "A chronological record of system activities that provides documentary evidence of the sequence of activities that have affected a specific operation or event. Immutable audit logs cannot be altered or deleted, making them critical for compliance and forensic investigation.",
-    related: ["Compliance", "SIEM", "Forensics"],
-  },
-  "anomaly-detection": {
-    term: "Anomaly Detection",
-    definition: "The identification of patterns in data that do not conform to expected behavior. In security contexts, anomaly detection uses machine learning to identify unusual access patterns, command sequences, or behavioral changes that may indicate a threat.",
-    related: ["SIEM", "Behavioral AI", "Insider Threat"],
-  },
-};
+/**
+ * /glossary/[slug], reference-grade term pages (Sprint 1,
+ * exp-glossary-geo). Rebuilt from one-paragraph stubs into the
+ * 8-section format the founder set as the bar: definition, why it
+ * matters, how it works, real example, common mistakes, best
+ * practices, related concepts (as real links, fixing the audit
+ * finding), and FAQs with FAQPage schema. DefinedTerm + FAQPage +
+ * BreadcrumbList JSON-LD make each page AI-citable (GEO).
+ */
 
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const t = TERMS[slug];
+  const t = getTerm(slug);
   if (!t) return { title: "Not Found" };
+  const description = t.short.slice(0, 158);
   return {
-    title: `${t.term} | AEGIBIT Security Glossary`,
-    description: t.definition.slice(0, 160),
+    title: `What is ${t.term}?`,
+    description,
     alternates: { canonical: `/glossary/${slug}` },
     openGraph: {
-      title: `${t.term} | AEGIBIT Security Glossary`,
-      description: t.definition.slice(0, 160),
+      title: `${t.term} | AEGIBIT Glossary`,
+      description,
       type: "article",
       url: `${SITE_URL}/glossary/${slug}`,
       siteName: "AEGIBIT",
     },
-    twitter: {
-      card: "summary_large_image",
-      title: t.term,
-      description: t.definition.slice(0, 160),
-    },
+    twitter: { card: "summary_large_image", title: t.term, description },
   };
 }
 
 export function generateStaticParams() {
-  return Object.keys(TERMS).map((slug) => ({ slug }));
+  return GLOSSARY.map((t) => ({ slug: t.slug }));
 }
 
-export default async function GlossaryTerm({ params }: Props) {
+function Section({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <section className="mb-10">
+      <h2 className="text-xl font-semibold text-white mb-3">{label}</h2>
+      {children}
+    </section>
+  );
+}
+
+export default async function GlossaryTermPage({ params }: Props) {
   const { slug } = await params;
-  const t = TERMS[slug];
+  const t = getTerm(slug);
   if (!t) notFound();
 
   const pageUrl = `${SITE_URL}/glossary/${slug}`;
@@ -74,13 +64,21 @@ export default async function GlossaryTerm({ params }: Props) {
         "@type": "DefinedTerm",
         "@id": `${pageUrl}#term`,
         name: t.term,
-        description: t.definition,
+        description: t.short,
         url: pageUrl,
         inDefinedTermSet: {
           "@type": "DefinedTermSet",
-          name: "AEGIBIT Security Glossary",
+          name: "AEGIBIT Glossary of Security, AI, and Business Software",
           url: `${SITE_URL}/glossary`,
         },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: t.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
       },
       {
         "@type": "BreadcrumbList",
@@ -97,20 +95,89 @@ export default async function GlossaryTerm({ params }: Props) {
     <>
       <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <main className="pt-32 pb-16 px-6 lg:px-10 max-w-3xl mx-auto">
-        <span className="mono-label text-[#F97316] block mb-4">Glossary</span>
-        <h1 className="text-4xl font-bold text-white tracking-tight mb-6">{t.term}</h1>
-        <p className="text-[#A1A1AA] text-lg leading-relaxed mb-10">{t.definition}</p>
-        {t.related.length > 0 && (
-          <div>
-            <p className="mono-label text-[#52525B] mb-3">Related Terms</p>
-            <div className="flex flex-wrap gap-2">
-              {t.related.map((r) => (
-                <span key={r} className="text-sm text-[#A1A1AA] border border-[rgba(255,255,255,0.08)] rounded px-3 py-1">{r}</span>
-              ))}
-            </div>
+      <main id="main-content" className="pt-32 pb-20 px-6 lg:px-10 max-w-3xl mx-auto">
+        <Link href="/glossary" className="mono-label text-[#F97316] block mb-4 hover:underline">
+          ← AEGIBIT Glossary
+        </Link>
+        <h1 className="text-4xl font-bold text-white tracking-tight mb-5">{t.term}</h1>
+        <p className="text-[#D4D4D8] text-lg leading-relaxed mb-10">{t.short}</p>
+
+        <Section label="Why it matters">
+          <p className="text-[#A1A1AA] leading-relaxed">{t.why}</p>
+        </Section>
+
+        <Section label="How it works">
+          <p className="text-[#A1A1AA] leading-relaxed">{t.how}</p>
+        </Section>
+
+        <Section label="A real-world example">
+          <p className="text-[#A1A1AA] leading-relaxed">{t.example}</p>
+        </Section>
+
+        <Section label="Common mistakes">
+          <ul className="space-y-2">
+            {t.mistakes.map((m) => (
+              <li key={m} className="text-[#A1A1AA] leading-relaxed flex gap-2">
+                <span className="text-[#F87171] shrink-0">✗</span> {m}
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section label="Best practices">
+          <ul className="space-y-2">
+            {t.bestPractices.map((b) => (
+              <li key={b} className="text-[#A1A1AA] leading-relaxed flex gap-2">
+                <span className="text-[#10B981] shrink-0">✓</span> {b}
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section label="Frequently asked questions">
+          <div className="space-y-5">
+            {t.faqs.map((f) => (
+              <div key={f.q}>
+                <h3 className="text-white font-medium mb-1">{f.q}</h3>
+                <p className="text-[#A1A1AA] leading-relaxed">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {t.aegibit && (
+          <div
+            className="rounded-xl p-6 mb-10"
+            style={{
+              background: "linear-gradient(135deg, rgba(249,115,22,0.10), transparent)",
+              border: "1px solid rgba(249,115,22,0.25)",
+            }}
+          >
+            <p className="text-[#D4D4D8] leading-relaxed mb-3">{t.aegibit.text}</p>
+            <Link href={t.aegibit.href} className="text-sm font-semibold text-[#F97316] hover:underline">
+              {t.aegibit.label} →
+            </Link>
           </div>
         )}
+
+        <div>
+          <p className="mono-label text-[#52525B] mb-3">Related concepts</p>
+          <div className="flex flex-wrap gap-2">
+            {t.related.map((slugRef) => {
+              const rel = getTerm(slugRef);
+              if (!rel) return null;
+              return (
+                <Link
+                  key={slugRef}
+                  href={`/glossary/${slugRef}`}
+                  className="text-sm text-[#A1A1AA] border border-[rgba(255,255,255,0.08)] rounded px-3 py-1 hover:border-[rgba(249,115,22,0.5)] hover:text-white transition-colors"
+                >
+                  {rel.term}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </main>
       <Footer />
     </>

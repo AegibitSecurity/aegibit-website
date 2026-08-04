@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { GLOSSARY } from "@/content/glossary";
 import { SITE_URL } from "@/lib/seo";
 import { COMPARISONS } from "@/content/comparisons";
 import { SOLUTIONS } from "@/content/solutions";
@@ -50,6 +51,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Products (flagship landing pages)
     entry("/products/cortex", 0.9, "weekly"),
+
+    // Reference library (Sprint 1, exp-glossary-geo)
+    entry("/glossary", 0.7, "weekly"),
+    ...GLOSSARY.map((t) => entry(`/glossary/${t.slug}`, 0.6, "monthly")),
     entry("/products/paymint", 0.95, "weekly"),
     entry("/products/paymint/demo", 0.85, "monthly"),
     entry("/products/mcp-shield", 0.9, "weekly"),
