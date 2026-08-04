@@ -1,0 +1,13 @@
+{
+ "observations": [
+  {
+   "at": "2026-08-04T15:17:21.505Z",
+   "taskId": "coverage-glossary",
+   "taskType": "coverage-gap",
+   "worker": "geo",
+   "decision": "approve",
+   "latencyDays": 0,
+   "note": "Approved as the first Business Experiment: correctly framed with a comparative hypothesis and measurable outcomes"
+  }
+ ]
+}

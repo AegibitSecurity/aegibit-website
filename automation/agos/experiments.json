@@ -3,7 +3,7 @@
  "experiments": [
   {
    "id": "exp-glossary-geo",
-   "hypothesis": "Reference-grade glossary pages improve GEO authority and organic discovery more than generic blog posts.",
+   "hypothesis": "For AEGIBIT, glossary pages increase authority and measurable business outcomes more effectively than our alternative uses of the same production time (general blog articles).",
    "linkedPolicy": "pol-glossary-over-generic",
    "metrics": [
     "GSC impressions on glossary URLs",
@@ -12,10 +12,12 @@
     "qualified leads citing organic"
    ],
    "durationDays": 30,
-   "status": "awaiting-start",
+   "status": "running",
    "startCondition": "Founder approves coverage-glossary; measurement window opens at first page indexation.",
    "decision": null,
-   "decidedOn": null
+   "decidedOn": null,
+   "startedOn": "2026-08-04",
+   "comparator": "general blog articles produced by the existing daily content pipeline over the same window"
   }
  ]
 }

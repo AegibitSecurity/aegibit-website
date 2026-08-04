@@ -7,10 +7,11 @@
    "priority": 85,
    "confidence": 40,
    "etaMinutes": 90,
-   "status": "awaiting-approval",
+   "status": "approved",
    "firstSeen": "2026-08-04T14:34:06.625Z",
-   "updatedAt": "2026-08-04T14:34:06.625Z",
-   "timesProposed": 1
+   "updatedAt": "2026-08-04T15:17:21.507Z",
+   "timesProposed": 1,
+   "note": "founder approved"
   },
   {
    "id": "coverage-alternatives",
