@@ -1,0 +1,36 @@
+{
+ "assets": [
+  {
+   "assetId": "GLOSSARY-2026-08-04-001",
+   "assetKey": "glossary-cluster-v1",
+   "type": "glossary",
+   "title": "AEGIBIT Glossary, 13-term reference cluster",
+   "paths": [
+    "/glossary",
+    "/glossary/[13 terms]"
+   ],
+   "createdAt": "2026-08-04T15:44:50.829Z",
+   "lastRefreshed": "2026-08-04T15:44:50.829Z",
+   "refreshCount": 0,
+   "sourceTasks": [
+    "coverage-glossary"
+   ],
+   "strategicChain": {
+    "goal": "goal-authority",
+    "initiative": "init-topical-authority",
+    "objective": "glossary-30"
+   },
+   "owner": "aira",
+   "lifecycle": "completed",
+   "metrics": {
+    "traffic": null,
+    "impressions": null,
+    "conversions": null,
+    "revenueGenerated": null,
+    "aiCitations": null,
+    "internalLinks": null
+   },
+   "measuredAt": null
+  }
+ ]
+}

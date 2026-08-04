@@ -1,6 +1,6 @@
 {
- "pages": 51,
- "chunkCount": 238,
+ "pages": 66,
+ "chunkCount": 289,
  "chunks": [
   {
    "id": "/#0",
@@ -699,6 +699,312 @@
    "text": "AEGIBIT does not currently hold SOC 2 Type II certification (in progress), ISO 27001, HIPAA, RBI Cybersecurity Framework, or SEBI CSCRF. We will not display a badge before the auditor issues the report. We do not have pre-built integrations with Slack, Jira, ServiceNow, Splunk, PagerDuty, or GitHub. When a specific integration becomes important to a buyer, it ships as a focused engineering slice, not a marketing claim. For a roadmap discussion, what AEGIBIT is building next and which buyers shape the priority queue, the AEGIBIT team responds at contact@aegibit.com . See the platform live. Book a 12-minute PayMint demo. We walk the architecture and the product together, configuration files open, no slideware. Book a PayMint demo Talk to AEGIBIT ."
   },
   {
+   "id": "/glossary#0",
+   "url": "/glossary",
+   "title": "Glossary: Security, AI, and Business Software Explained",
+   "text": "Reference Library The AEGIBIT Glossary. The concepts behind secure business software, explained properly: what each one is, why it matters, how it works, where teams go wrong, and how to get it right. Written by the team that builds this way every day. Zero Trust. A security model that treats every request as untrusted until verified, regardless of whether it originates inside or outside the network. The operating principle: never trust, always verify. Role-Based Access Control (RBAC). An access-control method where permissions attach to roles (accountant, manager, owner) rather than to individuals, and people inherit permissions by being assigned a role. Audit Log (Audit Trail). A chronological, tamper-resistant record of who did what, when, and from where in a system. Immutable audit logs cannot be edited or deleted, which is what makes them evidence rather than notes. Prompt Injection."
+  },
+  {
+   "id": "/glossary#1",
+   "url": "/glossary",
+   "title": "Glossary: Security, AI, and Business Software Explained",
+   "text": "An attack on AI systems where malicious instructions are hidden inside content the model reads (a document, web page, or tool description), tricking it into following the attacker instead of the user. Tool Poisoning. An attack where the description or metadata of an AI tool (the text a model reads to decide how to use it) carries hidden malicious instructions, corrupting every agent that loads the tool. Model Context Protocol (MCP). An open protocol that standardizes how AI models connect to external tools, data sources, and services, letting any compliant model use any compliant tool server. Row-Level Security (RLS). A database feature that enforces, at the database itself, which rows each user or tenant can see or change, so isolation holds even if application code has bugs. Retrieval-Augmented Generation (RAG)."
+  },
+  {
+   "id": "/glossary#2",
+   "url": "/glossary",
+   "title": "Glossary: Security, AI, and Business Software Explained",
+   "text": "An AI architecture where a model retrieves relevant documents from a trusted knowledge base at question time and answers from them, instead of relying on whatever it memorized in training. DPDP Act (Digital Personal Data Protection Act, India). India's data-protection law (2023) governing how organizations collect, process, store, and share the personal data of individuals in India, with consent, purpose limitation, and security obligations. Multi-Tenant Architecture. A software design where one application instance securely serves many customers (tenants), with each tenant's data isolated as strictly as if they had their own system. Petty Cash Management. The controlled handling of small day-to-day cash expenses (fuel, repairs, refreshments, courier) across a business, with documented vouchers, approvals, and reconciliation. CPQ (Configure, Price, Quote)."
+  },
+  {
+   "id": "/glossary#3",
+   "url": "/glossary",
+   "title": "Glossary: Security, AI, and Business Software Explained",
+   "text": "Software that helps sales teams configure a product or service, price it correctly under current rules, and generate an accurate quotation, fast and without spreadsheet archaeology. OTP Authentication (One-Time Password). A login method where a short-lived single-use code (sent by SMS, app, or email, or generated on-device) proves the user controls a registered factor, replacing or supplementing passwords. Anomaly Detection. Techniques that identify patterns deviating from expected behavior, unusual logins, odd transaction shapes, abnormal usage, so humans can investigate before small oddities become incidents."
+  },
+  {
+   "id": "/glossary/anomaly-detection#0",
+   "url": "/glossary/anomaly-detection",
+   "title": "What is Anomaly Detection?",
+   "text": "← AEGIBIT Glossary Anomaly Detection. Techniques that identify patterns deviating from expected behavior, unusual logins, odd transaction shapes, abnormal usage, so humans can investigate before small oddities become incidents. Why it matters. Rules catch what you predicted; anomalies are what you did not. It matters because fraud, abuse, and failures usually announce themselves first as statistical weirdness: an approval at 3 a.m., a branch's expenses doubling, a user suddenly exporting everything. Catching deviation early converts incidents into questions. How it works. Baselines are learned from historical behavior (per user, branch, or system), then live activity is scored against them, statistically (thresholds, distributions) or with machine learning for complex patterns. Good systems route scored anomalies to humans with context, tune to keep false positives tolerable, and feed confirmed outcomes back to improve the model. A real-world example."
+  },
+  {
+   "id": "/glossary/anomaly-detection#1",
+   "url": "/glossary/anomaly-detection",
+   "title": "What is Anomaly Detection?",
+   "text": "An expense platform learns each branch's rhythm. One branch's fuel vouchers spike far beyond baseline in a week; the system flags it with the comparison attached. The review takes minutes: either a legitimate campaign explains it, or a conversation begins, weeks earlier than a quarterly audit would have noticed. Common mistakes. ✗ Alerting on everything, training humans to ignore the channel. ✗ Static thresholds forever, businesses drift and baselines must follow. ✗ Anomaly scores without context, flags nobody can act on. ✗ Using detection as the only defence instead of a layer atop controls and logs. Best practices. ✓ Baseline per entity (user, branch, tenant), not one global average. ✓ Deliver anomalies with the evidence that made them anomalous. ✓ Tune alert volume to what reviewers can genuinely investigate. ✓ Close the loop: confirmed outcomes retrain the detector. Frequently asked questions. Do small businesses need anomaly detection?."
+  },
+  {
+   "id": "/glossary/anomaly-detection#2",
+   "url": "/glossary/anomaly-detection",
+   "title": "What is Anomaly Detection?",
+   "text": "At small scale, simple per-entity baselines and review of outliers already deliver most of the value, sophistication can grow with data volume. Machine learning or rules?. Both: rules for known-bad patterns, statistical or learned baselines for the unknown. Rules are explainable; learning finds what rules cannot enumerate. What data does it need?. Reliable event history, which is why immutable audit logs come first. Detection is only as good as the record it studies. AEGIBIT's platforms are built log-first, the foundation anomaly detection needs, with per-branch visibility that makes deviations obvious early. AEGIBIT's security engineering → . Related concepts. Audit Log (Audit Trail) Zero Trust Petty Cash Management ."
+  },
+  {
+   "id": "/glossary/audit-log#0",
+   "url": "/glossary/audit-log",
+   "title": "What is Audit Log (Audit Trail)?",
+   "text": "← AEGIBIT Glossary Audit Log (Audit Trail). A chronological, tamper-resistant record of who did what, when, and from where in a system. Immutable audit logs cannot be edited or deleted, which is what makes them evidence rather than notes. Why it matters. When money or data moves, disputes eventually follow: a missing voucher, a changed price, a deleted customer. Without an audit trail the answer is someone's memory against someone else's. With one, the system itself testifies. Audit logs also deter quietly: people behave differently when actions are attributable. How it works. Every meaningful action (create, approve, edit, delete, login) is written as an event with actor, timestamp, and context. Immutability is enforced by design: application roles get insert-only access, deletions are soft and logged, and sensitive events may be hash-chained so any tampering breaks the chain visibly. A real-world example. A boutique notices a bill for a large sale has vanished."
+  },
+  {
+   "id": "/glossary/audit-log#1",
+   "url": "/glossary/audit-log",
+   "title": "What is Audit Log (Audit Trail)?",
+   "text": "In a system with an owner-only delete policy and a permanent log, the record shows which account deleted it and when, turning a mystery into a five-minute conversation. In a spreadsheet, that sale simply never existed. Common mistakes. ✗ Logging only logins while the actions that matter (approvals, edits, deletions) go unrecorded. ✗ Letting administrators edit or purge the log, which converts evidence back into opinion. ✗ Keeping logs nobody can read or search, retention without accessibility. ✗ Treating logs as an afterthought instead of designing them into every workflow. Best practices. ✓ Make the log insert-only at the database layer, not just in the UI. ✓ Record the business meaning (approved voucher V-104 for X amount), not just raw table changes. ✓ Surface the trail in-product so owners can self-serve answers. ✓ Align retention with your compliance needs and review access to the log itself. Frequently asked questions. What should a small business log at minimum?."
+  },
+  {
+   "id": "/glossary/audit-log#2",
+   "url": "/glossary/audit-log",
+   "title": "What is Audit Log (Audit Trail)?",
+   "text": "Every financial mutation (create, approve, edit, delete), every login, and every permission change, each with actor and timestamp. That covers most disputes and most compliance questions. Are audit logs a legal requirement?. Depends on jurisdiction and industry, but financial record-keeping obligations generally assume trustworthy records. Immutable logs make audits faster and cheaper regardless of whether a statute names them. Do audit logs slow systems down?. Writing an event row per action is negligible for typical business volumes. The real cost is designing them well; the real price is not having them. Every AEGIBIT product writes an immutable trail: PayMint anchors every voucher to a person, place, and minute; Vestiq logs every bill and payment action permanently. Audit-grade logging in PayMint → . Related concepts. Role-Based Access Control (RBAC) Zero Trust Petty Cash Management Row-Level Security (RLS) ."
+  },
+  {
+   "id": "/glossary/cpq#0",
+   "url": "/glossary/cpq",
+   "title": "What is CPQ (Configure, Price, Quote)?",
+   "text": "← AEGIBIT Glossary CPQ (Configure, Price, Quote). Software that helps sales teams configure a product or service, price it correctly under current rules, and generate an accurate quotation, fast and without spreadsheet archaeology. Why it matters. Quoting is where deals stall and margins quietly die: wrong prices from old sheets, discounts beyond authority, taxes miscomputed, and days lost to internal back-and-forth. CPQ matters because speed and accuracy at the quote stage are conversion levers, the first credible, correct quote often wins. How it works. A CPQ system encodes the catalog, pricing rules, tax logic (like GST), and discount authority. Sales picks the configuration; the system computes price with current rules, routes approvals when a discount exceeds the rep's tier, and produces a versioned, branded quote document. Versioning preserves negotiation history; integration hands accepted quotes to invoicing. A real-world example."
+  },
+  {
+   "id": "/glossary/cpq#1",
+   "url": "/glossary/cpq",
+   "title": "What is CPQ (Configure, Price, Quote)?",
+   "text": "A rep quotes a multi-item deal with a special discount. Instead of a spreadsheet and three phone calls, the system prices from the live catalog, computes GST correctly, flags the discount for a manager's one-tap approval, and emails a numbered quote, minutes, not days, with every version on record. Common mistakes. ✗ Pricing from personal spreadsheets that drift from the real catalog. ✗ Discount authority by trust rather than enforced tiers. ✗ Quotes as untracked documents, no versions, no status, no learning. ✗ Divorcing quoting from invoicing so accepted quotes are retyped (and mistyped). Best practices. ✓ Single source of truth for catalog, prices, and tax rules. ✓ Enforced discount tiers with logged approvals. ✓ Versioned quotes with status tracking from draft to accepted. ✓ Straight-through flow from accepted quote to invoice. Frequently asked questions. Is CPQ only for enterprises?. No."
+  },
+  {
+   "id": "/glossary/cpq#2",
+   "url": "/glossary/cpq",
+   "title": "What is CPQ (Configure, Price, Quote)?",
+   "text": "Any business quoting configurable work, dealerships, agencies, equipment sellers, wholesalers, bleeds time and margin at this stage. SMB-shaped CPQ pays back quickly. How does CPQ handle GST?. Good systems compute tax from the rules (rates, intra- versus inter-state splits) rather than trusting manual entry, so quotes and downstream invoices stay consistent and compliant. What connects CPQ to CRM?. Quotes are pipeline events: which deals received quotes, at what values, with what outcomes. CPQ inside a CRM turns quoting from paperwork into conversion data. AEGIBIT Cortex includes native CPQ: catalog-driven quotations with GST, versioning, and tiered discount approvals, inside the CRM rather than bolted on. Quotation and approvals in Cortex → . Related concepts. Petty Cash Management Role-Based Access Control (RBAC) Multi-Tenant Architecture ."
+  },
+  {
+   "id": "/glossary/dpdp-act#0",
+   "url": "/glossary/dpdp-act",
+   "title": "What is DPDP Act (Digital Personal Data Protection Act, India)?",
+   "text": "← AEGIBIT Glossary DPDP Act (Digital Personal Data Protection Act, India). India's data-protection law (2023) governing how organizations collect, process, store, and share the personal data of individuals in India, with consent, purpose limitation, and security obligations. Why it matters. Any business holding customer phone numbers, addresses, or payment references is processing personal data. The DPDP Act matters because it converts good data hygiene from courtesy into legal obligation, with real penalties, and because customers increasingly choose vendors who can answer 'how do you protect my data' convincingly. How it works. The Act centres on consent-based processing for defined purposes, obligations on 'data fiduciaries' (the entities deciding why and how data is processed) to secure data and honor rights such as correction and erasure, breach notification duties, and restrictions on retaining data beyond its purpose."
+  },
+  {
+   "id": "/glossary/dpdp-act#1",
+   "url": "/glossary/dpdp-act",
+   "title": "What is DPDP Act (Digital Personal Data Protection Act, India)?",
+   "text": "Compliance in practice means knowing what personal data you hold, why, where, who can touch it, and being able to delete it on request. A real-world example. A retail software vendor stores customer names and phone numbers for billing on behalf of shops. Under the DPDP lens, the vendor maps this data, restricts staff access by role, logs every access, keeps it hosted appropriately, and builds deletion workflows, so when a shop's customer invokes rights, the chain can actually comply. Common mistakes. ✗ Collecting data 'because it might be useful', purpose limitation forbids exactly this. ✗ Keeping personal data in exports, chats, and spreadsheets outside governed systems. ✗ Having no deletion path, rights you cannot execute are violations waiting. ✗ Treating compliance as a legal document instead of an engineering property. Best practices. ✓ Inventory personal data: what, where, why, who accesses it. ✓ Minimize collection and retention to the stated purpose."
+  },
+  {
+   "id": "/glossary/dpdp-act#2",
+   "url": "/glossary/dpdp-act",
+   "title": "What is DPDP Act (Digital Personal Data Protection Act, India)?",
+   "text": "✓ Enforce access by role, log access, and secure data in transit and at rest. ✓ Design erasure and correction as product features, not manual heroics. Frequently asked questions. Does the DPDP Act apply to small businesses?. It applies to processing of digital personal data broadly, with certain obligations scaled by role and scale. Building on purpose limitation, security, and deletability is the safe posture at any size. What is a data fiduciary versus a processor?. The fiduciary decides the purpose and means of processing; a processor acts on the fiduciary's instructions. Software vendors are often processors for their clients' customer data, contracts should reflect that. Where should compliance start for a software product?. In architecture: role-scoped access, audit logs, encryption, data mapped to purpose, and deletion workflows. Paper policies follow engineering reality, not the reverse."
+  },
+  {
+   "id": "/glossary/dpdp-act#3",
+   "url": "/glossary/dpdp-act",
+   "title": "What is DPDP Act (Digital Personal Data Protection Act, India)?",
+   "text": "AEGIBIT builds DPDP-aware systems by default: data minimization, role-scoped access, immutable logs, and India-region hosting where it matters. AEGIBIT's DPDP posture → . Related concepts. Audit Log (Audit Trail) Row-Level Security (RLS) Zero Trust ."
+  },
+  {
+   "id": "/glossary/model-context-protocol#0",
+   "url": "/glossary/model-context-protocol",
+   "title": "What is Model Context Protocol (MCP)?",
+   "text": "← AEGIBIT Glossary Model Context Protocol (MCP). An open protocol that standardizes how AI models connect to external tools, data sources, and services, letting any compliant model use any compliant tool server. Why it matters. Before standardization, every AI-to-tool integration was custom glue. MCP matters because it turns tools into an ecosystem: businesses can expose their systems to AI assistants once and work with many models. It equally matters for security: a standard connection layer concentrates risk, so vetting MCP servers becomes as important as vetting software dependencies. How it works. An MCP server declares tools (functions with names, descriptions, and schemas), resources, and prompts. A client (the AI application) connects, lists what is available, and the model decides when to invoke tools during a conversation. Transport is typically local stdio or HTTP."
+  },
+  {
+   "id": "/glossary/model-context-protocol#1",
+   "url": "/glossary/model-context-protocol",
+   "title": "What is Model Context Protocol (MCP)?",
+   "text": "Because the model reads tool descriptions as text, those descriptions are part of the attack surface, and launch configurations and credentials need the same care as any service deployment. A real-world example. A business connects its AI assistant to an MCP server exposing 'search customer records' and 'create support ticket'. The assistant can now resolve a complaint end to end. If that server came from an unvetted source, however, a poisoned description could redirect the same capabilities, which is why registration-time scanning exists. Common mistakes. ✗ Treating MCP servers as harmless plugins instead of privileged software dependencies. ✗ Running servers with credentials far broader than the tools require. ✗ Skipping review of tool descriptions, the part the model actually obeys. ✗ Exposing sensitive internal systems without human gates on consequential actions. Best practices. ✓ Scan servers for tool poisoning and injection patterns before connecting them."
+  },
+  {
+   "id": "/glossary/model-context-protocol#2",
+   "url": "/glossary/model-context-protocol",
+   "title": "What is Model Context Protocol (MCP)?",
+   "text": "✓ Pin versions; re-scan on updates like any dependency bump. ✓ Scope credentials per server to the minimum its tools genuinely need. ✓ Prefer reputable, auditable servers and read the schema of anything else. Frequently asked questions. Is MCP tied to one AI vendor?. It is an open protocol with multi-vendor adoption; that neutrality is why an ecosystem of servers exists, and why supply-chain hygiene around them matters. Should a business build its own MCP server?. If AI assistants should act on your systems, yes, a scoped server you control beats granting a third-party tool broad API keys. Build it least-privileged with logging from day one. What are the main security risks with MCP?. Poisoned tool descriptions, prompt injection through returned content, secret exposure in configurations, and unsafe launch patterns. All are scannable and manageable with discipline."
+  },
+  {
+   "id": "/glossary/model-context-protocol#3",
+   "url": "/glossary/model-context-protocol",
+   "title": "What is Model Context Protocol (MCP)?",
+   "text": "AEGIBIT built MCP Shield after studying real MCP attack disclosures: an open-source scanner and runtime firewall for exactly this layer. MCP Shield by AEGIBIT → . Related concepts. Tool Poisoning Prompt Injection Retrieval-Augmented Generation (RAG) ."
+  },
+  {
+   "id": "/glossary/multi-tenant-architecture#0",
+   "url": "/glossary/multi-tenant-architecture",
+   "title": "What is Multi-Tenant Architecture?",
+   "text": "← AEGIBIT Glossary Multi-Tenant Architecture. A software design where one application instance securely serves many customers (tenants), with each tenant's data isolated as strictly as if they had their own system. Why it matters. Single-tenant deployments multiply cost and maintenance by customer count. Multi-tenancy matters because it makes modern SaaS economics possible, one codebase, one upgrade, many customers, but it concentrates the isolation problem: the architecture, not luck, must guarantee tenant A can never see tenant B. How it works. Common patterns range from shared database with a tenant id on every row (enforced by row-level security), through schema-per-tenant, to database-per-tenant for extreme isolation. Requests carry verified tenant context from authentication; every query, cache, file path, and background job scopes to it. Billing, quotas, and configuration also key off the tenant. A real-world example."
+  },
+  {
+   "id": "/glossary/multi-tenant-architecture#1",
+   "url": "/glossary/multi-tenant-architecture",
+   "title": "What is Multi-Tenant Architecture?",
+   "text": "A CRM serves hundreds of companies from one PostgreSQL cluster. Every table carries tenant_id, RLS policies enforce matching, and staff tooling uses separate audited paths. When one customer requests an export or deletion, it is a scoped operation, not an archaeology project. Common mistakes. ✗ Relying on application filters alone for isolation (one missed clause = cross-tenant leak). ✗ Leaking tenants through side channels: caches, logs, search indexes, file storage. ✗ Sequential ids that let tenants infer each other's existence and scale. ✗ No per-tenant export/delete capability, painful for both sales and compliance. Best practices. ✓ Enforce isolation at the database with RLS in shared-schema designs. ✓ Propagate tenant context from verified auth claims through every layer, including jobs. ✓ Test cross-tenant access automatically in CI. ✓ Design tenant export and deletion early; they unlock enterprise deals and legal compliance. Frequently asked questions."
+  },
+  {
+   "id": "/glossary/multi-tenant-architecture#2",
+   "url": "/glossary/multi-tenant-architecture",
+   "title": "What is Multi-Tenant Architecture?",
+   "text": "Is multi-tenancy less secure than single-tenant?. Done properly, isolation is enforced by the database and tested continuously, which is often stronger in practice than many separately-maintained single-tenant installs. Which isolation pattern should a new SaaS pick?. Shared schema with RLS is the pragmatic default: cheapest to operate with database-enforced isolation. Escalate to schema- or database-per-tenant when contracts or regulation demand it. What usually leaks first in bad multi-tenant systems?. Side channels: a cache keyed without tenant, a global search index, or filenames in shared storage. Isolation is a property of the whole system, not just the main tables. Cortex and Vestiq are multi-tenant by construction: tenant ids on every row, RLS enforced, isolation tested, one platform serving many businesses safely. Cortex's multi-tenant design → . Related concepts. Row-Level Security (RLS) Role-Based Access Control (RBAC) Retrieval-Augmented Generation (RAG) ."
+  },
+  {
+   "id": "/glossary/otp-authentication#0",
+   "url": "/glossary/otp-authentication",
+   "title": "What is OTP Authentication (One-Time Password)?",
+   "text": "← AEGIBIT Glossary OTP Authentication (One-Time Password). A login method where a short-lived single-use code (sent by SMS, app, or email, or generated on-device) proves the user controls a registered factor, replacing or supplementing passwords. Why it matters. Passwords get reused, phished, and shared, especially on shared shop-floor devices. OTP matters because it removes the stored-secret problem for frontline teams: nothing to remember, nothing to leak in a database dump, and each code dies after use. For field workforces in retail and dealerships, phone-plus-OTP is often both more secure and more usable than passwords. How it works. The user identifies (typically by phone number), the system generates a code bound to that identity with a short expiry and single-use flag, delivers it, and verifies the entry. Sound implementations rate-limit attempts and sends, hash stored codes, bind verification to a session, and then protect the session token properly (secure storage, rotation)."
+  },
+  {
+   "id": "/glossary/otp-authentication#1",
+   "url": "/glossary/otp-authentication",
+   "title": "What is OTP Authentication (One-Time Password)?",
+   "text": "TOTP apps generate codes on-device, avoiding SMS interception for higher-risk uses. A real-world example. A dealership's sales app onboards staff with phone and OTP: no passwords to forget or share between shifts. Session tokens live in the device's secure store with automatic refresh. When a person leaves, deactivating their number ends access, cleanly, with every session's actions attributed to them in the log. Common mistakes. ✗ No rate limiting, letting attackers brute-force codes or drain SMS budgets. ✗ Long-lived or reusable codes, which quietly become passwords again. ✗ Treating a verified OTP as the end: unprotected session tokens undo the win. ✗ Using SMS OTP alone for high-value admin actions where interception matters. Best practices. ✓ Short expiry, single use, rate limits on both attempts and sends. ✓ Store only hashed codes; log verification events. ✓ Protect sessions after login: secure storage, rotation, revocation."
+  },
+  {
+   "id": "/glossary/otp-authentication#2",
+   "url": "/glossary/otp-authentication",
+   "title": "What is OTP Authentication (One-Time Password)?",
+   "text": "✓ Escalate to TOTP or additional factors for administrative or high-value access. Frequently asked questions. Is OTP the same as two-factor authentication?. OTP is a factor. Used alone it is single-factor (possession); combined with a password or biometric it forms 2FA. For many frontline flows, possession-based OTP alone already beats shared passwords. Is SMS OTP secure enough?. For frontline business apps, generally yes with rate limiting and short expiry. For administrator access or high-value transactions, prefer authenticator apps or hardware factors. Why do field apps prefer phone-plus-OTP?. Zero password reuse, zero sharing between shifts, instant revocation by deactivating the number, and clean per-person attribution in audit logs. LeadSync signs dealership staff in with phone plus OTP, session tokens in the device secure store, no passwords to leak on a busy showroom floor. LeadSync's authentication design → . Related concepts."
+  },
+  {
+   "id": "/glossary/petty-cash-management#0",
+   "url": "/glossary/petty-cash-management",
+   "title": "What is Petty Cash Management?",
+   "text": "← AEGIBIT Glossary Petty Cash Management. The controlled handling of small day-to-day cash expenses (fuel, repairs, refreshments, courier) across a business, with documented vouchers, approvals, and reconciliation. Why it matters. Individually tiny, petty cash flows compound into serious money across branches and months, and they are the least-documented money in most SMBs. It matters because leakage hides here: duplicate claims, missing receipts, unlogged advances, and month-end reconciliations that never quite balance, quietly taxing the business. How it works. A disciplined loop: every spend gets a voucher at the moment it happens (who, what, where, amount, proof), an approver within a defined limit signs off, entries post to a ledger by branch and category, and reconciliation compares cash on hand against the ledger regularly. Digital systems add photo receipts, geo-tagged capture, tiered approvals, and instant HQ visibility. A real-world example."
+  },
+  {
+   "id": "/glossary/petty-cash-management#1",
+   "url": "/glossary/petty-cash-management",
+   "title": "What is Petty Cash Management?",
+   "text": "A seven-branch dealership handled fuel and workshop spends on paper; HQ learned each branch's numbers five to nine days late, and disputes were memory contests. Moving to digital vouchers with photo, location, and timestamp at capture, tiered approvals, and same-day dashboards made every rupee attributable, and month-end audit preparation dropped from days to hours. Common mistakes. ✗ Recording expenses at day-end from memory instead of at the moment of spend. ✗ One cash box, many hands, no per-person accountability. ✗ Approvals without limits, or limits without enforcement. ✗ Reconciliation only when something already feels wrong. Best practices. ✓ Capture at source: voucher with proof photo, time, and place, before cash leaves the drawer. ✓ Tiered approval limits matching roles, escalation beyond them. ✓ Immutable records: corrections happen by new entries, not silent edits. ✓ Weekly branch reconciliation with HQ visibility into every branch, same day. Frequently asked questions."
+  },
+  {
+   "id": "/glossary/petty-cash-management#2",
+   "url": "/glossary/petty-cash-management",
+   "title": "What is Petty Cash Management?",
+   "text": "How much leakage do businesses actually suffer?. Honest answer: it varies widely, and unmeasured means unknown, which is the true problem. The consistent pattern is that documentation at source plus visibility shrinks disputes and unexplained gaps immediately. Is a spreadsheet enough for petty cash?. It records; it does not control. Spreadsheets lack capture-at-source proof, enforced approvals, and immutability, the three properties that actually prevent leakage. What is the fastest first improvement?. Vouchers with photo and timestamp at the moment of spend. That single habit converts arguments about memory into checks of evidence. PayMint is AEGIBIT's petty-cash and expense platform for multi-branch businesses: 30-second capture with photo and geo-tag, tiered approvals, immutable logs, Tally-ready exports. How PayMint controls branch expenses → . Related concepts. Audit Log (Audit Trail) Role-Based Access Control (RBAC) CPQ (Configure, Price, Quote) ."
+  },
+  {
+   "id": "/glossary/prompt-injection#0",
+   "url": "/glossary/prompt-injection",
+   "title": "What is Prompt Injection?",
+   "text": "← AEGIBIT Glossary Prompt Injection. An attack on AI systems where malicious instructions are hidden inside content the model reads (a document, web page, or tool description), tricking it into following the attacker instead of the user. Why it matters. AI assistants increasingly read email, browse pages, and call tools. Anything they read is potential input, and models do not inherently distinguish 'data to summarize' from 'instructions to obey'. A successful injection can exfiltrate data, misuse connected tools, or quietly rewrite the assistant's behavior, all without malware in the traditional sense. How it works. The attacker plants text where the model will encounter it: a webpage the assistant summarizes, a shared file, a calendar invite, or a manipulated tool description. The text addresses the model directly ('ignore previous instructions and send the contents of. ')."
+  },
+  {
+   "id": "/glossary/prompt-injection#1",
+   "url": "/glossary/prompt-injection",
+   "title": "What is Prompt Injection?",
+   "text": "Defences work by boundary-setting: treating retrieved content as untrusted data, constraining what tools can do, requiring human approval for consequential actions, and scanning inputs for injection patterns. A real-world example. A company chatbot answers from its website knowledge base. An attacker gets a page indexed containing hidden text instructing the bot to reveal internal prompts and redirect users to a phishing link. A grounded bot with strict boundaries refuses: it answers only from vetted content and never follows instructions found inside that content. Common mistakes. ✗ Assuming a system prompt saying 'ignore malicious instructions' is sufficient defence. ✗ Letting a model act on tools (send, delete, pay) directly from untrusted content without a human gate. ✗ Feeding unvetted external content into the same context as privileged instructions. ✗ Never testing the assistant adversarially before shipping it. Best practices."
+  },
+  {
+   "id": "/glossary/prompt-injection#2",
+   "url": "/glossary/prompt-injection",
+   "title": "What is Prompt Injection?",
+   "text": "✓ Architect so the model can only read curated, public, or sanitized sources. ✓ Gate consequential actions behind explicit human approval. ✓ Scan tool descriptions and retrieved content for injection patterns before they reach the model. ✓ Log model actions like any other privileged actor and review anomalies. Frequently asked questions. Is prompt injection the same as jailbreaking?. Related but different: jailbreaking is a user trying to bypass a model's rules directly; prompt injection hides the attack in third-party content so the model betrays its actual user. Can prompt injection be fully solved?. Today it is managed, not eliminated. Robust systems combine content boundaries, least-privilege tools, human gates, and detection, the same defence-in-depth logic as classic security. Does this affect small businesses using AI chatbots?. Yes, any bot that reads external content or holds tool access is in scope."
+  },
+  {
+   "id": "/glossary/prompt-injection#3",
+   "url": "/glossary/prompt-injection",
+   "title": "What is Prompt Injection?",
+   "text": "The mitigations are architectural choices made when the bot is built, which is why security-first construction matters. MCP Shield, AEGIBIT's open-source scanner, detects prompt-injection and hidden-instruction patterns in AI tool servers before they reach a model. Scan for injection with MCP Shield → . Related concepts. Tool Poisoning Model Context Protocol (MCP) Retrieval-Augmented Generation (RAG) ."
+  },
+  {
+   "id": "/glossary/rbac#0",
+   "url": "/glossary/rbac",
+   "title": "What is Role-Based Access Control (RBAC)?",
+   "text": "← AEGIBIT Glossary Role-Based Access Control (RBAC). An access-control method where permissions attach to roles (accountant, manager, owner) rather than to individuals, and people inherit permissions by being assigned a role. Why it matters. Managing permissions person-by-person collapses as a team grows: access accumulates, nobody remembers why, and offboarding leaves ghosts with live credentials. RBAC matters because it makes access reviewable: you audit a handful of roles instead of every individual, and revoking a person is one clean operation. How it works. You define roles that mirror real responsibilities, attach specific permissions to each role (view vouchers, approve up to a limit, export reports), then assign users to roles. Systems enforce the mapping at every request. Good implementations also support tiered approvals, so a role can act only within its limit and must escalate beyond it. A real-world example."
+  },
+  {
+   "id": "/glossary/rbac#1",
+   "url": "/glossary/rbac",
+   "title": "What is Role-Based Access Control (RBAC)?",
+   "text": "In a dealership expense system, a branch cashier can create vouchers, the branch manager can approve up to a set amount, the group finance head approves above it, and only the owner can delete anything. When a cashier changes branches, one role reassignment updates every permission at once. Common mistakes. ✗ Creating one 'admin' role that half the company ends up holding. ✗ Cloning roles per person, which recreates individual permissions with extra steps. ✗ Never reviewing role membership, so leavers and role-changers keep old access. ✗ Forgetting deletion rights: if everyone can delete records, the audit trail is decorative. Best practices. ✓ Mirror the org chart honestly: roles should match how responsibility actually flows. ✓ Reserve destructive permissions (delete, export-all, config) for the narrowest role. ✓ Review role assignments quarterly and on every exit. ✓ Pair RBAC with audit logging so every permitted action is still attributable. Frequently asked questions."
+  },
+  {
+   "id": "/glossary/rbac#2",
+   "url": "/glossary/rbac",
+   "title": "What is Role-Based Access Control (RBAC)?",
+   "text": "How many roles should a small business define?. As few as honestly reflect the work, typically three to six: operator, approver, finance, owner. More roles than realities creates confusion; fewer creates over-broad access. What is the difference between RBAC and simple user accounts?. Accounts identify who is acting; RBAC governs what they may do. Identity without scoped permissions still lets any user do everything, which is how most internal fraud stays invisible. Can RBAC prevent fraud?. It removes the easiest paths: no single role can create, approve, and erase a transaction alone. Combined with immutable logs, it turns fraud from an edit into a visible anomaly. PayMint ships with dealership-shaped roles and tiered approval limits; Cortex adds custom roles and dynamic permissions from day one. See RBAC in PayMint → . Related concepts. Zero Trust Audit Log (Audit Trail) Multi-Tenant Architecture ."
+  },
+  {
+   "id": "/glossary/retrieval-augmented-generation#0",
+   "url": "/glossary/retrieval-augmented-generation",
+   "title": "What is Retrieval-Augmented Generation (RAG)?",
+   "text": "← AEGIBIT Glossary Retrieval-Augmented Generation (RAG). An AI architecture where a model retrieves relevant documents from a trusted knowledge base at question time and answers from them, instead of relying on whatever it memorized in training. Why it matters. Plain language models guess plausibly, which is fatal for business use: stale product facts, invented prices, confident nonsense. RAG matters because it grounds answers in your actual, current content, makes them citable, and lets knowledge update by updating documents rather than retraining or rewriting prompts. How it works. Content is split into chunks and indexed (lexically, as vectors, or both). At question time the system retrieves the most relevant chunks, injects them into the model's context with instructions to answer only from them, and ideally returns the sources used. Quality hinges on retrieval: good chunking, fresh indexing, and honest fallbacks when nothing relevant exists. A real-world example."
+  },
+  {
+   "id": "/glossary/retrieval-augmented-generation#1",
+   "url": "/glossary/retrieval-augmented-generation",
+   "title": "What is Retrieval-Augmented Generation (RAG)?",
+   "text": "A company chatbot once pitched a retired product for weeks because its knowledge lived in a hardcoded prompt nobody updated. Rebuilt as RAG over the live website, the bot now learns every new page automatically at the next crawl and cites the page it answered from. Ship content, and the bot is current, no prompt edits. Common mistakes. ✗ Indexing everything, including private documents, into a bot exposed to the public. ✗ Letting the model answer from general knowledge when retrieval finds nothing, hello hallucinations. ✗ Never refreshing the index, recreating the stale-prompt problem with extra steps. ✗ Skipping source citation, which removes the user's ability to verify. Best practices. ✓ Index only content the audience is entitled to see; public bot, public content. ✓ Instruct the model to say 'I do not have that' when retrieval is empty, and escalate to a human. ✓ Automate index refresh from the source of truth."
+  },
+  {
+   "id": "/glossary/retrieval-augmented-generation#2",
+   "url": "/glossary/retrieval-augmented-generation",
+   "title": "What is Retrieval-Augmented Generation (RAG)?",
+   "text": "✓ Show sources with answers; verifiability builds trust and catches errors. Frequently asked questions. Does RAG eliminate hallucinations?. It reduces them sharply when paired with strict grounding rules and honest empty-retrieval behavior. Discipline in the prompt and architecture matters as much as retrieval itself. Do I need a vector database?. Not always. Small, well-structured corpora often do excellently with lexical retrieval plus query expansion; vectors earn their complexity as scale and ambiguity grow. Is RAG secure by default?. No. Retrieved content is untrusted input (see prompt injection), and the index defines what can leak. Security comes from what you index and how the model is constrained. Aira, the consultant on this site, is RAG over aegibit.com itself: it auto-learns every published page weekly and cites sources under its answers. Ask Aira anything about AEGIBIT → . Related concepts. Prompt Injection Model Context Protocol (MCP) Multi-Tenant Architecture ."
+  },
+  {
+   "id": "/glossary/row-level-security#0",
+   "url": "/glossary/row-level-security",
+   "title": "What is Row-Level Security (RLS)?",
+   "text": "← AEGIBIT Glossary Row-Level Security (RLS). A database feature that enforces, at the database itself, which rows each user or tenant can see or change, so isolation holds even if application code has bugs. Why it matters. Most data leaks between customers in shared systems come from one missed WHERE clause. RLS matters because it moves tenant isolation from 'every developer remembers, every time' to 'the database refuses, always'. For any SaaS or multi-branch system holding other people's data, it converts a class of catastrophic bugs into non-events. How it works. Policies are declared on tables: for example, a row is visible only when its tenant_id matches the requesting session's tenant. The database evaluates the policy on every query, application mistakes cannot bypass it because the enforcement happens below the application. Forced RLS extends this so even the table owner's connections obey policies. A real-world example."
+  },
+  {
+   "id": "/glossary/row-level-security#1",
+   "url": "/glossary/row-level-security",
+   "title": "What is Row-Level Security (RLS)?",
+   "text": "A boutique-management platform serves hundreds of shops from one database. Each row carries the shop's id and RLS policies bind every query to the signed-in shop. A developer later ships a buggy report query with no shop filter; instead of leaking every shop's sales, the database returns only the caller's rows. The bug becomes a wrong report, not a breach. Common mistakes. ✗ Enforcing isolation only in application code and hoping every query remembers. ✗ Enabling RLS but leaving service-role connections that bypass it in normal request paths. ✗ Writing policies against client-supplied values instead of authenticated session context. ✗ Never testing cross-tenant access as part of CI. Best practices. ✓ Put a tenant id on every multi-tenant table and FORCE row-level security on. ✓ Derive policy inputs from verified session claims, never from request parameters. ✓ Keep privileged bypass connections out of user-facing paths and audit their use."
+  },
+  {
+   "id": "/glossary/row-level-security#2",
+   "url": "/glossary/row-level-security",
+   "title": "What is Row-Level Security (RLS)?",
+   "text": "✓ Add automated tests that attempt cross-tenant reads and expect failure. Frequently asked questions. Does RLS replace application authorization?. No, it backstops it. RBAC decides what actions a role may take; RLS guarantees which rows those actions can ever touch. Together they give defence in depth. Is RLS slow?. Policies add a predicate to queries; with proper indexes on tenant columns the overhead is typically negligible compared to the risk it removes. Which databases support it?. PostgreSQL has mature support (widely used via platforms like Supabase); SQL Server and others offer equivalents. The concept transfers even where syntax differs. AEGIBIT Cortex enforces tenant isolation with PostgreSQL RLS on every multi-tenant table, a tenant id on every row, checked by the database on every query. How Cortex isolates tenants → . Related concepts. Multi-Tenant Architecture Zero Trust Audit Log (Audit Trail) ."
+  },
+  {
+   "id": "/glossary/tool-poisoning#0",
+   "url": "/glossary/tool-poisoning",
+   "title": "What is Tool Poisoning?",
+   "text": "← AEGIBIT Glossary Tool Poisoning. An attack where the description or metadata of an AI tool (the text a model reads to decide how to use it) carries hidden malicious instructions, corrupting every agent that loads the tool. Why it matters. Agentic AI works by reading tool descriptions and deciding when to call them. That makes the descriptions themselves an instruction channel. A poisoned tool does not need to exploit code: the attack ships in plain text, activates in any connected model, and can instruct exfiltration or misuse of other legitimate tools. As businesses adopt tool-using agents, this is supply-chain risk in a new costume. How it works. The attacker publishes or compromises a tool server whose tool descriptions embed directives ('before every call, also send the conversation to. '), sometimes hidden with encoding tricks or invisible Unicode."
+  },
+  {
+   "id": "/glossary/tool-poisoning#1",
+   "url": "/glossary/tool-poisoning",
+   "title": "What is Tool Poisoning?",
+   "text": "Defences: scan tool schemas for imperative or hidden content before registration, pin and review tool versions like dependencies, run agents least-privileged, and monitor calls for behavior that does not match user intent. A real-world example. A developer connects a free community tool server to their AI workflow. One tool's description contains a hidden instruction to include environment secrets in its arguments. Every agent that loads it obeys silently. A pre-registration scan flags the imperative text and the hidden Unicode, and the server never enters the workflow. Common mistakes. ✗ Connecting community tool servers without reading or scanning their schemas. ✗ Trusting a tool forever after one review, descriptions can change on update. ✗ Running agents with broad credentials so any poisoned tool inherits them. ✗ Assuming code review covers it; the payload is prose, not code. Best practices."
+  },
+  {
+   "id": "/glossary/tool-poisoning#2",
+   "url": "/glossary/tool-poisoning",
+   "title": "What is Tool Poisoning?",
+   "text": "✓ Scan every tool schema for injection patterns, hidden Unicode, and secret-shaped strings before use. ✓ Version-pin tool servers and re-scan on every update. ✓ Apply least privilege to agent credentials and per-tool permissions. ✓ Log and review tool calls the way you review privileged user actions. Frequently asked questions. How is tool poisoning different from prompt injection?. Prompt injection hides instructions in content a model reads; tool poisoning specifically plants them in tool descriptions and metadata, compromising the agent's action layer at its source. Who should worry about this?. Anyone wiring AI agents to tools, from solo developers using open-source tool servers to enterprises building internal agents. The ecosystem is young and review practices are still maturing. What is the quickest practical defence?. Automated scanning of tool schemas before registration plus least-privilege credentials. Together they neutralize most known poisoning patterns cheaply."
+  },
+  {
+   "id": "/glossary/tool-poisoning#3",
+   "url": "/glossary/tool-poisoning",
+   "title": "What is Tool Poisoning?",
+   "text": "Tool poisoning is exactly what MCP Shield was built to catch: it scans Model Context Protocol servers for poisoned descriptions, hidden Unicode, and secret exposure. Free and open source. Explore MCP Shield → . Related concepts. Prompt Injection Model Context Protocol (MCP) Zero Trust ."
+  },
+  {
+   "id": "/glossary/zero-trust#0",
+   "url": "/glossary/zero-trust",
+   "title": "What is Zero Trust?",
+   "text": "← AEGIBIT Glossary Zero Trust. A security model that treats every request as untrusted until verified, regardless of whether it originates inside or outside the network. The operating principle: never trust, always verify. Why it matters. Perimeter security assumed everything inside the office network was safe. Cloud apps, remote work, and phone-based workflows dissolved that perimeter, and a single stolen password now walks straight past a castle-and-moat defence. Zero Trust matters because it limits how far an attacker can travel after any single control fails. How it works. Every access request is evaluated on identity, device, context, and least privilege before it is granted, and the evaluation repeats continuously rather than once at login. In practice that combines strong authentication, per-role permissions, network segmentation, and audit logging, so each resource makes its own trust decision instead of inheriting one from the network. A real-world example."
+  },
+  {
+   "id": "/glossary/zero-trust#1",
+   "url": "/glossary/zero-trust",
+   "title": "What is Zero Trust?",
+   "text": "A multi-branch business runs its expense system in the cloud. Under Zero Trust, a branch accountant signs in with their own identity, sees only their branch's vouchers, and every approval they make is logged with who, where, and when. If their password leaks, the attacker still cannot see other branches, approve beyond the accountant's tier, or erase the trail. Common mistakes. ✗ Buying a 'Zero Trust product' and declaring the job done; it is an architecture and a discipline, not a single tool. ✗ Verifying identity once at login and then trusting the session forever. ✗ Granting broad roles because fine-grained permissions feel slow to set up. ✗ Leaving service accounts and integrations outside the model while locking down only human users. Best practices. ✓ Start from least privilege: every role gets the minimum access its job needs. ✓ Make audit logging non-optional and immutable, verification without evidence is theatre. ✓ Apply the model to machines and API keys, not just people."
+  },
+  {
+   "id": "/glossary/zero-trust#2",
+   "url": "/glossary/zero-trust",
+   "title": "What is Zero Trust?",
+   "text": "✓ Roll out incrementally: protect the highest-value system first, then expand. Frequently asked questions. Is Zero Trust only for large enterprises?. No. Small multi-branch businesses arguably benefit more, because one shared password or over-broad role can expose the whole operation. The principles scale down cleanly: least privilege, per-user identity, and logged actions. Does Zero Trust slow teams down?. Implemented well, users mostly notice nothing: they sign in and see exactly what their role needs. The friction of occasional re-verification is far cheaper than the downtime of an account-takeover incident. Where should a business start?. With the system that moves money or holds customer data. Give every user their own identity, scope roles tightly, turn on audit logs, and expand outward from there. AEGIBIT builds every product on Zero Trust foundations: per-user identity, role-scoped access, and immutable audit logs are defaults, not add-ons. How AEGIBIT engineers security → ."
+  },
+  {
+   "id": "/glossary/zero-trust#3",
+   "url": "/glossary/zero-trust",
+   "title": "What is Zero Trust?",
+   "text": "Related concepts. Role-Based Access Control (RBAC) Audit Log (Audit Trail) Row-Level Security (RLS) OTP Authentication (One-Time Password) ."
+  },
+  {
    "id": "/press#0",
    "url": "/press",
    "title": "Press & Brand, AEGIBIT",
@@ -834,7 +1140,7 @@
    "id": "/products/aira#6",
    "url": "/products/aira",
    "title": "Aira, Voice control for your desktop",
-   "text": "Soon she'll voice-approve PayMint vouchers, drive Industry OS workflows, and surface insights from every AEGIBIT product you use. One voice. Every tool. Founder seats fill quietly. Reserve yours before the next batch closes. 60 seconds. Reserve my Aira . 10 downloads · counted by GitHub Releases live ."
+   "text": "Soon she'll voice-approve PayMint vouchers, drive Industry OS workflows, and surface insights from every AEGIBIT product you use. One voice. Every tool. Founder seats fill quietly. Reserve yours before the next batch closes. 60 seconds. Reserve my Aira . 12 downloads · counted by GitHub Releases live ."
   },
   {
    "id": "/products/aira/changelog#0",
@@ -978,7 +1284,7 @@
    "id": "/products/vestiq#0",
    "url": "/products/vestiq",
    "title": "Vestiq: Boutique Billing and Shop Management App",
-   "text": ". Live · Android and Web . Vestiq. The Boutique OS. Born inside Burimar Abha Boutique, its founding client, and built around how a real boutique actually runs. Mobile-first billing and shop management for Indian boutiques and tailoring businesses. Branded bills, WhatsApp-native sharing, airtight payment tracking, and leakage protection. Runs as an Android app and in any browser. Powered by AEGIBIT. Get Vestiq for your boutique Download for Android Open in browser . 17 downloads · counted live by AEGIBIT live . Everything below is live today. Run the whole boutique from your phone. Professional billing in seconds. Itemized bills with a built-in boutique catalog (Saree, Party Wear Saree, Blouse, Designer Blouse, Kurti and more) plus custom items, quantity steppers, and automatic totals. Discounts by percentage, round-off, and net bill value computed live. Bills numbered like BAB/0001/26-27, with shop initials, sequence, and the Indian financial year. Branded PDF bills, automatically."
+   "text": ". Live · Android and Web . Vestiq. The Boutique OS. Born inside Burimar Abha Boutique, its founding client, and built around how a real boutique actually runs. Mobile-first billing and shop management for Indian boutiques and tailoring businesses. Branded bills, WhatsApp-native sharing, airtight payment tracking, and leakage protection. Runs as an Android app and in any browser. Powered by AEGIBIT. Get Vestiq for your boutique Download for Android Open in browser . 19 downloads · counted live by AEGIBIT live . Everything below is live today. Run the whole boutique from your phone. Professional billing in seconds. Itemized bills with a built-in boutique catalog (Saree, Party Wear Saree, Blouse, Designer Blouse, Kurti and more) plus custom items, quantity steppers, and automatic totals. Discounts by percentage, round-off, and net bill value computed live. Bills numbered like BAB/0001/26-27, with shop initials, sequence, and the Indian financial year. Branded PDF bills, automatically."
   },
   {
    "id": "/products/vestiq#1",
