@@ -3,6 +3,28 @@ export const dynamic = "force-dynamic";
 
 import { airaChatTurn, type ChatMessage } from "@/lib/aira-bot";
 import { checkRateLimit, chatLimiter } from "@/lib/rate-limiter";
+import { GLOSSARY } from "@/content/glossary";
+
+/**
+ * Follow-up suggestions: when the answer is grounded in a glossary
+ * term, offer that term's related concepts as next questions. Pure
+ * content discovery, and it only fires from REAL retrieved sources, so
+ * it never invents a topic we do not actually cover.
+ */
+function followUpSuggestions(
+  sources: { url: string; title: string }[],
+): { q: string; url: string }[] {
+  const top = sources.find((s) => s.url.startsWith("/glossary/"));
+  if (!top) return [];
+  const slug = top.url.split("/").filter(Boolean).pop();
+  const term = GLOSSARY.find((t) => t.slug === slug);
+  if (!term) return [];
+  return term.related
+    .map((rslug) => GLOSSARY.find((t) => t.slug === rslug))
+    .filter((t): t is NonNullable<typeof t> => Boolean(t))
+    .slice(0, 3)
+    .map((t) => ({ q: `What is ${t.term}?`, url: `/glossary/${t.slug}` }));
+}
 
 /**
  * POST /api/chat
@@ -83,11 +105,18 @@ export async function POST(req: NextRequest) {
     });
   }
 
+  const sources = reply.sources ?? [];
   return NextResponse.json({
     text: reply.text,
     captureLead: reply.captureLead,
     // Pages the answer was grounded in; the widget renders these as
-    // "sources" links so visitors can verify and click deeper.
-    sources: reply.sources ?? [],
+    // titled "source" links so visitors can verify and click deeper.
+    sources,
+    // Honest trust signal: true only when the answer actually cites
+    // knowledge-base pages. No fabricated confidence percentage, a
+    // number we cannot truthfully compute would be worse than none.
+    grounded: sources.length > 0,
+    // Content-discovery follow-ups, derived from real related terms.
+    suggestions: followUpSuggestions(sources),
   });
 }

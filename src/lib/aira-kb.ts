@@ -176,6 +176,18 @@ export function retrieve(query: string, k = 6): KbChunk[] {
       // Title/URL hits are strong relevance signals on a marketing site.
       if (doc.titleTokens.has(term)) score += 1.2;
     }
+    // Commercial-intent boost, TIERED. This is a business site, not an
+    // encyclopedia: when a visitor describes a pain, the page that
+    // SOLVES it must surface over the glossary entry that DEFINES it.
+    // Flagship product pages outrank their own supporting solution
+    // pages (so a whole petty-cash solution cluster cannot bury
+    // /products/paymint itself), and both outrank educational content.
+    // Glossary still wins genuinely educational queries; it just stops
+    // out-competing the pages that convert.
+    if (score > 0) {
+      if (doc.chunk.url.startsWith("/products/")) score += 2.5;
+      else if (doc.chunk.url.startsWith("/solutions/")) score += 0.8;
+    }
     return { doc, score };
   })
     .filter((s) => s.score > 0)

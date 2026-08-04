@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Loader2, CheckCircle2 } from "lucide-react";
+import { MessageSquare, X, Send, Loader2, CheckCircle2, ShieldCheck } from "lucide-react";
 import { track } from "@/lib/track";
 import type { ChatMessage } from "@/lib/aira-bot";
 
@@ -41,8 +41,12 @@ type Mode = "chat" | "capture" | "captured";
 interface UiMessage extends ChatMessage {
   /** Stable key across re-renders for AnimatePresence. */
   id: string;
-  /** Pages the reply was grounded in (RAG citations), rendered as links. */
+  /** Pages the reply was grounded in (RAG citations), rendered as titled links. */
   sources?: { url: string; title: string }[];
+  /** True when the answer cites knowledge-base pages (honest trust badge). */
+  grounded?: boolean;
+  /** Follow-up questions from related knowledge, for content discovery. */
+  suggestions?: { q: string; url: string }[];
 }
 
 const GREETING: UiMessage = {
@@ -126,9 +130,13 @@ export function ChatWidget() {
   function appendMessage(
     role: ChatMessage["role"],
     text: string,
-    sources?: { url: string; title: string }[],
+    extra?: {
+      sources?: { url: string; title: string }[];
+      grounded?: boolean;
+      suggestions?: { q: string; url: string }[];
+    },
   ) {
-    setMessages((m) => [...m, { id: newId(), role, text, sources }]);
+    setMessages((m) => [...m, { id: newId(), role, text, ...extra }]);
   }
 
   async function sendChatTurn(userText: string) {
@@ -158,11 +166,14 @@ export function ChatWidget() {
       const sources = Array.isArray(data.sources)
         ? (data.sources as { url: string; title: string }[]).slice(0, 3)
         : undefined;
+      const suggestions = Array.isArray(data.suggestions)
+        ? (data.suggestions as { q: string; url: string }[]).slice(0, 3)
+        : undefined;
       appendMessage(
         "model",
         replyText ||
           "Let me put you in touch with the AEGIBIT team directly. What's the best work email to reach you?",
-        sources,
+        { sources, grounded: Boolean(data.grounded), suggestions },
       );
       if (data.captureLead) setMode("capture");
     } catch {
@@ -335,16 +346,47 @@ export function ChatWidget() {
                     style={{ whiteSpace: "pre-wrap" }}
                   >
                     {m.text}
+                    {m.role === "model" && m.grounded && (
+                      <span className="flex items-center gap-1.5 mt-2 text-[10px] text-[#10B981]">
+                        <ShieldCheck className="w-3 h-3" />
+                        Grounded from AEGIBIT Knowledge Base
+                      </span>
+                    )}
                     {m.sources && m.sources.length > 0 && (
-                      <span className="block mt-2 pt-2 border-t border-[rgba(255,255,255,0.08)]">
+                      <span className="block mt-2 pt-2 border-t border-[rgba(255,255,255,0.08)] space-y-1">
+                        <span className="block text-[9px] uppercase tracking-[0.12em] text-[#52525B] mb-1">
+                          Sources
+                        </span>
                         {m.sources.map((s) => (
                           <a
                             key={s.url}
                             href={s.url}
-                            className="inline-block mr-2 mb-1 px-2 py-0.5 rounded-full text-[11px] text-[#FDBA74] border border-[rgba(249,115,22,0.3)] hover:bg-[rgba(249,115,22,0.12)] transition-colors"
+                            className="flex items-start gap-1.5 group"
                           >
-                            {s.url}
+                            <span className="text-[11px] leading-tight">📘</span>
+                            <span className="min-w-0">
+                              <span className="block text-[11px] leading-tight text-[#FDBA74] group-hover:underline truncate">
+                                {s.title || s.url}
+                              </span>
+                              <span className="block text-[9px] text-[#52525B] truncate">{s.url}</span>
+                            </span>
                           </a>
+                        ))}
+                      </span>
+                    )}
+                    {m.suggestions && m.suggestions.length > 0 && (
+                      <span className="block mt-2.5 pt-2 border-t border-[rgba(255,255,255,0.08)]">
+                        <span className="block text-[9px] uppercase tracking-[0.12em] text-[#52525B] mb-1.5">
+                          You might also ask
+                        </span>
+                        {m.suggestions.map((sug) => (
+                          <button
+                            key={sug.url}
+                            onClick={() => void sendChatTurn(sug.q)}
+                            className="block w-full text-left text-[11px] text-[#A1A1AA] hover:text-white mb-1 transition-colors"
+                          >
+                            <span className="text-[#F97316]">&rsaquo;</span> {sug.q}
+                          </button>
                         ))}
                       </span>
                     )}
