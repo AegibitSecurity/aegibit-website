@@ -10,8 +10,9 @@ import { execFileSync } from "node:child_process";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { readFileSync, existsSync, statSync } from "node:fs";
 import { collectProposals } from "./collect.mjs";
-import { evaluate, commitDecisions } from "./engine.mjs";
+import { evaluate, commitDecisions, loadObjectives } from "./engine.mjs";
 import { loadQueue, saveQueue, enqueueDecisions, markStatus, renderQueueTable } from "./queue.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -56,17 +57,51 @@ for (const d of auto) {
 }
 saveQueue(queue);
 
-// ── REPORT: the executive briefing ──────────────────────────────────
-const waiting = queue.items.filter((i) => i.status === "awaiting-approval").length;
+// ── REPORT: the Founder Dashboard ───────────────────────────────────
+// Rahul's contract: decisions in under a minute. Mode, honest ops
+// health with its breakdown, tonight's numbers, ONE top
+// recommendation with reasoning and confidence, then the queue.
+const objectives = loadObjectives();
+const waiting = queue.items.filter((i) => i.status === "awaiting-approval");
+const deferred = queue.items.filter((i) => i.status === "deferred");
+const autoOk = executed.filter((e) => e.result === "ok").length;
+
+// Ops health, computed from REAL signals only (named honestly: this
+// is operational health; business health earns its name when revenue
+// and client metrics feed in).
+let health = 100;
+const healthNotes = [];
+const kbPath = join(ROOT, "src/data/aira-kb.json");
+if (existsSync(kbPath)) {
+  const kbAge = (Date.now() - statSync(kbPath).mtimeMs) / 864e5;
+  if (kbAge > 8) { health -= 15; healthNotes.push(`knowledge index stale ${Math.round(kbAge)}d (-15)`); }
+}
+try {
+  const st = JSON.parse(readFileSync(join(ROOT, "automation/state.json"), "utf8"));
+  const fails = Object.values(st.consecutiveFailures ?? {}).reduce((a, b) => a + (b || 0), 0);
+  if (fails > 0) { const hit = Math.min(fails * 10, 30); health -= hit; healthNotes.push(`${fails} automation failure(s) (-${hit})`); }
+} catch { /* state optional */ }
+const droughts = waiting.filter((i) => (i.timesProposed ?? 1) >= 3).length;
+if (droughts > 0) { const hit = Math.min(droughts * 5, 20); health -= hit; healthNotes.push(`${droughts} approval drought(s) (-${hit})`); }
+if (healthNotes.length === 0) healthNotes.push("all monitored signals nominal");
+
+const top = waiting[0] ?? null;
+
 const b = [];
-b.push(`# AGOS Morning Briefing · ${today}`);
+b.push(`# AGOS Morning Brief · ${today}`);
 b.push("");
-b.push(
-  `Last night I evaluated ${decisions.length} opportunit${decisions.length === 1 ? "y" : "ies"}. ` +
-  `I rejected ${reject.length} (low value, duplicate, or policy), executed ${executed.filter((e) => e.result === "ok").length} low-risk task(s) autonomously inside guardrails, ` +
-  `and ${waiting} action(s) await your approval, ranked by expected business impact below.`,
-);
+b.push(`**Business mode:** ${objectives.mode} (${objectives.quarter})  `);
+b.push(`**Ops health:** ${Math.max(health, 0)}/100 (${healthNotes.join("; ")})  `);
+b.push(`**Evaluated tonight:** ${decisions.length} · **auto-executed:** ${autoOk} · **awaiting approval:** ${waiting.length} · **deferred:** ${deferred.length} · **rejected:** ${reject.length}`);
 b.push("");
+if (top) {
+  b.push("## Top recommendation");
+  b.push("");
+  b.push(`**${top.title}**  `);
+  b.push(`Priority ${top.priority} · confidence ${top.confidence}% · est. ${top.etaMinutes} min  `);
+  b.push(`Why: highest value-density item in the queue under ${objectives.mode} mode, serving this quarter's objectives. Reply "approved: ${top.id}" to execute.`);
+  b.push("");
+}
 b.push("## The work queue (highest ROI first)");
 b.push("");
 b.push(renderQueueTable(queue));

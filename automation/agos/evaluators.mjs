@@ -76,32 +76,30 @@ export function costEvaluator(p, ctx) {
   };
 }
 
-/* ── Policy: AGOS governance compliance (VETO power) ─────────────── */
-const POLICY_GATES = [
-  {
-    id: "no-contact-scraping",
-    hits: (p) => /scrape|harvest.*(email|phone|contact)|enrich.*person/i.test(p.title + " " + p.detail),
-    reason: "Personal-contact harvesting violates DPDP/GDPR posture and platform ToS.",
-  },
+/* ── Policy: constitutional compliance (VETO power) ──────────────── */
+/**
+ * The Policy evaluator does not "remember" rules, it READS THE
+ * CONSTITUTION. Machine-checkable gates live in dna.json
+ * (machineGates); this code only enforces them, plus two structural
+ * gates that are shape-based rather than text-based. Amending policy
+ * = amending the DNA file under founder review, never editing code.
+ */
+const STRUCTURAL_GATES = [
   {
     id: "no-autopost-social",
     hits: (p) => p.type === "social-post" && p.execution === "auto",
-    reason: "Outward social publishing is founder-gated (governance rule 4). Draft only.",
-  },
-  {
-    id: "no-invented-claims",
-    hits: (p) => /fake|invent|fabricat|backfill.*(count|metric|review)/i.test(p.title + " " + p.detail),
-    reason: "Honesty covenant: no fabricated metrics, reviews, or claims.",
-  },
-  {
-    id: "no-paid-tools",
-    hits: (p) => /ahrefs|semrush|paid api|credit card|subscription/i.test(p.detail),
-    reason: "Zero-spend policy: no paid tooling without explicit founder approval.",
+    reason: "DNA security standard: human approval required for external publishing. Draft only.",
   },
 ];
 
 export function policyEvaluator(p, ctx) {
-  const gate = POLICY_GATES.find((g) => g.hits(p));
+  const text = p.title + " " + p.detail;
+  for (const g of ctx.dna?.machineGates ?? []) {
+    if (new RegExp(g.pattern, "i").test(text)) {
+      return { veto: true, score: 0, confidence: 100, reasons: [`[${g.id}] ${g.reason}`] };
+    }
+  }
+  const gate = STRUCTURAL_GATES.find((g) => g.hits(p));
   if (gate) {
     return { veto: true, score: 0, confidence: 100, reasons: [`[${gate.id}] ${gate.reason}`] };
   }
@@ -111,7 +109,29 @@ export function policyEvaluator(p, ctx) {
       reasons: [`unregistered capability for type "${p.type}", register it in capabilities.json first`],
     };
   }
-  return { score: 100, confidence: 100, reasons: ["passes all governance gates"] };
+  return { score: 100, confidence: 100, reasons: ["passes constitutional gates (dna.json) and registry"] };
+}
+
+/* ── Strategic Alignment: does this serve THIS quarter? ──────────── */
+/**
+ * A company does not optimize forever, it optimizes for the current
+ * quarter (objectives.json). Tasks matching active objectives outrank
+ * generically-good work.
+ */
+export function alignmentEvaluator(p, ctx) {
+  const text = (p.title + " " + p.detail + " " + p.type).toLowerCase();
+  const hits = (ctx.objectives?.objectives ?? []).filter((o) =>
+    o.keywords.some((k) => text.includes(k.toLowerCase())),
+  );
+  if (hits.length === 0) {
+    return { score: 30, confidence: 70, reasons: ["matches no current-quarter objective (generic value only)"] };
+  }
+  const score = Math.min(100, 55 + hits.length * 20);
+  return {
+    score,
+    confidence: 75,
+    reasons: [`serves ${hits.length} objective(s): ${hits.map((h) => h.id).join(", ")}`],
+  };
 }
 
 /* ── Priority: highest-value action relative to everything waiting ─ */
@@ -120,7 +140,15 @@ export function policyEvaluator(p, ctx) {
  * batch plus the standing queue. Value density = weighted value per
  * unit time, so a 2-minute schema fix can outrank a 90-minute build.
  */
-export function priorityEvaluator(items) {
+export function priorityEvaluator(items, objectives) {
+  const mode = objectives?.mode ?? "growth";
+  const mult = objectives?.modes?.[mode] ?? {};
+  const workerKey = (w) => ({ geo: "geo", seo: "seo", content: "content", sales: "sales", product: "product" }[w] ?? "ops");
+  for (const item of items) {
+    const m = mult[workerKey(item.worker)] ?? 1;
+    item.valueDensity = item.valueDensity * m;
+    item.modeMultiplier = m;
+  }
   const ranked = [...items].sort((a, b) => b.valueDensity - a.valueDensity);
   const n = ranked.length;
   const out = new Map();
@@ -129,7 +157,7 @@ export function priorityEvaluator(items) {
     out.set(item.id, {
       score,
       confidence: 75,
-      reasons: [`rank ${i + 1}/${n} by value density (${item.valueDensity.toFixed(1)} value/hr)`],
+      reasons: [`rank ${i + 1}/${n} by value density ${item.valueDensity.toFixed(1)}/hr (mode x${item.modeMultiplier ?? 1})`],
     });
   });
   return out;

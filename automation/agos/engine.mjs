@@ -23,6 +23,7 @@ import { fileURLToPath } from "node:url";
 import {
   authorityEvaluator, revenueEvaluator, geoEvaluator,
   riskEvaluator, costEvaluator, policyEvaluator, priorityEvaluator,
+  alignmentEvaluator,
 } from "./evaluators.mjs";
 
 const AGOS_DIR = dirname(fileURLToPath(import.meta.url));
@@ -33,6 +34,12 @@ export function loadConfig() {
 }
 export function loadCapabilities() {
   return JSON.parse(readFileSync(join(AGOS_DIR, "capabilities.json"), "utf8")).capabilities;
+}
+export function loadDNA() {
+  return JSON.parse(readFileSync(join(AGOS_DIR, "dna.json"), "utf8"));
+}
+export function loadObjectives() {
+  return JSON.parse(readFileSync(join(AGOS_DIR, "objectives.json"), "utf8"));
 }
 
 function loadLedgerKeys() {
@@ -58,14 +65,20 @@ function loadLedgerKeys() {
 export function evaluate(proposals) {
   const config = loadConfig();
   const capabilities = loadCapabilities();
+  const dna = loadDNA();
+  const objectives = loadObjectives();
   const seen = loadLedgerKeys();
   const { valueWeights, valueFloor, autoRiskCeiling, autoCostCeilingMinutes } = config.aggregator;
+  // Resource awareness: value asks "is it worth it", resources ask
+  // "can we afford it TODAY". Budgets consumed in priority order.
+  let founderBudget = objectives.resources?.weeklyFounderMinutes ?? 120;
+  let buildBudget = objectives.resources?.weeklyBuildMinutes ?? 900;
 
   // Board pass 1: independent evaluators per proposal.
   const evaluated = proposals.map((p) => {
     const profile = config.typeProfiles[p.type] ?? config.typeProfiles.default;
     const capability = profile.capability ? capabilities[profile.capability] : null;
-    const ctx = { profile, capability };
+    const ctx = { profile, capability, dna, objectives };
 
     const board = {
       authority: authorityEvaluator(p, ctx),
@@ -74,12 +87,18 @@ export function evaluate(proposals) {
       risk: riskEvaluator(p, ctx),
       cost: costEvaluator(p, ctx),
       policy: policyEvaluator(p, ctx),
+      alignment: alignmentEvaluator(p, ctx),
     };
 
+    // Strategic alignment shapes value: a task serving this quarter's
+    // objectives outranks slightly-better generic ROI (DNA principle).
+    const alignW = config.aggregator.alignmentWeight ?? 0.25;
     const value = Math.round(
-      valueWeights.authority * board.authority.score +
-      valueWeights.geo * board.geo.score +
-      valueWeights.revenue * board.revenue.score,
+      (1 - alignW) * (
+        valueWeights.authority * board.authority.score +
+        valueWeights.geo * board.geo.score +
+        valueWeights.revenue * board.revenue.score
+      ) + alignW * board.alignment.score,
     );
     const etaMinutes = board.cost.etaMinutes ?? 30;
     const valueDensity = value / Math.max(etaMinutes / 60, 0.05);
@@ -88,7 +107,7 @@ export function evaluate(proposals) {
   });
 
   // Board pass 2: relative priority across the whole batch.
-  const priorities = priorityEvaluator(evaluated);
+  const priorities = priorityEvaluator(evaluated, objectives);
 
   // Aggregate.
   return evaluated.map(({ p, profile, capability, board, value, etaMinutes, valueDensity }) => {
@@ -106,6 +125,14 @@ export function evaluate(proposals) {
       verdict = "reject";
       reasons.push(`value ${value} below floor ${valueFloor}: improve existing assets instead`);
     } else if (
+      (capability?.dependencies ?? []).some((dep) => typeof dep === "string" && dep.startsWith("founder:"))
+    ) {
+      verdict = "defer";
+      reasons.push(`dependency not met: ${(capability.dependencies).find((d) => d.startsWith("founder:"))}`);
+    } else if (p.dependsOn && p.dependsOn.length > 0) {
+      verdict = "defer";
+      reasons.push(`depends on unfinished task(s): ${p.dependsOn.join(", ")}`);
+    } else if (
       capability?.allowAuto && !p.outward &&
       board.risk.score <= autoRiskCeiling && etaMinutes <= autoCostCeilingMinutes
     ) {
@@ -120,6 +147,23 @@ export function evaluate(proposals) {
             ? `capability "${profile.capability}" is PR/founder-gated by registry`
             : `risk ${board.risk.score} or cost ${etaMinutes}m exceeds auto ceilings`,
       );
+    }
+
+    // Resource awareness: even a good verdict defers when this week's
+    // capacity is spent. Approvals cost founder minutes (est. 5 each)
+    // plus build time; autos cost build time only.
+    if (verdict === "auto" || verdict === "approve") {
+      const founderCost = verdict === "approve" ? 5 : 0;
+      if (verdict === "approve" && founderBudget - founderCost < 0) {
+        verdict = "defer";
+        reasons.unshift("founder attention budget exhausted this week: deferred to protect the scarcest resource");
+      } else if (buildBudget - etaMinutes < 0) {
+        verdict = "defer";
+        reasons.unshift(`build capacity exhausted this week (${buildBudget}m left < ${etaMinutes}m needed)`);
+      } else {
+        founderBudget -= founderCost;
+        buildBudget -= etaMinutes;
+      }
     }
 
     // Confidence of the decision = weakest confidence on the axes that
@@ -143,6 +187,7 @@ export function evaluate(proposals) {
         revenue: board.revenue.score,
         risk: board.risk.score,
         cost: board.cost.score,
+        alignment: board.alignment.score,
         priority: priority?.score ?? 50,
         value,
         automation: verdict === "auto" ? 90 : verdict === "approve" ? 50 : 0,
