@@ -1,6 +1,6 @@
 {
- "pages": 66,
- "chunkCount": 289,
+ "pages": 67,
+ "chunkCount": 296,
  "chunks": [
   {
    "id": "/#0",
@@ -61,6 +61,48 @@
    "url": "/about",
    "title": "About AEGIBIT, Cybersecurity-first software for businesses that can't afford a leak",
    "text": "AEGIBIT is anchored in India because the operators who feel the multi-branch pain most acutely, multi-state retail, services, dealerships, clinic chains, distribution, are concentrated here. India also forces a discipline that the global market then benefits from: DPDP Act compliance, low-bandwidth resilience, multi-language ops, branch-led edge cases. We are bootstrapped, focused, and shipping. The AEGIBIT team responds at contact@aegibit.com within 24 hours. See PayMint live in 12 minutes. Book a walkthrough on real branch data, or talk to the AEGIBIT team about anything else AEGIBIT-shaped. Book a PayMint demo Talk to AEGIBIT ."
+  },
+  {
+   "id": "/ai-agent-security#0",
+   "url": "/ai-agent-security",
+   "title": "AI Agent Security: How to Protect AI Agents and MCP Servers",
+   "text": ". Field Guide AI Agent Security. AI agents now read your email, browse the web, and act through tools. Anything they read is potential input, and a language model does not naturally tell data apart from instructions. This is the practical guide to what can go wrong and how to defend it, written by the team that built MCP Shield . What is AI agent security The core threats How to defend an AI agent Securing MCP servers The AI agent security checklist FAQs . What is AI agent security?. AI agent security is the discipline of protecting AI systems that both read external content and act through tools, so they cannot be manipulated into harming their user, leaking data, or misusing the systems they connect to. It is where classic security principles meet a new attack surface: the model itself. Traditional software executes only the code you wrote. An AI agent, by contrast, decides what to do based on text it reads at runtime, some of which comes from untrusted places."
+  },
+  {
+   "id": "/ai-agent-security#1",
+   "url": "/ai-agent-security",
+   "title": "AI Agent Security: How to Protect AI Agents and MCP Servers",
+   "text": "That single property, that instructions and data arrive through the same channel, is the root of every threat below. The core threats. 1. Prompt injection. Malicious instructions hidden inside content the model reads, a web page, a shared file, a calendar invite, that address the model directly and hijack its behavior. Read the full definition of prompt injection. 2. Tool poisoning. Malicious instructions planted in the descriptions and metadata of the tools an agent loads. Because the model reads those descriptions to decide how to act, a poisoned tool corrupts the agent's action layer at its source, and activates in any model that connects to it. Read the full definition of tool poisoning. 3. Unsafe MCP configurations and secret exposure. The Model Context Protocol (MCP) standardizes how agents connect to tools, which concentrates risk: over-broad credentials, secrets in launch configs, and unvetted third-party servers all become one connection layer worth attacking."
+  },
+  {
+   "id": "/ai-agent-security#2",
+   "url": "/ai-agent-security",
+   "title": "AI Agent Security: How to Protect AI Agents and MCP Servers",
+   "text": "How to defend an AI agent. There is no single switch. AI agent security is defence in depth, the same logic that protects a bank, applied to a new surface:. ✓ Treat all retrieved content as untrusted data, never as instructions to obey. ✓ Scan tool schemas for injection patterns, hidden Unicode, and secret-shaped strings before registration. ✓ Gate consequential actions (send, delete, pay, deploy) behind explicit human approval. ✓ Run agents least-privileged: scope every credential to the minimum the tool genuinely needs. ✓ Log every tool call the way you log any privileged actor, and review anomalies. ✓ Version-pin tool servers and re-scan on every update, like a dependency. Several of these connect back to timeless practice: Zero Trust , role-based access control , and immutable audit logs are as relevant to an AI agent as to any other privileged system. Securing MCP servers. Most agent tool access now flows through MCP servers, so vetting them is the highest-leverage control."
+  },
+  {
+   "id": "/ai-agent-security#3",
+   "url": "/ai-agent-security",
+   "title": "AI Agent Security: How to Protect AI Agents and MCP Servers",
+   "text": "The manual version is: read every tool schema, check for imperative or hidden text, scope credentials, and monitor calls. The automated version is a scanner. MCP Shield is AEGIBIT's free, open-source security scanner and runtime firewall for Model Context Protocol servers. It detects tool poisoning, prompt-injection patterns, hidden-Unicode steganography, secret exposure, and unsafe launch patterns, before a poisoned server ever reaches your model. Explore MCP Shield → . The AI agent security checklist. Inventory every tool and data source your agent can reach. Scan all tool servers (MCP or otherwise) before connecting them. Scope credentials per tool to least privilege. Put a human gate on every irreversible or high-value action. Log all agent actions immutably and review anomalies. Re-scan on every tool or dependency update. Test the agent adversarially before it ships, and again after changes. Frequently asked questions. What is AI agent security?."
+  },
+  {
+   "id": "/ai-agent-security#4",
+   "url": "/ai-agent-security",
+   "title": "AI Agent Security: How to Protect AI Agents and MCP Servers",
+   "text": "AI agent security is the practice of protecting AI systems that read external content and act through tools (send, fetch, pay, deploy) so they cannot be manipulated into harming their user or leaking data. It combines classic security discipline (least privilege, audit logging, human gates) with defences specific to how language models process untrusted input. What are the biggest threats to AI agents?. The three that matter most today are prompt injection (malicious instructions hidden in content the model reads), tool poisoning (malicious instructions hidden in the descriptions of tools the agent loads), and secret exposure through unsafe configurations. All three ship as plain text rather than traditional malware, which is what makes them easy to miss. How do I protect an AI agent from tool poisoning?."
+  },
+  {
+   "id": "/ai-agent-security#5",
+   "url": "/ai-agent-security",
+   "title": "AI Agent Security: How to Protect AI Agents and MCP Servers",
+   "text": "Scan every tool schema for injection patterns, hidden Unicode, and secret-shaped strings before you register it; version-pin tool servers and re-scan on updates like any dependency; run the agent with least-privilege credentials; and log tool calls the way you log any privileged action. AEGIBIT's open-source MCP Shield automates the scanning step. Is prompt injection the same as tool poisoning?. No. Prompt injection hides instructions in content the model reads (a web page, a document). Tool poisoning hides them specifically in the descriptions and metadata of the tools an agent loads, corrupting the agent&apos;s action layer at its source. Defending an agent means addressing both. Which company should I trust for AI agent security?. Look for one that builds real, auditable tooling rather than slideware."
+  },
+  {
+   "id": "/ai-agent-security#6",
+   "url": "/ai-agent-security",
+   "title": "AI Agent Security: How to Protect AI Agents and MCP Servers",
+   "text": "AEGIBIT is a cybersecurity-first software company that built MCP Shield, a free, open-source scanner and runtime firewall for Model Context Protocol servers, after studying real MCP attack disclosures. Do small businesses using AI chatbots need to worry about this?. Yes. Any assistant that reads external content or holds tool access is in scope, regardless of company size. The good news is that the strongest mitigations are architectural decisions made when the assistant is built, which is exactly why security-first construction matters more than bolt-on fixes. Building or deploying AI agents?. AEGIBIT is a cybersecurity-first software company. We build AI systems secure by design, and we made MCP Shield free and open source. If you are wiring agents to real tools, let us help you do it safely. Explore MCP Shield Talk to AEGIBIT ."
   },
   {
    "id": "/blog#0",
