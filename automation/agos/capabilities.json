@@ -1,84 +1,174 @@
 {
-  "comment": "AGOS Capability Registry. New powers plug in here, not as new architecture. A proposal only executes if its capability is registered, and 'auto' verdicts additionally require allowAuto=true. Owner 'aira' means the AI operates it inside guardrails; 'founder' means Rahul's human action is the capability.",
-  "capabilities": {
-    "knowledge-collection": {
-      "description": "Crawl and index public AEGIBIT content; feeds the Aira RAG brain and /llms.txt.",
-      "inputs": ["live sitemap", "public pages"],
-      "outputs": ["src/data/aira-kb.json", "/llms.txt"],
-      "permissions": ["repo-commit-via-ci"],
-      "riskLevel": "low",
-      "allowAuto": true,
-      "dependencies": ["build-aira-kb.mjs"],
-      "metrics": ["kb pages", "kb chunks", "kb age days"],
-      "owner": "aira"
-    },
-    "geo-optimization": {
-      "description": "Entity graph, llms.txt, schema, citable content sections (glossary, comparisons, definitions).",
-      "inputs": ["aira-kb", "site content"],
-      "outputs": ["schema JSON-LD", "content PRs"],
-      "permissions": ["pr-only"],
-      "riskLevel": "low",
-      "allowAuto": false,
-      "dependencies": ["knowledge-collection"],
-      "metrics": ["indexed pages", "GSC impressions"],
-      "owner": "aira"
-    },
-    "seo-optimization": {
-      "description": "Technical SEO upkeep and content freshness (meta, links, sitemaps, refreshes).",
-      "inputs": ["site content", "GSC data when wired"],
-      "outputs": ["content PRs", "audit reports"],
-      "permissions": ["pr-only"],
-      "riskLevel": "low",
-      "allowAuto": false,
-      "dependencies": [],
-      "metrics": ["GSC clicks", "indexed pages"],
-      "owner": "aira"
-    },
-    "content-generation": {
-      "description": "Articles and social DRAFTS. Site content ships via gated PRs; social copy is draft-only, founder posts.",
-      "inputs": ["topic queue", "aira-kb"],
-      "outputs": ["blog PRs", "social drafts"],
-      "permissions": ["pr-only", "draft-only-social"],
-      "riskLevel": "medium",
-      "allowAuto": true,
-      "dependencies": ["knowledge-collection"],
-      "metrics": ["posts published", "impressions"],
-      "owner": "aira"
-    },
-    "lead-qualification": {
-      "description": "Score and enrich inbound leads from OUR OWN data; draft outreach from public info only.",
-      "inputs": ["/api/leads data", "public company pages"],
-      "outputs": ["lead scores", "outreach drafts"],
-      "permissions": ["draft-only"],
-      "riskLevel": "medium",
-      "allowAuto": false,
-      "dependencies": [],
-      "metrics": ["leads scored", "reply rate"],
-      "owner": "aira"
-    },
-    "security-intelligence": {
-      "description": "Daily brief from public feeds (CVE/NVD, AI and cybersecurity news, DPDP/gov updates). Planned.",
-      "inputs": ["public RSS/NVD feeds"],
-      "outputs": ["morning briefing section"],
-      "permissions": ["read-public-feeds"],
-      "riskLevel": "low",
-      "allowAuto": true,
-      "dependencies": [],
-      "metrics": ["briefings generated"],
-      "owner": "aira",
-      "status": "planned"
-    },
-    "reputation": {
-      "description": "Review monitoring and drafted responses. Blocked until first Google reviews exist.",
-      "inputs": ["GBP reviews", "brand mentions"],
-      "outputs": ["draft responses"],
-      "permissions": ["draft-only"],
-      "riskLevel": "medium",
-      "allowAuto": false,
-      "dependencies": ["founder: first reviews"],
-      "metrics": ["review count", "avg rating"],
-      "owner": "founder",
-      "status": "blocked-on-founder"
-    }
+ "comment": "AGOS Capability Registry. New powers plug in here, not as new architecture. A proposal only executes if its capability is registered, and 'auto' verdicts additionally require allowAuto=true. Owner 'aira' means the AI operates it inside guardrails; 'founder' means Rahul's human action is the capability. ADR-002: every capability MUST name its primary KPI; the Policy evaluator vetoes proposals whose capability lacks one.",
+ "capabilities": {
+  "knowledge-collection": {
+   "description": "Crawl and index public AEGIBIT content; feeds the Aira RAG brain and /llms.txt.",
+   "inputs": [
+    "live sitemap",
+    "public pages"
+   ],
+   "outputs": [
+    "src/data/aira-kb.json",
+    "/llms.txt"
+   ],
+   "permissions": [
+    "repo-commit-via-ci"
+   ],
+   "riskLevel": "low",
+   "allowAuto": true,
+   "dependencies": [
+    "build-aira-kb.mjs"
+   ],
+   "metrics": [
+    "kb pages",
+    "kb chunks",
+    "kb age days"
+   ],
+   "owner": "aira",
+   "kpi": "Aira answer accuracy and resolution rate (KB freshness as proxy until measured)"
+  },
+  "geo-optimization": {
+   "description": "Entity graph, llms.txt, schema, citable content sections (glossary, comparisons, definitions).",
+   "inputs": [
+    "aira-kb",
+    "site content"
+   ],
+   "outputs": [
+    "schema JSON-LD",
+    "content PRs"
+   ],
+   "permissions": [
+    "pr-only"
+   ],
+   "riskLevel": "low",
+   "allowAuto": false,
+   "dependencies": [
+    "knowledge-collection"
+   ],
+   "metrics": [
+    "indexed pages",
+    "GSC impressions"
+   ],
+   "owner": "aira",
+   "kpi": "AI discoverability and entity coverage (indexed + citable pages; GSC impressions)"
+  },
+  "seo-optimization": {
+   "description": "Technical SEO upkeep and content freshness (meta, links, sitemaps, refreshes).",
+   "inputs": [
+    "site content",
+    "GSC data when wired"
+   ],
+   "outputs": [
+    "content PRs",
+    "audit reports"
+   ],
+   "permissions": [
+    "pr-only"
+   ],
+   "riskLevel": "low",
+   "allowAuto": false,
+   "dependencies": [],
+   "metrics": [
+    "GSC clicks",
+    "indexed pages"
+   ],
+   "owner": "aira",
+   "kpi": "Organic clicks (GSC)"
+  },
+  "content-generation": {
+   "description": "Articles and social DRAFTS. Site content ships via gated PRs; social copy is draft-only, founder posts.",
+   "inputs": [
+    "topic queue",
+    "aira-kb"
+   ],
+   "outputs": [
+    "blog PRs",
+    "social drafts"
+   ],
+   "permissions": [
+    "pr-only",
+    "draft-only-social"
+   ],
+   "riskLevel": "medium",
+   "allowAuto": true,
+   "dependencies": [
+    "knowledge-collection"
+   ],
+   "metrics": [
+    "posts published",
+    "impressions"
+   ],
+   "owner": "aira",
+   "kpi": "Organic impressions and qualified leads from content"
+  },
+  "lead-qualification": {
+   "description": "Score and enrich inbound leads from OUR OWN data; draft outreach from public info only.",
+   "inputs": [
+    "/api/leads data",
+    "public company pages"
+   ],
+   "outputs": [
+    "lead scores",
+    "outreach drafts"
+   ],
+   "permissions": [
+    "draft-only"
+   ],
+   "riskLevel": "medium",
+   "allowAuto": false,
+   "dependencies": [],
+   "metrics": [
+    "leads scored",
+    "reply rate"
+   ],
+   "owner": "aira",
+   "kpi": "Qualified leads per month"
+  },
+  "security-intelligence": {
+   "description": "Daily brief from public feeds (CVE/NVD, AI and cybersecurity news, DPDP/gov updates). Planned.",
+   "inputs": [
+    "public RSS/NVD feeds"
+   ],
+   "outputs": [
+    "morning briefing section"
+   ],
+   "permissions": [
+    "read-public-feeds"
+   ],
+   "riskLevel": "low",
+   "allowAuto": true,
+   "dependencies": [],
+   "metrics": [
+    "briefings generated"
+   ],
+   "owner": "aira",
+   "status": "planned",
+   "kpi": "Founder decision speed on threats (briefing coverage as proxy); risk reduction"
+  },
+  "reputation": {
+   "description": "Review monitoring and drafted responses. Blocked until first Google reviews exist.",
+   "inputs": [
+    "GBP reviews",
+    "brand mentions"
+   ],
+   "outputs": [
+    "draft responses"
+   ],
+   "permissions": [
+    "draft-only"
+   ],
+   "riskLevel": "medium",
+   "allowAuto": false,
+   "dependencies": [
+    "founder: first reviews"
+   ],
+   "metrics": [
+    "review count",
+    "avg rating"
+   ],
+   "owner": "founder",
+   "status": "blocked-on-founder",
+   "kpi": "Review count and average rating"
   }
+ }
 }
