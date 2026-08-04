@@ -1,12 +1,17 @@
 # AGOS Morning Briefing · 2026-08-04
 
-Observed 2 signal(s). Decisions: 0 autonomous, 2 awaiting founder approval, 0 rejected. Full rationale in automation/agos/decisions.jsonl.
+Last night I evaluated 2 opportunities. I rejected 2 (low value, duplicate, or policy), executed 0 low-risk task(s) autonomously inside guardrails, and 2 action(s) await your approval, ranked by expected business impact below.
 
-## Awaiting your approval
-- **Build real content for /glossary and lift its noindex** (worker: geo, authority 85 · geo 90 · revenue 55 · risk 10)
-  risk 10 or type requires judgment: queued for founder
-- **Build real content for /alternatives and lift its noindex** (worker: geo, authority 85 · geo 90 · revenue 55 · risk 10)
-  risk 10 or type requires judgment: queued for founder
+## The work queue (highest ROI first)
+
+| Task | Priority | Confidence | ETA | Status |
+| --- | ---: | ---: | ---: | --- |
+| Build real content for /glossary and lift its noindex | 85 | 40 | 90 min | awaiting-approval |
+| Build real content for /alternatives and lift its noindex | 85 | 40 | 90 min | awaiting-approval |
+
+## Rejected (with reasons)
+- Build real content for /glossary and lift its noindex: duplicate: same dedupeKey accepted within 30 days
+- Build real content for /alternatives and lift its noindex: duplicate: same dedupeKey accepted within 30 days
 
 ## Standing founder levers (unchanged until done)
 - Google reviews from Nibir / SS Auto / Burimar / OJAS

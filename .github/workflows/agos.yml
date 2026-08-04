@@ -41,11 +41,19 @@ jobs:
       - name: Observe, decide, act, report
         run: node automation/agos/run.mjs
 
+      - name: Weekly learning pass (Mondays)
+        run: |
+          if [ "$(date -u +%u)" = "1" ]; then
+            node automation/agos/learn.mjs
+          else
+            echo "Not Monday, learning engine sleeps."
+          fi
+
       - name: Commit ledger, briefing, and any refreshed knowledge
         run: |
           git config user.name "agos-bot"
           git config user.email "contact@aegibit.com"
-          git add automation/agos/decisions.jsonl automation/reports/ src/data/aira-kb.json || true
+          git add automation/agos/decisions.jsonl automation/agos/queue.json automation/reports/ src/data/aira-kb.json || true
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0

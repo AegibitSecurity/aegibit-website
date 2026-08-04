@@ -1,0 +1,19 @@
+{
+  "comment": "AGOS tunable brain. Weights are recalibrated by the Learning Engine (learn.mjs) within the stated bounds; humans may also edit. Every change lands in git, so the brain's evolution is auditable.",
+  "aggregator": {
+    "valueWeights": { "authority": 0.35, "geo": 0.35, "revenue": 0.3 },
+    "valueFloor": 35,
+    "autoRiskCeiling": 25,
+    "autoCostCeilingMinutes": 30
+  },
+  "weightBounds": { "min": 0.1, "max": 0.6 },
+  "typeProfiles": {
+    "kb-refresh":     { "authority": 40, "geo": 80, "revenue": 20, "etaMinutes": 6,  "capability": "knowledge-collection" },
+    "coverage-gap":   { "authority": 85, "geo": 90, "revenue": 55, "etaMinutes": 90, "capability": "geo-optimization" },
+    "stale-refresh":  { "authority": 60, "geo": 55, "revenue": 60, "etaMinutes": 25, "capability": "seo-optimization" },
+    "daily-content":  { "authority": 70, "geo": 65, "revenue": 55, "etaMinutes": 20, "capability": "content-generation" },
+    "social-post":    { "authority": 30, "geo": 25, "revenue": 70, "etaMinutes": 8,  "capability": "content-generation" },
+    "outreach-draft": { "authority": 10, "geo": 5,  "revenue": 90, "etaMinutes": 12, "capability": "lead-qualification" },
+    "default":        { "authority": 30, "geo": 30, "revenue": 30, "etaMinutes": 30, "capability": null }
+  }
+}

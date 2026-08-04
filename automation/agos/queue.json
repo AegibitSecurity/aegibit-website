@@ -1,0 +1,28 @@
+{
+ "items": [
+  {
+   "id": "coverage-glossary",
+   "title": "Build real content for /glossary and lift its noindex",
+   "worker": "geo",
+   "priority": 85,
+   "confidence": 40,
+   "etaMinutes": 90,
+   "status": "awaiting-approval",
+   "firstSeen": "2026-08-04T14:34:06.625Z",
+   "updatedAt": "2026-08-04T14:34:06.625Z",
+   "timesProposed": 1
+  },
+  {
+   "id": "coverage-alternatives",
+   "title": "Build real content for /alternatives and lift its noindex",
+   "worker": "geo",
+   "priority": 85,
+   "confidence": 40,
+   "etaMinutes": 90,
+   "status": "awaiting-approval",
+   "firstSeen": "2026-08-04T14:34:06.625Z",
+   "updatedAt": "2026-08-04T14:34:06.625Z",
+   "timesProposed": 1
+  }
+ ]
+}
