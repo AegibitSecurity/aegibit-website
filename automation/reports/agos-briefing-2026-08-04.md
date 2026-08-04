@@ -12,10 +12,12 @@ Why: highest value-density item in the queue under growth mode, serving this qua
 
 ## The work queue (highest ROI first)
 
-| Task | Priority | Confidence | ETA | Status |
-| --- | ---: | ---: | ---: | --- |
-| Build real content for /glossary and lift its noindex | 85 | 40 | 90 min | awaiting-approval |
-| Build real content for /alternatives and lift its noindex | 85 | 40 | 90 min | awaiting-approval |
+| Task | Priority | Confidence | Founder fit | ETA | Status |
+| --- | ---: | ---: | --- | ---: | --- |
+| Build real content for /glossary and lift its noindex | 85 | 40 | learning (n=0) | 90 min | awaiting-approval |
+| Build real content for /alternatives and lift its noindex | 85 | 40 | learning (n=0) | 90 min | awaiting-approval |
+
+_Founder Twin: learning (0 observations). Every approve/reject teaches it._
 
 ## Rejected (with reasons)
 - Build real content for /glossary and lift its noindex: duplicate: same dedupeKey accepted within 30 days
