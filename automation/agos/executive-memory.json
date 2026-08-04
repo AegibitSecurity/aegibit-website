@@ -24,6 +24,18 @@
    "decision": "Freeze AGOS Core v1.0 (ADR-001). All future effort goes to Knowledge, Evidence, or Revenue.",
    "reason": "Architecture is sufficient to build a company on; advantage now compounds through execution, not design.",
    "outcome": "Design era closed. Execution era open."
+  },
+  {
+   "date": "2026-08-04",
+   "decision": "Adopt the Weekly Executive Review (10 questions, one page, every Monday) and the five CEO metrics as the company's steering instruments.",
+   "reason": "Alignment with reality beats dashboards; five trending metrics cover what matters.",
+   "outcome": "First review generates next Monday."
+  },
+  {
+   "date": "2026-08-04",
+   "decision": "First founder-approved experiment: glossary initiative (exp-glossary-geo), Founder Twin observation #1.",
+   "reason": "Correctly framed comparative hypothesis with measurable outcomes; evidence will decide expansion or rollback.",
+   "outcome": "Execution begun same day."
   }
  ]
 }

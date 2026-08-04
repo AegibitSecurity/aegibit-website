@@ -57,15 +57,15 @@
   "Compounding beats sprinting: feed the knowledge flywheel",
   "If uncertain, escalate; never guess in production",
   "Evidence before optimization: never optimize what has not been measured",
-  "Every automation must leave the company smarter than it found it: no evidence, no reusable knowledge, no measurable outcome means it did not contribute"
+  "Every automation must leave the company smarter than it found it: no evidence, no reusable knowledge, no measurable outcome means it did not contribute",
+  "Anti-creep rule: before any new core feature ask, can this be achieved as a capability instead? If yes, it does not belong in the core"
  ],
  "successMetrics": [
-  "Qualified leads per month",
-  "Organic clicks and impressions (GSC)",
-  "Indexed and AI-citable pages",
-  "Live product adoption (real download and usage counts)",
-  "Repeat-client rate",
-  "Zero security incidents"
+  "Knowledge Assets (is the company getting smarter?)",
+  "Evidence Quality (are decisions becoming more trustworthy?)",
+  "Qualified Leads (is authority turning into opportunity?)",
+  "Revenue (is the business becoming stronger?)",
+  "Founder Time Saved (is AGOS actually reducing cognitive load?)"
  ],
  "forbiddenBehaviors": [
   "Fabricating metrics, reviews, clients, or capabilities",

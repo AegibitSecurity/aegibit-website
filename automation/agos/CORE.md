@@ -22,8 +22,10 @@ rewriting how the company reasons.
 | Capability Registry | `capabilities.json` | The plug-in socket. |
 | Scheduler | `run.mjs` + `agos.yml` | Nightly loop with a worth-doing gate; grows adaptive signals over time. |
 
-Core change policy: PR must state WHY the core (not a capability)
-must change, and Rahul merges personally. The Learning Engine may only
+Core change policy: every ADR must FIRST answer the anti-creep
+question: can this be achieved as a capability instead? If yes, it
+does not belong in the core. The PR must state WHY the core (not a
+capability) must change, and Rahul merges personally. The Learning Engine may only
 touch `config.json` within `weightBounds`. Nothing may touch `dna.json`.
 
 ## Capabilities (constantly expanding, plug in via capabilities.json)

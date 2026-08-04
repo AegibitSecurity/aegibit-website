@@ -77,19 +77,56 @@ if (autos.length > 0) {
   }
 }
 
-// ── Report ──────────────────────────────────────────────────────────
+// ── The Weekly Executive Review ─────────────────────────────────────
+// Rahul's founder discipline (2026-08-04): exactly one page, ten
+// questions, every Monday. Answers come from real data where it
+// exists and say "no data yet" where it does not, alignment with
+// reality over impressive-looking dashboards.
 const today = new Date().toISOString().slice(0, 10);
-const report = [
-  `# AGOS Learning Report · ${today}`,
+const weekAgo = Date.now() - 7 * 864e5;
+const week = decisions.filter((d) => new Date(d.at).getTime() >= weekAgo);
+const weekAuto = week.filter((d) => d.verdict === "auto").length;
+const weekApprove = week.filter((d) => d.verdict === "approve").length;
+const weekReject = week.filter((d) => d.verdict === "reject").length;
+
+let assets = { assets: [] };
+try { assets = JSON.parse(readFileSync(join(AGOS_DIR, "assets.json"), "utf8")); } catch { /* none yet */ }
+let experiments = { experiments: [] };
+try { experiments = JSON.parse(readFileSync(join(AGOS_DIR, "experiments.json"), "utf8")); } catch { /* none yet */ }
+const concluded = experiments.experiments.filter((e) => e.decision != null);
+const running = experiments.experiments.filter((e) => e.status === "running");
+
+const review = [
+  `# AGOS Weekly Review · ${today}`,
   "",
+  `## 1. What did we learn this week?`,
+  `- ${week.length} decisions ledgered (auto ${weekAuto} / founder-queue ${weekApprove} / rejected ${weekReject}). Key finding: ${findings.length ? findings[0] : "none"}`,
+  `## 2. What generated revenue?`,
+  `- No revenue attribution wired yet (honest gap). Track via leads + invoices until measurement lands.`,
+  `## 3. What generated authority?`,
+  `- Knowledge assets on record: ${assets.assets.length}. Authority work ships via the GEO capability (glossary experiment ${running.length ? "RUNNING" : "not running"}).`,
+  `## 4. What failed?`,
+  `- ${failed.length === 0 ? "No failed executions this week." : failed.map((f) => f.title).join("; ")}`,
+  `## 5. What surprised us?`,
+  `- Filled by the founder, or by anomaly detection once measurement data flows. No automated surprises this week.`,
+  `## 6. Which experiment concluded?`,
+  `- ${concluded.length ? concluded.map((e) => `${e.id}: ${e.decision}`).join("; ") : `None concluded. Running: ${running.map((e) => e.id).join(", ") || "none"}.`}`,
+  `## 7. Which assumptions changed?`,
+  `- ${adjusted ? "Evaluator weights recalibrated (see appendix)." : "None: insufficient outcome data to responsibly change assumptions."}`,
+  `## 8. What should stop?`,
+  `- ${droughts.length ? `Founder attention: ${droughts.length} approval-drought item(s), approve or kill them.` : "Nothing flagged for stopping this week."}`,
+  `## 9. What should double down?`,
+  `- Highest value-density queue item: ${queue.items[0] ? queue.items[0].title : "(queue empty)"}.`,
+  `## 10. Single highest-impact action for the coming week?`,
+  `- ${queue.items.find((i) => i.status === "approved" || i.status === "awaiting-approval")?.title ?? "Feed the pipeline: founder levers (reviews, outreach) remain the top unmeasured lever."}`,
+  "",
+  "## Learning Engine appendix",
   `Ledger decisions analyzed: ${decisions.length}. Queue items: ${queue.items.length}. Config adjusted: ${adjusted ? "yes" : "no"}.`,
-  "",
-  "## Findings",
   ...findings.map((f) => `- ${f}`),
   "",
 ].join("\n");
 
 const reportDir = join(ROOT, "automation/reports");
 mkdirSync(reportDir, { recursive: true });
-writeFileSync(join(reportDir, `agos-learning-${today}.md`), report, "utf8");
-console.log(`[agos-learn] ${findings.length} finding(s), adjusted=${adjusted}`);
+writeFileSync(join(reportDir, `agos-weekly-review-${today}.md`), review, "utf8");
+console.log(`[agos-learn] weekly review written, ${findings.length} finding(s), adjusted=${adjusted}`);
