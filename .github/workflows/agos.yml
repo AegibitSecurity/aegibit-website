@@ -1,0 +1,54 @@
+# AGOS, the Autonomous Growth Operating System (Phase A).
+#
+# Nightly loop: observe -> decide (scored, policy-gated, ledgered) ->
+# act (only "auto"-cleared actions, inside existing guardrails) ->
+# morning executive briefing committed to the repo.
+#
+# Founder-gated actions never execute here; they appear in the
+# briefing's "Awaiting your approval" section. Kill switch: the
+# automation/PAUSE file stops this workflow like every other.
+name: agos-nightly
+
+on:
+  schedule:
+    # 21:30 UTC = 03:00 IST, the business improves while Kolkata sleeps.
+    - cron: "30 21 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  agos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Respect the kill switch
+        run: |
+          if [ -f automation/PAUSE ]; then
+            echo "automation/PAUSE present, AGOS stands down."
+            exit 78
+          fi
+        continue-on-error: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Observe, decide, act, report
+        run: node automation/agos/run.mjs
+
+      - name: Commit ledger, briefing, and any refreshed knowledge
+        run: |
+          git config user.name "agos-bot"
+          git config user.email "contact@aegibit.com"
+          git add automation/agos/decisions.jsonl automation/reports/ src/data/aira-kb.json || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore(agos): nightly decisions, briefing, knowledge refresh"
+          git push
