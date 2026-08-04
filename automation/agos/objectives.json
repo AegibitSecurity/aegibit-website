@@ -103,6 +103,20 @@
     "index",
     "refresh"
    ]
+  },
+  {
+   "id": "ai-security-wedge",
+   "title": "Own the AI-agent / MCP security category: be a top AI-cited answer",
+   "keywords": [
+    "ai agent security",
+    "mcp security",
+    "tool poisoning",
+    "prompt injection",
+    "agent",
+    "shield",
+    "llm security",
+    "ai governance"
+   ]
   }
  ],
  "resources": {
@@ -123,7 +137,8 @@
      "objectives": [
       "geo-authority",
       "glossary-30",
-      "aira-accuracy"
+      "aira-accuracy",
+      "ai-security-wedge"
      ]
     },
     {
@@ -149,5 +164,75 @@
     }
    ]
   }
- ]
+ ],
+ "executionRoadmap": {
+  "freezeUntil": "2026-11-02",
+  "sprints": [
+   {
+    "n": 1,
+    "objective": "Prove the GEO experiment",
+    "deliverables": [
+     "12-15 high-quality glossary pages",
+     "DefinedTerm schema",
+     "internal linking",
+     "sitemap updates",
+     "indexing workflow",
+     "measurement baseline"
+    ],
+    "successMetrics": [
+     "pages indexed",
+     "impressions appear",
+     "entity coverage up"
+    ],
+    "status": "active"
+   },
+   {
+    "n": 2,
+    "objective": "Establish authority",
+    "deliverables": [
+     "comparison pages",
+     "alternatives pages",
+     "best-practice guides",
+     "security checklists"
+    ],
+    "successMetrics": [
+     "long-tail impressions",
+     "topical authority",
+     "qualified traffic"
+    ],
+    "status": "planned"
+   },
+   {
+    "n": 3,
+    "objective": "Turn authority into demand",
+    "deliverables": [
+     "case studies",
+     "client stories",
+     "product docs",
+     "interactive tools",
+     "downloadable resources"
+    ],
+    "successMetrics": [
+     "inquiries",
+     "lead quality",
+     "conversion rate"
+    ],
+    "status": "planned"
+   },
+   {
+    "n": 4,
+    "objective": "Close the loop",
+    "deliverables": [
+     "GSC evidence ingestion",
+     "experiment evaluation",
+     "learner calibration",
+     "first evidence-backed recommendation"
+    ],
+    "successMetrics": [
+     "evidence-backed strategy shift"
+    ],
+    "status": "planned"
+   }
+  ]
+ }
 }
