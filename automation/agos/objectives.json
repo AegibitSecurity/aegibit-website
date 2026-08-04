@@ -1,0 +1,26 @@
+{
+  "comment": "Strategic objectives + business mode. The founder edits this file (quarterly or when reality changes); AGOS aligns every decision against it. Mode multipliers weight the Priority evaluator per worker. Targets are honest and revisable, not vanity numbers.",
+  "quarter": "2026-Q3",
+  "mode": "growth",
+  "modes": {
+    "growth":     { "geo": 1.25, "seo": 1.2, "content": 1.15, "sales": 1.0, "product": 0.85, "ops": 0.9 },
+    "revenue":    { "geo": 0.9, "seo": 0.9, "content": 0.85, "sales": 1.3, "product": 1.1, "ops": 0.9 },
+    "survival":   { "geo": 0.5, "seo": 0.6, "content": 0.4, "sales": 1.1, "product": 0.7, "ops": 1.4 },
+    "innovation": { "geo": 0.9, "seo": 0.8, "content": 0.9, "sales": 0.8, "product": 1.35, "ops": 1.0 }
+  },
+  "objectives": [
+    { "id": "leads-30", "title": "Grow qualified inbound leads 30% quarter over quarter", "keywords": ["lead", "outreach", "conversion", "cta", "demo", "contact"] },
+    { "id": "geo-authority", "title": "Establish GEO authority: AEGIBIT citable by AI models", "keywords": ["geo", "llms", "schema", "entity", "citab", "glossary", "definition", "comparison", "noindex"] },
+    { "id": "glossary-30", "title": "Publish 30 genuine glossary/definition pages", "keywords": ["glossary", "definition", "term"] },
+    { "id": "first-reviews", "title": "First 10 Google reviews from real clients", "keywords": ["review", "reputation", "gbp"] },
+    { "id": "enterprise-3", "title": "Sign 3 new business clients", "keywords": ["client", "proposal", "sales", "outreach", "enterprise"] },
+    { "id": "aira-accuracy", "title": "Keep Aira grounded: fresh KB weekly, zero hallucination reports", "keywords": ["kb", "aira", "knowledge", "index", "refresh"] }
+  ],
+  "resources": {
+    "comment": "Can we afford it TODAY, not just is it valuable. Founder minutes cover approvals + human actions; build minutes cover Aira's implementation work per week. The engine defers work that would overrun capacity, ranked losers first.",
+    "weeklyFounderMinutes": 120,
+    "weeklyBuildMinutes": 900,
+    "cashBudget": 0,
+    "notes": "Zero-spend stack. Founder time is the scarcest resource; protect it."
+  }
+}

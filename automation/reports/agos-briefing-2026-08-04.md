@@ -1,6 +1,14 @@
-# AGOS Morning Briefing · 2026-08-04
+# AGOS Morning Brief · 2026-08-04
 
-Last night I evaluated 2 opportunities. I rejected 2 (low value, duplicate, or policy), executed 0 low-risk task(s) autonomously inside guardrails, and 2 action(s) await your approval, ranked by expected business impact below.
+**Business mode:** growth (2026-Q3)  
+**Ops health:** 100/100 (all monitored signals nominal)  
+**Evaluated tonight:** 2 · **auto-executed:** 0 · **awaiting approval:** 2 · **deferred:** 0 · **rejected:** 2
+
+## Top recommendation
+
+**Build real content for /glossary and lift its noindex**  
+Priority 85 · confidence 40% · est. 90 min  
+Why: highest value-density item in the queue under growth mode, serving this quarter's objectives. Reply "approved: coverage-glossary" to execute.
 
 ## The work queue (highest ROI first)
 

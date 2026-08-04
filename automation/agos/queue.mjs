@@ -36,7 +36,10 @@ export function enqueueDecisions(queue, decisions) {
   const byId = new Map(queue.items.map((i) => [i.id, i]));
   for (const d of decisions) {
     if (d.verdict === "reject") continue;
-    const status = d.verdict === "auto" ? "auto-approved" : "awaiting-approval";
+    const status =
+      d.verdict === "auto" ? "auto-approved"
+      : d.verdict === "defer" ? "deferred"
+      : "awaiting-approval";
     const existing = byId.get(d.id);
     if (existing && ["executed", "approved"].includes(existing.status)) continue;
     byId.set(d.id, {
