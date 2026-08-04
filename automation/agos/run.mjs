@@ -1,21 +1,9 @@
 #!/usr/bin/env node
 /**
- * AGOS nightly orchestrator: observe -> reason -> decide -> act ->
- * report. This is the "03:00, nobody logs in, the business improves"
- * loop, Phase A.
- *
- *   1. COLLECT   real signals -> proposals (collect.mjs)
- *   2. DECIDE    score + policy-gate every proposal (engine.mjs),
- *                append to the auditable decisions ledger
- *   3. ACT       execute ONLY verdict="auto" actions, each of which
- *                still runs inside existing guardrails (PRs, CI).
- *                v1 executor: kb-refresh (Aira index + llms.txt).
- *   4. REPORT    write the morning executive briefing to
- *                automation/reports/, committed by the workflow so
- *                Rahul reads it with coffee.
- *
- * Approve-queue items are surfaced in the briefing; they wait for the
- * founder (governance rule 4). Nothing outward ships autonomously.
+ * AGOS nightly orchestrator (Phase B): observe -> board-evaluate ->
+ * queue -> act -> report. The executive summary the briefing opens
+ * with is the long-term contract: "evaluated N opportunities, rejected
+ * R, executed A autonomously, these K await your approval."
  */
 
 import { execFileSync } from "node:child_process";
@@ -24,25 +12,27 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { collectProposals } from "./collect.mjs";
 import { evaluate, commitDecisions } from "./engine.mjs";
+import { loadQueue, saveQueue, enqueueDecisions, markStatus, renderQueueTable } from "./queue.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const today = new Date().toISOString().slice(0, 10);
 
 console.log("[agos] observe...");
 const proposals = collectProposals();
-console.log(`[agos] ${proposals.length} proposal(s) from collectors`);
 
-console.log("[agos] decide...");
+console.log("[agos] board evaluation...");
 const decisions = evaluate(proposals);
 commitDecisions(decisions);
 
 const auto = decisions.filter((d) => d.verdict === "auto");
 const approve = decisions.filter((d) => d.verdict === "approve");
 const reject = decisions.filter((d) => d.verdict === "reject");
-
 console.log(`[agos] verdicts: auto=${auto.length} approve=${approve.length} reject=${reject.length}`);
 
-// ── ACT: execute cleared autonomous actions ─────────────────────────
+// ── Queue: merge tonight's decisions with everything still waiting ──
+let queue = enqueueDecisions(loadQueue(), decisions);
+
+// ── ACT on auto-approved queue items with wired executors ───────────
 const executed = [];
 for (const d of auto) {
   try {
@@ -51,36 +41,39 @@ for (const d of auto) {
       execFileSync("node", [join(ROOT, "automation/scripts/build-aira-kb.mjs")], {
         stdio: "inherit", timeout: 10 * 60 * 1000,
       });
-      // Guard: generated index must respect the no-dash rule before commit.
       execFileSync("node", [join(ROOT, "automation/scripts/check-no-emdash.mjs")], {
         stdio: "inherit", timeout: 60 * 1000,
       });
       executed.push({ ...d, result: "ok" });
+      queue = markStatus(queue, d.id, "executed", "kb refreshed");
     } else {
-      executed.push({ ...d, result: "skipped: no executor wired for this type yet" });
+      executed.push({ ...d, result: "no executor wired yet" });
     }
   } catch (e) {
     executed.push({ ...d, result: `failed: ${e.message?.slice(0, 120)}` });
+    queue = markStatus(queue, d.id, "failed", e.message?.slice(0, 120));
   }
 }
+saveQueue(queue);
 
-// ── REPORT: morning executive briefing ──────────────────────────────
+// ── REPORT: the executive briefing ──────────────────────────────────
+const waiting = queue.items.filter((i) => i.status === "awaiting-approval").length;
 const b = [];
 b.push(`# AGOS Morning Briefing · ${today}`);
 b.push("");
-b.push(`Observed ${proposals.length} signal(s). Decisions: ${auto.length} autonomous, ${approve.length} awaiting founder approval, ${reject.length} rejected. Full rationale in automation/agos/decisions.jsonl.`);
+b.push(
+  `Last night I evaluated ${decisions.length} opportunit${decisions.length === 1 ? "y" : "ies"}. ` +
+  `I rejected ${reject.length} (low value, duplicate, or policy), executed ${executed.filter((e) => e.result === "ok").length} low-risk task(s) autonomously inside guardrails, ` +
+  `and ${waiting} action(s) await your approval, ranked by expected business impact below.`,
+);
+b.push("");
+b.push("## The work queue (highest ROI first)");
+b.push("");
+b.push(renderQueueTable(queue));
 b.push("");
 if (executed.length) {
-  b.push("## Executed autonomously (inside guardrails)");
+  b.push("## Executed autonomously");
   for (const e of executed) b.push(`- ${e.title} -> ${e.result}`);
-  b.push("");
-}
-if (approve.length) {
-  b.push("## Awaiting your approval");
-  for (const d of approve) {
-    b.push(`- **${d.title}** (worker: ${d.worker}, authority ${d.scores.authority} · geo ${d.scores.geo} · revenue ${d.scores.revenue} · risk ${d.scores.risk})`);
-    b.push(`  ${d.reasons[0]}`);
-  }
   b.push("");
 }
 if (reject.length) {
@@ -96,6 +89,5 @@ b.push("");
 
 const reportDir = join(ROOT, "automation/reports");
 mkdirSync(reportDir, { recursive: true });
-const reportPath = join(reportDir, `agos-briefing-${today}.md`);
-writeFileSync(reportPath, b.join("\n"), "utf8");
-console.log(`[agos] briefing -> ${reportPath}`);
+writeFileSync(join(reportDir, `agos-briefing-${today}.md`), b.join("\n"), "utf8");
+console.log(`[agos] briefing -> automation/reports/agos-briefing-${today}.md`);
