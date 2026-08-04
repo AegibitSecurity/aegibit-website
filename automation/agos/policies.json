@@ -1,0 +1,45 @@
+{
+  "comment": "AGOS Organizational Memory: policies the company has ADOPTED, each with its evidence and adoption date. This is institutional knowledge, when someone (or Aira) asks WHY we work a certain way, the answer lives here with receipts. Two statuses: 'adopted' (in force) and 'hypothesis' (believed, evidence still accumulating; the Learning Engine promotes hypotheses only when measured evidence crosses threshold, and adoption itself is a founder call).",
+  "policies": [
+    {
+      "id": "pol-no-emdash",
+      "statement": "No em-dashes in any AEGIBIT artifact.",
+      "status": "adopted",
+      "adoptedOn": "2026-07-27",
+      "evidence": ["Founder directive after brand review of the company profile PDF; enforced by CI guard and AGOS DNA."],
+      "source": "founder"
+    },
+    {
+      "id": "pol-no-phone-on-site",
+      "statement": "The business phone number never appears on the public website; contact routes through /contact and email.",
+      "status": "adopted",
+      "adoptedOn": "2026-07-29",
+      "evidence": ["Founder privacy directive; phone stays on GBP, PDFs, proposals, signatures."],
+      "source": "founder"
+    },
+    {
+      "id": "pol-draft-then-approve",
+      "statement": "All outward publishing (social, email, external posts) is drafted by AGOS and sent by the founder.",
+      "status": "adopted",
+      "adoptedOn": "2026-08-02",
+      "evidence": ["Access governance rules 4; encoded in DNA securityStandard and the no-autopost policy gate."],
+      "source": "founder"
+    },
+    {
+      "id": "pol-glossary-over-generic",
+      "statement": "Reference-grade pages (glossary, definitions, comparisons) are prioritized over generic blog posts for GEO authority.",
+      "status": "hypothesis",
+      "adoptedOn": null,
+      "evidence": ["Industry-consensus reasoning encoded in the authority evaluator (+8 reference-grade bonus). NO first-party measurement yet: awaiting GSC outcome data on our own glossary rollout before this can be promoted to adopted."],
+      "source": "aira-hypothesis"
+    },
+    {
+      "id": "pol-flywheel-single-source",
+      "statement": "Every knowledge surface (Aira chat, llms.txt, future docs) generates from one crawled index, never hand-maintained copies.",
+      "status": "adopted",
+      "adoptedOn": "2026-08-02",
+      "evidence": ["Prevented the stale-prompt failure mode that shipped a retired product (VoiceCore) in the chat widget for weeks."],
+      "source": "founder+aira"
+    }
+  ]
+}

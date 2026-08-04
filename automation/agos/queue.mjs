@@ -72,16 +72,19 @@ export function markStatus(queue, id, status, note) {
 }
 
 /** Render the queue as the briefing's markdown table. */
-export function renderQueueTable(queue, limit = 8) {
+export function renderQueueTable(queue, limit = 8, founderFit = null) {
   const active = queue.items
     .filter((i) => !["executed", "dropped", "failed"].includes(i.status))
     .slice(0, limit);
   if (active.length === 0) return "(queue is empty, all caught up)";
+  // founderFit(item) -> string comes from the Founder Twin: an honest
+  // approval-probability when enough observations exist, else
+  // "learning (n=X)".
   const rows = [
-    "| Task | Priority | Confidence | ETA | Status |",
-    "| --- | ---: | ---: | ---: | --- |",
+    "| Task | Priority | Confidence | Founder fit | ETA | Status |",
+    "| --- | ---: | ---: | --- | ---: | --- |",
     ...active.map((i) =>
-      `| ${i.title} | ${i.priority} | ${i.confidence} | ${i.etaMinutes} min | ${i.status} |`,
+      `| ${i.title} | ${i.priority} | ${i.confidence} | ${founderFit ? founderFit(i) : "n/a"} | ${i.etaMinutes} min | ${i.status} |`,
     ),
   ];
   return rows.join("\n");

@@ -124,13 +124,30 @@ export function alignmentEvaluator(p, ctx) {
     o.keywords.some((k) => text.includes(k.toLowerCase())),
   );
   if (hits.length === 0) {
-    return { score: 30, confidence: 70, reasons: ["matches no current-quarter objective (generic value only)"] };
+    return { score: 30, confidence: 70, reasons: ["matches no current-quarter objective (generic value only)"], chain: null };
+  }
+  // Walk the strategy tree upward: objective -> initiative -> goal, so
+  // the ledger records WHICH goal this task ultimately serves. The
+  // engine optimizes strategy, not isolated tasks.
+  const chains = [];
+  for (const goal of ctx.objectives?.goals ?? []) {
+    for (const init of goal.initiatives ?? []) {
+      for (const h of hits) {
+        if ((init.objectives ?? []).includes(h.id)) {
+          chains.push({ goal: goal.id, initiative: init.id, objective: h.id });
+        }
+      }
+    }
   }
   const score = Math.min(100, 55 + hits.length * 20);
   return {
     score,
     confidence: 75,
-    reasons: [`serves ${hits.length} objective(s): ${hits.map((h) => h.id).join(", ")}`],
+    reasons: [
+      `serves ${hits.length} objective(s): ${hits.map((h) => h.id).join(", ")}`,
+      ...chains.slice(0, 2).map((c) => `strategic chain: ${c.goal} -> ${c.initiative} -> ${c.objective}`),
+    ],
+    chain: chains[0] ?? null,
   };
 }
 

@@ -14,12 +14,28 @@ import { readFileSync, existsSync, statSync } from "node:fs";
 import { collectProposals } from "./collect.mjs";
 import { evaluate, commitDecisions, loadObjectives } from "./engine.mjs";
 import { loadQueue, saveQueue, enqueueDecisions, markStatus, renderQueueTable } from "./queue.mjs";
+import { loadAssets, saveAssets, recordAsset } from "./assets.mjs";
+import { loadModel, predictApproval, twinSummary } from "./founder.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const today = new Date().toISOString().slice(0, 10);
 
 console.log("[agos] observe...");
 const proposals = collectProposals();
+
+// Predictive-scheduling seed: the clock wakes AGOS, but AGOS decides
+// whether the moment is worth acting on. If nothing was observed and
+// nothing waits in the queue, it declines to burn cycles or produce a
+// noise briefing. (Adaptive signals, crawl pressure, deploy windows,
+// founder presence, join this gate as they become measurable.)
+if (proposals.length === 0) {
+  const idleQueue = loadQueue();
+  const pending = idleQueue.items.filter((i) => !["executed", "dropped", "failed"].includes(i.status));
+  if (pending.length === 0) {
+    console.log("[agos] worth-doing gate: no signals, empty queue. Standing down until tomorrow.");
+    process.exit(0);
+  }
+}
 
 console.log("[agos] board evaluation...");
 const decisions = evaluate(proposals);
@@ -47,6 +63,17 @@ for (const d of auto) {
       });
       executed.push({ ...d, result: "ok" });
       queue = markStatus(queue, d.id, "executed", "kb refreshed");
+      // Lifecycle: the completed task becomes (or refreshes) an ASSET.
+      const reg = loadAssets();
+      recordAsset(reg, {
+        assetKey: "aira-knowledge-index",
+        type: "knowledge-index",
+        title: "Aira knowledge index + llms.txt surface",
+        paths: ["src/data/aira-kb.json", "/llms.txt"],
+        taskId: d.id,
+        strategicChain: d.strategicChain,
+      });
+      saveAssets(reg);
     } else {
       executed.push({ ...d, result: "no executor wired yet" });
     }
@@ -102,9 +129,17 @@ if (top) {
   b.push(`Why: highest value-density item in the queue under ${objectives.mode} mode, serving this quarter's objectives. Reply "approved: ${top.id}" to execute.`);
   b.push("");
 }
+const twin = loadModel();
+const fitLabel = (i) => {
+  const t = i.id.startsWith("coverage") ? "coverage-gap" : (i.capability ?? "unknown");
+  const pred = predictApproval(twin, t);
+  return pred.known ? `${pred.approveProbability}% (n=${pred.n})` : `learning (n=${pred.n})`;
+};
 b.push("## The work queue (highest ROI first)");
 b.push("");
-b.push(renderQueueTable(queue));
+b.push(renderQueueTable(queue, 8, fitLabel));
+b.push("");
+b.push(`_${twinSummary(twin)}_`);
 b.push("");
 if (executed.length) {
   b.push("## Executed autonomously");

@@ -194,9 +194,12 @@ export function evaluate(proposals) {
       },
       confidence,
       etaMinutes,
-      board: Object.fromEntries(
-        Object.entries(board).map(([k, v]) => [k, { score: v.score, confidence: v.confidence, reasons: v.reasons }]),
+      // Evidence Layer: every score points to its evidence, decisions
+      // are explainable and auditable forever, not just numeric.
+      evidence: Object.fromEntries(
+        Object.entries(board).map(([k, v]) => [k, { score: v.score, confidence: v.confidence, evidence: v.reasons }]),
       ),
+      strategicChain: board.alignment.chain ?? null,
       priorityReasons: priority?.reasons ?? [],
       verdict,
       reasons,
