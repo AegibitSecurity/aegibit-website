@@ -52,6 +52,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Products (flagship landing pages)
     entry("/products/cortex", 0.9, "weekly"),
 
+    // Authority pillar (GEO wedge: AI agent / MCP security)
+    entry("/ai-agent-security", 0.85, "weekly"),
+
     // Reference library (Sprint 1, exp-glossary-geo)
     entry("/glossary", 0.7, "weekly"),
     ...GLOSSARY.map((t) => entry(`/glossary/${t.slug}`, 0.6, "monthly")),
