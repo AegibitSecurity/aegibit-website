@@ -15,4 +15,25 @@ Disallow: /api/
 Disallow: /login
 Disallow: /signup
 
+# ── AI assistants and LLM crawlers are welcome ──────────────────
+# Structured company overview for language models:
+#   https://www.aegibit.com/llms.txt
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://www.aegibit.com/sitemap.xml
