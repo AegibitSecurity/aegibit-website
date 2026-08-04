@@ -1,0 +1,29 @@
+{
+ "comment": "AGOS Executive Memory: WHY the company changed direction, distinct from the operational Decision Memory (ledger). Five years from now, 'why did we do this' is answered here, not from anyone's recollection.",
+ "entries": [
+  {
+   "date": "2026-06-04",
+   "decision": "Found AEGIBIT as a zero-spend, cybersecurity-first, honesty-absolute company.",
+   "reason": "Premium global standard without burn; trust as the moat; founder covenant with Aira as AI co-founder.",
+   "outcome": "Registered (MSME, trade license, TM filed, GST). Products live. First repeat clients."
+  },
+  {
+   "date": "2026-08-02",
+   "decision": "Build one Autonomous Growth Operating System instead of six separate automation engines.",
+   "reason": "Isolated scripts do not compound; a shared knowledge graph plus a decision gate does.",
+   "outcome": "AGOS Phases A-C shipped in 72 hours. Pending: first measured outcomes."
+  },
+  {
+   "date": "2026-08-04",
+   "decision": "Prioritize GEO (AI citability) over competitor monitoring.",
+   "reason": "Zero-cost, compounding asset, fits authority strategy; monitoring is spend without an asset.",
+   "outcome": "Pending measurement (exp-glossary-geo)."
+  },
+  {
+   "date": "2026-08-04",
+   "decision": "Freeze AGOS Core v1.0 (ADR-001). All future effort goes to Knowledge, Evidence, or Revenue.",
+   "reason": "Architecture is sufficient to build a company on; advantage now compounds through execution, not design.",
+   "outcome": "Design era closed. Execution era open."
+  }
+ ]
+}

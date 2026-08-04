@@ -109,7 +109,15 @@ export function policyEvaluator(p, ctx) {
       reasons: [`unregistered capability for type "${p.type}", register it in capabilities.json first`],
     };
   }
-  return { score: 100, confidence: 100, reasons: ["passes constitutional gates (dna.json) and registry"] };
+  // ADR-002: a capability that cannot name its KPI is not ready to be
+  // built. Enforced mechanically so the rule outlives its authors.
+  if (!ctx.capability.kpi) {
+    return {
+      veto: true, score: 0, confidence: 100,
+      reasons: ["ADR-002: capability has no declared KPI, name the measurable business metric it improves before proposing work"],
+    };
+  }
+  return { score: 100, confidence: 100, reasons: ["passes constitutional gates (dna.json), registry, and ADR-002 KPI requirement"] };
 }
 
 /* ── Strategic Alignment: does this serve THIS quarter? ──────────── */

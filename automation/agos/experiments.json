@@ -1,0 +1,21 @@
+{
+ "comment": "AGOS Business Experiments. Every significant change is an experiment: hypothesis, metrics, duration, then a decision (continue / expand / rollback) based on measured evidence. AGOS learns scientifically, not vibes.",
+ "experiments": [
+  {
+   "id": "exp-glossary-geo",
+   "hypothesis": "Reference-grade glossary pages improve GEO authority and organic discovery more than generic blog posts.",
+   "linkedPolicy": "pol-glossary-over-generic",
+   "metrics": [
+    "GSC impressions on glossary URLs",
+    "GSC clicks",
+    "indexed page count",
+    "qualified leads citing organic"
+   ],
+   "durationDays": 30,
+   "status": "awaiting-start",
+   "startCondition": "Founder approves coverage-glossary; measurement window opens at first page indexation.",
+   "decision": null,
+   "decidedOn": null
+  }
+ ]
+}
