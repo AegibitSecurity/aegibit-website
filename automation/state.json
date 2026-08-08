@@ -1,14 +1,14 @@
 {
   "lastRuns": {
     "generate-blog-post": {
-      "timestamp": "2026-08-07T04:46:35.458Z",
+      "timestamp": "2026-08-08T04:03:12.577Z",
       "success": true,
-      "durationMs": 1698
+      "durationMs": 767
     },
     "generate-seo-pages": {
-      "timestamp": "2026-08-07T04:46:36.736Z",
+      "timestamp": "2026-08-08T04:03:13.584Z",
       "success": true,
-      "durationMs": 697
+      "durationMs": 522
     },
     "seo-audit": {
       "timestamp": "2026-05-02T20:42:31.151Z",
