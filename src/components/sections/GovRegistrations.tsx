@@ -8,7 +8,10 @@ import { BadgeCheck, ScrollText, Landmark } from "lucide-react";
  *  - Udyam (MSME) registration UDYAM-WB-10-0209203, "AEGIBIT GLOBAL
  *    CONSULTING", Ministry of MSME, Government of India, registered
  *    06/06/2026, publicly verifiable at udyamregistration.gov.in.
- *  - Incorporation date 04/06/2026 per the same certificate.
+ *  - Establishment date 04/06/2026 per the same certificate. AEGIBIT
+ *    Global Consulting is a registered proprietorship, NOT an
+ *    incorporated company/LLP, so we say "established", never
+ *    "incorporated" (that would misstate the legal entity type).
  *  - Trademark: TM-A application filed at the Trade Marks Registry,
  *    Kolkata, June 2026. Filed means TM (never claim R until granted).
  * Personal data on the certificates (mobile, email, street address,
@@ -31,7 +34,7 @@ const ITEMS = [
   {
     icon: Landmark,
     title: "Registered Enterprise",
-    line1: "AEGIBIT Global Consulting, incorporated 4 June 2026",
+    line1: "AEGIBIT Global Consulting, established 4 June 2026",
     line2: "Kolkata, West Bengal, India",
   },
 ] as const;

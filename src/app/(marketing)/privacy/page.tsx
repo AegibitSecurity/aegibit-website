@@ -185,10 +185,12 @@ export default function PrivacyPage() {
               </Bullet>
             </ul>
             <P>
-              A formal cookie-consent banner is on the polish roadmap.
-              Until it ships, your operating-system &quot;Do Not
-              Track&quot; signal and your browser&apos;s third-party
-              cookie controls remain authoritative on this site.
+              A cookie-consent banner asks for your choice on your first
+              visit. Analytics and behavioural tracking stay switched off
+              until you accept; declining keeps them off. Only the
+              essential security session cookie runs regardless, because
+              the site cannot function without it. Your browser&apos;s
+              cookie controls also remain authoritative here.
             </P>
           </Section>
 

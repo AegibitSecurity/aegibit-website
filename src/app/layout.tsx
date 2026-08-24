@@ -3,7 +3,8 @@ import { Instrument_Serif } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react";
+import { ConsentedAnalytics } from "@/components/shared/ConsentedAnalytics";
+import { ConsentBanner } from "@/components/shared/ConsentBanner";
 import { TrackingProvider } from "@/components/shared/TrackingProvider";
 import { MarketingChrome } from "@/components/shared/MarketingChrome";
 import { SITE_URL } from "@/lib/seo";
@@ -108,7 +109,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rationale + the "why each component" doc.
         */}
         <MarketingChrome />
-        <Analytics />
+        <ConsentBanner />
+        <ConsentedAnalytics />
       </body>
     </html>
   );

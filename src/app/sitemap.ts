@@ -89,6 +89,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Legal
     entry("/privacy", 0.4, "yearly"),
     entry("/terms", 0.4, "yearly"),
+    entry("/refund-policy", 0.4, "yearly"),
+    entry("/grievance", 0.4, "yearly"),
     entry("/dpdp", 0.5, "yearly"),
   ];
 

@@ -32,6 +32,8 @@ const COLS = {
   Legal: [
     { label:"Privacy",       href:"/privacy" },
     { label:"Terms",         href:"/terms"   },
+    { label:"Refunds",       href:"/refund-policy" },
+    { label:"Grievance",     href:"/grievance" },
     { label:"DPDP (India)",  href:"/dpdp"    },
     { label:"Security",      href:"/security" },
   ],

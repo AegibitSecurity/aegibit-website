@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useVisitorStore } from "@/stores/visitor-store";
 import { getDeviceType, getBrowser, getOS } from "@/lib/behavior-engine";
+import { useConsent } from "@/lib/consent";
 
 /**
  * Site-wide visitor-tracking hook.
@@ -37,6 +38,14 @@ export function useVisitorTracking() {
   const visitorId = useVisitorStore((s) => s.visitorId);
   const initialized = useRef(false);
 
+  // DPDP consent gate. Behavioural tracking (the /api/visitors visitor
+  // creation below) runs only after the visitor accepts. Everything
+  // else in this hook keys off visitorId, which is issued ONLY by that
+  // gated call, so gating this single choke point cascades to presence,
+  // page-view, scroll, and the vc_return cookie. useConsent reacts live
+  // when the visitor changes their choice, no reload needed.
+  const consented = useConsent() === "granted";
+
   // ── 0. Live-presence heartbeat ────────────────────────────────────
   // Tells /api/presence "this visitor is on the site right now" every
   // 30s while the tab is visible, so the admin dashboard can show a
@@ -65,8 +74,9 @@ export function useVisitorTracking() {
     };
   }, [visitorId]);
 
-  // ── 1. One-shot init ──────────────────────────────────────────────
+  // ── 1. One-shot init (consent-gated) ──────────────────────────────
   useEffect(() => {
+    if (!consented) return; // no visitor created until DPDP consent
     if (initialized.current) return;
     initialized.current = true;
 
@@ -117,11 +127,11 @@ export function useVisitorTracking() {
         document.cookie = "vc_return=1; max-age=2592000; path=/; SameSite=Lax";
       })
       .catch(() => {});
-    // Intentionally one-shot. `pathname` is captured at first mount
+    // One-shot per grant. `pathname` is captured at first mount
     // (landing page); subsequent route changes are handled by the
-    // page-view effect below.
+    // page-view effect below. Re-runs if consent flips to granted.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [consented]);
 
   // ── 2. Page-view tracking ─────────────────────────────────────────
   useEffect(() => {
