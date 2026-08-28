@@ -59,6 +59,16 @@ const HOME_JSON_LD = {
             "@type": "Offer",
             itemOffered: {
               "@type": "SoftwareApplication",
+              name: "AEGIBIT Cortex",
+              url: "https://www.aegibit.com/products/cortex",
+              description:
+                "AI-powered business platform: CRM and sales, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF, ESI, Professional Tax) and attendance, approvals, a WhatsApp support inbox, and an AI copilot. Multi-tenant, secure, offline mobile. Start free.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "SoftwareApplication",
               name: "PayMint",
               url: "https://www.aegibit.com/products/paymint",
               description:

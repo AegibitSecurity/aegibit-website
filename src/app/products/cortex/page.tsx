@@ -3,23 +3,31 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { buildMetadata, buildBreadcrumbJsonLd, SITE_URL } from "@/lib/seo";
 import {
-  BrainCircuit, Sparkles, Database, Gauge, Workflow, ShieldCheck,
-  Boxes, Globe, ArrowRight, Lock, Layers, TrendingUp,
-  Users, FileText, Smartphone, RefreshCw, Command,
+  Sparkles, Gauge, ShieldCheck,
+  Globe, ArrowRight, Lock, Layers,
+  Users, FileText, Smartphone, RefreshCw,
+  Receipt, Banknote, CalendarCheck, UserCheck, MessageSquare,
+  BarChart3, ClipboardCheck, Fingerprint,
 } from "lucide-react";
 
 /**
  * /products/cortex, the AEGIBIT Cortex product page.
  *
- * Cortex is AEGIBIT's AI-powered, multi-tenant CRM and revenue platform:
- * live web app (cortex.aegibit.com), plus offline-first mobile apps.
- * Honesty bar, unchanged: everything described here is a capability that
- * is BUILT and deployed per the Cortex repo status (phases 1-13, all
- * "Built"), and the positioning rests only on the market-gap analysis'
- * VERIFIED differentiators, never the refuted / do-not-cite claims. No
- * customer counts, no fabricated metrics. Cortex is a browser SaaS, so
- * "run it on your computer" launches the real web app, there is no
- * desktop installer and we do not pretend there is one.
+ * Cortex is AEGIBIT's AI-powered, multi-tenant BUSINESS OPERATING
+ * SYSTEM: a live web app (cortex.aegibit.com) plus an offline-first
+ * mobile app. It is far more than a CRM: CRM + CPQ + GST invoicing +
+ * accounts-payable + full HRMS (India-compliant payroll with
+ * PF/ESI/Professional-Tax, attendance with geofence/GPS/selfie, leave)
+ * + approvals + omnichannel support inbox + reporting + an AI copilot.
+ *
+ * Honesty bar (unchanged): every capability described here is BUILT and
+ * mounted in the Cortex repo (verified against apps/api/app/api/v1
+ * routers + apps/web routes, 2026-08). We deliberately do NOT claim the
+ * documented non-goals: marketing-automation/journey builder, native
+ * telephony/dialer, a full general-ledger accounting system, or
+ * Google/Microsoft social SSO. No customer counts, no invented metrics.
+ * Cortex is a browser SaaS, so "open on your computer" launches the real
+ * web app; there is no desktop installer and we do not pretend there is.
  */
 
 const PAGE_PATH = "/products/cortex";
@@ -32,46 +40,129 @@ const ANDROID_APK_URL = "/download/cortex-android";
 const ANDROID_VERSION = "1.1.0";
 
 export const metadata: Metadata = buildMetadata({
-  title: "AEGIBIT Cortex: The AI CRM That Does the Data Entry For You",
+  title: "AEGIBIT Cortex: AI CRM, GST Invoicing, HRMS & Payroll in One Platform",
   description:
-    "AEGIBIT Cortex is an AI-powered, multi-tenant CRM and revenue platform. Zero-entry AI capture, a built-in data-quality engine, native CPQ and invoicing, transparent pricing, and offline-first mobile. Runs in any browser. Powered by AEGIBIT.",
+    "AEGIBIT Cortex is an AI-powered, multi-tenant business platform: CRM and sales pipeline, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF/ESI/Professional Tax), attendance with GPS and selfie, approvals, a WhatsApp support inbox, and an AI copilot. Runs in any browser, plus offline mobile. Start free. Powered by AEGIBIT.",
   path: PAGE_PATH,
   keywords: [
     "AI CRM",
-    "CRM software",
-    "sales automation platform",
+    "business management software",
+    "HRMS software India",
+    "payroll software India",
+    "PF ESI professional tax payroll",
+    "attendance management software",
+    "GST invoicing software",
     "CPQ quotation software",
+    "accounts payable software",
     "CRM for SMB and mid-market",
+    "ERP alternative for SMB",
     "HubSpot alternative",
-    "Salesforce alternative",
+    "Zoho alternative",
     "AEGIBIT Cortex",
     "AEGIBIT",
   ],
 });
 
-// Each capability maps to a VERIFIED pain / differentiator in the Cortex
-// market-gap analysis (docs/04). No refuted stats are used anywhere.
-const FEATURES = [
-  { icon: Sparkles, title: "AI that does the data entry, not just chat", body: "Reps lose most of their day to admin, industry research puts non-selling work near 70% of their time. Cortex auto-logs emails, calls, and meetings straight into the timeline and auto-fills the record. You confirm with one click instead of filling a form. This is the single highest-ROI thing an AI can do in a CRM." },
-  { icon: Database, title: "A data-quality engine, built in", body: "Bad CRM data quietly costs revenue. Cortex ships real-time duplicate detection (exact and fuzzy), a clean merge experience, validation rules, and a tenant Data Health score that nudges you on stale records, capabilities most suites sell as a paid add-on, included here." },
-  { icon: TrendingUp, title: "Everything to close, on one platform", body: "Native CPQ and quotation with tax and GST, versioning, an approval workflow with discount tiers, and invoicing, all in the core. Not bolt-on hubs, not integrations you rent, not a per-module upsell every quarter." },
-  { icon: Command, title: "Low-click, role-tailored, Linear-fast", body: "A command palette, inline editing, and keyboard-first flows. Rep, manager, finance, and support each get a home screen built for their job. Cortex is designed to log anything in under three clicks, the opposite of the click-heavy incumbents people quietly resent." },
-  { icon: BrainCircuit, title: "ROI-instrumented AI, not demo flash", body: "Summaries, deal-risk scoring, and forecasting, each tied to a measurable time-saved or revenue-surfaced number. A provider-agnostic engine runs across models with automatic fallback, so the intelligence layer never goes dark." },
-  { icon: RefreshCw, title: "No lock-in, by design", body: "One-click full data export, a documented schema, and guided importers from Salesforce, HubSpot, Pipedrive, and Zoho. We win by being easy to join and easy to leave, the opposite of the switching-cost trap that keeps people on tools they dislike." },
-  { icon: Boxes, title: "Enterprise extensions in the core", body: "An assignment engine with five routing modes, a universal activity timeline, source analytics, shareable links with engagement tracking, and a universal inventory and matching engine with dashboards and CSV exports." },
-  { icon: Smartphone, title: "A real field-sales mobile app", body: "Offline-first mobile with a genuine sync engine and an offline outbox, auth, leads, deals, and an AI copilot in your pocket, a true field tool, not a shrunk-down web view." },
+// Core capability grid. Each maps to a VERIFIED, shipped router in the
+// Cortex repo (apps/api/app/api/v1). Business language, owner-first.
+const CAPABILITIES = [
+  {
+    icon: Sparkles,
+    title: "Sell, without the data entry",
+    body: "A full CRM: leads, companies, contacts, and a Kanban deal pipeline with stage history. The AI copilot logs activity and drafts follow-ups for you, and auto lead-assignment routes every new lead to the right rep. You confirm, you don't type.",
+  },
+  {
+    icon: Receipt,
+    title: "Quote to cash, GST built in",
+    body: "Native CPQ with line items, discounts, and tax, immutable quote versioning, and one-click quote-to-invoice. Full invoicing with GST-aware totals, payment reminders, and a revenue overview. No bolt-on billing tool to rent.",
+  },
+  {
+    icon: Banknote,
+    title: "Run India-compliant payroll",
+    body: "Payroll runs that generate payslips with statutory PF, ESI, and Professional Tax handled for you, plus verifiable payslips with a public verify link. Your accountant stops doing it by hand.",
+  },
+  {
+    icon: Fingerprint,
+    title: "Attendance you can actually trust",
+    body: "Check-in and check-out with geofences, device binding, GPS, break tracking, and selfie capture, a live attendance board, register, and analytics. Built for field teams and multi-branch businesses, not just a desk clock.",
+  },
+  {
+    icon: UserCheck,
+    title: "A real HR system, not a spreadsheet",
+    body: "Employee master, onboarding, org structure, and an employee self-service portal with documents and leave requests with balances. Your whole team's records in one secure place.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Approve spend and pay vendors",
+    body: "Accounts-payable with vendor bills, approval, reconciliation, and archive, plus vendor advances and refunds, and procurement requisitions with approval chains. Multi-level approvals with discount tiers and delegation across the platform.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Every customer conversation in one inbox",
+    body: "An omnichannel Connect inbox with WhatsApp channel provisioning and webhooks, a support-ticket desk, meetings, and a knowledge base. Sales, support, and success on one timeline.",
+  },
+  {
+    icon: BarChart3,
+    title: "See everything, with an AI copilot on top",
+    body: "An executive dashboard, analytics, and custom reports with exports. The AI copilot spans the platform: account summaries, proposal drafting, deal-risk scoring, and forecasting, running provider-agnostic across models with automatic fallback.",
+  },
+] as const;
+
+// India-first back office is the single strongest differentiator.
+const INDIA_FIRST = [
+  "GST-aware quoting and invoicing, from quote to paid",
+  "Payroll with statutory PF, ESI, and Professional Tax",
+  "Verifiable payslips with a public verify link",
+  "Attendance with geofence, device binding, GPS, and selfie",
 ] as const;
 
 const SECURITY = [
   { icon: Lock, text: "Multi-tenant isolation enforced at the database with PostgreSQL Row-Level Security, a tenant_id on every row" },
-  { icon: ShieldCheck, text: "JWT with refresh-token rotation and reuse detection, plus TOTP multi-factor authentication" },
-  { icon: Layers, text: "Role-based access control with custom roles and dynamic permissions from day one" },
+  { icon: ShieldCheck, text: "A built-in Security Center: automated validation runs, a scoring model, and scheduled scans, because AEGIBIT is a security company first" },
+  { icon: Layers, text: "Role-based access control with custom roles, plus privacy tooling: consent, data export, and erasure" },
 ] as const;
 
-const PRICING_POINTS = [
-  "Flat, per-seat pricing with all core modules included",
-  "No feature paywalls on CPQ, approvals, invoicing, support, or reporting",
-  "No punitive tier cliffs, and no charging for breadth you never use",
+const WHO = [
+  { icon: Users, role: "Sales teams", line: "Auto-logged activity, AI drafting, and one-click confirm. More time selling, less time typing." },
+  { icon: Gauge, role: "Founders and ops", line: "One platform instead of a stack of six. CRM, invoicing, HR, and payroll that finally talk to each other." },
+  { icon: FileText, role: "Finance and RevOps", line: "GST invoicing, accounts-payable, approvals, and clean, exportable data they can trust." },
+  { icon: CalendarCheck, role: "HR and admin", line: "Payroll, attendance, leave, and employee records, compliant and in one place." },
+] as const;
+
+// Verified from billing_service.py: Starter is free (up to 3 seats).
+// Exact paid numbers/currency are intentionally not published here
+// pending founder confirmation; editions are named, price on request.
+const EDITIONS = [
+  { name: "Starter", line: "Free, up to 3 seats. Get your whole business on one platform at zero cost." },
+  { name: "Growth", line: "Per seat, everything included, for growing teams. No feature paywalls." },
+  { name: "Enterprise", line: "Per seat, for larger teams, with the scale and controls big operations need." },
+] as const;
+
+const FAQS = [
+  {
+    q: "Is Cortex a CRM or a full business platform?",
+    a: "Both. Cortex starts as an AI CRM with a full sales pipeline, but it also runs your back office: CPQ and GST invoicing, accounts-payable, a complete HRMS with payroll and attendance, approvals, and a customer-support inbox, all on one multi-tenant platform.",
+  },
+  {
+    q: "Does Cortex handle payroll in India?",
+    a: "Yes. Cortex runs payroll that generates payslips with statutory PF, ESI, and Professional Tax, and produces verifiable payslips with a public verify link. It is built for Indian statutory requirements.",
+  },
+  {
+    q: "How does Cortex track attendance?",
+    a: "Employees check in and out with geofences, device binding, GPS, break tracking, and selfie capture. Managers get a live attendance board, a register, and analytics. It is designed for field and multi-branch teams, not just a desk.",
+  },
+  {
+    q: "Is my data isolated from other companies?",
+    a: "Yes. Cortex enforces multi-tenant isolation at the database with PostgreSQL Row-Level Security, so every row carries a tenant id and one company can never read another's data. AEGIBIT is a security company, and Cortex ships a built-in Security Center with scored validation scans.",
+  },
+  {
+    q: "Can my team use Cortex on the phone?",
+    a: "Yes. Cortex runs in any modern browser with nothing to install, and there is a real offline-first Android app with a sync engine, leads, deals, and the AI copilot in your pocket. An iOS build is on the way.",
+  },
+  {
+    q: "How much does Cortex cost?",
+    a: "Cortex has a free Starter edition for up to 3 seats, plus paid Growth and Enterprise editions priced per seat with all core modules included and no feature paywalls. Email contact@aegibit.com for a straight number for your team size.",
+  },
 ] as const;
 
 function productJsonLd() {
@@ -81,26 +172,52 @@ function productJsonLd() {
     "@id": `${SITE_URL}${PAGE_PATH}#app`,
     name: "AEGIBIT Cortex",
     applicationCategory: "BusinessApplication",
-    applicationSubCategory: "Customer Relationship Management",
+    applicationSubCategory: "Customer Relationship Management, HRMS, Invoicing",
     operatingSystem: "Web, Android, iOS",
     url: `${SITE_URL}${PAGE_PATH}`,
     installUrl: APP_URL,
     description:
-      "AI-powered, multi-tenant CRM and revenue platform by AEGIBIT: zero-entry AI capture, built-in data-quality engine, native CPQ and invoicing, approval workflows, offline-first mobile, and transparent pricing. Multi-tenant isolation via PostgreSQL Row-Level Security.",
+      "AI-powered, multi-tenant business platform by AEGIBIT: CRM and sales pipeline, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF/ESI/Professional Tax), attendance with GPS and selfie, approvals, an omnichannel WhatsApp support inbox, reporting, and an AI copilot. Multi-tenant isolation via PostgreSQL Row-Level Security. Offline-first mobile.",
     author: { "@id": `${SITE_URL}/#org` },
     brand: { "@id": `${SITE_URL}/#org` },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "INR",
+      description: "Free Starter edition for up to 3 seats; paid Growth and Enterprise editions priced per seat.",
+    },
     featureList: [
-      "Zero-entry AI activity capture and auto-fill",
-      "Built-in data-quality engine with dedupe, merge, and health score",
-      "Native CPQ and quotation with tax and GST",
-      "Approval workflows with discount tiers",
-      "Invoicing in the core",
-      "Deal pipeline with Kanban and stage history",
-      "ROI-instrumented AI: summaries, deal-risk, forecasting",
-      "One-click data export and guided importers (anti-lock-in)",
-      "Offline-first mobile with sync engine",
+      "AI CRM with leads, companies, contacts, and a Kanban deal pipeline",
+      "Zero-entry AI activity capture and follow-up drafting",
+      "Native CPQ and quotation with GST and immutable versioning",
+      "GST invoicing with payment reminders and revenue overview",
+      "Accounts-payable: vendor bills, approvals, reconciliation",
+      "Full HRMS: employee master, onboarding, self-service portal",
+      "India-compliant payroll with PF, ESI, and Professional Tax",
+      "Verifiable payslips with public verify links",
+      "Attendance with geofence, device binding, GPS, and selfie",
+      "Leave management with balances and requests",
+      "Multi-level approval workflows with delegation",
+      "Omnichannel support inbox with WhatsApp and ticketing",
+      "Executive dashboards, analytics, and custom reports",
+      "AI copilot: summaries, deal-risk, forecasting (provider-agnostic)",
       "Multi-tenant isolation via PostgreSQL Row-Level Security",
+      "Built-in Security Center and GDPR consent/export/erasure tooling",
+      "Offline-first mobile app with a sync engine",
     ],
+  };
+}
+
+function faqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}${PAGE_PATH}#faq`,
+    mainEntity: FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 }
 
@@ -116,6 +233,7 @@ export default function CortexPage() {
     <>
       <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd()) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       <main id="main-content" style={{ background: "#000" }}>
@@ -135,13 +253,13 @@ export default function CortexPage() {
             <h1 className="font-light leading-tight mb-6" style={{ fontSize: "clamp(2.2rem, 5vw, 3.6rem)", color: "#fff" }}>
               AEGIBIT Cortex.{" "}
               <span style={{ background: "linear-gradient(135deg, #fff 0%, #818CF8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                The AI CRM that does the data entry for you.
+                One platform to sell, invoice, and run your team.
               </span>
             </h1>
             <p className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-9" style={{ color: "#A1A1AA" }}>
-              A multi-tenant CRM, sales-automation, quotation, and customer-success platform, rebuilt around one idea:
-              the software should do the admin, not the salesperson. Zero-entry AI capture, a data-quality engine, native
-              CPQ and invoicing, transparent pricing, and a real offline mobile app. Powered by AEGIBIT.
+              An AI-powered business platform that replaces the stack of disconnected tools you run today. CRM and sales,
+              CPQ and GST invoicing, accounts-payable, a full HRMS with India-compliant payroll and attendance, approvals,
+              and a customer-support inbox, on one secure, multi-tenant platform. Start free. Powered by AEGIBIT.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <a
@@ -151,7 +269,7 @@ export default function CortexPage() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-transform hover:-translate-y-0.5"
                 style={{ background: "#818CF8", color: "#000" }}
               >
-                Create your workspace <ArrowRight size={16} />
+                Start free <ArrowRight size={16} />
               </a>
               <a
                 href={APP_URL}
@@ -160,7 +278,7 @@ export default function CortexPage() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
               >
-                <Globe size={15} /> Open Cortex on your computer
+                <Globe size={15} /> Open Cortex in your browser
               </a>
               <a
                 href={ANDROID_APK_URL}
@@ -179,9 +297,8 @@ export default function CortexPage() {
               </a>
             </div>
             <p className="mt-6 text-xs" style={{ color: "#52525B" }}>
-              Cortex runs in any modern browser, nothing to install. Prefer the field app?{" "}
-              Download the Android APK (v{ANDROID_VERSION}) above, tap the file, and allow install
-              from your browser when Android asks. On iPhone? Email us, an iOS build is on the way.
+              Free Starter edition, up to 3 seats. Cortex runs in any modern browser, nothing to install. Prefer the field
+              app? Download the Android APK (v{ANDROID_VERSION}) above. On iPhone? Email us, an iOS build is on the way.
             </p>
           </div>
         </section>
@@ -193,30 +310,29 @@ export default function CortexPage() {
               The problem
             </p>
             <h2 className="font-light mb-6" style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", color: "#fff" }}>
-              CRMs were supposed to remove busywork. Most of them added it.
+              Your business runs on six tools that don&apos;t talk to each other.
             </h2>
             <p className="text-base leading-relaxed" style={{ color: "#A1A1AA" }}>
-              Bad data costs revenue. Pricing hides behind tier cliffs and per-module upsells. Reps spend the majority
-              of their day on data entry instead of selling, and the interfaces are so click-heavy that even the market
-              leaders are rebuilding them. Cortex was designed by studying exactly what people complain about, and
-              winning on every one of those points.
+              A CRM here, invoicing there, payroll in a spreadsheet, attendance on paper, approvals over WhatsApp. Data
+              and money leak between the gaps, and you pay for all of it separately. Cortex puts the whole operation on
+              one platform, so the record a rep updates is the same record finance invoices and HR pays against.
             </p>
           </div>
         </section>
 
-        {/* Features */}
+        {/* Capabilities */}
         <section className="px-6 lg:px-12 py-20 md:py-24 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
               <p className="text-[11px] uppercase font-medium mb-4" style={{ color: ACCENT, letterSpacing: "0.2em" }}>
-                Why teams switch to Cortex
+                Everything your business runs on
               </p>
               <h2 className="font-light" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", color: "#fff" }}>
-                Built to win on the four things people hate about CRMs
+                One platform. The whole operation.
               </h2>
             </div>
             <div className="grid sm:grid-cols-2 gap-5">
-              {FEATURES.map((f) => {
+              {CAPABILITIES.map((f) => {
                 const Icon = f.icon;
                 return (
                   <div key={f.title} className="rounded-2xl p-7" style={{ background: "#0D0D0D", border: "1px solid rgba(255,255,255,0.07)" }}>
@@ -232,6 +348,28 @@ export default function CortexPage() {
           </div>
         </section>
 
+        {/* India-first back office */}
+        <section className="px-6 lg:px-12 py-20 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-[11px] uppercase font-medium mb-4" style={{ color: ACCENT, letterSpacing: "0.2em" }}>
+                Built for India
+              </p>
+              <h2 className="font-light" style={{ fontSize: "clamp(1.7rem, 3vw, 2.3rem)", color: "#fff" }}>
+                The back office, compliant out of the box
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {INDIA_FIRST.map((t) => (
+                <div key={t} className="rounded-xl p-6 flex gap-3" style={{ background: "#0D0D0D", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <span style={{ color: "#10B981", marginTop: "0.15rem" }}>✓</span>
+                  <p className="text-sm leading-relaxed" style={{ color: "#D4D4D8" }}>{t}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Who it's for */}
         <section className="px-6 lg:px-12 py-20 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
           <div className="max-w-5xl mx-auto">
@@ -240,16 +378,11 @@ export default function CortexPage() {
                 Who it is for
               </p>
               <h2 className="font-light" style={{ fontSize: "clamp(1.7rem, 3vw, 2.3rem)", color: "#fff" }}>
-                SMB and mid-market teams that sell
+                SMB and mid-market teams that want one system
               </h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { icon: Users, role: "Sales reps", line: "Stop typing. Auto-logged activity and one-click confirm means more time in front of customers." },
-                { icon: Gauge, role: "Sales managers", line: "A real-time pipeline, deal-risk, and forecasting, without chasing the team for updates." },
-                { icon: FileText, role: "Finance and RevOps", line: "Native CPQ, approvals, and invoicing with clean, exportable data they can trust." },
-                { icon: Workflow, role: "Founders and ops", line: "One transparent-priced platform that replaces a stack of add-ons, with no lock-in." },
-              ].map((p) => {
+              {WHO.map((p) => {
                 const Icon = p.icon;
                 return (
                   <div key={p.role} className="rounded-2xl p-6" style={{ background: "#0D0D0D", border: "1px solid rgba(255,255,255,0.07)" }}>
@@ -270,7 +403,7 @@ export default function CortexPage() {
               Built by a security company
             </p>
             <h2 className="font-light mb-10" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: "#fff" }}>
-              Your customer data, isolated at the database
+              Your business data, isolated at the database
             </h2>
             <div className="grid sm:grid-cols-3 gap-4">
               {SECURITY.map((s) => {
@@ -286,42 +419,76 @@ export default function CortexPage() {
           </div>
         </section>
 
-        {/* Pricing philosophy */}
+        {/* Editions */}
         <section className="px-6 lg:px-12 py-20 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl p-8" style={{ background: "linear-gradient(180deg, #0b0b1a 0%, #0a0a0a 100%)", border: "1px solid rgba(129,140,248,0.30)" }}>
-              <p className="text-[11px] uppercase font-bold mb-3" style={{ color: ACCENT, letterSpacing: "0.16em" }}>Pricing is a feature</p>
-              <p className="mb-4" style={{ fontSize: "1.5rem", color: "#fff", fontWeight: 500 }}>Flat per seat. Everything included.</p>
-              <ul className="space-y-3 mb-6">
-                {PRICING_POINTS.map((t) => (
-                  <li key={t} className="text-sm leading-relaxed flex gap-2" style={{ color: "#A1A1AA" }}>
-                    <span style={{ color: ACCENT }}>·</span> {t}
-                  </li>
-                ))}
-              </ul>
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-[11px] uppercase font-medium mb-4" style={{ color: ACCENT, letterSpacing: "0.2em" }}>
+                Pricing is a feature
+              </p>
+              <h2 className="font-light" style={{ fontSize: "clamp(1.7rem, 3vw, 2.3rem)", color: "#fff" }}>
+                Start free. Everything included. No paywalls.
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-4 mb-8">
+              {EDITIONS.map((e, i) => (
+                <div
+                  key={e.name}
+                  className="rounded-2xl p-7"
+                  style={{
+                    background: i === 0 ? "linear-gradient(180deg, #0b0b1a 0%, #0a0a0a 100%)" : "#0D0D0D",
+                    border: i === 0 ? "1px solid rgba(129,140,248,0.30)" : "1px solid rgba(255,255,255,0.07)",
+                  }}
+                >
+                  <p className="text-[11px] uppercase font-bold mb-3" style={{ color: i === 0 ? ACCENT : "#71717A", letterSpacing: "0.14em" }}>{e.name}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#A1A1AA" }}>{e.line}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center">
               <a
                 href="mailto:contact@aegibit.com?subject=Cortex pricing for my team"
                 className="inline-flex items-center gap-2 text-sm font-semibold"
                 style={{ color: ACCENT }}
               >
-                Get a straight number <ArrowRight size={15} />
+                Get a straight number for your team <ArrowRight size={15} />
               </a>
             </div>
-            <div className="rounded-2xl p-8" style={{ background: "#0D0D0D", border: "1px solid rgba(255,255,255,0.07)" }}>
-              <p className="text-[11px] uppercase font-bold mb-4" style={{ color: "#71717A", letterSpacing: "0.16em" }}>What is inside, today</p>
-              <ul className="space-y-3">
-                {[
-                  "CRM: companies, contacts, deals, Kanban, dedupe, lead conversion",
-                  "Sales: CPQ, quotations, approval workflow, invoicing",
-                  "AI: auto-capture, summaries, deal-risk, forecasting",
-                  "Mobile: offline-first Android and iOS with a real sync engine",
-                  "Enterprise: assignment engine, timeline, analytics, inventory matching",
-                ].map((t) => (
-                  <li key={t} className="text-sm leading-relaxed" style={{ color: "#A1A1AA" }}>
-                    <span style={{ color: "#10B981" }}>✓</span> {t}
-                  </li>
-                ))}
-              </ul>
+          </div>
+        </section>
+
+        {/* No lock-in */}
+        <section className="px-6 lg:px-12 py-16 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+          <div className="max-w-3xl mx-auto text-center">
+            <RefreshCw size={22} style={{ color: ACCENT }} className="mx-auto mb-4" />
+            <h2 className="font-light mb-4" style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", color: "#fff" }}>
+              No lock-in, by design
+            </h2>
+            <p className="text-base leading-relaxed" style={{ color: "#A1A1AA" }}>
+              One-click full data export and CSV import, a documented schema, and privacy tooling that lets you take your
+              data with you. You own everything. We earn the renewal by being worth staying on, not by trapping you.
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ (also emitted as FAQPage schema for AI engines) */}
+        <section className="px-6 lg:px-12 py-20 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-[11px] uppercase font-medium mb-4" style={{ color: ACCENT, letterSpacing: "0.2em" }}>
+                Questions
+              </p>
+              <h2 className="font-light" style={{ fontSize: "clamp(1.7rem, 3vw, 2.3rem)", color: "#fff" }}>
+                Cortex, answered
+              </h2>
+            </div>
+            <div className="space-y-4">
+              {FAQS.map((f) => (
+                <div key={f.q} className="rounded-2xl p-6" style={{ background: "#0D0D0D", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <h3 className="font-medium mb-2" style={{ fontSize: "1.02rem", color: "#fff" }}>{f.q}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#A1A1AA" }}>{f.a}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -330,11 +497,11 @@ export default function CortexPage() {
         <section className="px-6 lg:px-12 py-24 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-light mb-5" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", color: "#fff" }}>
-              Put your revenue team on Cortex.
+              Put your whole business on Cortex.
             </h2>
             <p className="text-base leading-relaxed mb-9" style={{ color: "#A1A1AA" }}>
-              The AI does the data entry, the data stays clean, and everything you need to close lives on one platform.
-              Open it in your browser right now, nothing to install. Powered by AEGIBIT.
+              Sell, invoice, pay your team, and support your customers on one platform, with an AI copilot doing the busywork
+              and your data isolated at the database. Start free in your browser, nothing to install. Powered by AEGIBIT.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <a
@@ -344,7 +511,7 @@ export default function CortexPage() {
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-transform hover:-translate-y-0.5"
                 style={{ background: "#818CF8", color: "#000" }}
               >
-                Create your workspace <ArrowRight size={16} />
+                Start free <ArrowRight size={16} />
               </a>
               <a
                 href={APP_URL}
