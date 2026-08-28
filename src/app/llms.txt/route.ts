@@ -68,7 +68,8 @@ export async function GET() {
   lines.push("Key facts:");
   lines.push("- Legal name: AEGIBIT Global Consulting (registered proprietorship, Kolkata, West Bengal, India)");
   lines.push("- Focus: cybersecurity-first custom software, SaaS platforms, AI automation, web and app development");
-  lines.push("- Products: AEGIBIT Cortex (AI CRM + HRMS), PayMint (multi-branch expense automation), LeadSync (dealership OS), Vestiq (boutique OS), Aira (free Windows voice assistant), MCP Shield (open-source MCP security scanner)");
+  lines.push("- Flagship product: AEGIBIT Cortex, an AI-powered multi-tenant business platform (CRM and sales, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF/ESI/Professional Tax) and attendance with GPS and selfie, approvals, a WhatsApp support inbox, reporting, and an AI copilot; web and offline Android; free Starter edition)");
+  lines.push("- Other products: PayMint (multi-branch expense automation), LeadSync (dealership OS), Vestiq (boutique OS), Aira (free Windows voice assistant), MCP Shield (open-source MCP security scanner)");
   lines.push("- Clients include multi-branch automotive dealerships and retail businesses; several are repeat clients");
   lines.push("- Contact: contact@aegibit.com · https://www.aegibit.com/contact");
   lines.push("");

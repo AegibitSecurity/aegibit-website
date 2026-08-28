@@ -53,6 +53,19 @@ interface Product {
 
 const PRODUCTS: Product[] = [
   {
+    id: "cortex",
+    name: "AEGIBIT Cortex",
+    tagline: "The AI platform that runs your whole business.",
+    description:
+      "One platform to sell, invoice, and run your team. CRM and sales, GST invoicing and CPQ, accounts-payable, a full HRMS with India-compliant payroll (PF, ESI, Professional Tax) and attendance, approvals, and a WhatsApp support inbox, with an AI copilot and hard multi-tenant isolation. Start free. Web and Android. Powered by AEGIBIT.",
+    status: "LIVE",
+    icon: BrainCircuit,
+    iconColor: "#818CF8",
+    href: "/products/cortex",
+    ctaLabel: "Explore Cortex",
+    highlighted: true,
+  },
+  {
     id: "paymint",
     name: "PayMint",
     tagline: "Multi-branch expense automation.",
@@ -112,18 +125,6 @@ const PRODUCTS: Product[] = [
     iconColor: "#38BDF8",
     href: "/products/leadsync",
     ctaLabel: "Explore LeadSync",
-  },
-  {
-    id: "cortex",
-    name: "AEGIBIT Cortex",
-    tagline: "The AI CRM that does the data entry for you.",
-    description:
-      "A multi-tenant CRM, sales-automation, and quotation platform where the software does the admin. Zero-entry AI capture, a built-in data-quality engine, native CPQ and invoicing, transparent pricing, and a real offline mobile app. Runs in any browser.",
-    status: "LIVE",
-    icon: BrainCircuit,
-    iconColor: "#818CF8",
-    href: "/products/cortex",
-    ctaLabel: "Explore Cortex",
   },
 ];
 
