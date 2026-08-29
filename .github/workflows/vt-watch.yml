@@ -1,0 +1,74 @@
+# VirusTotal watch: weekly re-check of the shipped Cortex APK's detection
+# count. Engines re-classify silently; we want to hear it before customers do.
+#
+# Reads the SHA-256 straight from the install page source (single source of
+# truth), queries VT, and compares against automation/vt-baseline.txt. Any
+# change - better or worse - opens an issue and updates the baseline, so we
+# get exactly one alert per change. Uses the free public API (a handful of
+# lookups per month) with the VT_API_KEY repo secret; our own public APK only,
+# never anything else.
+
+name: vt-watch
+on:
+  schedule:
+    - cron: "0 4 * * 1" # Mondays 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Look up current detection stats
+        id: vt
+        env:
+          VT_API_KEY: ${{ secrets.VT_API_KEY }}
+        run: |
+          set -euo pipefail
+          SHA=$(grep -oP 'APK_SHA256 = "\K[0-9a-f]{64}' src/app/products/cortex/install/page.tsx)
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          RESP=$(curl -sf -H "x-apikey: $VT_API_KEY" "https://www.virustotal.com/api/v3/files/$SHA")
+          MAL=$(echo "$RESP" | jq '.data.attributes.last_analysis_stats.malicious')
+          SUS=$(echo "$RESP" | jq '.data.attributes.last_analysis_stats.suspicious')
+          TOTAL=$(echo "$RESP" | jq '[.data.attributes.last_analysis_stats[]] | add')
+          FLAGGED=$((MAL + SUS))
+          echo "flagged=$FLAGGED" >> "$GITHUB_OUTPUT"
+          echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
+          echo "Current: $FLAGGED flagged (malicious=$MAL suspicious=$SUS) of $TOTAL engines"
+
+      - name: Compare with baseline and alert on change
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          BASELINE_FILE=automation/vt-baseline.txt
+          BASELINE=$(cat "$BASELINE_FILE" 2>/dev/null || echo "unknown")
+          CURRENT="${{ steps.vt.outputs.flagged }}"
+          if [ "$CURRENT" = "$BASELINE" ]; then
+            echo "No change ($CURRENT flagged). Done."
+            exit 0
+          fi
+          if [ "$CURRENT" -gt "${BASELINE:-0}" ] 2>/dev/null; then
+            TITLE="VT watch: Cortex APK detections ROSE to $CURRENT (was $BASELINE)"
+            BODY="A security engine started flagging the shipped APK. Review the report and decide: false-positive dispute, install-page note, or investigation.
+
+Report: https://www.virustotal.com/gui/file/${{ steps.vt.outputs.sha }}"
+          else
+            TITLE="VT watch: Cortex APK detections dropped to $CURRENT (was $BASELINE)"
+            BODY="Good news - a previous flag was cleared. If this is now 0, the install page's read-the-report note can be simplified.
+
+Report: https://www.virustotal.com/gui/file/${{ steps.vt.outputs.sha }}"
+          fi
+          gh issue create --title "$TITLE" --body "$BODY" --label "vt-watch" || \
+            gh issue create --title "$TITLE" --body "$BODY"
+          echo "$CURRENT" > "$BASELINE_FILE"
+          git config user.name "vt-watch"
+          git config user.email "actions@aegibit.com"
+          git add "$BASELINE_FILE"
+          git commit -m "vt-watch: baseline $BASELINE -> $CURRENT"
+          git push
