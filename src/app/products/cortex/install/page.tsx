@@ -238,6 +238,13 @@ export default function CortexInstallPage() {
                   <ScanSearch size={14} /> Open the VirusTotal scan
                 </a>
               </div>
+              <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "#52525B" }}>
+                Reading the report: 64 of 65 engines, including Google, Microsoft, Kaspersky and
+                ESET, rate this file clean. One vendor&rsquo;s generic &ldquo;potentially
+                unwanted&rdquo; heuristic flags many direct-download business apps; it is a
+                classification style, not a malware finding, and we have requested its review.
+                We publish the full report rather than hiding it - judge for yourself.
+              </p>
             </div>
           </div>
         </section>
