@@ -33,10 +33,9 @@ import {
 const PAGE_PATH = "/products/cortex";
 const APP_URL = "https://cortex.aegibit.com";
 const REGISTER_URL = "https://cortex.aegibit.com/register";
-// Branded download link on our own domain. It 302-redirects (see next.config.ts)
-// to the GitHub release asset on the fixed `cortex-latest` tag, so the shareable
-// URL stays clean and stable while the file behind it is replaced each build.
-const ANDROID_APK_URL = "/download/cortex-android";
+// The Android download now flows through /products/cortex/install (the
+// verified-install page), which links the branded /download/cortex-android
+// redirect (see next.config.ts) to the `cortex-latest` release asset.
 const ANDROID_VERSION = "1.1.0";
 
 export const metadata: Metadata = buildMetadata({
@@ -281,12 +280,11 @@ export default function CortexPage() {
                 <Globe size={15} /> Open Cortex in your browser
               </a>
               <a
-                href={ANDROID_APK_URL}
-                download
+                href="/products/cortex/install"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(129,140,248,0.35)", color: "#fff", background: "rgba(129,140,248,0.10)" }}
               >
-                <Smartphone size={15} /> Download Android app
+                <Smartphone size={15} /> Get the Android app
               </a>
               <a
                 href="mailto:contact@aegibit.com?subject=Cortex demo for my team"
@@ -298,7 +296,7 @@ export default function CortexPage() {
             </div>
             <p className="mt-6 text-xs" style={{ color: "#52525B" }}>
               Free Starter edition, up to 3 seats. Cortex runs in any modern browser, nothing to install. Prefer the field
-              app? Download the Android APK (v{ANDROID_VERSION}) above. On iPhone? Email us, an iOS build is on the way.
+              app? Get the verified Android app (v{ANDROID_VERSION}) above - fingerprinted and independently scannable. On iPhone? Email us, an iOS build is on the way.
             </p>
           </div>
         </section>
@@ -523,12 +521,11 @@ export default function CortexPage() {
                 <Globe size={15} /> Open Cortex
               </a>
               <a
-                href={ANDROID_APK_URL}
-                download
+                href="/products/cortex/install"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(129,140,248,0.35)", color: "#fff", background: "rgba(129,140,248,0.10)" }}
               >
-                <Smartphone size={15} /> Download Android app
+                <Smartphone size={15} /> Get the Android app
               </a>
             </div>
           </div>
