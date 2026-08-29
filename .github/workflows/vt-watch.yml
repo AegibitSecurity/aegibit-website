@@ -53,16 +53,13 @@ jobs:
             echo "No change ($CURRENT flagged). Done."
             exit 0
           fi
+          REPORT="https://www.virustotal.com/gui/file/${{ steps.vt.outputs.sha }}"
           if [ "$CURRENT" -gt "${BASELINE:-0}" ] 2>/dev/null; then
             TITLE="VT watch: Cortex APK detections ROSE to $CURRENT (was $BASELINE)"
-            BODY="A security engine started flagging the shipped APK. Review the report and decide: false-positive dispute, install-page note, or investigation.
-
-Report: https://www.virustotal.com/gui/file/${{ steps.vt.outputs.sha }}"
+            BODY=$'A security engine started flagging the shipped APK. Review the report and decide: false-positive dispute, install-page note, or investigation.\n\nReport: '"$REPORT"
           else
             TITLE="VT watch: Cortex APK detections dropped to $CURRENT (was $BASELINE)"
-            BODY="Good news - a previous flag was cleared. If this is now 0, the install page's read-the-report note can be simplified.
-
-Report: https://www.virustotal.com/gui/file/${{ steps.vt.outputs.sha }}"
+            BODY=$'Good news - a previous flag was cleared. If this is now 0, the install page read-the-report note can be simplified.\n\nReport: '"$REPORT"
           fi
           gh issue create --title "$TITLE" --body "$BODY" --label "vt-watch" || \
             gh issue create --title "$TITLE" --body "$BODY"
