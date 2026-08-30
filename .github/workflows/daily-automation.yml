@@ -20,7 +20,7 @@ jobs:
     outputs:
       paused: ${{ steps.check.outputs.paused }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - id: check
         run: |
           if [ -f automation/PAUSE ]; then
@@ -42,7 +42,7 @@ jobs:
       SITE_URL:         https://www.aegibit.com
       DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with: { node-version: "20", cache: "npm" }
       - run: npm ci
@@ -88,7 +88,7 @@ jobs:
       SITE_URL:         https://www.aegibit.com
       DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: node automation/scripts/seo-audit.mjs
@@ -102,7 +102,7 @@ jobs:
       SITE_URL:         https://www.aegibit.com
       DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: |
@@ -115,7 +115,7 @@ jobs:
     if: needs.killswitch.outputs.paused == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
@@ -136,7 +136,7 @@ jobs:
       SUPABASE_URL:              ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: node automation/scripts/lead-health-check.mjs
@@ -153,7 +153,7 @@ jobs:
       SITE_URL:         https://www.aegibit.com
       DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with: { node-version: "20" }
       - run: node automation/scripts/outbound-draft.mjs
