@@ -47,7 +47,7 @@ jobs:
       SEO_SLACK_WEBHOOK_URL:      ${{ secrets.SEO_SLACK_WEBHOOK_URL }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: "20"
       - name: Run live SEO audit
