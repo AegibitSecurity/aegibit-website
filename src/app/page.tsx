@@ -62,7 +62,7 @@ const HOME_JSON_LD = {
               name: "AEGIBIT Cortex",
               url: "https://www.aegibit.com/products/cortex",
               description:
-                "AI-powered business platform: CRM and sales, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF, ESI, Professional Tax) and attendance, approvals, a WhatsApp support inbox, and an AI copilot. Multi-tenant, secure, offline mobile. Start free.",
+                "AI-powered business platform: CRM and sales, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF, ESI, Professional Tax) and attendance, approvals, a WhatsApp support inbox, an Excel and Data Engine that learns monthly spreadsheet workflows and reconciles ledger against bank exactly, and an AI copilot. Multi-tenant, secure, offline mobile. Start free.",
             },
           },
           {

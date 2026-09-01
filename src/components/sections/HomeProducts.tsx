@@ -57,7 +57,7 @@ const PRODUCTS: Product[] = [
     name: "AEGIBIT Cortex",
     tagline: "The AI platform that runs your whole business.",
     description:
-      "One platform to sell, invoice, and run your team. CRM and sales, GST invoicing and CPQ, accounts-payable, a full HRMS with India-compliant payroll (PF, ESI, Professional Tax) and attendance, approvals, and a WhatsApp support inbox, with an AI copilot and hard multi-tenant isolation. Start free. Web and Android. Powered by AEGIBIT.",
+      "One platform to sell, invoice, and run your team. CRM and sales, GST invoicing and CPQ, accounts-payable, a full HRMS with India-compliant payroll (PF, ESI, Professional Tax) and attendance, approvals, a WhatsApp support inbox, and an Excel and Data Engine that learns your monthly spreadsheet workflow and reconciles ledger against bank exactly. AI copilot, hard multi-tenant isolation. Start free. Web and Android. Powered by AEGIBIT.",
     status: "LIVE",
     icon: BrainCircuit,
     iconColor: "#818CF8",

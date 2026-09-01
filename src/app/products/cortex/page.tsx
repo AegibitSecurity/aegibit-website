@@ -8,6 +8,7 @@ import {
   Users, FileText, Smartphone, RefreshCw,
   Receipt, Banknote, CalendarCheck, UserCheck, MessageSquare,
   BarChart3, ClipboardCheck, Fingerprint,
+  FileSpreadsheet, Wand2, Scale, GitBranch, Sigma, PieChart,
 } from "lucide-react";
 
 /**
@@ -22,12 +23,16 @@ import {
  *
  * Honesty bar (unchanged): every capability described here is BUILT and
  * mounted in the Cortex repo (verified against apps/api/app/api/v1
- * routers + apps/web routes, 2026-08). We deliberately do NOT claim the
- * documented non-goals: marketing-automation/journey builder, native
- * telephony/dialer, a full general-ledger accounting system, or
- * Google/Microsoft social SSO. No customer counts, no invented metrics.
- * Cortex is a browser SaaS, so "open on your computer" launches the real
- * web app; there is no desktop installer and we do not pretend there is.
+ * routers + apps/web routes, 2026-08; Excel & Data Engine phases 1-9
+ * verified merged and live 2026-09-01, PRs #431-#439). We deliberately do
+ * NOT claim the documented non-goals: marketing-automation/journey
+ * builder, native telephony/dialer, a full general-ledger accounting
+ * system, or Google/Microsoft social SSO. No customer counts, no invented
+ * metrics. Cortex is a browser SaaS, so "open on your computer" launches
+ * the real web app; there is no desktop installer and we do not pretend
+ * there is. AI assist is shipped with an honest "not configured" state
+ * until the operator enables a provider, so we describe WHAT it does, not
+ * uptime promises.
  */
 
 const PAGE_PATH = "/products/cortex";
@@ -39,9 +44,9 @@ const REGISTER_URL = "https://cortex.aegibit.com/register";
 const ANDROID_VERSION = "1.1.0";
 
 export const metadata: Metadata = buildMetadata({
-  title: "AEGIBIT Cortex: AI CRM, GST Invoicing, HRMS & Payroll in One Platform",
+  title: "AEGIBIT Cortex: AI CRM, GST Invoicing, HRMS, Payroll & Excel Automation",
   description:
-    "AEGIBIT Cortex is an AI-powered, multi-tenant business platform: CRM and sales pipeline, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF/ESI/Professional Tax), attendance with GPS and selfie, approvals, a WhatsApp support inbox, and an AI copilot. Runs in any browser, plus offline mobile. Start free. Powered by AEGIBIT.",
+    "AEGIBIT Cortex is an AI-powered, multi-tenant business platform: CRM and sales pipeline, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF/ESI/Professional Tax), attendance with GPS and selfie, approvals, a WhatsApp support inbox, and an Excel & Data Engine that learns your monthly spreadsheet workflow, reconciles ledger against bank exactly, and explains every number. Runs in any browser, plus offline mobile. Start free. Powered by AEGIBIT.",
   path: PAGE_PATH,
   keywords: [
     "AI CRM",
@@ -53,6 +58,11 @@ export const metadata: Metadata = buildMetadata({
     "GST invoicing software",
     "CPQ quotation software",
     "accounts payable software",
+    "Excel automation software",
+    "bank reconciliation software",
+    "Tally data transformation",
+    "spreadsheet workflow automation",
+    "MIS report automation",
     "CRM for SMB and mid-market",
     "ERP alternative for SMB",
     "HubSpot alternative",
@@ -107,6 +117,43 @@ const CAPABILITIES = [
   },
 ] as const;
 
+// NEW (Sept 2026): the Excel & Data Engine - shipped across 9 phases,
+// every tile below is a live, tested capability. The USP is honesty:
+// exact decimal math, never-fuzzy matching, provable proposals, and AI
+// that is validated by the engine and confirmed by the user.
+const DATA_ENGINE = [
+  {
+    icon: Wand2,
+    title: "It learns your monthly Excel routine",
+    body: "Give Cortex the raw Tally or bank export and the finished sheet you build from it by hand. It works out the steps: renames, formulas, dropped columns, filters, group totals, and proposes a workflow. It only proposes what it can prove on your own rows, and plainly asks about anything it cannot. Apply once, and next month is one click.",
+  },
+  {
+    icon: Scale,
+    title: "Reconcile ledger vs bank in seconds",
+    body: "Match any two files: sales register against bank statement, ledger against a report. Matching is exact, never a similarity guess. Every row lands in one of seven honest buckets: matched, amount differs, date differs, missing on either side, duplicated on either side, and every difference traces back to its source row numbers.",
+  },
+  {
+    icon: GitBranch,
+    title: "Ask any number 'why?'",
+    body: "Click a calculated cell and see its full calculation tree, down to the exact source cells and the formula at every step. When the auditor or your boss asks where a figure came from, the answer is one click, not an afternoon.",
+  },
+  {
+    icon: Sigma,
+    title: "Excel-compatible, to the paisa",
+    body: "66 verified spreadsheet functions running on exact decimal arithmetic, so totals never drift by a rupee the way floating-point tools do. Validation rules catch unbalanced debit/credit, missing fields, and negative values before anyone downloads a wrong report.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Sign-off with real segregation of duties",
+    body: "An accounts person submits the month's output for approval with its totals frozen onto the run. A different reviewer approves or rejects with a reason. The person who submitted can never approve their own work, even the owner. Every sign-off is auditable forever.",
+  },
+  {
+    icon: PieChart,
+    title: "From raw export to report pack",
+    body: "Pivot matrices, KPI scorecards, and charts computed exactly on the full data. Then ship it: a multi-sheet Excel workbook, a clean PDF, or a BI-ready manifest that tells any downstream tool precisely what the data is and how it was made.",
+  },
+] as const;
+
 // India-first back office is the single strongest differentiator.
 const INDIA_FIRST = [
   "GST-aware quoting and invoicing, from quote to paid",
@@ -151,6 +198,14 @@ const FAQS = [
     a: "Employees check in and out with geofences, device binding, GPS, break tracking, and selfie capture. Managers get a live attendance board, a register, and analytics. It is designed for field and multi-branch teams, not just a desk.",
   },
   {
+    q: "Can Cortex automate my monthly Excel and MIS work?",
+    a: "Yes. The Excel & Data Engine ingests Tally, CSV, and Excel exports, lets you clean and shape the data once, and saves the workflow as a template so next month is one click. It can even learn the workflow from an example: give it the raw export and the finished sheet you normally build by hand, and it derives the steps, proposing only what it can prove on your own rows and asking about anything it cannot. It also reconciles any two files exactly, ledger against bank statement, with every difference traced to its source rows.",
+  },
+  {
+    q: "Does the AI ever see or change my numbers?",
+    a: "No. AI assist in the data engine only ever receives your column names, never a single row of data. It can propose a formula or a header mapping, but the deterministic calculation engine tests every proposal on your real rows and shows the verdict, and nothing is applied until you confirm it. Calculations run on exact decimal arithmetic and matching is never fuzzy, so a number in Cortex is computed and traceable, never guessed.",
+  },
+  {
     q: "Is my data isolated from other companies?",
     a: "Yes. Cortex enforces multi-tenant isolation at the database with PostgreSQL Row-Level Security, so every row carries a tenant id and one company can never read another's data. AEGIBIT is a security company, and Cortex ships a built-in Security Center with scored validation scans.",
   },
@@ -176,7 +231,7 @@ function productJsonLd() {
     url: `${SITE_URL}${PAGE_PATH}`,
     installUrl: APP_URL,
     description:
-      "AI-powered, multi-tenant business platform by AEGIBIT: CRM and sales pipeline, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF/ESI/Professional Tax), attendance with GPS and selfie, approvals, an omnichannel WhatsApp support inbox, reporting, and an AI copilot. Multi-tenant isolation via PostgreSQL Row-Level Security. Offline-first mobile.",
+      "AI-powered, multi-tenant business platform by AEGIBIT: CRM and sales pipeline, CPQ and GST invoicing, accounts-payable, full HRMS with India-compliant payroll (PF/ESI/Professional Tax), attendance with GPS and selfie, approvals, an omnichannel WhatsApp support inbox, reporting, an AI copilot, and an Excel & Data Engine that learns monthly spreadsheet workflows from an example, reconciles ledger against bank exactly with source-row tracing, explains any calculated number, and ships sign-off runs with segregation of duties. Multi-tenant isolation via PostgreSQL Row-Level Security. Offline-first mobile.",
     author: { "@id": `${SITE_URL}/#org` },
     brand: { "@id": `${SITE_URL}/#org` },
     offers: {
@@ -199,6 +254,14 @@ function productJsonLd() {
       "Multi-level approval workflows with delegation",
       "Omnichannel support inbox with WhatsApp and ticketing",
       "Executive dashboards, analytics, and custom reports",
+      "Excel & Data Engine: replayable cleanup of Tally/CSV/Excel exports with saved templates",
+      "Workflow discovery: learns your monthly spreadsheet routine from a raw plus finished example",
+      "Exact ledger-vs-bank reconciliation with seven categories and source-row tracing",
+      "Formula lineage: click any calculated cell to see its full calculation tree",
+      "66 Excel-compatible functions on exact decimal arithmetic",
+      "Maker/checker sign-off runs with frozen totals and enforced segregation of duties",
+      "Report packs: multi-sheet workbooks, PDF, and BI-ready manifests",
+      "AI formula and header-mapping assist, engine-validated and user-confirmed",
       "AI copilot: summaries, deal-risk, forecasting (provider-agnostic)",
       "Multi-tenant isolation via PostgreSQL Row-Level Security",
       "Built-in Security Center and GDPR consent/export/erasure tooling",
@@ -258,7 +321,8 @@ export default function CortexPage() {
             <p className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-9" style={{ color: "#A1A1AA" }}>
               An AI-powered business platform that replaces the stack of disconnected tools you run today. CRM and sales,
               CPQ and GST invoicing, accounts-payable, a full HRMS with India-compliant payroll and attendance, approvals,
-              and a customer-support inbox, on one secure, multi-tenant platform. Start free. Powered by AEGIBIT.
+              a customer-support inbox, and a new Excel &amp; Data Engine that learns your monthly spreadsheet routine and
+              reconciles your books against the bank, exactly. One secure, multi-tenant platform. Start free. Powered by AEGIBIT.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <a
@@ -342,6 +406,53 @@ export default function CortexPage() {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: the Excel & Data Engine */}
+        <section className="px-6 lg:px-12 py-20 md:py-24 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5" style={{ background: "rgba(129,140,248,0.10)", border: "1px solid rgba(129,140,248,0.35)" }}>
+                <FileSpreadsheet size={13} style={{ color: ACCENT }} />
+                <span className="text-[11px] uppercase font-medium" style={{ color: ACCENT, letterSpacing: "0.2em" }}>
+                  New · The Excel &amp; Data Engine
+                </span>
+              </div>
+              <h2 className="font-light mb-5" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", color: "#fff" }}>
+                Stop redoing the same Excel work every month
+              </h2>
+              <p className="text-base leading-relaxed max-w-3xl mx-auto mb-4" style={{ color: "#A1A1AA" }}>
+                Every business has that person who spends days each month cleaning the Tally export, rebuilding the MIS,
+                and eyeballing the bank statement line by line. Cortex now does that work: upload the messy CSV or Excel
+                file, shape it once, and replay the exact same workflow on next month&apos;s file with one click. The
+                original file is never modified, and every output is an exact, replayable calculation.
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+              {DATA_ENGINE.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div key={f.title} className="rounded-2xl p-7" style={{ background: "#0D0D0D", border: "1px solid rgba(129,140,248,0.18)" }}>
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style={{ background: "rgba(129,140,248,0.12)", border: "1px solid rgba(129,140,248,0.25)" }}>
+                      <Icon size={20} style={{ color: ACCENT }} />
+                    </div>
+                    <h3 className="font-medium mb-2" style={{ fontSize: "1.1rem", color: "#fff" }}>{f.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "#A1A1AA" }}>{f.body}</p>
+                  </div>
+                );
+              })}
+            </div>
+            {/* The trust strip: what makes this engine different from AI toys */}
+            <div className="rounded-2xl p-7 text-center" style={{ background: "linear-gradient(180deg, #0b0b1a 0%, #0a0a0a 100%)", border: "1px solid rgba(129,140,248,0.30)" }}>
+              <p className="text-sm leading-relaxed max-w-4xl mx-auto" style={{ color: "#D4D4D8" }}>
+                <span className="font-semibold" style={{ color: "#fff" }}>AI that suggests, an engine that proves, a human who decides.</span>{" "}
+                Describe a formula in plain language and the AI proposes it, but the deterministic engine tests it on your
+                real rows and shows the verdict before you accept, and nothing is ever applied without you. Only your
+                column names are shared with the AI, never a single row of your data. Numbers here are never guessed,
+                never fuzzy-matched, and never invented: when Cortex cannot prove something, it asks you instead.
+              </p>
             </div>
           </div>
         </section>
