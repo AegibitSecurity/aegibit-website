@@ -24,6 +24,11 @@
       "timestamp": "2026-06-01T15:03:41.137Z",
       "success": true,
       "durationMs": 6610
+    },
+    "outbound-draft": {
+      "timestamp": "2026-09-06T07:23:10.556Z",
+      "success": true,
+      "durationMs": 1449
     }
   },
   "consecutiveFailures": {
@@ -31,7 +36,8 @@
     "generate-seo-pages": 0,
     "seo-audit": 0,
     "friday-pdf": 0,
-    "seo-live-audit": 0
+    "seo-live-audit": 0,
+    "outbound-draft": 0
   },
   "metrics": {
     "pagesGenerated": 75,
