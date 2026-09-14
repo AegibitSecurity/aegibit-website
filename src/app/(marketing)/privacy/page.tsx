@@ -22,7 +22,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  * terms of service lives at /terms.
  */
 
-const LAST_UPDATED = "2026-05-10";
+const LAST_UPDATED = "2026-09-15";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -240,6 +240,89 @@ export default function PrivacyPage() {
               are bound by their own published Data Processing
               Agreements. If you need names of legal contacts at any
               sub-processor, contact us.
+            </P>
+          </Section>
+
+          {/* Required by Google for OAuth app verification: an app requesting
+              a sensitive scope must disclose, on its own verified domain, what
+              Google user data it touches and affirm the Limited Use policy by
+              name. Every claim below maps to a specific call in
+              google_calendar_service.py - if that file changes, this changes. */}
+          <Section title="Google account data (AEGIBIT Cortex)">
+            <P>
+              AEGIBIT Cortex, our business operations platform, can link one
+              Google account per customer company so that meetings booked in
+              Cortex carry a real Google Meet link. This is optional. A company
+              that never connects an account loses no other feature, and its
+              guests still receive a normal calendar invitation by email.
+            </P>
+            <P>
+              When an administrator connects that account, Cortex requests three
+              permissions and no others:
+            </P>
+            <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
+              <Bullet>
+                <strong style={{ color: "#fff" }}>openid</strong> and{" "}
+                <strong style={{ color: "#fff" }}>email</strong>: so we can show
+                the administrator which Google account is currently linked, and
+                so they can tell whether it is the right one.
+              </Bullet>
+              <Bullet>
+                <strong style={{ color: "#fff" }}>
+                  https://www.googleapis.com/auth/calendar.events
+                </strong>
+                : so Cortex can create the calendar event that carries the Meet
+                link, move it when a meeting is rescheduled, and remove it when a
+                meeting is cancelled.
+              </Bullet>
+            </ul>
+            <P>
+              We deliberately do not request{" "}
+              <strong style={{ color: "#fff" }}>auth/calendar</strong>, the wider
+              scope that would grant access to an entire calendar.
+            </P>
+            <P>
+              <strong style={{ color: "#fff" }}>
+                Cortex never reads your other calendar entries.
+              </strong>{" "}
+              The software makes exactly four kinds of Calendar API call:
+              create an event, then read, update or delete an event{" "}
+              <em>by the specific id of an event Cortex itself created</em>.
+              There is no call anywhere in the product that lists or searches a
+              calendar, so your existing appointments are never fetched, never
+              transmitted to us and never stored.
+            </P>
+            <P>
+              What we store: the Google account&apos;s email address, the word
+              &quot;primary&quot; as the target calendar, the id of each event
+              Cortex created, and the long-lived refresh token, encrypted at
+              rest. Short-lived access tokens are held in memory for the
+              duration of a request and are never written to a database, a log,
+              an audit record or any response sent to a browser or phone.
+            </P>
+            <P>
+              What we never do: sell this data, share it with advertisers or
+              data brokers, use it for advertising, or use it to develop,
+              improve or train any general-purpose artificial-intelligence model.
+              It is used solely to provide the meeting feature the administrator
+              switched on.
+            </P>
+            <P>
+              An administrator can disconnect at any time from Meeting settings
+              inside Cortex. Disconnecting deletes our stored token and asks
+              Google to revoke the grant, so our access ends immediately. The
+              same can be done from your own Google Account under Security,
+              Third-party apps with account access. Calendar events already
+              created stay in your calendar, because they are your records, not
+              ours.
+            </P>
+            <P>
+              AEGIBIT&apos;s use of information received from Google APIs
+              adheres to the{" "}
+              <Link href="https://developers.google.com/terms/api-services-user-data-policy">
+                Google API Services User Data Policy
+              </Link>
+              , including the Limited Use requirements.
             </P>
           </Section>
 
