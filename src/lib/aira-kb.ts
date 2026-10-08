@@ -219,6 +219,7 @@ export function retrieve(query: string, k = 6): KbChunk[] {
  */
 export const PRODUCT_CATALOG = `AEGIBIT product catalog (all live, details in KNOWLEDGE below):
 - AEGIBIT Cortex (/products/cortex): AI CRM + sales automation + quotation/CPQ + invoicing + HRMS with geo/selfie attendance and payroll. For SMB and mid-market teams. Web, Android, iOS.
+- GoKarT (/products/gokart): quick commerce from neighbourhood stores. Shoppers order in the GoKarT Android app (Bengali and English, honest arrival times, cash on delivery); store owners run orders, stock, customers, delivery and payments in the same app and at gokart.aegibit.com. Store onboarding is by invitation.
 - PayMint (/products/paymint): multi-branch expense automation, vouchers, tiered approvals, audit logs, Tally-ready exports. Live with automotive dealerships.
 - LeadSync (/products/leadsync): the Dealership OS, lead-to-delivery pipeline for automobile dealerships. Android and web.
 - Vestiq (/products/vestiq): the Boutique OS, billing and shop management for boutiques and tailoring businesses.
