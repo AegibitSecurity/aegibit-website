@@ -60,6 +60,14 @@ const nextConfig: NextConfig = {
           "https://github.com/AegibitSecurity/aegibit-website/releases/download/cortex-latest/cortex.apk",
         permanent: false,
       },
+      // GoKarT: the merchant invitation and the invite landing point here, so
+      // the APK can move between builds without re-sending a single invitation.
+      {
+        source: "/download/gokart-android",
+        destination:
+          "https://github.com/AegibitSecurity/aegibit-website/releases/download/gokart-latest/gokart.apk",
+        permanent: false,
+      },
     ];
   },
   async headers() {
