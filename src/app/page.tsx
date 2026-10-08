@@ -69,6 +69,16 @@ const HOME_JSON_LD = {
             "@type": "Offer",
             itemOffered: {
               "@type": "SoftwareApplication",
+              name: "GoKarT",
+              url: "https://www.aegibit.com/products/gokart",
+              description:
+                "Quick commerce by AEGIBIT: fast delivery from neighbourhood stores with honest arrival times, in Bengali and English. Store owners run orders, stock, customers, delivery and payments from the GoKarT app and web console. Android and web.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "SoftwareApplication",
               name: "PayMint",
               url: "https://www.aegibit.com/products/paymint",
               description:

@@ -7,6 +7,7 @@ import {
   Shield,
   Layers,
   ShoppingBag,
+  ShoppingBasket,
   Car,
   BrainCircuit,
   ArrowRight,
@@ -64,6 +65,18 @@ const PRODUCTS: Product[] = [
     href: "/products/cortex",
     ctaLabel: "Explore Cortex",
     highlighted: true,
+  },
+  {
+    id: "gokart",
+    name: "GoKarT",
+    tagline: "Your neighbourhood stores, delivered fast.",
+    description:
+      "Quick commerce built around the shops down your road. Shoppers order groceries and daily needs with honest, live arrival times, in Bengali and English. Store owners run orders, stock, customers, delivery and payments from the GoKarT app and web console. Android and web. Powered by AEGIBIT.",
+    status: "LIVE",
+    icon: ShoppingBasket,
+    iconColor: "#F58220",
+    href: "/products/gokart",
+    ctaLabel: "Explore GoKarT",
   },
   {
     id: "paymint",

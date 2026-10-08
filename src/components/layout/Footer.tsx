@@ -10,6 +10,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
 const COLS = {
   Product: [
     { label:"AEGIBIT Cortex", href:"/products/cortex"     },
+    { label:"GoKarT",     href:"/products/gokart"     },
     { label:"PayMint",    href:"/products/paymint"    },
     { label:"Vestiq",     href:"/products/vestiq"     },
     { label:"LeadSync",   href:"/products/leadsync"   },
