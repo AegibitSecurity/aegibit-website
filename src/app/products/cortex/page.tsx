@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { buildMetadata, buildBreadcrumbJsonLd, SITE_URL } from "@/lib/seo";
+import { cortexAlternatives } from "@/content/cortex-alternatives";
 import {
   Sparkles, Gauge, ShieldCheck,
   Globe, ArrowRight, Lock, Layers,
@@ -639,6 +640,30 @@ export default function CortexPage() {
                 <Smartphone size={15} /> Get the Android app
               </a>
             </div>
+          </div>
+        </section>
+
+        {/* How Cortex compares - internal links to HRMS comparison pages
+            (SEO: targets "<competitor> alternative" queries + feeds link
+            equity to the indexable /products/cortex/vs/* pages). */}
+        <section className="max-w-5xl mx-auto px-6 lg:px-10 pb-20">
+          <h2 className="text-2xl font-bold tracking-tight mb-2" style={{ color: "#fff" }}>
+            How Cortex compares
+          </h2>
+          <p className="text-sm mb-6" style={{ color: "#A1A1AA" }}>
+            An all-in-one business OS, not an HR-only tool. See Cortex next to the HRMS platforms Indian SMBs know.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {cortexAlternatives.map((a) => (
+              <a
+                key={a.slug}
+                href={`/products/cortex/vs/${a.slug}`}
+                className="p-3 rounded-sm text-xs transition-colors"
+                style={{ border: "1px solid rgba(255,255,255,0.08)", color: "#A1A1AA" }}
+              >
+                Cortex vs {a.name}
+              </a>
+            ))}
           </div>
         </section>
       </main>
