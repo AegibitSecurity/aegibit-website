@@ -4,6 +4,7 @@ import { SITE_URL } from "@/lib/seo";
 import { COMPARISONS } from "@/content/comparisons";
 import { SOLUTIONS } from "@/content/solutions";
 import { blogPosts } from "@/content/blog-posts";
+import { cortexAlternatives } from "@/content/cortex-alternatives";
 
 /**
  * Native dynamic sitemap (app/sitemap.ts).
@@ -52,6 +53,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Products (flagship landing pages)
     entry("/products/cortex", 0.9, "weekly"),
     entry("/products/cortex/install", 0.6, "monthly"),
+    // Cortex HRMS comparison pages (indexable: substantive feature tables +
+    // FAQ schema, targeting "<competitor> alternative" / "best HRMS" queries).
+    ...cortexAlternatives.map((a) => entry(`/products/cortex/vs/${a.slug}`, 0.75, "monthly")),
     entry("/products/gokart", 0.9, "weekly"),
 
     // Authority pillar (GEO wedge: AI agent / MCP security)
