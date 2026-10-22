@@ -43,7 +43,7 @@ jobs:
       DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with: { node-version: "20", cache: "npm" }
       - run: npm ci
       - run: node automation/scripts/generate-blog-post.mjs
@@ -89,7 +89,7 @@ jobs:
       DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with: { node-version: "20" }
       - run: node automation/scripts/seo-audit.mjs
       - run: node automation/scripts/ping-search-engines.mjs
@@ -103,7 +103,7 @@ jobs:
       DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with: { node-version: "20" }
       - run: |
           mkdir -p automation/logs
@@ -137,7 +137,7 @@ jobs:
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with: { node-version: "20" }
       - run: node automation/scripts/lead-health-check.mjs
 
@@ -154,7 +154,7 @@ jobs:
       DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with: { node-version: "20" }
       - run: node automation/scripts/outbound-draft.mjs
       - name: Open PR with outbound drafts (manual review)

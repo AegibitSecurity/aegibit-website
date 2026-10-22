@@ -42,7 +42,7 @@ jobs:
           # and the entire workflow file silently fails to validate.
           # Block form is unambiguous; keep it block.
           token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: "20"
       - run: npm install --no-save resend
