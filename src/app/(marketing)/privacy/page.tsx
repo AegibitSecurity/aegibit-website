@@ -22,7 +22,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  * terms of service lives at /terms.
  */
 
-const LAST_UPDATED = "2026-09-15";
+const LAST_UPDATED = "2026-11-08";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -62,7 +62,7 @@ export default function PrivacyPage() {
               letterSpacing: "0.04em",
             }}
           >
-            Last updated: {LAST_UPDATED} · v1.0
+            Last updated: {LAST_UPDATED} · v1.1
           </p>
 
           <Section title="Plain-English summary">
@@ -323,6 +323,57 @@ export default function PrivacyPage() {
                 Google API Services User Data Policy
               </Link>
               , including the Limited Use requirements.
+            </P>
+          </Section>
+
+          <Section title="Cortex mobile app (workforce and attendance)">
+            <P>
+              When your employer gives you the AEGIBIT Cortex mobile app, we
+              process the data below so your workplace can run attendance and HR.
+              It is captured on your phone and lives inside your employer&apos;s
+              own private workspace.
+            </P>
+            <P>
+              We collect these, and only these, for attendance:
+            </P>
+            <ul className="space-y-3 my-6" style={{ color: "#A1A1AA", lineHeight: 1.7 }}>
+              <Bullet>
+                <strong style={{ color: "#fff" }}>Location:</strong> captured at
+                the moment you clock in or out, and while you are clocked in for a
+                field shift. A notification stays visible the entire time location
+                is being recorded. We do not track your location when you are off
+                the clock or when the app is closed, and the app never requests
+                &quot;all the time&quot; background location.
+              </Bullet>
+              <Bullet>
+                <strong style={{ color: "#fff" }}>Selfie photo:</strong> captured
+                at clock-in to confirm it is really you punching.
+              </Bullet>
+              <Bullet>
+                <strong style={{ color: "#fff" }}>Device identifier:</strong> used
+                to tie a punch to a device and prevent attendance fraud.
+              </Bullet>
+              <Bullet>
+                <strong style={{ color: "#fff" }}>Profile data:</strong> your
+                name, work email, phone and employee id.
+              </Bullet>
+            </ul>
+            <P>
+              Who sees it: only your employer&apos;s authorised HR and managers,
+              within your employer&apos;s own private workspace. Cortex never
+              shares one company&apos;s data with another, and never sells
+              personal data.
+            </P>
+            <P>
+              Your employer is the controller of this workplace data. To access,
+              correct or delete it, contact your employer&apos;s HR, or email{" "}
+              <Link href="mailto:contact@aegibit.com?subject=Cortex%20App%20Privacy%20Request">
+                contact@aegibit.com
+              </Link>{" "}
+              and we will route your request. Data is encrypted in transit.
+              Before any location or photo is captured, the app shows a consent
+              screen in English and Bengali, and tracking stops when you clock
+              out.
             </P>
           </Section>
 
