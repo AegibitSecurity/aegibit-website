@@ -212,7 +212,7 @@ const FAQS = [
   },
   {
     q: "Can my team use Cortex on the phone?",
-    a: "Yes. Cortex runs in any modern browser with nothing to install, and there is a real offline-first Android app with a sync engine, leads, deals, and the AI copilot in your pocket. An iOS build is on the way.",
+    a: "Yes. Cortex runs in any modern browser with nothing to install, and there is RightForce, a real offline-first Android app with a sync engine, leads, deals, and the AI copilot in your pocket. An iOS build is on the way.",
   },
   {
     q: "How much does Cortex cost?",
@@ -349,7 +349,7 @@ export default function CortexPage() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(129,140,248,0.35)", color: "#fff", background: "rgba(129,140,248,0.10)" }}
               >
-                <Smartphone size={15} /> Get the Android app
+                <Smartphone size={15} /> Get RightForce (Android)
               </a>
               <a
                 href="mailto:contact@aegibit.com?subject=Cortex demo for my team"
@@ -361,7 +361,7 @@ export default function CortexPage() {
             </div>
             <p className="mt-6 text-xs" style={{ color: "#52525B" }}>
               Free Starter edition, up to 3 seats. Cortex runs in any modern browser, nothing to install. Prefer the field
-              app? Get the verified Android app (v{ANDROID_VERSION}) above - fingerprinted and independently scannable. On iPhone? Email us, an iOS build is on the way.
+              app? Get the verified RightForce app (v{ANDROID_VERSION}) above - fingerprinted and independently scannable. On iPhone? Email us, an iOS build is on the way.
             </p>
           </div>
         </section>
@@ -637,7 +637,7 @@ export default function CortexPage() {
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm"
                 style={{ border: "1px solid rgba(129,140,248,0.35)", color: "#fff", background: "rgba(129,140,248,0.10)" }}
               >
-                <Smartphone size={15} /> Get the Android app
+                <Smartphone size={15} /> Get RightForce (Android)
               </a>
             </div>
           </div>
