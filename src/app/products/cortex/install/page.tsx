@@ -34,15 +34,16 @@ const APK_SHA256 = "09279a18ba0aa3cf4acd5267eac78458d8c8352ba8d0991941194ae6c459
 const VIRUSTOTAL_URL = `https://www.virustotal.com/gui/file/${APK_SHA256}`;
 
 export const metadata: Metadata = buildMetadata({
-  title: "Install AEGIBIT Cortex on Android: Verified APK, Fingerprint & Guide",
+  title: "Install RightForce on Android: Verified APK, Fingerprint & Guide",
   description:
-    "The official, signed AEGIBIT Cortex Android app. Step-by-step install guide, the release's SHA-256 fingerprint for independent verification, a multi-engine antivirus scan link, and a plain statement of the permissions Cortex never requests.",
+    "The official, signed RightForce Android app by AEGIBIT. Step-by-step install guide, the release's SHA-256 fingerprint for independent verification, a multi-engine antivirus scan link, and a plain statement of the permissions RightForce never requests.",
   path: PAGE_PATH,
   keywords: [
-    "AEGIBIT Cortex Android app",
-    "Cortex APK download",
+    "RightForce Android app",
+    "RightForce APK download",
     "verified APK install",
-    "Cortex attendance app",
+    "RightForce attendance app",
+    "AEGIBIT Cortex",
     "AEGIBIT",
   ],
 });
@@ -108,13 +109,13 @@ export default function CortexInstallPage() {
               </span>
             </div>
             <h1 className="font-light leading-tight mb-5" style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)", color: "#fff" }}>
-              Install Cortex on Android.{" "}
+              Install RightForce on Android.{" "}
               <span style={{ background: "linear-gradient(135deg, #fff 0%, #818CF8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 Verified, fingerprinted, yours.
               </span>
             </h1>
             <p className="text-base leading-relaxed max-w-xl mx-auto mb-9" style={{ color: "#A1A1AA" }}>
-              Cortex ships directly from AEGIBIT, not an app store, so you always get the exact build we
+              RightForce ships directly from AEGIBIT, not an app store, so you always get the exact build we
               signed. This page gives you the file, the proof it is genuine, and what to expect during install.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -124,7 +125,7 @@ export default function CortexInstallPage() {
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-transform hover:-translate-y-0.5"
                 style={{ background: ACCENT, color: "#000" }}
               >
-                <Download size={16} /> Download Cortex for Android
+                <Download size={16} /> Download RightForce for Android
               </a>
               <a
                 href="/products/cortex"
@@ -209,7 +210,7 @@ export default function CortexInstallPage() {
               </h2>
               <p className="text-[15px] leading-relaxed max-w-xl mx-auto" style={{ color: "#A1A1AA" }}>
                 Every genuine copy of this release has exactly one SHA-256 fingerprint. If a file claiming to
-                be Cortex shows a different one, it did not come from us: delete it and download from this page.
+                be RightForce shows a different one, it did not come from us: delete it and download from this page.
               </p>
             </div>
 
@@ -262,7 +263,7 @@ export default function CortexInstallPage() {
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <h3 className="text-sm font-semibold mb-3" style={{ color: "#fff" }}>Cortex asks for</h3>
+                <h3 className="text-sm font-semibold mb-3" style={{ color: "#fff" }}>RightForce asks for</h3>
                 <ul className="space-y-2.5">
                   <li className="flex gap-2.5 text-[13px] leading-relaxed" style={{ color: "#A1A1AA" }}>
                     <CheckCircle2 size={15} className="flex-shrink-0 mt-0.5" style={{ color: OK }} />
@@ -279,7 +280,7 @@ export default function CortexInstallPage() {
                 </ul>
               </div>
               <div className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <h3 className="text-sm font-semibold mb-3" style={{ color: "#fff" }}>Cortex never requests</h3>
+                <h3 className="text-sm font-semibold mb-3" style={{ color: "#fff" }}>RightForce never requests</h3>
                 <ul className="space-y-2.5">
                   {NEVER.map((n) => (
                     <li key={n} className="flex gap-2.5 text-[13px]" style={{ color: "#A1A1AA" }}>
@@ -306,11 +307,11 @@ export default function CortexInstallPage() {
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-transform hover:-translate-y-0.5"
               style={{ background: ACCENT, color: "#000" }}
             >
-              <Download size={16} /> Download Cortex v{APK_VERSION}
+              <Download size={16} /> Download RightForce v{APK_VERSION}
             </a>
             <p className="mt-6 text-xs" style={{ color: "#52525B" }}>
               Questions about a warning on your specific phone?{" "}
-              <a href="mailto:contact@aegibit.com?subject=Cortex Android install" style={{ color: ACCENT }}>
+              <a href="mailto:contact@aegibit.com?subject=RightForce Android install" style={{ color: ACCENT }}>
                 contact@aegibit.com
               </a>{" "}
               - we answer fast.
