@@ -57,6 +57,23 @@ export interface Comparison {
   pickPaymintIf: string[];
   /** When the competitor is the right choice (honest framing). */
   pickCompetitorIf: string[];
+  /**
+   * Which AEGIBIT product this comparison is for. Optional: defaults to
+   * PayMint so the original pages are unchanged. Set for Cortex (or any
+   * future product) comparisons. The `paymint`/`paymintWins`/`pickPaymintIf`
+   * fields carry the "us" values regardless of which product this is.
+   */
+  product?: string;
+  /** Path to the product page (default /products/paymint). */
+  productPath?: string;
+  /** Path the primary CTA links to (default /products/paymint/demo). */
+  demoPath?: string;
+  /** Label for the primary CTA button (default "Book a 20-min Demo"). */
+  ctaLabel?: string;
+  /** Headline over the "where we win" block (default multi-branch line). */
+  winsHeadline?: string;
+  /** Subhead in the closing CTA (default PayMint pilot line). */
+  ctaSubhead?: string;
 }
 
 export const COMPARISONS: Comparison[] = [
@@ -375,6 +392,157 @@ export const COMPARISONS: Comparison[] = [
         q: "Is PayMint India-data-residency-safe?",
         a: "Yes. Firestore region is Asia-South1 (Mumbai); customer data never leaves the region. SOC 2 / ISO 27001 documentation packages available on request. Built by AEGIBIT, an India-based cybersecurity-first software company.",
       },
+    ],
+  },
+
+  // ── Cortex vs Zoho ──────────────────────────────────────────────────
+  {
+    slug: "cortex-vs-zoho",
+    product: "AEGIBIT Cortex",
+    productPath: "/products/cortex",
+    demoPath: "/products/cortex",
+    ctaLabel: "Open Cortex Free",
+    winsHeadline: "Your whole business, one platform.",
+    ctaSubhead:
+      "Start free in your browser, up to 3 seats, all core modules included. No credit card, nothing to install.",
+    competitorName: "Zoho",
+    competitorTagline: "A vast, mature suite of 45+ connected business apps.",
+    competitorStrengths: [
+      "An enormous ecosystem: CRM, Books, People, Payroll, Desk, Marketing, and dozens more apps.",
+      "Years of maturity, deep features, and a huge global user base and community.",
+      "Marketing automation, telephony, and a large third-party integration marketplace.",
+      "Full double-entry accounting in Zoho Books for businesses that need a complete GL.",
+    ],
+    paymintWins: [
+      "One unified product and one data model, not 45 separate apps you subscribe to and stitch together.",
+      "India-compliant payroll (PF, ESI, Professional Tax) and field attendance (GPS, geofence, selfie) built into the same system as your CRM and invoicing.",
+      "Database-level tenant isolation, engineered by a cybersecurity-first company.",
+      "A free Starter edition and an AI copilot across the whole platform.",
+    ],
+    title: "AEGIBIT Cortex vs Zoho, One Platform or a Suite of Apps",
+    description:
+      "Honest comparison of AEGIBIT Cortex and Zoho for Indian SMBs. One unified business platform with built-in payroll and attendance, versus a mature suite of separate apps.",
+    headline: "AEGIBIT Cortex vs Zoho",
+    subhead:
+      "Zoho gives you dozens of apps to assemble. Cortex gives you one platform that already runs sales, invoicing, HR, payroll, and attendance together. Here is the honest comparison.",
+    table: [
+      {
+        title: "One platform vs a suite",
+        rows: [
+          { feature: "CRM, invoicing, HR, and payroll in one product", paymint: "✓ Single unified system", competitor: "Separate apps (CRM, Books, People, Payroll)", note: "Zoho One bundles them, but they remain distinct apps with their own data and setup." },
+          { feature: "Single login and data model across the business", paymint: "✓ Native", competitor: "Per-app, bridged by integrations" },
+          { feature: "Setup effort to run the whole operation", paymint: "✓ One platform to configure", competitor: "Configure and connect multiple apps" },
+        ],
+      },
+      {
+        title: "India back office",
+        rows: [
+          { feature: "Payroll with PF, ESI, and Professional Tax", paymint: "✓ Built in", competitor: "✓ Via Zoho Payroll (separate app)" },
+          { feature: "Attendance with geofence, GPS, and selfie", paymint: "✓ Built in", competitor: "Via Zoho People (separate app)" },
+          { feature: "GST quoting and invoicing in the same system as CRM", paymint: "✓ Native", competitor: "Via Zoho Books / Invoice (separate app)" },
+        ],
+      },
+      {
+        title: "Security, AI, and pricing",
+        rows: [
+          { feature: "Database-level multi-tenant isolation", paymint: "✓ PostgreSQL Row-Level Security", competitor: "Platform-level controls" },
+          { feature: "AI copilot across the platform", paymint: "✓ Summaries, deal-risk, forecasting", competitor: "Zia AI, per app" },
+          { feature: "Free starting edition", paymint: "✓ Free up to 3 seats", competitor: "Free tiers on some apps" },
+          { feature: "Marketing automation and telephony", paymint: "-", competitor: "✓ Mature", note: "Cortex does not do marketing automation or telephony; if those are central, Zoho is strong there." },
+        ],
+      },
+    ],
+    pickPaymintIf: [
+      "You want one platform to run sales, invoicing, HR, payroll, and attendance, not a suite to assemble.",
+      "You need India-compliant payroll and field attendance built into the same system as your CRM.",
+      "Security and data isolation matter and you want a free way to start.",
+    ],
+    pickCompetitorIf: [
+      "You want the broadest possible app ecosystem and are happy to connect several apps.",
+      "Marketing automation, telephony, or full double-entry accounting are central to your needs.",
+      "You are already deeply invested in the Zoho ecosystem.",
+    ],
+    faqs: [
+      { q: "Is Cortex an all-in-one like Zoho One?", a: "Both cover a lot of ground, but differently. Zoho One bundles 45+ separate apps you connect together. Cortex is a single unified product where CRM, invoicing, HR, payroll, and attendance share one data model and one login, which means less setup and less stitching." },
+      { q: "Does Cortex handle Indian payroll like Zoho Payroll?", a: "Yes. Cortex runs payroll with statutory PF, ESI, and Professional Tax and produces verifiable payslips, built into the same platform as your CRM and invoicing rather than as a separate app." },
+      { q: "What does Zoho do that Cortex does not?", a: "Zoho has a far larger app ecosystem, mature marketing automation and telephony, and full double-entry accounting in Zoho Books. If those are central to you, Zoho is strong. Cortex focuses on running the core of your business on one secure platform." },
+      { q: "Can I try Cortex before paying?", a: "Yes. Cortex has a free Starter edition for up to 3 seats with all core modules included. Open it in your browser at cortex.aegibit.com, nothing to install." },
+    ],
+  },
+
+  // ── Cortex vs HubSpot ───────────────────────────────────────────────
+  {
+    slug: "cortex-vs-hubspot",
+    product: "AEGIBIT Cortex",
+    productPath: "/products/cortex",
+    demoPath: "/products/cortex",
+    ctaLabel: "Open Cortex Free",
+    winsHeadline: "The front office and the back office, together.",
+    ctaSubhead:
+      "Start free in your browser, up to 3 seats, all core modules included. No credit card, nothing to install.",
+    competitorName: "HubSpot",
+    competitorTagline: "A world-class CRM and marketing platform.",
+    competitorStrengths: [
+      "Best-in-class marketing automation and inbound tooling.",
+      "A polished, widely loved CRM experience and a generous free CRM tier.",
+      "A huge app marketplace, community, and ecosystem.",
+      "Strong content, email, and campaign tools for marketing teams.",
+    ],
+    paymintWins: [
+      "Cortex runs the whole business, not just sales and marketing: CRM, invoicing, accounts-payable, HR, payroll, and attendance on one platform.",
+      "India-compliant payroll (PF, ESI, Professional Tax) and GST invoicing, which HubSpot does not do at all.",
+      "Database-level tenant isolation from a cybersecurity-first company.",
+      "A free Starter edition and transparent per-seat pricing without steep tier jumps.",
+    ],
+    title: "AEGIBIT Cortex vs HubSpot, Whole Business or Just CRM",
+    description:
+      "Honest comparison of AEGIBIT Cortex and HubSpot. HubSpot is a great CRM and marketing platform; Cortex also runs invoicing, HR, payroll, and attendance in one system.",
+    headline: "AEGIBIT Cortex vs HubSpot",
+    subhead:
+      "HubSpot is excellent at CRM and marketing. But a growing business also has to invoice, pay staff, and track attendance. Here is the honest comparison of where each one fits.",
+    table: [
+      {
+        title: "Scope of the platform",
+        rows: [
+          { feature: "CRM and sales pipeline", paymint: "✓ Built in", competitor: "✓ Best-in-class" },
+          { feature: "Marketing automation and campaigns", paymint: "-", competitor: "✓ Best-in-class", note: "If deep marketing automation is your priority, HubSpot leads. Cortex does not do marketing automation." },
+          { feature: "GST invoicing and accounts-payable", paymint: "✓ Built in", competitor: "-" },
+          { feature: "HRMS, payroll, and attendance", paymint: "✓ Built in", competitor: "-" },
+        ],
+      },
+      {
+        title: "India fit",
+        rows: [
+          { feature: "India-compliant payroll (PF, ESI, P-Tax)", paymint: "✓ Native", competitor: "-" },
+          { feature: "Attendance with geofence, GPS, selfie", paymint: "✓ Native", competitor: "-" },
+          { feature: "GST-aware quoting and invoicing", paymint: "✓ Native", competitor: "-" },
+        ],
+      },
+      {
+        title: "Security, AI, and pricing",
+        rows: [
+          { feature: "Database-level multi-tenant isolation", paymint: "✓ PostgreSQL Row-Level Security", competitor: "Platform-level controls" },
+          { feature: "AI copilot", paymint: "✓ Across the platform", competitor: "✓ Breeze AI" },
+          { feature: "Free starting edition", paymint: "✓ Free up to 3 seats", competitor: "✓ Free CRM tier" },
+          { feature: "Cost as you grow", paymint: "Transparent per seat", competitor: "Can rise steeply across tiers and add-ons" },
+        ],
+      },
+    ],
+    pickPaymintIf: [
+      "You want one platform for the whole business, not only the front office.",
+      "You need invoicing, payroll, and attendance alongside your CRM, especially in India.",
+      "You want strong security and a free way to start.",
+    ],
+    pickCompetitorIf: [
+      "Marketing automation and inbound are your primary need.",
+      "You want the largest CRM app ecosystem and community.",
+      "You do not need HR, payroll, or invoicing inside the same tool.",
+    ],
+    faqs: [
+      { q: "Is Cortex a HubSpot alternative?", a: "For the CRM and sales side, yes, and Cortex goes further by also running invoicing, HR, payroll, and attendance in the same platform. If your main need is deep marketing automation, HubSpot is stronger there." },
+      { q: "Does HubSpot do payroll or invoicing?", a: "No. HubSpot is a CRM and marketing platform; it does not run Indian payroll, attendance, or GST invoicing. Cortex does all three, built in." },
+      { q: "Which is better value for an Indian SMB?", a: "If you need CRM plus back office (invoicing, HR, payroll) in one place, Cortex covers more for the money and starts free. If you only need CRM and marketing, HubSpot's free tier and marketing tools are excellent." },
+      { q: "Can I try Cortex free?", a: "Yes. Cortex has a free Starter edition for up to 3 seats with all core modules included. Open it at cortex.aegibit.com, nothing to install." },
     ],
   },
 ];

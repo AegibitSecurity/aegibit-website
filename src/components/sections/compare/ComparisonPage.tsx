@@ -24,6 +24,15 @@ import type { Comparison, ComparisonRow } from "@/content/comparisons";
 
 export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
   const utm = `?utm_source=compare&utm_campaign=${encodeURIComponent(c.slug)}`;
+  // Product config, defaults to PayMint so existing comparisons are unchanged.
+  const product = c.product ?? "PayMint";
+  const productPath = c.productPath ?? "/products/paymint";
+  const demoPath = c.demoPath ?? "/products/paymint/demo";
+  const ctaLabel = c.ctaLabel ?? "Book a 20-min Demo";
+  const winsHeadline = c.winsHeadline ?? "Multi-branch operations, end-to-end.";
+  const ctaSubhead =
+    c.ctaSubhead ??
+    "20-minute live demo. Same-day sandbox link. Free 14-day pilot, no credit card required.";
 
   return (
     <main style={{ background: "#000" }}>
@@ -89,7 +98,7 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href={`/products/paymint/demo${utm}`}
+              href={`${demoPath}${utm}`}
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: "linear-gradient(135deg, #F97316, #EA6C0A)",
@@ -99,10 +108,10 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
               }}
             >
               <CalendarCheck size={18} />
-              Book a 20-min Demo
+              {ctaLabel}
             </Link>
             <Link
-              href="/products/paymint"
+              href={productPath}
               className="inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: "transparent",
@@ -110,7 +119,7 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
                 border: "1px solid rgba(255,255,255,0.20)",
               }}
             >
-              Explore PayMint
+              Explore {product}
               <ArrowRight size={18} />
             </Link>
           </div>
@@ -166,10 +175,10 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
               className="text-[11px] uppercase mb-3 font-medium"
               style={{ color: "#F97316", letterSpacing: "0.2em" }}
             >
-              Where PayMint clearly wins
+              Where {product} clearly wins
             </p>
             <h2 className="text-xl font-medium mb-5" style={{ color: "#fff" }}>
-              Multi-branch operations, end-to-end.
+              {winsHeadline}
             </h2>
             <ul className="space-y-3">
               {c.paymintWins.map((w, i) => (
@@ -226,7 +235,7 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
                           Feature
                         </th>
                         <th className="text-left py-3 px-4 text-[11px] uppercase font-medium tracking-wider" style={{ color: "#F97316" }}>
-                          PayMint
+                          {product}
                         </th>
                         <th className="text-left py-3 px-4 text-[11px] uppercase font-medium tracking-wider" style={{ color: "#94A3B8" }}>
                           {c.competitorName}
@@ -271,7 +280,7 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
               }}
             >
               <h3 className="text-lg font-medium mb-5" style={{ color: "#F97316" }}>
-                Pick PayMint if…
+                Pick {product} if…
               </h3>
               <ul className="space-y-3">
                 {c.pickPaymintIf.map((p, i) => (
@@ -386,7 +395,7 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
             className="font-light leading-[1.1] tracking-tight mb-6"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)", color: "#fff" }}
           >
-            See PayMint run{" "}
+            See {product} run{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #fff 0%, #F97316 100%)",
@@ -402,12 +411,11 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
             className="text-lg max-w-xl mx-auto leading-relaxed mb-10"
             style={{ color: "#A1A1AA" }}
           >
-            20-minute live demo. Same-day sandbox link. ₹999/branch/month.
-            Free 14-day pilot, no credit card required.
+            {ctaSubhead}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href={`/products/paymint/demo${utm}`}
+              href={`${demoPath}${utm}`}
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: "linear-gradient(135deg, #F97316, #EA6C0A)",
@@ -416,7 +424,7 @@ export function ComparisonPage({ comparison: c }: { comparison: Comparison }) {
               }}
             >
               <CalendarCheck size={18} />
-              Book a Demo
+              {ctaLabel}
             </Link>
             <Link
               href="/pricing"

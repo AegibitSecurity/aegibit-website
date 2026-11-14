@@ -23,10 +23,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: c.title,
     description: c.description,
     keywords: [
-      `PayMint vs ${c.competitorName}`,
+      `${c.product ?? "PayMint"} vs ${c.competitorName}`,
       `${c.competitorName} alternative`,
-      "multi-branch expense management",
-      "PayMint",
+      `${c.product ?? "PayMint"}`,
       "AEGIBIT",
     ],
     alternates: { canonical: `/compare/${c.slug}` },
