@@ -545,6 +545,158 @@ export const COMPARISONS: Comparison[] = [
       { q: "Can I try Cortex free?", a: "Yes. Cortex has a free Starter edition for up to 3 seats with all core modules included. Open it at cortex.aegibit.com, nothing to install." },
     ],
   },
+
+  // ── Cortex vs Tally ─────────────────────────────────────────────────
+  {
+    slug: "cortex-vs-tally",
+    product: "AEGIBIT Cortex",
+    productPath: "/products/cortex",
+    demoPath: "/products/cortex",
+    ctaLabel: "Open Cortex Free",
+    winsHeadline: "Run the business, not just the books.",
+    ctaSubhead:
+      "Start free in your browser, up to 3 seats, all core modules included. No credit card, nothing to install.",
+    competitorName: "Tally",
+    competitorTagline: "India's default accounting software for decades.",
+    competitorStrengths: [
+      "Deep, trusted double-entry accounting and GST return filing.",
+      "Every accountant and CA in India already knows it.",
+      "Mature inventory and statutory reporting for the books.",
+      "Works offline on a desktop, no internet required.",
+    ],
+    paymintWins: [
+      "Cortex runs sales, CRM, invoicing, HR, payroll, and attendance, the operations Tally was never built for.",
+      "Cloud and mobile, multi-user and multi-branch by design, with a live AI copilot.",
+      "India-compliant payroll and field attendance built in, alongside your customer and sales data.",
+      "Database-level security and a free Starter edition.",
+    ],
+    title: "AEGIBIT Cortex vs Tally, Operations vs Accounting",
+    description:
+      "Honest comparison of AEGIBIT Cortex and Tally. Tally keeps your books; Cortex runs your operations, CRM, HR, payroll, and invoicing. Most businesses use both.",
+    headline: "AEGIBIT Cortex vs Tally",
+    subhead:
+      "Tally is excellent accounting software. But it was never meant to run your sales, your people, or your payroll. Here is the honest comparison, and why many businesses use both.",
+    table: [
+      {
+        title: "What each is built for",
+        rows: [
+          { feature: "Double-entry accounting and GST filing", paymint: "-", competitor: "✓ Deep and trusted", note: "Cortex is not an accounting ledger. For the books and CA filing, Tally leads. Cortex can export clean data to it." },
+          { feature: "CRM, sales pipeline, and quoting", paymint: "✓ Built in", competitor: "-" },
+          { feature: "HRMS, payroll, and attendance", paymint: "✓ Built in", competitor: "-" },
+          { feature: "Customer support inbox and operations", paymint: "✓ Built in", competitor: "-" },
+        ],
+      },
+      {
+        title: "How it runs",
+        rows: [
+          { feature: "Cloud and mobile access from anywhere", paymint: "✓ Web + Android", competitor: "Desktop; cloud variant at extra cost" },
+          { feature: "Multi-user and multi-branch by design", paymint: "✓ Native, role-based", competitor: "Add-ons / separate setups" },
+          { feature: "AI copilot across the platform", paymint: "✓", competitor: "-" },
+        ],
+      },
+      {
+        title: "India fit and security",
+        rows: [
+          { feature: "Payroll with PF, ESI, Professional Tax", paymint: "✓ Built in", competitor: "-" },
+          { feature: "GST-aware quoting and invoicing", paymint: "✓ Built in", competitor: "✓ Accounting side" },
+          { feature: "Database-level multi-tenant isolation", paymint: "✓ PostgreSQL RLS", competitor: "Local file / deployment dependent" },
+          { feature: "Free starting edition", paymint: "✓ Free up to 3 seats", competitor: "Paid licence" },
+        ],
+      },
+    ],
+    pickPaymintIf: [
+      "You need to run sales, CRM, HR, payroll, attendance, and invoicing, not just keep accounts.",
+      "You want cloud and mobile access, multi-branch, and an AI copilot.",
+      "You want a modern platform your whole team can use, starting free.",
+    ],
+    pickCompetitorIf: [
+      "Your core need is deep accounting, statutory books, and GST return filing.",
+      "Your CA and finance team work entirely in Tally and you want to keep that.",
+      "You do not need CRM, HR, or payroll in the same tool.",
+    ],
+    faqs: [
+      { q: "Does Cortex replace Tally?", a: "Not for accounting. Tally keeps your books and files GST; it does that extremely well. Cortex runs the operations around the books, sales, CRM, invoicing, HR, payroll, and attendance. Many businesses use Cortex for operations and Tally for accounting, and move clean data between them." },
+      { q: "Can Cortex do GST invoicing like Tally?", a: "Cortex does GST-aware quoting and invoicing for your sales operations. For full double-entry accounting and GST return filing, Tally remains the specialist." },
+      { q: "Why would an SMB add Cortex if it has Tally?", a: "Because Tally does not run your sales pipeline, your customer relationships, your HR, or your payroll and attendance. Cortex puts all of that on one modern cloud platform, which Tally was never designed to do." },
+      { q: "Can I try Cortex free?", a: "Yes. Cortex has a free Starter edition for up to 3 seats with all core modules included. Open it at cortex.aegibit.com, nothing to install." },
+    ],
+  },
+
+  // ── Cortex vs Salesforce ────────────────────────────────────────────
+  {
+    slug: "cortex-vs-salesforce",
+    product: "AEGIBIT Cortex",
+    productPath: "/products/cortex",
+    demoPath: "/products/cortex",
+    ctaLabel: "Open Cortex Free",
+    winsHeadline: "Enterprise power, without the enterprise price.",
+    ctaSubhead:
+      "Start free in your browser, up to 3 seats, all core modules included. No credit card, nothing to install.",
+    competitorName: "Salesforce",
+    competitorTagline: "The enterprise CRM leader.",
+    competitorStrengths: [
+      "The most powerful and customizable CRM platform in the world.",
+      "An unmatched ecosystem, AppExchange, and partner network.",
+      "Built to scale to the largest, most complex enterprises.",
+      "Deep configurability for specialized sales processes.",
+    ],
+    paymintWins: [
+      "Cortex is all-in-one: CRM plus invoicing, accounts-payable, HR, payroll, and attendance, where Salesforce is CRM with paid add-ons for the rest.",
+      "Simple enough to run without a dedicated admin or a consultant, and far more affordable for SMB and mid-market.",
+      "India-compliant payroll, GST invoicing, and field attendance built in.",
+      "A free Starter edition and transparent per-seat pricing.",
+    ],
+    title: "AEGIBIT Cortex vs Salesforce, Power Without the Complexity",
+    description:
+      "Honest comparison of AEGIBIT Cortex and Salesforce for SMB and mid-market. All-in-one simplicity and India back office, versus enterprise power and cost.",
+    headline: "AEGIBIT Cortex vs Salesforce",
+    subhead:
+      "Salesforce is the enterprise CRM king. For SMB and mid-market teams that want that power without the admins, consultants, and cost, here is the honest comparison.",
+    table: [
+      {
+        title: "Scope and simplicity",
+        rows: [
+          { feature: "Core CRM and sales pipeline", paymint: "✓ Built in", competitor: "✓ Best-in-class" },
+          { feature: "Invoicing, HR, payroll, attendance in the same tool", paymint: "✓ Built in", competitor: "Paid add-ons / separate products" },
+          { feature: "Runs without a dedicated admin or consultant", paymint: "✓ Designed for it", competitor: "Typically needs admin / partner setup" },
+          { feature: "Unlimited enterprise customization and ecosystem", paymint: "Focused platform", competitor: "✓ Unmatched", note: "For deep enterprise customization and a vast app ecosystem, Salesforce leads." },
+        ],
+      },
+      {
+        title: "India fit",
+        rows: [
+          { feature: "Payroll with PF, ESI, Professional Tax", paymint: "✓ Built in", competitor: "-" },
+          { feature: "Attendance with geofence, GPS, selfie", paymint: "✓ Built in", competitor: "-" },
+          { feature: "GST-aware quoting and invoicing", paymint: "✓ Built in", competitor: "Via add-ons / partners" },
+        ],
+      },
+      {
+        title: "Security, AI, and pricing",
+        rows: [
+          { feature: "Database-level multi-tenant isolation", paymint: "✓ PostgreSQL RLS", competitor: "✓ Enterprise-grade" },
+          { feature: "AI copilot", paymint: "✓ Across the platform", competitor: "✓ Einstein (higher tiers)" },
+          { feature: "Free starting edition", paymint: "✓ Free up to 3 seats", competitor: "-" },
+          { feature: "Total cost for SMB / mid-market", paymint: "Transparent, affordable per seat", competitor: "High, rises with add-ons and seats" },
+        ],
+      },
+    ],
+    pickPaymintIf: [
+      "You are an SMB or mid-market team that wants CRM plus back office in one simple platform.",
+      "You need India payroll, attendance, and invoicing, not just CRM.",
+      "You want to start free and avoid admins, consultants, and steep costs.",
+    ],
+    pickCompetitorIf: [
+      "You are a large enterprise needing deep customization and a vast app ecosystem.",
+      "You have the budget and the admin or partner resources to run it.",
+      "Your sales process is highly specialized and needs enterprise-grade configurability.",
+    ],
+    faqs: [
+      { q: "Is Cortex a Salesforce alternative?", a: "For SMB and mid-market, yes. Cortex gives you a strong CRM plus invoicing, HR, payroll, and attendance in one platform, without the admins, consultants, and cost Salesforce usually involves. For large enterprises needing deep customization, Salesforce remains more powerful." },
+      { q: "What does Salesforce do that Cortex does not?", a: "Salesforce offers far deeper enterprise customization, a vast AppExchange ecosystem, and scale for the largest organizations. Cortex focuses on running the core of an SMB or mid-market business simply and affordably on one platform." },
+      { q: "Is Cortex cheaper than Salesforce?", a: "For SMB and mid-market, substantially. Cortex has a free Starter edition and transparent per-seat pricing with all core modules included, where Salesforce cost rises quickly across tiers, seats, and add-ons." },
+      { q: "Can I try Cortex free?", a: "Yes. Cortex has a free Starter edition for up to 3 seats with all core modules included. Open it at cortex.aegibit.com, nothing to install." },
+    ],
+  },
 ];
 
 export const COMPARISON_SLUGS = COMPARISONS.map((c) => c.slug);
