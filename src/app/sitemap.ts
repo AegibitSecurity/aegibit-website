@@ -38,14 +38,17 @@ type ChangeFreq = NonNullable<SitemapEntry["changeFrequency"]>;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE_URL.replace(/\/$/, "");
-  const now = new Date();
-
   const entry = (
     path: string,
     priority: number,
     changeFrequency: ChangeFreq,
-    lastModified: Date = now,
-  ): SitemapEntry => ({ url: `${base}${path}`, lastModified, changeFrequency, priority });
+    lastModified?: Date,
+  ): SitemapEntry => ({
+    url: `${base}${path}`,
+    ...(lastModified ? { lastModified } : {}),
+    changeFrequency,
+    priority,
+  });
 
   const staticPages: SitemapEntry[] = [
     entry("/", 1.0, "weekly"),

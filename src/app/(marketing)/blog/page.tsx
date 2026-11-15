@@ -1,11 +1,29 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { blogPosts } from "@/content/blog-posts";
+import { SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-export const metadata: Metadata = { title: "Blog", description: "Security insights and enterprise AI research from AEGIBIT." };
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Security insights and enterprise AI research from AEGIBIT.",
+  alternates: { canonical: `${SITE_URL}/blog` },
+  openGraph: {
+    title: "AEGIBIT Blog",
+    description: "Security insights and enterprise AI research from AEGIBIT.",
+    url: `${SITE_URL}/blog`,
+    type: "website",
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AEGIBIT Blog",
+    description: "Security insights and enterprise AI research from AEGIBIT.",
+    images: [`${SITE_URL}/opengraph-image`],
+  },
+};
 
 export default function BlogPage() {
   return (

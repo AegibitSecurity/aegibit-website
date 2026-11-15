@@ -20,10 +20,8 @@ import { usePathname } from "next/navigation";
  *   - StickyMobileCTA, fixed bottom "Get Demo" CTA on mobile
  *   - ExitIntentPopup, abandon-capture
  *   - ChatWidget, Aira AI guide (Groq Llama 3.3 70B backbone)
- *   - CookieNotice, first-visit data-collection notice (DPDP §4
- *     explicit-notice gap from PR #96; not an opt-in gate because we
- *     don't set advertising or cross-site tracking cookies, see the
- *     component header for the full rationale).
+ * Cookie consent is handled once by ConsentBanner in the root layout.
+ * Do not mount the older informational CookieNotice alongside it.
  *
  * What was REMOVED in the credibility-cleanup pass:
  *   - SocialProofToast, fabricated "team from <random-city> joined"
@@ -73,11 +71,6 @@ const ChatWidget = dynamic(
   { ssr: false },
 );
 
-const CookieNotice = dynamic(
-  () => import("./CookieNotice").then((m) => ({ default: m.CookieNotice })),
-  { ssr: false },
-);
-
 // Routes where marketing chrome must NEVER render. Match by prefix.
 // Keep this list in sync with src/proxy.ts conceptually, anything
 // that's "internal" or "auth-gated" goes here.
@@ -107,7 +100,6 @@ export function MarketingChrome() {
       <StickyMobileCTA />
       <ExitIntentPopup />
       <ChatWidget />
-      <CookieNotice />
     </>
   );
 }

@@ -13,6 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return { title: "Not Found" };
+  const postUrl = `${SITE_URL}/blog/${post.slug}`;
   return {
     // Bare title; the root layout title.template appends " | AEGIBIT".
     // (Previously appended a stale " | AEGIBIT VoiceCore", which also
@@ -21,11 +22,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.description,
     keywords: post.tags,
     authors: [{ name: post.author.name }],
+    alternates: { canonical: postUrl },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
+      url: postUrl,
       publishedTime: post.date,
+      images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [`${SITE_URL}/opengraph-image`],
     },
   };
 }
@@ -54,9 +64,11 @@ export default async function BlogPost({ params }: Props) {
         datePublished: post.date,
         dateModified: post.date,
         author: {
-          "@type": "Person",
+          "@type": post.author.name === "AEGIBIT Security Team" ? "Organization" : "Person",
           name: post.author.name,
-          jobTitle: post.author.title,
+          ...(post.author.name === "AEGIBIT Security Team"
+            ? { parentOrganization: { "@type": "Organization", name: "AEGIBIT Global Consulting", url: SITE_URL } }
+            : { jobTitle: post.author.title }),
         },
         publisher: {
           "@type": "Organization",
@@ -66,7 +78,7 @@ export default async function BlogPost({ params }: Props) {
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
         keywords: post.tags.join(", "),
-        image: `${SITE_URL}/api/og?title=${encodeURIComponent(post.title)}`,
+        image: `${SITE_URL}/opengraph-image`,
       },
       {
         "@type": "FAQPage",
@@ -91,7 +103,7 @@ export default async function BlogPost({ params }: Props) {
     <>
       <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <main className="pt-32 pb-16 px-6 lg:px-10">
+      <main id="main-content" className="pt-32 pb-16 px-6 lg:px-10">
         <div className="max-w-3xl mx-auto">
 
           {/* Breadcrumb */}
@@ -174,11 +186,11 @@ export default async function BlogPost({ params }: Props) {
 
           {/* CTA */}
           <div className="p-8 rounded-sm border border-[rgba(249,115,22,0.2)] bg-[#111111] mb-14 text-center">
-            <p className="mono-label text-[#F97316] mb-3">AEGIBIT VOICECORE</p>
-            <h3 className="text-xl font-bold text-white mb-2">Ready to secure your voice workflows?</h3>
-            <p className="text-[#A1A1AA] text-sm mb-6">Join 50+ enterprise teams. No credit card required.</p>
-            <Link href="/signup" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-6 py-3 rounded-md text-sm transition-colors">
-              Get Private Access <ArrowRight className="w-4 h-4" />
+            <p className="mono-label text-[#F97316] mb-3">AEGIBIT GLOBAL CONSULTING</p>
+            <h3 className="text-xl font-bold text-white mb-2">Have a software project in mind?</h3>
+            <p className="text-[#A1A1AA] text-sm mb-6">Tell us about your workflow, requirements, and the problem you want to solve.</p>
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-6 py-3 rounded-md text-sm transition-colors">
+              Discuss your project <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
