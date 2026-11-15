@@ -100,11 +100,11 @@ export default function NibirMotorsCaseStudyPage() {
           <div className="relative z-10 max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
               <Link
-                href="/case-studies"
+                href="/work"
                 className="text-xs uppercase tracking-[0.2em] hover:text-white transition-colors"
                 style={{ color: "#F97316" }}
               >
-                Case Study
+                Our Work
               </Link>
               <span style={{ color: "#52525B" }}>·</span>
               <span className="text-xs flex items-center gap-1" style={{ color: "#71717A" }}>

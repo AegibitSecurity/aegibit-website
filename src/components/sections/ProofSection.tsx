@@ -1,8 +1,3 @@
-"use client";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
-
 /**
  * Numbers section.
  *
@@ -25,11 +20,8 @@ const METRICS = [
 ];
 
 export function ProofSection() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
-
   return (
     <section
-      ref={ref}
       className="py-32 px-6 border-t border-[rgba(255,255,255,0.06)]"
       style={{
         background:
@@ -37,18 +29,12 @@ export function ProofSection() {
       }}
     >
       <div className="max-w-7xl mx-auto">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5 }}
+        <p
           className="mono-label text-[#F97316] text-center mb-3"
         >
           Real numbers, real customers
-        </motion.p>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
+        </p>
+        <p
           className="text-center text-[#52525B] text-sm mb-16"
         >
           From{" "}
@@ -59,32 +45,23 @@ export function ProofSection() {
             Nibir Motors, 7 dealerships, West Bengal
           </a>
           , now also live with SS Auto Trader LLP (Authorized Bajaj Dealership)
-        </motion.p>
+        </p>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          {METRICS.map((m, i) => (
-            <motion.div
+          {METRICS.map((m) => (
+            <div
               key={m.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
               className="text-center lg:text-left"
             >
               <p className="text-[clamp(2.2rem,4.5vw,3.5rem)] font-bold text-white leading-none mb-3 tracking-tight">
-                <AnimatedCounter
-                  value={m.value}
-                  prefix=""
-                  suffix={m.suffix}
-                  decimals={0}
-                  duration={2}
-                />
+                {m.value}{m.suffix}
               </p>
               <p className="mono-label text-[#52525B]">{m.label}</p>
               <div
                 className="w-8 h-0.5 mt-3 mx-auto lg:mx-0"
                 style={{ background: "rgba(249,115,22,0.4)" }}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
