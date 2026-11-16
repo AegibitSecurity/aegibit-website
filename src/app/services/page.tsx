@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { CompanyPage } from "@/components/shared/CompanyPage";
+import { SERVICES } from "@/content/services";
+import { buildMetadata } from "@/lib/seo";
+export const metadata = buildMetadata({ title: "Software development services", description: "Scope a custom business application or dealership workflow with AEGIBIT Global Consulting in Kolkata.", path: "/services" });
+export default function Page() { return <CompanyPage eyebrow="Services" title="Build the workflow your team needs." intro="Scoped software delivery for business operations, supported by AEGIBIT's product experience."><section><h2>Choose your starting point</h2><div className="grid md:grid-cols-2 gap-6">{SERVICES.map(s => <Link key={s.slug} href={`/services/${s.slug}`} className="border border-white/15 rounded-xl p-7 hover:border-orange-400"><h3 className="text-xl mb-3">{s.title}</h3><p>{s.intro}</p><span className="text-orange-400 block mt-5">Explore the service →</span></Link>)}</div></section><section><h2>Website projects</h2><p>For a company website, start with the pages, content, enquiries and integrations your buyers need.</p><Link href="/website-development-company-kolkata" className="inline-block mt-4 text-orange-400 underline">Website development in Kolkata →</Link></section></CompanyPage>; }

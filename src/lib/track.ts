@@ -1,5 +1,6 @@
 "use client";
 
+import { hasAnalyticsConsent } from "@/lib/consent";
 import { useVisitorStore } from "@/stores/visitor-store";
 import type { VisitorEventType } from "@/lib/validators";
 
@@ -38,7 +39,7 @@ export function track(
   data?: TrackData,
   pageOverride?: string,
 ): void {
-  if (typeof window === "undefined") return; // SSR no-op
+  if (typeof window === "undefined" || !hasAnalyticsConsent()) return;
 
   // Read visitorId from the zustand store directly, works outside
   // React components (e.g. inline event handlers in server-rendered

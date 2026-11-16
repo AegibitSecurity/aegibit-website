@@ -22,6 +22,8 @@ const COLS = {
     { label:"Changelog",  href:"/changelog"           },
   ],
   Company: [
+    { label:"Services", href:"/services" },
+    { label:"Aira", href:"/products/aira" },
     { label:"About",   href:"/about"   },
     { label:"Work",    href:"/work"    },
     { label:"Blog",    href:"/blog"    },

@@ -32,7 +32,7 @@ const WORK: Work[] = [
     name: "Nibir Motors",
     role: "PayMint, LeadSync, and the corporate website · 7 dealerships, West Bengal",
     description:
-      "It started with PayMint taking all seven dealerships fully audit-ready in 30 days. Nibir Motors then came back twice: first commissioning LeadSync, their dealership operating system, and then their corporate website. When a client keeps returning, the work speaks for itself.",
+      "Our work for Nibir Motors includes PayMint expense workflows, LeadSync dealership workflows and the corporate website. Each project addresses a different part of the business.",
     chips: ["PayMint rollout", "LeadSync platform", "Corporate website"],
     icon: Building2,
     accent: "#F97316",

@@ -182,7 +182,7 @@ export function PayMintDemoForm() {
           <div className="space-y-4 mb-10">
             {[
               { Icon: Clock,        text: 'No prep needed, we drive the demo' },
-              { Icon: ShieldCheck,  text: 'Built by a cybersecurity company, SOC 2 ready' },
+              { Icon: ShieldCheck,  text: 'Discuss the security controls for your deployment' },
               { Icon: Building2,    text: 'Live with Nibir Motors, 7 branches, real-time sync' },
               { Icon: Zap,          text: 'Get a live PayMint sandbox link the same day' },
             ].map(({ Icon, text }) => (

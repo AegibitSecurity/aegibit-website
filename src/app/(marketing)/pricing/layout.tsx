@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Pricing: AEGIBIT Software and Security Plans",
   description:
-    "Honest, simple pricing for AEGIBIT products. PayMint from 999 rupees per branch, Vestiq from 599 per boutique, MCP Shield and Aira free. Custom software and security scoped per project.",
+    "Explore PayMint plans for multi-branch expense management. Contact AEGIBIT for the scope and pricing of a custom software project.",
   path: "/pricing",
   keywords: [
     "AEGIBIT pricing",

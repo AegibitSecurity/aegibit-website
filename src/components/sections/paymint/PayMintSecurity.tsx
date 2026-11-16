@@ -4,42 +4,12 @@ import { motion } from 'framer-motion';
 import { Shield, Lock, Database, Eye, Server, FileLock2 } from 'lucide-react';
 
 const LAYERS = [
-  {
-    Icon: Lock,
-    title: 'Server-Enforced Rules',
-    body:
-      'Permissions live in Firestore Security Rules, not the client. A compromised browser still can&apos;t read another branch&apos;s data.',
-  },
-  {
-    Icon: Eye,
-    title: 'Append-Only Audit Log',
-    body:
-      'Every read-worthy action is recorded with an immutable timestamp and the actor&apos;s UID. No one can erase their own history.',
-  },
-  {
-    Icon: Database,
-    title: 'Atomic Transactions',
-    body:
-      'Voucher numbers and counters are issued inside Firestore transactions, concurrent makers can never collide on the same number.',
-  },
-  {
-    Icon: Shield,
-    title: 'Device Binding',
-    body:
-      'New devices require admin approval before they can read a single byte. Stolen credentials alone are not enough.',
-  },
-  {
-    Icon: FileLock2,
-    title: 'Soft-Delete Recovery',
-    body:
-      'Records are never destroyed on user action, they are tombstoned. A clean restore path exists for ransomware-grade incidents.',
-  },
-  {
-    Icon: Server,
-    title: 'OWASP-Hardened',
-    body:
-      'Tested against the OWASP Top 10 before every release. Built by a cybersecurity company, not a feature, a baseline.',
-  },
+ { Icon: Lock, title: 'Role and branch access', body: 'Review the maker, authoriser and payment roles, and the branch records each person can access.' },
+ { Icon: Eye, title: 'Action history', body: 'Review the recorded approval and payment actions, who can access them and the retention policy for your deployment.' },
+ { Icon: Database, title: 'Voucher references', body: 'Use a consistent branch and voucher reference for reconciliation. Include duplicate-submission cases in acceptance checks.' },
+ { Icon: Shield, title: 'Device access', body: 'Confirm device registration, OTP controls and access revocation with the deployment owner.' },
+ { Icon: FileLock2, title: 'Data recovery', body: 'Agree backup ownership, retention and a tested restore procedure before relying on a recovery commitment.' },
+ { Icon: Server, title: 'Security review', body: 'Ask for deployment-specific architecture and assessment evidence. A product description is not a certification or penetration-test report.' },
 ];
 
 export function PayMintSecurity() {
@@ -87,7 +57,7 @@ export function PayMintSecurity() {
             className="font-light leading-tight mb-5"
             style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#fff' }}
           >
-            Eight layers of protection.<br />
+            Controls to review.<br />
             <span
               style={{
                 background: 'linear-gradient(135deg, #fff 0%, #F97316 100%)',
@@ -96,12 +66,11 @@ export function PayMintSecurity() {
                 backgroundClip: 'text',
               }}
             >
-              Zero compromises.
+              Clear responsibilities.
             </span>
           </h2>
           <p className="text-lg leading-relaxed" style={{ color: '#A1A1AA' }}>
-            PayMint is the only expense platform built by a cybersecurity company. Every feature
-            you see is matched by an invisible defence beneath it.
+            Security requirements should be checked against your deployment, user roles and operating process. Review these areas during scoping.
           </p>
         </motion.div>
 

@@ -42,6 +42,7 @@ export const metadata: Metadata = {
 export default function PayMintPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "SoftwareApplication", name: "PayMint", applicationCategory: "BusinessApplication", operatingSystem: "Web, Android", url: "https://www.aegibit.com/products/paymint", description: "Multi-branch expense vouchers, role-based approvals, payment records and accounting exports.", publisher: { "@type": "Organization", name: "AEGIBIT Global Consulting", url: "https://www.aegibit.com" } }) }} />
       <Navbar />
       <main id="main-content">
         <PayMintHero />

@@ -5,7 +5,6 @@ import {
   CheckCircle2,
   AlertTriangle,
   Sparkles,
-  Quote,
 } from "lucide-react";
 import type { Solution } from "@/content/solutions";
 
@@ -238,56 +237,7 @@ export function SolutionPage({ solution }: { solution: Solution }) {
         </div>
       </section>
 
-      {/* ── TESTIMONIAL ─────────────────────────────────────────────── */}
-      <section className="py-20 px-6 lg:px-12" style={{ background: "#000000" }}>
-        <div className="max-w-4xl mx-auto">
-          <div
-            className="rounded-2xl p-8 md:p-12 relative overflow-hidden"
-            style={{
-              background: "#0D0D0D",
-              border: "1px solid rgba(255,255,255,0.07)",
-            }}
-          >
-            <Quote
-              size={56}
-              strokeWidth={1}
-              style={{
-                color: "rgba(249,115,22,0.10)",
-                position: "absolute",
-                top: 24,
-                right: 32,
-              }}
-            />
-            <div className="relative">
-              <p
-                className="text-xl md:text-2xl leading-relaxed font-light italic mb-8"
-                style={{ color: "#fff", letterSpacing: "-0.005em" }}
-              >
-                &ldquo;{solution.testimonialAngle}&rdquo;
-              </p>
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"
-                  style={{
-                    background: "linear-gradient(135deg, #F97316, #EA6C0A)",
-                    color: "#fff",
-                  }}
-                >
-                  NM
-                </div>
-                <div>
-                  <div className="text-sm font-semibold" style={{ color: "#fff" }}>
-                    Nibir Motors Pvt. Ltd.
-                  </div>
-                  <div className="text-xs" style={{ color: "#52525B" }}>
-                    7 branches across West Bengal · Live on PayMint
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="py-16 px-6 bg-black"><div className="max-w-4xl mx-auto rounded-xl border border-white/15 p-8"><h2 className="text-2xl text-white mb-4">See the branch workflow</h2><p className="text-zinc-300 mb-5">Read how the Nibir Motors project connects expense requests, approvals and payment records.</p><a href="/case-studies/nibir-motors" className="text-orange-400 underline underline-offset-4">Read the project summary →</a></div></section>
 
       {/* ── FAQ ─────────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 px-6 lg:px-12" style={{ background: "#000000" }}>

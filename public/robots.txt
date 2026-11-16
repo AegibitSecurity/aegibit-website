@@ -20,20 +20,50 @@ Disallow: /signup
 #   https://www.aegibit.com/llms.txt
 User-agent: GPTBot
 Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
 
 User-agent: CCBot
 Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
 
 Sitemap: https://www.aegibit.com/sitemap.xml

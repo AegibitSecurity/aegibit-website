@@ -1,8 +1,10 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
 import { useVisitorStore } from "@/stores/visitor-store";
+import { isValidEmail } from "@/lib/validators";
+import { hasAnalyticsConsent } from "@/lib/consent";
 import { track } from "@/lib/track";
 
 interface FormData {
@@ -30,6 +32,9 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
   const [step, setStep]     = useState(1);
   const [dir, setDir]       = useState(1);
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [submitError, setSubmitError] = useState("");
+  const [duplicate, setDuplicate] = useState(false);
+  const submitting = useRef(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [data, setData]     = useState<FormData>({
     email: "", name: "", company: "", teamSize: "", message: "",
@@ -40,6 +45,8 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
   const recalculate     = useVisitorStore((s) => s.recalculateScore);
   const visitorId       = useVisitorStore((s) => s.visitorId);
   const focusFired      = useRef(false);
+
+  useEffect(() => { track("contact_step_view", { source, step }); }, [source, step]);
 
   function set(field: keyof FormData, value: string) {
     setData((d) => ({ ...d, [field]: value }));
@@ -57,9 +64,9 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
 
   function validateStep(): boolean {
     const errs: Partial<FormData> = {};
-    if (step === 1 && !data.email.includes("@")) errs.email = "Enter a valid email";
+    if (step === 1 && !isValidEmail(data.email.trim())) errs.email = "Enter a valid email";
     if (step === 2 && !data.name.trim()) errs.name = "Name is required";
-    if (Object.keys(errs).length) { setErrors(errs); return false; }
+    if (Object.keys(errs).length) { setErrors(errs); track("contact_validation_error", { source, step, fields: Object.keys(errs) }); return false; }
     return true;
   }
 
@@ -76,7 +83,9 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!validateStep()) return;
+    if (submitting.current || !validateStep()) return;
+    submitting.current = true;
+    setSubmitError("");
     setStatus("loading");
     try {
       const res = await fetch("/api/leads", {
@@ -84,25 +93,31 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
+          email: data.email.trim(),
           source,
           page: window.location.pathname,
-          visitorId: visitorId ?? undefined,
+          visitorId: hasAnalyticsConsent() ? visitorId ?? undefined : undefined,
         }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) throw new Error(res.status === 429 ? "Please wait a moment before trying again." : "Your request could not be saved. Please retry or email contact@aegibit.com.");
+      const result = await res.json();
+      if (result.ok !== true) throw new Error("Your request could not be confirmed. Please retry or email contact@aegibit.com.");
+      setDuplicate(result.duplicate === true);
       setStatus("success");
       setSubmittedForm();
       recalculate();
-      track("form_submit", {
+      if (!result.duplicate) track("form_submit", {
         source,
         team_size: data.teamSize || undefined,
         had_company: Boolean(data.company.trim()),
         had_message: Boolean(data.message.trim()),
       });
       onSuccess?.();
-    } catch {
+    } catch (error) {
       setStatus("idle");
-    }
+      setSubmitError(error instanceof Error ? error.message : "Please retry or email contact@aegibit.com.");
+      track("contact_submit_error", { source, category: "request_failed" });
+    } finally { submitting.current = false; }
   }
 
   if (status === "success") {
@@ -113,8 +128,8 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
         className="text-center py-10 space-y-4"
       >
         <CheckCircle2 className="w-12 h-12 text-[#F97316] mx-auto" />
-        <p className="text-white font-bold text-xl tracking-tight">You&apos;re on the list.</p>
-        <p className="text-[#A1A1AA] text-sm">We&apos;ll reach out to {data.email} within 24 hours.</p>
+        <p className="text-white font-bold text-xl tracking-tight">{duplicate ? "Your earlier request is already recorded." : "Your request has been received."}</p>
+        <p className="text-[#A1A1AA] text-sm">{duplicate ? "To update it, email contact@aegibit.com." : "Thank you. The AEGIBIT team will review your enquiry."}</p>
       </motion.div>
     );
   }
@@ -126,7 +141,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
         {[1, 2, 3].map((s) => (
           <div key={s} className="flex items-center gap-2 flex-1">
             <div className={`h-0.5 flex-1 rounded-full transition-colors duration-300 ${s <= step ? "bg-[#F97316]" : "bg-[rgba(255,255,255,0.08)]"}`} />
-            <span className={`mono-label flex-shrink-0 transition-colors ${s === step ? "text-[#F97316]" : s < step ? "text-[#EA580C]" : "text-[#2A2A2A]"}`}>
+            <span className={`mono-label flex-shrink-0 transition-colors ${s === step ? "text-[#F97316]" : s < step ? "text-[#EA580C]" : "text-[#A1A1AA]"}`}>
               {s}/{3}
             </span>
           </div>
@@ -138,15 +153,15 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
           {step === 1 && (
             <motion.div key="step1" custom={dir} variants={slideVariants} initial="enter" animate="center" exit="exit"
               transition={{ duration: 0.25, ease: "easeOut" }}>
-              <p className="mono-label text-[#52525B] mb-2">Step 1 of 3</p>
-              <h3 className="text-xl font-bold text-white mb-6 tracking-tight">What&apos;s your work email?</h3>
+              <p className="mono-label text-[#A1A1AA] mb-2">Step 1 of 3</p>
+              <h2 className="text-xl font-bold text-white mb-6 tracking-tight">What&apos;s your work email?</h2>
               <div className="space-y-1.5">
                 <input
-                  type="email" value={data.email} onChange={(e) => set("email", e.target.value)}
+                  aria-label="Work email" autoComplete="email" maxLength={200} type="email" value={data.email} onChange={(e) => set("email", e.target.value)}
                   placeholder="you@company.com" autoFocus
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
                 />
-                {errors.email && <p className="text-[#EF4444] text-xs">{errors.email}</p>}
+                {errors.email && <p className="text-[#FCA5A5] text-xs">{errors.email}</p>}
               </div>
             </motion.div>
           )}
@@ -154,21 +169,21 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
           {step === 2 && (
             <motion.div key="step2" custom={dir} variants={slideVariants} initial="enter" animate="center" exit="exit"
               transition={{ duration: 0.25, ease: "easeOut" }}>
-              <p className="mono-label text-[#52525B] mb-2">Step 2 of 3</p>
-              <h3 className="text-xl font-bold text-white mb-6 tracking-tight">Tell us about yourself.</h3>
+              <p className="mono-label text-[#A1A1AA] mb-2">Step 2 of 3</p>
+              <h2 className="text-xl font-bold text-white mb-6 tracking-tight">Tell us about yourself.</h2>
               <div className="space-y-3">
                 <div>
                   <input
-                    type="text" value={data.name} onChange={(e) => set("name", e.target.value)}
+                    aria-label="Your name" autoComplete="name" maxLength={100} type="text" value={data.name} onChange={(e) => set("name", e.target.value)}
                     placeholder="Your name" autoFocus
-                    className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                    className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
                   />
-                  {errors.name && <p className="text-[#EF4444] text-xs mt-1">{errors.name}</p>}
+                  {errors.name && <p className="text-[#FCA5A5] text-xs mt-1">{errors.name}</p>}
                 </div>
                 <input
-                  type="text" value={data.company} onChange={(e) => set("company", e.target.value)}
+                  aria-label="Company name" autoComplete="organization" maxLength={100} type="text" value={data.company} onChange={(e) => set("company", e.target.value)}
                   placeholder="Company name"
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
                 />
               </div>
             </motion.div>
@@ -177,41 +192,42 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
           {step === 3 && (
             <motion.div key="step3" custom={dir} variants={slideVariants} initial="enter" animate="center" exit="exit"
               transition={{ duration: 0.25, ease: "easeOut" }}>
-              <p className="mono-label text-[#52525B] mb-2">Step 3 of 3</p>
-              <h3 className="text-xl font-bold text-white mb-6 tracking-tight">Last step, almost there.</h3>
+              <p className="mono-label text-[#A1A1AA] mb-2">Step 3 of 3</p>
+              <h2 className="text-xl font-bold text-white mb-6 tracking-tight">Last step, almost there.</h2>
               <div className="space-y-3">
                 <div>
                   <p className="text-[#A1A1AA] text-xs mb-2">Team size</p>
                   <div className="flex flex-wrap gap-2">
                     {TEAM_SIZES.map((size) => (
                       <button key={size} type="button" onClick={() => set("teamSize", size)}
-                        className={`px-4 py-2 rounded-md text-sm border transition-colors ${data.teamSize === size ? "bg-[#F97316] border-[#F97316] text-white" : "border-[rgba(255,255,255,0.08)] text-[#A1A1AA] hover:border-[rgba(255,255,255,0.2)]"}`}>
+                        className={`px-4 py-2 rounded-md text-sm border transition-colors ${data.teamSize === size ? "bg-[#F97316] border-[#F97316] text-black" : "border-[rgba(255,255,255,0.08)] text-[#A1A1AA] hover:border-[rgba(255,255,255,0.2)]"}`}>
                         {size}
                       </button>
                     ))}
                   </div>
                 </div>
-                <textarea
+                <textarea aria-label="What are you trying to solve?" maxLength={2000}
                   value={data.message} onChange={(e) => set("message", e.target.value)}
                   placeholder="What are you trying to solve? (optional)" rows={3}
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#2A2A2A] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors resize-none"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors resize-none"
                 />
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
+        {submitError ? <p role="alert" className="text-red-300 text-sm mt-4">{submitError}</p> : null}
         {/* Nav buttons */}
         <div className={`flex gap-3 mt-6 ${step > 1 ? "justify-between" : "justify-end"}`}>
           {step > 1 && (
-            <button type="button" onClick={back}
-              className="text-sm text-[#52525B] hover:text-[#A1A1AA] transition-colors px-4 py-2">
+            <button type="button" disabled={status === "loading"} onClick={back}
+              className="text-sm text-[#A1A1AA] hover:text-[#A1A1AA] transition-colors px-4 py-2">
               ← Back
             </button>
           )}
           <button
             type="submit" disabled={status === "loading"}
-            className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-6 py-2.5 rounded-md text-sm transition-colors disabled:opacity-60"
+            className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#FB923C] text-black font-semibold px-6 py-2.5 rounded-md text-sm transition-colors disabled:opacity-60"
           >
             {status === "loading" ? (
               <Loader2 className="w-4 h-4 animate-spin" />

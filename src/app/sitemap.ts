@@ -75,6 +75,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/products/aira", 0.85, "weekly"),
     entry("/products/aira/changelog", 0.6, "weekly"),
 
+    entry("/services", 0.8, "monthly"),
+    entry("/services/custom-business-software", 0.8, "monthly"),
+    entry("/services/dealership-workflow-software", 0.8, "monthly"),
+
     // Core marketing
     entry("/security", 0.8, "monthly"),
     entry("/features", 0.8, "monthly"),
