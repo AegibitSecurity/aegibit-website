@@ -1,4 +1,3 @@
-"use client";
 
 import { TrackedLink } from "@/components/shared/TrackedLink";
 import {
@@ -14,132 +13,10 @@ import {
   Zap,
 } from "lucide-react";
 
-/**
- * HomeProducts, AEGIBIT product showcase.
- *
- * The homepage section directly under the hero. Communicates that AEGIBIT
- * is a multi-product company building an industry OS, not a single tool.
- *
- * Product status badges:
- *   • LIVE, In production, paying customers
- *   • EARLY ACCESS, Buildable, design-partner-only
- *   • EMBEDDED, Layered across all products (Aira AI)
- *   • COMING 2026, On the roadmap, not yet code
- *
- * Each card has its own CTA so visitors with different intent (PayMint
- * buyer vs VoiceCore early-adopter vs general AEGIBIT prospect) all
- * find a meaningful next step from this single section.
- */
-
-type ProductStatus =
-  | "LIVE"
-  | "EARLY ACCESS"
-  | "EMBEDDED"
-  | "COMING 2026"
-  | "FREE · WINDOWS"
-  | "FREE · OPEN SOURCE";
-
-interface Product {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  status: ProductStatus;
-  icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
-  iconColor: string;
-  href: string;
-  ctaLabel: string;
-  highlighted?: boolean;
-}
-
-const PRODUCTS: Product[] = [
-  {
-    id: "cortex",
-    name: "AEGIBIT Cortex",
-    tagline: "The AI platform that runs your whole business.",
-    description:
-      "One platform to sell, invoice, and run your team. CRM and sales, GST invoicing and CPQ, accounts-payable, a full HRMS with India-compliant payroll (PF, ESI, Professional Tax) and attendance, approvals, a WhatsApp support inbox, and an Excel and Data Engine that learns your monthly spreadsheet workflow and reconciles ledger against bank exactly. AI copilot, hard multi-tenant isolation. Start free. Web and Android. Powered by AEGIBIT.",
-    status: "LIVE",
-    icon: BrainCircuit,
-    iconColor: "#818CF8",
-    href: "/products/cortex",
-    ctaLabel: "Explore Cortex",
-    highlighted: true,
-  },
-  {
-    id: "gokart",
-    name: "GoKarT",
-    tagline: "Your neighbourhood stores, delivered fast.",
-    description:
-      "Quick commerce built around the shops down your road. Shoppers order groceries and daily needs with honest, live arrival times, in Bengali and English. Store owners run orders, stock, customers, delivery and payments from the GoKarT app and web console. Android and web. Powered by AEGIBIT.",
-    status: "LIVE",
-    icon: ShoppingBasket,
-    iconColor: "#F58220",
-    href: "/products/gokart",
-    ctaLabel: "Explore GoKarT",
-  },
-  {
-    id: "paymint",
-    name: "PayMint",
-    tagline: "Multi-branch expense automation.",
-    description:
-      "Real-time vouchers, role-based approvals, audit-grade logs, Tally-ready exports. Trusted by multiple automotive dealerships: Nibir Motors (7 branches) and SS Auto Trader LLP, an Authorized Bajaj Dealership.",
-    status: "LIVE",
-    icon: Wallet,
-    iconColor: "#F97316",
-    href: "/products/paymint",
-    ctaLabel: "Explore PayMint",
-    highlighted: true,
-  },
-  {
-    id: "aira",
-    name: "Aira",
-    tagline: "Voice control for your desktop.",
-    description:
-      "Free desktop assistant for Windows. Wake by voice, opens apps, drafts messages, schedules reminders, acts on your tools. Hindi, Bengali, English. Voice biometric. Local-first. Built in India.",
-    status: "FREE · WINDOWS",
-    icon: Mic,
-    iconColor: "#60A5FA",
-    href: "/products/aira",
-    ctaLabel: "Download Aira free",
-  },
-  {
-    id: "mcp-shield",
-    name: "MCP Shield",
-    tagline: "Security for the protocol Anthropic refused to secure.",
-    description:
-      "Open-source security scanner and runtime firewall for Model Context Protocol servers. Detects tool poisoning, prompt injection, hidden-Unicode steganography, secret exposure, and unsafe stdio launch patterns. Built after Anthropic's April 2026 MCP-RCE disclosure. MIT licensed, stdlib-only, zero dependencies.",
-    status: "FREE · OPEN SOURCE",
-    icon: Shield,
-    iconColor: "#F97316",
-    href: "https://shield.aegibit.com",
-    ctaLabel: "Explore MCP Shield",
-  },
-  {
-    id: "vestiq",
-    name: "Vestiq",
-    tagline: "The Boutique OS.",
-    description:
-      "Mobile-first billing and shop management for Indian boutiques and tailoring businesses, built with founding client Burimar Abha Boutique. Branded PDF bills, WhatsApp-native sharing, payment tracking, and leakage protection. Android and web. Powered by AEGIBIT.",
-    status: "LIVE",
-    icon: ShoppingBag,
-    iconColor: "#A855F7",
-    href: "/products/vestiq",
-    ctaLabel: "Explore Vestiq",
-  },
-  {
-    id: "leadsync",
-    name: "LeadSync",
-    tagline: "The Dealership OS.",
-    description:
-      "A premium mobile operating system for automobile dealerships: lead to delivery on one canvas, command dashboard, field-proven reliability, silent updates. Chosen by Nibir Motors as their second AEGIBIT platform. Android and web. Powered by AEGIBIT.",
-    status: "LIVE",
-    icon: Car,
-    iconColor: "#38BDF8",
-    href: "/products/leadsync",
-    ctaLabel: "Explore LeadSync",
-  },
-];
+import { PRODUCT_CATALOG } from "@/content/product-catalog";
+const ICONS = { cortex: BrainCircuit, gokart: ShoppingBasket, paymint: Wallet, aira: Mic, "mcp-shield": Shield, vestiq: ShoppingBag, leadsync: Car };
+const PRODUCTS = PRODUCT_CATALOG.map(p => ({ ...p, icon: ICONS[p.id], iconColor: "#FB923C", highlighted: p.id === "cortex" || p.id === "paymint" }));
+type Product = (typeof PRODUCTS)[number];
 
 export function HomeProducts() {
   return (
@@ -179,7 +56,7 @@ export function HomeProducts() {
             className="font-light leading-tight max-w-3xl mx-auto mb-5"
             style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#fff" }}
           >
-            One platform.{" "}
+            Business software.{" "}
             <span
               style={{
                 background:
@@ -189,16 +66,14 @@ export function HomeProducts() {
                 backgroundClip: "text",
               }}
             >
-              Compounding trust.
+              Built around your work.
             </span>
           </h2>
           <p
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
             style={{ color: "#A1A1AA" }}
           >
-            AEGIBIT builds an interlocking suite of products. Each one earns its
-            keep on its own. Together, they become the operating system for your
-            entire business.
+            Explore our product portfolio. Choose a focused tool or discuss a custom project that fits your operations.
           </p>
         </div>
 
@@ -214,17 +89,7 @@ export function HomeProducts() {
 }
 
 function ProductCard({ product }: { product: Product }) {
-  const { name, tagline, description, status, icon: Icon, iconColor, href, ctaLabel, highlighted } = product;
-
-  const statusConfig: Record<ProductStatus, { bg: string; fg: string; pulse: boolean }> = {
-    "LIVE":              { bg: "rgba(16,185,129,0.10)", fg: "#10B981", pulse: true  },
-    "EARLY ACCESS":      { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: false },
-    "EMBEDDED":          { bg: "rgba(168,85,247,0.10)", fg: "#A855F7", pulse: false },
-    "COMING 2026":       { bg: "rgba(255,255,255,0.05)", fg: "#71717A", pulse: false },
-    "FREE · WINDOWS":    { bg: "rgba(59,130,246,0.10)", fg: "#60A5FA", pulse: true  },
-    "FREE · OPEN SOURCE":{ bg: "rgba(249,115,22,0.10)", fg: "#F97316", pulse: true  },
-  };
-  const s = statusConfig[status];
+  const { name, tagline, description, icon: Icon, iconColor, href, ctaLabel, highlighted } = product;
 
   return (
     <TrackedLink
@@ -256,32 +121,6 @@ function ProductCard({ product }: { product: Product }) {
       <div className="relative flex flex-col h-full">
         {/* ── Status pill + flagship badge ──────────────────────── */}
         <div className="flex items-center justify-between mb-6">
-          <div
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full"
-            style={{
-              background: s.bg,
-              border: `1px solid ${s.fg}30`,
-            }}
-          >
-            {s.pulse && (
-              <span className="relative flex h-1.5 w-1.5">
-                <span
-                  className="ping-green absolute inline-flex h-full w-full rounded-full opacity-75"
-                  style={{ background: s.fg }}
-                />
-                <span
-                  className="relative inline-flex rounded-full h-1.5 w-1.5"
-                  style={{ background: s.fg }}
-                />
-              </span>
-            )}
-            <span
-              className="text-[10px] uppercase font-bold"
-              style={{ color: s.fg, letterSpacing: "0.12em" }}
-            >
-              {status}
-            </span>
-          </div>
           {highlighted && (
             <div
               className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full"

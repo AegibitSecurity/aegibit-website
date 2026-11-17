@@ -49,10 +49,10 @@ export function WhatWeDo() {
               </div>
               <span className="mono-label text-[#F97316] block mb-3">{p.num}</span>
               <h3 className="text-white font-semibold text-lg mb-3 leading-snug">{p.title}</h3>
-              <p className="text-[#52525B] text-sm leading-relaxed mb-5">{p.body}</p>
+              <p className="text-[#A1A1AA] text-sm leading-relaxed mb-5">{p.body}</p>
               <div className="flex flex-wrap gap-2">
                 {p.tags.map(t => (
-                  <span key={t} className="mono-label text-[#3F3F46] border border-[rgba(255,255,255,0.06)] rounded-md px-2.5 py-1">
+                  <span key={t} className="mono-label text-[#A1A1AA] border border-[rgba(255,255,255,0.06)] rounded-md px-2.5 py-1">
                     {t}
                   </span>
                 ))}

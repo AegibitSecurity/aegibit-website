@@ -31,7 +31,7 @@ const NAV = [
   { href: "/dashboard/outbound",   icon: Send,      label: "Outbound" },
   { href: "/dashboard/leads",      icon: Mail,      label: "Leads" },
   { href: "/dashboard/visitors",   icon: Users,     label: "Visitors" },
-  { href: "/dashboard/analytics",  icon: BarChart3, label: "Analytics" },
+  { href: "/dashboard/seo", icon: BarChart3, label: "Growth & SEO" },
   { href: "/dashboard/settings",   icon: Settings,  label: "Settings" },
 ];
 
@@ -127,7 +127,7 @@ export function DashboardSidebar() {
               <span className="ping-green absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]" />
             </span>
-            <span className="text-xs text-[#6B7280]">Live tracking active</span>
+            <span className="text-xs text-[#6B7280]">Measurement dashboard</span>
           </div>
         </div>
       </aside>

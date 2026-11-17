@@ -1,3 +1,4 @@
+import { COMPANY_DESCRIPTION } from "@/content/product-catalog";
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
@@ -36,17 +37,17 @@ export const metadata: Metadata = {
   // We override only the bits the convention can't infer.
   manifest: "/manifest.webmanifest",
   title: {
-    default: "AEGIBIT, Built to Outlast | Cybersecurity-First Operational Software",
+    default: "AEGIBIT Global Consulting | Business Software & Development",
     template: "%s | AEGIBIT",
   },
   description:
-    "AEGIBIT builds operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time across every branch. Engineered to outlast, for dealerships, multi-branch SMEs, and mission-critical operations.",
+    COMPANY_DESCRIPTION,
   keywords: [
     "AEGIBIT",
     "operational software",
     "multi-branch expense management",
     "PayMint",
-    "VoiceCore",
+    "custom business software",
     "cybersecurity software India",
     "SaaS for dealerships",
     "audit-grade software",
@@ -62,15 +63,13 @@ export const metadata: Metadata = {
     siteName: "AEGIBIT",
     title: "AEGIBIT, Built to Outlast",
     description:
-      "Cybersecurity-first software company. Operational platforms for multi-branch businesses, dealerships, mission-critical SMEs. Built to outlast.",
+      COMPANY_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    site: "@aegibit",
-    creator: "@aegibit",
     title: "AEGIBIT, Built to Outlast",
     description:
-      "Operational software for businesses that can't afford a leak. Cybersecurity-first. Real-time. Built to outlast.",
+      COMPANY_DESCRIPTION,
   },
   robots: { index: true, follow: true },
 };

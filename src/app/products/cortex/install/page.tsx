@@ -36,7 +36,7 @@ const VIRUSTOTAL_URL = `https://www.virustotal.com/gui/file/${APK_SHA256}`;
 export const metadata: Metadata = buildMetadata({
   title: "Install RightForce on Android: Verified APK, Fingerprint & Guide",
   description:
-    "The official, signed RightForce Android app by AEGIBIT. Step-by-step install guide, the release's SHA-256 fingerprint for independent verification, a multi-engine antivirus scan link, and a plain statement of the permissions RightForce never requests.",
+    "RightForce is the Android app for AEGIBIT Cortex. Step-by-step install guide, the release's SHA-256 fingerprint for independent verification, a multi-engine antivirus scan link, and a plain statement of the permissions RightForce never requests.",
   path: PAGE_PATH,
   keywords: [
     "RightForce Android app",
@@ -115,7 +115,7 @@ export default function CortexInstallPage() {
               </span>
             </h1>
             <p className="text-base leading-relaxed max-w-xl mx-auto mb-9" style={{ color: "#A1A1AA" }}>
-              RightForce ships directly from AEGIBIT, not an app store, so you always get the exact build we
+              RightForce is the Android app for AEGIBIT Cortex. It ships directly from AEGIBIT, not an app store, so you always get the exact build we
               signed. This page gives you the file, the proof it is genuine, and what to expect during install.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">

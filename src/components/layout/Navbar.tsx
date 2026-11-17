@@ -9,8 +9,8 @@ import { track } from "@/lib/track";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "PayMint",    href: "/products/paymint"     },
-  { label: "MCP Shield", href: "/products/mcp-shield"  },
+  { label: "Products",   href: "/features" },
+  { label: "Services",   href: "/services" },
   { label: "Work",       href: "/work"                 },
   { label: "Solutions",  href: "/solutions"            },
   { label: "Pricing",    href: "/pricing"              },

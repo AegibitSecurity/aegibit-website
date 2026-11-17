@@ -46,7 +46,7 @@ import { ArrowRight, Shield, ShieldCheck, ShieldAlert } from "lucide-react";
 export const metadata: Metadata = {
   title: "Security, AEGIBIT's posture, written plainly",
   description:
-    "AEGIBIT's security posture. CSP-hardened headers, per-IP rate limiting, httpOnly cookie auth, append-only audit trail, geo-tagged voucher capture, open-source MCP security tooling. Every claim defensible. DPDP-aware. SOC 2 Type II in progress.",
+    "AEGIBIT's security posture. CSP-hardened headers, per-IP rate limiting, httpOnly cookie auth, append-only audit trail, geo-tagged voucher capture, open-source MCP security tooling. Every claim defensible. DPDP-aware. No SOC 2 Type II report is currently held.",
   keywords: [
     "AEGIBIT security",
     "AEGIBIT trust center",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     "PayMint security",
     "MCP Shield",
     "DPDP Act compliance India",
-    "SOC 2 in progress",
+    "AEGIBIT security controls",
     "responsible disclosure",
   ],
   alternates: { canonical: "/security" },
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Security, AEGIBIT's posture, written plainly",
     description:
-      "Every security claim defensible. DPDP-aware. SOC 2 Type II in progress. Read the configuration, not the marketing.",
+      "Every security claim defensible. DPDP-aware. No SOC 2 Type II report is currently held. Read the configuration, not the marketing.",
   },
 };
 
@@ -128,8 +128,8 @@ const COMPLIANCE_TODAY = [
   },
   {
     name: "SOC 2 Type II",
-    status: "In progress",
-    note: "Internal controls + audit-trail discipline mapped to the Trust Services Criteria. Formal Type II audit window has not yet opened. We will not display a SOC 2 badge until the auditor issues the report.",
+    status: "Not audited",
+    note: "The formal Type II audit window has not opened. AEGIBIT does not currently hold a SOC 2 Type II report.",
   },
   {
     name: "GDPR, EU visitor data",

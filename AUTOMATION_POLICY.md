@@ -1,3 +1,7 @@
+# Content publication amendment — 16 November 2026
+
+This amendment supersedes automatic publication permissions below for generated marketing content. Daily content generation is opt-in via `ENABLE_CONTENT_DRAFTS=true`. Generated content must remain in draft pull requests until a human reviews its claims, sources, duplicate intent, business fit and preview. A green build does not approve factual statements. Do not enable automatic merge for content drops. Monitoring and security checks remain separate.
+
 # AEGIBIT AUTOMATION & UPGRADE POLICY
 **Owner:** AEGIS (Autonomous CEO)
 **Status:** ACTIVE

@@ -32,7 +32,7 @@ jobs:
 
   content-engine:
     needs: killswitch
-    if: needs.killswitch.outputs.paused == 'false'
+    if: needs.killswitch.outputs.paused == 'false' && vars.ENABLE_CONTENT_DRAFTS == 'true'
     runs-on: ubuntu-latest
     # P2-S4: every withJob() invocation now writes a row to the
     # agent_actions audit table via /api/admin/agent-actions. Both env
@@ -58,27 +58,18 @@ jobs:
           committer: "AEGIS Bot <contact@aegibit.com>"
           branch: automation/daily-content
           delete-branch: true
-          title: "chore(automation): daily content drop ${{ github.run_id }}"
+          draft: true
+          title: "chore(automation): daily content draft ${{ github.run_id }}"
           body: |
-            **Tier T0** — auto-generated content drop per AUTOMATION_POLICY.md §6.1.
+            Draft content for editorial review. Verify claims, duplication, intent and sources before publishing.
 
             - 1 new blog post
             - Up to 5 new programmatic SEO pages
 
-            **Auto-merge enabled.** Vercel preview must be green; if build fails, this PR holds for human review.
+            Human review required. A successful build does not validate factual claims.
           labels: |
             automation
             content-drop
-      - name: Enable auto-merge on content PR
-        if: steps.cpr.outputs.pull-request-number
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr merge ${{ steps.cpr.outputs.pull-request-number }} \
-            --repo ${{ github.repository }} \
-            --squash \
-            --auto \
-            --delete-branch
 
   seo-watch:
     needs: killswitch

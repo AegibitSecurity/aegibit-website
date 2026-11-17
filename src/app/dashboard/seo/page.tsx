@@ -1,42 +1,13 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = { title: "SEO Metrics | Dashboard" };
-
-const SEO_PAGES = [
-  { path: "/alternatives/*", count: 20, label: "Alternatives" },
-  { path: "/use-cases/*",    count: 15, label: "Use Cases" },
-  { path: "/integrations/*", count: 20, label: "Integrations" },
-  { path: "/industries/*",   count: 6,  label: "Industries" },
-  { path: "/blog/*",         count: 5,  label: "Blog Posts" },
-  { path: "/glossary/*",     count: 8,  label: "Glossary Terms" },
-];
-
-export default function SeoPage() {
-  const total = SEO_PAGES.reduce((s, p) => s + p.count, 0);
-
-  return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold text-white mb-2">SEO Pages</h1>
-      <p className="text-[#52525B] text-sm mb-8">{total} programmatic pages indexed for organic traffic.</p>
-
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-        {SEO_PAGES.map((p) => (
-          <div key={p.path} className="p-5 rounded-xl border border-[rgba(255,255,255,0.07)] bg-[#0D0D0D]">
-            <p className="text-3xl font-bold text-white mb-1">{p.count}</p>
-            <p className="text-[#52525B] text-xs mono-label">{p.label}</p>
-            <p className="text-[#3F3F46] text-xs mt-1 font-mono">{p.path}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="rounded-xl border border-[rgba(255,255,255,0.07)] bg-[#0D0D0D] p-6">
-        <h2 className="text-white font-semibold mb-3">Sitemap</h2>
-        <p className="text-[#52525B] text-sm mb-2">Auto-generated on every build via next-sitemap.</p>
-        <a href="/sitemap.xml" target="_blank"
-          className="text-[#F97316] text-sm hover:opacity-80 transition-opacity">
-          View sitemap.xml →
-        </a>
-      </div>
-    </div>
-  );
+import { redirect } from "next/navigation";
+import { getAdminSession } from "@/lib/auth";
+import { GrowthMetrics } from "@/components/dashboard/GrowthMetrics";
+import sitemap from "@/app/sitemap";
+export const dynamic = "force-dynamic";
+export const metadata = { title: "Growth and SEO | Dashboard", robots: { index: false, follow: false } };
+export default async function SeoPage() {
+ let authenticated = false;
+ try { authenticated = Boolean(await getAdminSession()); } catch { /* fail closed */ }
+ if (!authenticated) redirect("/admin/login");
+ const eligible = sitemap().length;
+ return <div className="p-6 md:p-10 max-w-6xl space-y-12"><header><h1 className="text-3xl text-white mb-3">Growth and SEO</h1><p className="text-zinc-300">Search visibility, inquiry measurement and the evidence still needed to assess growth.</p></header><GrowthMetrics /><section><h2 className="text-xl text-white mb-5">Search and indexing</h2><div className="grid sm:grid-cols-2 gap-5"><div className="rounded-xl border border-white/15 p-6"><h3 className="text-zinc-300">URLs in this release&apos;s sitemap</h3><p className="text-3xl text-white my-3">{eligible}</p><p className="text-zinc-400 text-sm">Eligibility is a site configuration, not proof of indexing. Generated pages are not automatically indexed.</p><a href="/sitemap.xml" className="text-orange-400 underline inline-block mt-4">View sitemap</a></div><div className="rounded-xl border border-white/15 p-6"><h3 className="text-zinc-300">Google indexed URLs and search results</h3><p className="text-2xl text-white my-3">Check Search Console</p><p className="text-zinc-400 text-sm">Use the verified property for clicks, impressions, queries and URL inspection. Its reporting timezone differs from the inquiry window. No live Search Console API connection is configured in this dashboard.</p><a href="https://search.google.com/search-console" className="text-orange-400 underline inline-block mt-4">Open Search Console</a></div></div></section><section><h2 className="text-xl text-white mb-5">AI visibility and commercial outcomes</h2><dl className="grid sm:grid-cols-2 gap-5">{["AI mention rate", "Owned citation rate", "Qualified opportunities", "Pipeline and won revenue"].map(label => <div key={label} className="rounded-xl border border-white/15 p-6"><dt className="text-zinc-300">{label}</dt><dd className="text-2xl text-white mt-3">Not measured</dd></div>)}</dl><p className="text-zinc-400 text-sm mt-5">AI rates need a fixed prompt panel and completed-answer denominator. Opportunity and revenue reporting need reviewed opportunity records and billing evidence; lead status alone is insufficient.</p></section></div>;
 }

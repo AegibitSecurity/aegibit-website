@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { DashboardSidebar } from "@/components/dashboard/Sidebar";
 
-export const metadata = { title: "Dashboard | AEGIBIT VoiceCore" };
+export const metadata = { title: "Dashboard | AEGIBIT" };
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (

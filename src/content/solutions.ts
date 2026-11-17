@@ -180,67 +180,63 @@ export const SOLUTIONS: Solution[] = [
   },
 
   // ── 3. Tally-ready expense tracking ──────────────────────────────
-  {
-    slug: "tally-ready-expense-tracking-software",
-    keyword: "tally compatible expense tracking software",
-    title: "Tally-Ready Expense Tracking Software for India | PayMint",
-    description:
-      "Export every expense as a Tally-ready CSV with 11 pre-mapped columns. Cost centers, voucher types, amounts, all formatted. Month-end in minutes.",
-    eyebrow: "Tally Integration",
-    h1: "Tally-Ready Expense Tracking, Month-End in Minutes, Not Days.",
-    subheadline:
-      "Eleven-column accounting CSVs that drop straight into Tally Prime. Voucher type, voucher number, ledger name, cost center, amount, all pre-mapped, all clean.",
-    audience:
-      "Indian SMEs and dealerships whose accountants use Tally Prime and lose days every month to manual data entry.",
-    painPoints: [
-      "Accountant manually keys vouchers from receipts into Tally, slow and error-prone",
-      "Branch and cost-center mappings drift between Excel and Tally",
-      "No standard voucher numbering, entries get duplicated or skipped",
-      "Reconciliation depends on one accountant's spreadsheet skills",
+{
+    "slug": "tally-ready-expense-tracking-software",
+    "keyword": "expense management software with tally integration",
+    "title": "Tally-Ready Expense Exports for Branch Finance | PayMint",
+    "description": "Prepare branch expense records for your Tally import workflow with PayMint accounting exports. Review ledger mappings and sample vouchers with your accountant.",
+    "eyebrow": "Accounting exports",
+    "h1": "Expense records prepared for your Tally workflow.",
+    "subheadline": "Capture and approve expenses in PayMint, then export accounting records for review and import. Validate your Tally version, import method and ledger mappings before rollout.",
+    "audience": "Multi-branch finance teams that need consistent voucher and branch references for reconciliation.",
+    "painPoints": [
+        "Receipts and approvals stored separately from payment records",
+        "Inconsistent branch and account-head references",
+        "Repeated manual preparation of accounting files",
+        "Unclear checks for repeat imports"
     ],
-    features: [
-      {
-        title: "11-column Tally CSV mapping",
-        body: "Voucher Type · Voucher Number · Date · Reference · Narration · Cost Center · Ledger Name · Amount · Tax · Approver · Source, every column matches Tally Prime's standard import schema.",
-      },
-      {
-        title: "Cost-center auto-tagging",
-        body: "Branch + expense type combinations auto-map to cost centers. \"BERHAMPORE Branch\" and \"KALYANI Service\" hit the right cost center in Tally without manual edits.",
-      },
-      {
-        title: "Idempotent voucher numbers",
-        body: "Once assigned, a voucher number never changes, re-export the same month and Tally won't see duplicates. Safe to regenerate as often as needed.",
-      },
-      {
-        title: "Power BI dashboards",
-        body: "Same CSV opens in Power BI for executive dashboards, branch comparison, expense category breakdown, month-over-month trend, all live.",
-      },
+    "features": [
+        {
+            "title": "Voucher and payment references",
+            "body": "Exports include voucher identifiers and payment dates so finance can trace a row back to its source record."
+        },
+        {
+            "title": "Ledger mapping",
+            "body": "Agree the credit ledger, debit ledger and account-head mapping with your accountant before importing a sample file."
+        },
+        {
+            "title": "Branch and narration fields",
+            "body": "Use branch or service references and expense narration to organise reconciliation and cost allocation."
+        },
+        {
+            "title": "An import checklist",
+            "body": "Reconcile row counts and totals, review rejected rows and confirm duplicate handling in the destination system before a wider import."
+        }
     ],
-    testimonialAngle:
-      "Month-end Tally entry used to take 3 days. PayMint's export turned it into 20 minutes.",
-    faqs: [
-      {
-        q: "Which Tally version does PayMint export work with?",
-        a: "Tally Prime (current version) and Tally ERP 9. The CSV format follows Tally's standard import schema, Voucher Type, Voucher Number, Date, Reference, Narration, Cost Center, Ledger, Amount. Verified working across both.",
-      },
-      {
-        q: "Do we need to map ledger names manually for every voucher?",
-        a: "No. Ledger and cost-center mappings are configured once during onboarding (a 30-minute exercise) and applied automatically to every voucher thereafter. New ledger? Add it once in PayMint, every future voucher uses it.",
-      },
-      {
-        q: "What about GST? Does PayMint handle CGST/SGST/IGST split?",
-        a: "Yes. Tax fields are first-class. PayMint captures GST rate per voucher, splits CGST/SGST/IGST automatically based on inter-state vs intra-state, and exports them as separate columns Tally can ingest directly.",
-      },
-      {
-        q: "Can we re-export a previous month if we missed something?",
-        a: "Yes, anytime. Voucher numbers are immutable, so re-exports are idempotent, Tally won't see duplicates. Many customers re-run exports monthly as a check.",
-      },
-      {
-        q: "Is there a Power BI integration too?",
-        a: "The same Tally-ready CSV is also Power BI-friendly. We've published a starter Power BI template with branch and cost-center dashboards pre-built. Drop the CSV in, dashboards refresh.",
-      },
-    ],
-  },
+    "testimonialAngle": "",
+    "faqs": [
+        {
+            "q": "Is this a live two-way Tally integration?",
+            "a": "This page describes accounting exports, not automatic two-way synchronisation. Review the sample export and your import tooling with AEGIBIT before agreeing the integration scope."
+        },
+        {
+            "q": "Which version of Tally will work?",
+            "a": "Compatibility depends on the version, import tooling and ledger configuration in use. Supply those details and validate representative vouchers in a test company before production import."
+        },
+        {
+            "q": "Can we export a period again?",
+            "a": "Retain the source voucher reference and verify the receiving system’s duplicate rules. Exporting the same voucher again does not by itself guarantee that Tally will reject a duplicate."
+        },
+        {
+            "q": "Does the export calculate every GST treatment?",
+            "a": "Do not assume automatic tax treatment from an export feature. Confirm the fields, tax rules and required accounting review with your accountant during scoping."
+        },
+        {
+            "q": "What should we bring to a demo?",
+            "a": "A redacted example voucher, your ledger and cost-centre structure, the Tally version and the import method you currently use. These let us assess the fit without requesting production credentials."
+        }
+    ]
+},
 
   // ── 4. Voucher generation ────────────────────────────────────────
   {
