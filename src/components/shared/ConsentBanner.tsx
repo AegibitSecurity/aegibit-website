@@ -41,8 +41,7 @@ export function ConsentBanner() {
       >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm leading-relaxed" style={{ color: "#A1A1AA" }}>
-            We use first-party cookies for analytics that help us improve
-            the site. Essential cookies for security always stay on.
+            We use optional analytics, including Microsoft Clarity heatmaps and masked session recordings, to improve the site. Essential security cookies always stay on.
             You can accept or decline the rest. See our{" "}
             <TrackedLink
               href="/privacy"

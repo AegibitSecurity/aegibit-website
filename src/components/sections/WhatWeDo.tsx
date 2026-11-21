@@ -10,8 +10,8 @@ export function WhatWeDo() {
   return <section aria-labelledby="why-aegibit" className="py-24 px-6 border-t border-white/10">
     <div className="max-w-7xl mx-auto">
       <p className="text-orange-400 text-sm uppercase tracking-widest mb-4">Why choose AEGIBIT</p>
-      <h2 id="why-aegibit" className="text-3xl md:text-5xl font-semibold tracking-tight max-w-3xl mb-6">Choose a team that understands the workflow.</h2>
-      <p className="text-zinc-300 text-lg leading-relaxed max-w-3xl mb-12">A useful system makes the next action clear. Here is what you can assess in our products, project experience and delivery approach.</p>
+      <h2 id="why-aegibit" className="text-3xl md:text-5xl font-semibold tracking-tight max-w-3xl mb-6">Software shaped around your operations.</h2>
+      <p className="text-zinc-300 text-lg leading-relaxed max-w-3xl mb-12">AEGIBIT Global Consulting is a Kolkata-based software business building applications and websites for growing teams. Our focus: translate the way your people request, approve, sell and record work into software they can use. Our product experience and client projects give you concrete work to assess before you choose us.</p>
       <div className="grid md:grid-cols-3 gap-6">{REASONS.map(reason => <article key={reason.title} className="rounded-2xl border border-white/15 bg-zinc-950 p-7 flex flex-col">
         <h3 className="text-xl font-semibold text-white mb-4">{reason.title}</h3><p className="text-zinc-300 leading-relaxed mb-6">{reason.body}</p><Link href={reason.href} className="mt-auto text-orange-400 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-orange-400">{reason.link}</Link>
       </article>)}</div>

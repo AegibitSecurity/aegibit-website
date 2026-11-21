@@ -4,6 +4,7 @@ import { Instrument_Serif } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
+import { ClarityAnalytics } from "@/components/shared/ClarityAnalytics";
 import { ConsentedAnalytics } from "@/components/shared/ConsentedAnalytics";
 import { ConsentBanner } from "@/components/shared/ConsentBanner";
 import { TrackingProvider } from "@/components/shared/TrackingProvider";
@@ -86,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${instrumentSerif.variable} ${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#000] text-white">
+      <body data-clarity-mask="true" className="min-h-full flex flex-col bg-[#000] text-white">
         {/*
           Skip-to-content link, first focusable element on every
           page. Keyboard users hit Tab once and can jump past the
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MarketingChrome />
         <ConsentBanner />
         <ConsentedAnalytics />
+        <ClarityAnalytics />
       </body>
     </html>
   );

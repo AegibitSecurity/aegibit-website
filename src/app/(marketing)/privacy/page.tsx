@@ -79,6 +79,8 @@ export default function PrivacyPage() {
               .
             </P>
             <P>
+              With your permission, Microsoft Clarity collects interactions for heatmaps and masked session recordings. Page text is masked, including chat and form content. Advertising storage consent is denied. You can turn off optional analytics using the footer control. Microsoft processes this analytics data under its privacy statement at privacy.microsoft.com.
+            </P><P>
               The rest of this page lists every data category we
               collect, where each one ends up, and what your rights
               are. If your buying process requires a Data Processing
