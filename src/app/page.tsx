@@ -29,9 +29,9 @@ export default function HomePage() {
       <main id="main-content">
         {/* 1 */ }<HeroSection />
         {/* Buyer fit before the catalogue */ }<WhatWeDo />
+        <GovRegistrations />
         <HomeProducts />
         {/* 4 */ }<ProofSection />
-        {/* 5 */ }<GovRegistrations />
         {/* 6 */ }<SelectedWork />
         {/* 7 */ }<HomeCTA />
       </main>

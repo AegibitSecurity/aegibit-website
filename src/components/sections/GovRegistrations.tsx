@@ -44,7 +44,7 @@ export function GovRegistrations() {
     <section className="px-6 lg:px-12 py-16 border-t" style={{ borderColor: "rgba(255,255,255,0.06)", background: "#000" }}>
       <div className="max-w-6xl mx-auto">
         <p className="text-[11px] uppercase font-medium mb-8 text-center" style={{ color: "#F97316", letterSpacing: "0.2em" }}>
-          Registered with the Government of India
+          Business identity you can verify
         </p>
         <div className="grid sm:grid-cols-3 gap-4">
           {ITEMS.map((it) => {
@@ -57,14 +57,16 @@ export function GovRegistrations() {
                 <div className="min-w-0">
                   <h3 className="font-medium mb-1" style={{ fontSize: "1.02rem", color: "#fff" }}>{it.title}</h3>
                   <p className="text-xs leading-relaxed break-words" style={{ color: "#A1A1AA" }}>{it.line1}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: "#52525B" }}>{it.line2}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: "#A1A1AA" }}>{it.line2}</p>
                 </div>
               </div>
             );
           })}
         </div>
-        <p className="text-center text-xs mt-6" style={{ color: "#52525B" }}>
-          Udyam registration is publicly verifiable at udyamregistration.gov.in
+        <p className="text-center text-xs mt-6" style={{ color: "#A1A1AA" }}>
+          <a href="https://udyamregistration.gov.in/Udyam_Verify.aspx" className="text-orange-300 underline">Verify our Udyam registration</a>
+          {" · "}<a href="/security" className="text-orange-300 underline">Trust &amp; security</a>
+          {" · "}<a href="/privacy" className="text-orange-300 underline">Privacy &amp; data handling</a>
         </p>
       </div>
     </section>

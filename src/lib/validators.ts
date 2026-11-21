@@ -10,6 +10,9 @@ export const leadSchema = z.object({
   source:    z.enum(["waitlist", "contact", "demo", "exit_intent", "paymint_demo", "voicecore_waitlist", "aira_waitlist", "chat"]),
   page:      z.string().max(500),
   visitorId: z.string().uuid().optional(),
+  contactConsent: z.boolean().optional(),
+}).refine(data => data.source !== "chat" || data.contactConsent === true, {
+  message: "Please allow the team to contact you about this chat.", path: ["contactConsent"],
 });
 
 export const visitorSchema = z.object({

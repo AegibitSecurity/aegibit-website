@@ -134,9 +134,9 @@ describe("filterSources (cite what the answer uses, not what retrieval read)", (
     expect(out.map((s) => s.url)).toEqual(["/products/cortex", "/products/vestiq"]);
   });
 
-  it("falls back to the top non-homepage hit when nothing is cited", () => {
+  it("does not attach a source to an answer that cites nothing", () => {
     const out = filterSources("Happy to help with that.", SRC);
-    expect(out.map((s) => s.url)).toEqual(["/products/cortex"]);
+    expect(out).toEqual([]);
   });
 
   it("never emits the bare homepage chip", () => {
