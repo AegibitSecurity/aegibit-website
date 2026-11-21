@@ -1,6 +1,6 @@
 {
  "pages": 67,
- "chunkCount": 296,
+ "chunkCount": 293,
  "chunks": [
   {
    "id": "/#0",
@@ -1353,42 +1353,6 @@
    "text": "Billing, customers, payments, exchanges, tailoring, and reports, all in one app that protects your money. Powered by AEGIBIT. Get Vestiq for your boutique Download for Android ."
   },
   {
-   "id": "/security#0",
-   "url": "/security",
-   "title": "Security, AEGIBIT's posture, written plainly",
-   "text": ". Security Security is the architecture. Not the marketing. Every claim on this page is defensible against a CISO's first question: \"where does that number come from?\" If we can't point at source code, a configuration file, or a public artifact, the claim isn't on this page. The posture. Six things AEGIBIT actually does, each anchored to a file you can read or a public artifact you can audit. 01 . Hardened response headers on every request. Explicit Content Security Policy with no unsafe-eval. HSTS with includeSubDomains. Permissions-Policy denies camera, microphone, geolocation, payment, sensors. COOP same-origin-allow-popups. X-Content-Type-Options nosniff. Pinned in next.config.ts and verified on every deploy. ↳ proof: next.config.ts headers() function. 02 . Per-IP rate limiting that survives serverless cold starts. Upstash Redis-backed limiter (visitor 10/min, event 30/min, lead 5/min, chat 20/min). In-memory fallback when Upstash unreachable."
-  },
-  {
-   "id": "/security#1",
-   "url": "/security",
-   "title": "Security, AEGIBIT's posture, written plainly",
-   "text": "Fail-open posture so a vendor outage doesn't lock out legitimate visitors. Lambda spawn doesn't reset the counter. ↳ proof: src/lib/rate-limiter.ts. 03 . httpOnly cookie sessions, scrypt-hashed admin credentials. Iron-session encrypted cookies (SameSite=Lax, Secure in production, 8-hour TTL). Admin password stored as scrypt:salt:derived format with N=2^14 and 64 MB maxmem, explicitly bounded so a misconfigured runtime can't OOM. No bearer tokens in client bundles, ever. ↳ proof: src/lib/auth.ts + src/lib/session.ts. 04 . Append-only audit trail on every automation action. Every agent run, every deploy notify, every lead-pipeline action writes a row to a Postgres table with start time, finish time, status, full payload, and the agent identity. Rows are insert-only; no UPDATE or DELETE path in the application code. ↳ proof: supabase/schema.sql `agent_actions` table. 05 . PayMint voucher capture, auditor-grade from the field."
-  },
-  {
-   "id": "/security#2",
-   "url": "/security",
-   "title": "Security, AEGIBIT's posture, written plainly",
-   "text": "Every voucher captured at the branch is anchored to a photograph, a GPS coordinate, and a server-issued timestamp at the moment of submission. The visibility window for headquarters is same-day instead of the 5-9 days typical of paper-based reconciliation. ↳ proof: PayMint product feature, see /products/paymint. 06 . MCP Shield, we open-sourced our own security tooling. After Anthropic's April 2026 MCP-RCE disclosure, we shipped MCP Shield: a free, MIT-licensed scanner + runtime for Model Context Protocol servers. Detects tool poisoning, hidden-Unicode steganography, prompt injection markers, secret exposure, unsafe stdio launches. Public code, public issues, public reports. ↳ proof: github.com/AegibitSecurity/mcp-shield + /products/mcp-shield. Compliance status, today. We will not display a certification badge we have not earned. DPDP Act 2023 (India). Aligning . AEGIBIT is an Indian company processing Indian PII. The Digital Personal Data Protection Act 2023 applies by default."
-  },
-  {
-   "id": "/security#3",
-   "url": "/security",
-   "title": "Security, AEGIBIT's posture, written plainly",
-   "text": "We process lead-form data with consent, store only what's necessary, and treat the user's email as the primary identity reference. SOC 2 Type II. In progress . Internal controls + audit-trail discipline mapped to the Trust Services Criteria. Formal Type II audit window has not yet opened. We will not display a SOC 2 badge until the auditor issues the report. GDPR, EU visitor data. Aware . EU-resident visitors who submit forms can request data export or deletion via contact@aegibit.com. We do not currently market into the EU; if AEGIBIT begins selling there, we will publish a formal DPA. What we do NOT claim. · ISO 27001, not certified. · HIPAA, not applicable (we are not a US healthcare entity or covered associate). · RBI Cybersecurity Framework, we are not a regulated bank or NBFC. · SEBI CSCRF, not applicable. · FedRAMP, IRAP, C5, not pursued."
-  },
-  {
-   "id": "/security#4",
-   "url": "/security",
-   "title": "Security, AEGIBIT's posture, written plainly",
-   "text": "If your buying process requires a specific certification that's not on the \"today\" list above, the AEGIBIT team can share our Trust Center roadmap, reach out at contact@aegibit.com . Responsible disclosure. Found a vulnerability? Tell us, we'll fix it and credit you. Email contact@aegibit.com with subject \"Security Disclosure.\" Include a clear reproduction path, the affected URL or component, and any payload required to trigger the issue. Encrypted channels available on request. We commit to acknowledging the report within 48 hours, providing a remediation timeline within 7 days, and coordinating a public disclosure window with you once a fix has shipped. We will not pursue legal action against anyone reporting in good faith. Out of scope: denial-of-service testing against production traffic, social engineering of AEGIBIT personnel, and any test that compromises the data or experience of other AEGIBIT visitors or customers. Want the security walkthrough live?."
-  },
-  {
-   "id": "/security#5",
-   "url": "/security",
-   "title": "Security, AEGIBIT's posture, written plainly",
-   "text": "Book a 12-minute PayMint demo and we'll cover the security architecture alongside the product workflow. Configuration files open, no slideware. Book a PayMint demo See MCP Shield ."
-  },
-  {
    "id": "/solutions#0",
    "url": "/solutions",
    "title": "Solutions, PayMint for Every Branch Operation",
@@ -1777,6 +1741,24 @@
    "url": "/work",
    "title": "Our Work: Websites, Apps and Software We Have Shipped",
    "text": "Senior engineers build it security-first, with audit-grade logging and clean, reviewable code. 0 3 . Launch. We ship fast, on a modern stack, tested and verified. Your project goes live, not into a backlog. 0 4 . Support. We stay with you after launch. No lock-in, no disappearing act. When you win, we win. Your project could be next. Websites, apps, custom software, or a security review. Tell us what you want to build and get a clear, honest plan from a dedicated team. Start a project ."
+  },
+  {
+   "id": "/security#0",
+   "url": "/security",
+   "title": "Trust & Security",
+   "text": "Trust & security Know who you are working with. Choose AEGIBIT with information you can check: our business identity, project work, website controls and the terms of your engagement. Verify the business AEGIBIT Global Consulting is based in Kolkata, India. Our published MSME registration number is UDYAM-WB-10-0209203 . Use the official Udyam portal to verify the record or request business documentation from contact@aegibit.com. Business registration identifies the enterprise. It is not a security certification or a government endorsement of our products. Verify on the official Udyam portal Explore client work Request business details How this website protects an enquiry These are controls in the marketing website. A customer application has its own configuration and should be assessed against your requirements. Encrypted connections and browser protections This website uses HTTPS. Its configuration includes HSTS, a Content Security Policy, clickjacking protection and restrictions on ca"
+  },
+  {
+   "id": "/security#1",
+   "url": "/security",
+   "title": "Trust & Security",
+   "text": "mera, microphone and location access. These controls reduce specific risks; they do not make any website immune to attack. Review the implementation Protected administration Administrative routes require a session. The application uses encrypted, HttpOnly session cookies, Secure cookies in production and scrypt password hashing. Administrative credentials stay on the server. Review the implementation Limits on public forms and chat Public endpoints validate input and apply request limits. The limiter supports shared Redis counters, with an in-memory fallback. Limits reduce automated abuse but are not a guarantee against every attack. Review the implementation A clear choice before human follow-up Aira identifies itself as an AI assistant. Chat handoff requires permission to share your questions and contact details with the team. That permission does not subscribe you to a marketing sequence. Avoid sharing passwords, payment details or confidential records in chat. Review the implementa"
+  },
+  {
+   "id": "/security#2",
+   "url": "/security",
+   "title": "Trust & Security",
+   "text": "tion Agree the details before delivery Scope, milestones, acceptance criteria, ownership, hosting, access permissions, backups and support should be agreed in writing for your project. International enquiries are welcome; currency, time-zone coverage and data-location requirements are confirmed during scoping. Security status, stated clearly We do not claim SOC 2 or ISO 27001 certification, or 100% security. If procurement needs an audit report or a specific certification, ask for the exact evidence before committing. Website controls alone do not establish compliance for your business. Your data and your next step Read our privacy policy for the information collected, service providers and contact details for data requests. To report a security concern, email contact@aegibit.com with the subject “Security Disclosure” and the affected URL. Do not include real customer records or credentials. Read the privacy policy Discuss your requirements"
   }
  ]
 }

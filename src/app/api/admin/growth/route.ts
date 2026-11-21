@@ -11,7 +11,7 @@ export async function GET() {
   try {
     const db = getServiceClient();
     const inquiries = () => db.from("leads").select("id", { count: "exact", head: true })
-      .in("source", ["contact", "demo", "paymint_demo"])
+      .in("source", ["contact", "demo", "paymint_demo", "chat"])
       .gte("created_at", window.since).lt("created_at", window.until);
     const results = await Promise.all([
       db.from("visitors").select("id", { count: "exact", head: true }).gte("created_at", window.since).lt("created_at", window.until),

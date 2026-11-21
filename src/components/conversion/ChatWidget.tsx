@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Loader2, CheckCircle2, ShieldCheck } from "lucide-react";
+import { buildChatLeadMessage } from "@/lib/chat-lead";
 import { track } from "@/lib/track";
 import type { ChatMessage } from "@/lib/aira-bot";
 
@@ -64,19 +65,20 @@ const GREETING: UiMessage = {
  * qualified conversation in one tap.
  */
 const FUNNEL = [
+  { tag: "Trust", hook: "Registration, security and how we handle data", send: "How can I verify AEGIBIT and understand your website security and privacy?" },
   {
     tag: "Cortex",
-    hook: "The AI CRM that does the data entry for you",
+    hook: "Explore CRM and workforce workflows",
     send: "My team wastes hours on CRM data entry and follow-ups. How does AEGIBIT Cortex fix that?",
   },
   {
     tag: "PayMint",
-    hook: "Every branch expense, audit-ready",
+    hook: "Branch expenses and approvals in one workflow",
     send: "We lose track of expenses across our branches. How does PayMint make them audit-ready?",
   },
   {
     tag: "LeadSync",
-    hook: "Never lose a showroom lead again",
+    hook: "Track dealership enquiries and delivery steps",
     send: "Our dealership loses leads between enquiry and delivery. How does LeadSync stop that?",
   },
   {
@@ -86,7 +88,7 @@ const FUNNEL = [
   },
   {
     tag: "Web Studio",
-    hook: "A premium website that converts",
+    hook: "Explain your offer with a business website",
     send: "We need a premium website that actually converts visitors. What does AEGIBIT offer?",
   },
   {
@@ -111,6 +113,10 @@ export function ChatWidget() {
   const [input, setInput]         = useState("");
   const [mode, setMode]           = useState<Mode>("chat");
   const [busy, setBusy]           = useState(false);
+  const [contactConsent, setContactConsent] = useState(false);
+  const [company, setCompany] = useState("");
+  const [country, setCountry] = useState("");
+  const [timeline, setTimeline] = useState("");
   const scrollRef                 = useRef<HTMLDivElement | null>(null);
 
   // Scroll to bottom whenever a new message lands.
@@ -140,6 +146,7 @@ export function ChatWidget() {
   }
 
   async function sendChatTurn(userText: string) {
+    if (busy) return;
     setBusy(true);
     appendMessage("user", userText);
     track("chat_message", { length: userText.length });
@@ -161,6 +168,7 @@ export function ChatWidget() {
         );
         return;
       }
+      if (!res.ok) throw new Error("Chat unavailable");
       const data = await res.json();
       const replyText = (data.text as string | undefined) ?? "";
       const sources = Array.isArray(data.sources)
@@ -190,30 +198,7 @@ export function ChatWidget() {
   async function submitLead(email: string) {
     setBusy(true);
 
-    // Promote the visitor's actual questions to the top of the email
-    // so the founder can read what they asked in 2 seconds, BEFORE
-    // wading through the Aira transcript. The transcript is still
-    // included below for full context, but the question is the
-    // founder's primary need ("what do they want?") and should not
-    // be buried.
-    const visitorQuestions = messages
-      .filter((m) => m.role === "user")
-      .map((m) => m.text.trim())
-      .filter(Boolean);
-
-    const conversationLines = messages
-      .slice(-12) // up to 12 turns of context (6 each side)
-      .map((m) => `${m.role === "user" ? "Visitor" : "Aira"}: ${m.text}`)
-      .join("\n");
-
-    const formattedQuestions =
-      visitorQuestions.length > 0
-        ? visitorQuestions.map((q, i) => `${i + 1}. ${q}`).join("\n")
-        : "(no question captured, visitor handed over email immediately)";
-
-    const message =
-      `WHAT THE VISITOR ASKED\n${formattedQuestions}\n\n` +
-      `FULL CHAT TRANSCRIPT\n${conversationLines}`;
+    const message = buildChatLeadMessage(messages, country, timeline);
 
     try {
       const res = await fetch("/api/leads", {
@@ -222,6 +207,8 @@ export function ChatWidget() {
         body: JSON.stringify({
           email,
           source: "chat",
+          company: company.trim(),
+          contactConsent,
           page: typeof window !== "undefined" ? window.location.pathname : "/",
           message,
         }),
@@ -230,8 +217,9 @@ export function ChatWidget() {
       track("chat_lead");
       appendMessage(
         "model",
-        "Done. The AEGIBIT team will be in touch within 24 hours. Anything else I can answer while you wait?",
+        "Your enquiry has been saved for the AEGIBIT team. You can also email contact@aegibit.com. Anything else I can help you explore?",
       );
+      setInput("");
       setMode("captured");
     } catch {
       appendMessage(
@@ -249,6 +237,7 @@ export function ChatWidget() {
     if (!text || busy) return;
 
     if (mode === "capture") {
+      if (!contactConsent) return;
       if (!isValidEmail(text)) {
         appendMessage(
           "model",
@@ -256,8 +245,6 @@ export function ChatWidget() {
         );
         return;
       }
-      setInput("");
-      appendMessage("user", text);
       void submitLead(text);
       return;
     }
@@ -320,7 +307,7 @@ export function ChatWidget() {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#F97316]" />
                 </span>
                 <span className="text-white text-sm font-semibold">Aira</span>
-                <span className="text-[#52525B] text-xs">· AEGIBIT</span>
+                <span className="text-[#52525B] text-xs">· AI assistant</span>
               </div>
               <button
                 onClick={() => setOpen(false)}
@@ -349,7 +336,7 @@ export function ChatWidget() {
                     {m.role === "model" && m.grounded && (
                       <span className="flex items-center gap-1.5 mt-2 text-[10px] text-[#10B981]">
                         <ShieldCheck className="w-3 h-3" />
-                        Grounded from AEGIBIT Knowledge Base
+                        Related AEGIBIT page
                       </span>
                     )}
                     {m.sources && m.sources.length > 0 && (
@@ -426,9 +413,23 @@ export function ChatWidget() {
               )}
             </div>
 
+            <div className="px-3 py-2 text-xs text-zinc-300 border-t border-white/10">
+              AI replies can be mistaken. Do not share confidential data. Chat text is processed by our AI provider. <a href="/privacy" className="text-orange-300 underline">Privacy</a> · <a href="/security" className="text-orange-300 underline">Trust &amp; security</a>
+              {mode !== "capture" && <button type="button" disabled={busy} onClick={() => { setMode("capture"); setInput(""); }} className="block mt-2 text-orange-300 underline">Request a human follow-up</button>}
+            </div>
             <form onSubmit={onSubmit} className="border-t border-[rgba(255,255,255,0.06)] p-3">
+              {mode === "capture" && <div className="space-y-2 mb-3 max-h-40 overflow-y-auto">
+                <p className="text-sm text-white">Send your project enquiry</p>
+                <input aria-label="Company (optional)" placeholder="Company (optional)" value={company} onChange={e => setCompany(e.target.value)} maxLength={100} className="w-full rounded bg-zinc-900 p-2 text-sm text-white" />
+                <input aria-label="Country or time zone (optional)" placeholder="Country / time zone (optional)" value={country} onChange={e => setCountry(e.target.value)} maxLength={100} className="w-full rounded bg-zinc-900 p-2 text-sm text-white" />
+                <input aria-label="Target date (optional)" placeholder="Target date (optional)" value={timeline} onChange={e => setTimeline(e.target.value)} maxLength={100} className="w-full rounded bg-zinc-900 p-2 text-sm text-white" />
+                <label className="flex items-start gap-2 text-xs text-zinc-300"><input type="checkbox" checked={contactConsent} onChange={e => setContactConsent(e.target.checked)} required />I agree to share my questions and these details with AEGIBIT for a reply to this enquiry. This does not subscribe me to marketing emails.</label>
+                <button type="button" onClick={() => { setMode("chat"); setInput(""); }} className="text-xs text-orange-300 underline">Continue chatting instead</button>
+              </div>}
               <div className="flex items-center gap-2">
                 <input
+                  aria-label={mode === "capture" ? "Work email" : "Message to Aira"}
+                  maxLength={mode === "capture" ? 200 : 2000}
                   type={mode === "capture" ? "email" : "text"}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
@@ -445,7 +446,7 @@ export function ChatWidget() {
                 />
                 <button
                   type="submit"
-                  disabled={busy || !input.trim()}
+                  disabled={busy || !input.trim() || (mode === "capture" && !contactConsent)}
                   className="flex items-center justify-center w-10 h-10 rounded-md bg-[#F97316] hover:bg-[#EA580C] disabled:opacity-40 text-white transition-colors"
                   aria-label={mode === "capture" ? "Submit email" : "Send message"}
                 >
@@ -458,7 +459,7 @@ export function ChatWidget() {
               </div>
               {mode === "capture" && (
                 <p className="text-[11px] text-[#52525B] mt-2">
-                  We&apos;ll reach out within 24 hours. No spam, ever.
+                  Submit to send your enquiry for human review. Pricing and delivery are agreed with the team.
                 </p>
               )}
             </form>

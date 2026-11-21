@@ -53,8 +53,8 @@ async function sendConfirmation(data: {
     ? "Your PayMint demo is on the way."
     : "Thanks, we received your request.";
   const intro = isPayMint
-    ? "A PayMint specialist will reach out within 24 business hours to schedule a 20-minute live demo, walk you through multi-branch expense management, and answer anything specific to your operation."
-    : "A member of the AEGIBIT team will reach out within 24 business hours.";
+    ? "The team will review your request and contact you about a PayMint walkthrough and your requirements."
+    : "Your enquiry has been received for review by the AEGIBIT team. Reply to this email if you would like to add any details.";
 
   try {
     const { Resend } = await import("resend");
@@ -248,7 +248,7 @@ export async function POST(req: NextRequest) {
     company:    sanitizeString(data.company),
     phone:      sanitizeString(data.phone),
     team_size:  sanitizeString(data.teamSize),
-    message:    sanitizeString(data.message),
+    message:    sanitizeString(data.source === "chat" ? `[Chat follow-up consent recorded ${new Date().toISOString()}; no marketing subscription]\n${data.message ?? ""}` : data.message),
     source:     data.source,
     page:       sanitizeString(data.page),
     visitor_id: data.visitorId ?? null,
