@@ -20,13 +20,13 @@ import { useSyncExternalStore } from "react";
 
 export type ConsentState = "granted" | "denied";
 
-const COOKIE = "aegibit_consent";
+const COOKIE = "aegibit_consent_v2";
 export const CONSENT_EVENT = "aegibit-consent-change";
 const MAX_AGE = 60 * 60 * 24 * 365; // 1 year
 
 export function getConsent(): ConsentState | null {
   if (typeof document === "undefined") return null;
-  const m = document.cookie.match(/(?:^|;\s*)aegibit_consent=(granted|denied)/);
+  const m = document.cookie.match(/(?:^|;\s*)aegibit_consent_v2=(granted|denied)/);
   return (m?.[1] as ConsentState) ?? null;
 }
 

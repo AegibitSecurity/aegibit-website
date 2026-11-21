@@ -19,6 +19,7 @@ const SUPABASE_HOST = (() => {
 })();
 
 const CSP_CONNECT_SRC = [
+  "https://*.clarity.ms",
   "'self'",
   // Vercel Web Analytics events POST to /_vercel/insights/event which
   // is same-origin (Vercel proxies it), so 'self' covers it. Listed
@@ -31,6 +32,7 @@ const CSP_CONNECT_SRC = [
 ];
 
 const CSP_SCRIPT_SRC = [
+  "https://*.clarity.ms",
   "'self'",
   "'unsafe-inline'", // inline JSON-LD blocks; nonce migration filed as A-2
   // Vercel Web Analytics SDK (loaded only when Web Analytics is enabled

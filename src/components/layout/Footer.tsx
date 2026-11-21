@@ -1,3 +1,4 @@
+import { PrivacyChoices } from "@/components/shared/PrivacyChoices";
 import { Logo } from "@/components/shared/Logo";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 
@@ -80,6 +81,7 @@ export function Footer() {
           </p>
           <p className="text-[#3F3F46] text-xs">MSME Registered · UDYAM-WB-10-0209203</p>
           <p className="text-[#3F3F46] text-xs">🇮🇳 Built in India</p>
+          <PrivacyChoices />
         </div>
       </div>
     </footer>
