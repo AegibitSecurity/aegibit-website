@@ -21,8 +21,8 @@ export const SERVICES = [
         "body": "A sample spreadsheet or process outline with personal data removed, the number of user roles, existing systems, important exceptions and your target date. We use this to propose a scope; a fixed price or delivery date requires that scope."
       },
       {
-        "title": "Relevant work",
-        "body": "AEGIBIT builds PayMint for expense workflows and Cortex for business operations. These illustrate our workflow focus; your project scope and implementation are agreed separately."
+        "title": "Why work with AEGIBIT",
+        "body": "AEGIBIT builds PayMint for expense workflows and Cortex for business operations. You can assess our approach against real product workflows, including the Nibir Motors project summary linked below. Bring your own approval steps and exceptions to the conversation so we can discuss fit before proposing a build."
       },
       {
         "title": "Common questions",
@@ -38,6 +38,10 @@ export const SERVICES = [
       {
         "title": "Who this is for",
         "body": "Automobile dealerships coordinating sales teams, branch managers, finance and delivery staff. This engagement is about operational workflows and approvals; it does not imply a replacement for an OEM system."
+      },
+      {
+        "title": "Why AEGIBIT for dealership workflows",
+        "body": "Our work for Nibir Motors includes expense workflows, dealership workflows and its corporate website. That experience gives us a concrete starting point for discussing branch responsibilities and approval handoffs. Assess the project summary below alongside your own requirements; your scope is agreed separately."
       },
       {
         "title": "Choose the first workflow",

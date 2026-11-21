@@ -1,19 +1,11 @@
 import { TrackedLink } from "@/components/shared/TrackedLink";
 import { HeroPrimaryCTA } from "@/components/sections/HeroPrimaryCTA";
 
-// Trust badges, every claim here must be defensible if a CISO asks.
-//   SOC 2 Type II is *in progress*, not certified, see /security.
-//     Until the audit closes, we don't claim it on the homepage.
-//   "99.99% Uptime SLA" was inherited from the dev-shop era; we don't
-//     have a customer with an SLA contract that says 99.99%, drop.
-//   "Zero Trust Architecture" is honest, defensible from next.config.ts
-//     headers + admin auth model.
-//   "Cybersecurity-First" is honest, it's the brand positioning.
-//   "Built for Multi-Branch Ops" is honest, it's the actual product.
+// Describe the work buyers can explore, without implying certification.
 const TRUST = [
-  { label: "Cybersecurity-First" },
-  { label: "Built for Multi-Branch Ops" },
-  { label: "Zero Trust Architecture" },
+  { label: "Business applications" },
+  { label: "Branch approval workflows" },
+  { label: "Websites & integrations" },
 ];
 
 export function HeroSection() {
@@ -105,7 +97,7 @@ export function HeroSection() {
           Weight: 500
           Letter-spacing: -0.03em
           Line-height: 1.05
-          Size: clamp(48px, 6vw, 88px)
+          Size: clamp(36px, 5.5vw, 76px)
           Line 1: warm white #EAEAEA
           Line 2: gradient 90deg white→orange→white
       ═══════════════════════════════════════ */}
@@ -116,7 +108,7 @@ export function HeroSection() {
           fontWeight: 500,
           letterSpacing: "-0.03em",
           lineHeight: 1.05,
-          fontSize: "clamp(48px, 6vw, 88px)",
+          fontSize: "clamp(36px, 5.5vw, 76px)",
           textAlign: "center",
           margin: "0 auto 1.5rem",
           maxWidth: "820px",
@@ -129,7 +121,7 @@ export function HeroSection() {
             color: "#EAEAEA",
           }}
         >
-          Built to
+          Business software.
         </span>
 
         {/* Line 2, gradient: white → orange → white. The kicker word.
@@ -148,7 +140,7 @@ export function HeroSection() {
             color: "transparent",
           }}
         >
-          outlast.
+          Built around your work.
         </span>
       </h1>
 
@@ -163,9 +155,9 @@ export function HeroSection() {
           margin: "0 auto 2.5rem",
         }}
       >
-        We build operational software for businesses that can&apos;t afford a leak.
-        Cybersecurity-first. Real-time across every branch. Engineered to run for
-        decades, long after the trends pass.
+        Stop chasing approvals across spreadsheets and messages. AEGIBIT builds
+        business applications and websites for dealerships, shops and growing teams.
+        Start with the process that needs fixing, and explore the work behind our approach.
       </p>
 
       {/* CTAs, company-level: explore products grid + Talk to AEGIBIT.

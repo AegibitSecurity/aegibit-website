@@ -50,8 +50,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Logo size="sm" />
             <p className="text-[#71717A] text-xs mt-4 leading-relaxed max-w-[200px]">
-              Cybersecurity-first operational software for businesses that
-              can&apos;t afford a leak.
+              Business applications and websites built around your team&apos;s workflows.
             </p>
           </div>
           {Object.entries(COLS).map(([cat, links]) => (

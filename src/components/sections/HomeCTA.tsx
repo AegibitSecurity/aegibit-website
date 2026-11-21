@@ -4,75 +4,21 @@ import { useInView } from "react-intersection-observer";
 import { TrackedLink } from "@/components/shared/TrackedLink";
 import { useCohort } from "@/hooks/useCohort";
 
-/**
- * Cohort-personalized homepage CTA.
- *
- * Six variants matched in priority order via useCohort():
- *   high_intent  → "Skip the demo. Start a 14-day pilot." (urgency)
- *   from_paid    → "You searched. We deliver." (intent-validation; UTM=cpc/google_ads)
- *   from_social  → "We meet on LinkedIn often. Let's meet for real." (relationship; UTM=linkedin etc.)
- *   from_email   → "Picked the right link." (already-warm; UTM=email)
- *   returning    → "Pick up where you left off." (generic returning)
- *   default      → "Ready to secure and scale your business?" (canonical)
- *
- * Each cohort gets a distinct cta_id so the funnel dashboard groups
- * conversions per-cohort automatically. No new dashboard code.
- *
- * The personalization is segment-based, not per-user fingerprinted,
- * respects the charter privacy posture. UTM cohorts are per-visit
- * (sessionStorage); they identify WHY the visitor is here today, not
- * WHO they are.
- */
-
+// Keep visitor-specific tracking IDs; use one clear, accurate project invitation.
+const INVITATION = {
+  eyebrow: "Your next step",
+  headline: "Which workflow\nwould you fix first?",
+  body: "Tell us what your team is trying to do, where the process breaks down and the systems you already use. We can discuss product fit or the scope of a custom project.",
+  ctaLabel: "Discuss your project",
+  ctaHref: "/contact",
+};
 const COPY = {
-  high_intent: {
-    eyebrow: "Decision time",
-    headline: "Skip the demo.\nStart a 14-day pilot.",
-    body: "You've seen the pricing. You've checked the alternatives. We've prepped your sandbox. Reserve a slot today.",
-    ctaLabel: "Start my pilot",
-    ctaHref: "/products/paymint/demo",
-    ctaId: "home_cta_high_intent",
-  },
-  from_paid: {
-    eyebrow: "Direct match",
-    headline: "You searched.\nWe deliver.",
-    body: "Multi-branch operational software with cybersecurity baked in. Real-time visibility, audit-grade trail, 30-second voucher capture. See PayMint in action.",
-    ctaLabel: "Book a 12-min demo",
-    ctaHref: "/products/paymint/demo",
-    ctaId: "home_cta_from_paid",
-  },
-  from_social: {
-    eyebrow: "Glad you came over",
-    headline: "We meet on social\noften. Let's meet for real.",
-    body: "20 minutes, no pitch deck, just a frank conversation about what you're trying to fix. If AEGIBIT isn't the right shape, we'll point you to who is.",
-    ctaLabel: "Talk to a founder",
-    ctaHref: "/contact",
-    ctaId: "home_cta_from_social",
-  },
-  from_email: {
-    eyebrow: "Right link, right time",
-    headline: "Ready to take\nthe next step?",
-    body: "You've been following AEGIBIT. The next move is the easy one, pick a slot, get the live walkthrough, decide on the spot.",
-    ctaLabel: "Pick a demo slot",
-    ctaHref: "/products/paymint/demo",
-    ctaId: "home_cta_from_email",
-  },
-  returning: {
-    eyebrow: "Welcome back",
-    headline: "Pick up where you\nleft off.",
-    body: "You've been here before. Whatever brought you back, let's close the loop. 20 minutes of your time, real answers.",
-    ctaLabel: "Talk to a founder",
-    ctaHref: "/contact",
-    ctaId: "home_cta_returning",
-  },
-  default: {
-    eyebrow: "Get started",
-    headline: "Ready to secure\nand scale your business?",
-    body: "Join enterprises building on AEGIBIT. No credit card required.",
-    ctaLabel: "Get Enterprise Access",
-    ctaHref: "/signup",
-    ctaId: "home_cta_default",
-  },
+  high_intent: { ...INVITATION, ctaId: "home_cta_high_intent" },
+  from_paid: { ...INVITATION, ctaId: "home_cta_from_paid" },
+  from_social: { ...INVITATION, ctaId: "home_cta_from_social" },
+  from_email: { ...INVITATION, ctaId: "home_cta_from_email" },
+  returning: { ...INVITATION, ctaId: "home_cta_returning" },
+  default: { ...INVITATION, ctaId: "home_cta_default" },
 } as const;
 
 export function HomeCTA() {
@@ -117,7 +63,7 @@ export function HomeCTA() {
           <motion.p
             initial={{ opacity:0,y:12 }} animate={inView?{opacity:1,y:0}:{}}
             transition={{ duration:0.6, delay:0.25, ease:"easeOut" }}
-            className="text-[#52525B] text-base mb-12 max-w-md mx-auto">
+            className="text-[#A1A1AA] text-base mb-12 max-w-md mx-auto">
             {c.body}
           </motion.p>
 
@@ -135,7 +81,7 @@ export function HomeCTA() {
               {c.ctaLabel}
             </TrackedLink>
             <a href="mailto:contact@aegibit.com"
-              className="text-sm text-[#52525B] hover:text-[#A1A1AA] transition-colors">
+              className="text-sm text-[#A1A1AA] hover:text-[#A1A1AA] transition-colors">
               contact@aegibit.com
             </a>
           </motion.div>
