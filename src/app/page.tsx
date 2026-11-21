@@ -28,8 +28,8 @@ export default function HomePage() {
 
       <main id="main-content">
         {/* 1 */ }<HeroSection />
-        {/* 2 */ }<HomeProducts />
-        {/* 3 */ }<WhatWeDo />
+        {/* Buyer fit before the catalogue */ }<WhatWeDo />
+        <HomeProducts />
         {/* 4 */ }<ProofSection />
         {/* 5 */ }<GovRegistrations />
         {/* 6 */ }<SelectedWork />
