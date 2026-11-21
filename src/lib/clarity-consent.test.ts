@@ -17,5 +17,5 @@ describe("Clarity consent boundary", () => {
   expect(window.clarity?.q?.[0]).toEqual(["consentv2", { analytics_Storage:"granted", ad_Storage:"denied" }]);
   expect(document.head.appendChild).toHaveBeenCalledWith(expect.objectContaining({src:"https://www.clarity.ms/tag/zh9bino7kd"}));
  });
- it("stops existing recording when consent is denied", () => { window.clarity=vi.fn(); state.consent="denied"; ClarityAnalytics(); expect(window.clarity).toHaveBeenCalledWith("stop"); });
+ it("stops existing recording when consent is denied", () => { window.clarity=vi.fn<(...args: unknown[]) => void>(); state.consent="denied"; ClarityAnalytics(); expect(window.clarity).toHaveBeenCalledWith("stop"); });
 });
