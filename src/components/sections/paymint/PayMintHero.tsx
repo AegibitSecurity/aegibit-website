@@ -101,7 +101,7 @@ export function PayMintHero() {
                 backgroundClip: 'text',
               }}
             >
-              built like a vault.
+              built around branch workflows.
             </span>
           </h1>
 
@@ -111,8 +111,8 @@ export function PayMintHero() {
             style={{ color: '#A1A1AA' }}
           >
             Multi-branch expense tracking with role-based approvals, branch-coded
-            vouchers, and audit-grade logs. Engineered by a cybersecurity company,
-            for businesses that can&apos;t afford a leak.
+            vouchers, and payment records. Bring your approval process to a demo
+            and review how PayMint could fit your team.
           </p>
 
           {/* Soft-anchor to the free Snapshot tool, non-competing with the
@@ -149,7 +149,7 @@ export function PayMintHero() {
               href={PAYMINT_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => track('cta_click', { cta_id: 'paymint_hero_launch_webapp', cta_label: 'Launch Web App', cta_section: 'paymint_hero', target: PAYMINT_APP_URL, external: true })}
+              onClick={() => track('cta_click', { cta_id: 'paymint_hero_launch_webapp', cta_label: 'Nibir Motors sign in', cta_section: 'paymint_hero', target: PAYMINT_APP_URL, external: true })}
               className="inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'transparent',
@@ -158,7 +158,7 @@ export function PayMintHero() {
               }}
             >
               <Zap size={18} />
-              Launch Web App
+              Nibir Motors sign in
             </a>
             <a
               href={PAYMINT_APK_URL}
@@ -211,8 +211,8 @@ export function PayMintHero() {
             style={{ color: '#52525B' }}
           >
             {[
-              'End-to-end encrypted',
-              'Real-time sync · 24/7',
+              'Branch-coded vouchers',
+              'Payment records',
               'Role-based access control',
             ].map((t) => (
               <div key={t} className="flex items-center gap-2">
