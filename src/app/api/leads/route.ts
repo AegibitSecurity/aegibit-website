@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
+import { NextRequest, NextResponse, after } from "next/server";
 export const dynamic = "force-dynamic";
 import { getServiceClient } from "@/lib/supabase-admin";
-import { leadSchema, sanitizeString } from "@/lib/validators";
+import { leadSchema, sanitizeString, sanitizeForDisplay } from "@/lib/validators";
 import { checkRateLimit, leadLimiter } from "@/lib/rate-limiter";
 import { requireAdmin } from "@/lib/auth";
 import {
@@ -47,17 +48,16 @@ async function sendConfirmation(data: {
 
   const isPayMint = data.source === "paymint_demo";
   const subject = isPayMint
-    ? "Your PayMint demo is being prepared, AEGIBIT"
+    ? "We received your PayMint demo request, AEGIBIT"
     : "We received your request, AEGIBIT";
   const heading = isPayMint
-    ? "Your PayMint demo is on the way."
+    ? "Your PayMint demo request is received."
     : "Thanks, we received your request.";
   const intro = isPayMint
     ? "The team will review your request and contact you about a PayMint walkthrough and your requirements."
     : "Your enquiry has been received for review by the AEGIBIT team. Reply to this email if you would like to add any details.";
 
   try {
-    const { Resend } = await import("resend");
     const resend = new Resend(apiKey);
     const result = await resend.emails.send({
       from: "AEGIBIT <noreply@aegibit.com>",
@@ -78,14 +78,14 @@ async function sendConfirmation(data: {
             ${heading}
           </h1>
           <p style="font-size:15px;line-height:1.6;color:#A1A1AA;margin:0 0 28px;">
-            ${data.name ? "Hi " + data.name + "," : "Hi,"}<br/><br/>
+            ${data.name ? "Hi " + sanitizeForDisplay(data.name) + "," : "Hi,"}<br/><br/>
             ${intro}
           </p>
           ${
             isPayMint
               ? `<div style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:18px;margin-bottom:28px;">
-                  <p style="font-size:13px;color:#A1A1AA;margin:0 0 12px;font-weight:600;">While you wait, try the live web app:</p>
-                  <a href="https://nibir-vault.web.app" style="display:inline-block;background:linear-gradient(135deg,#F97316,#EA6C0A);color:#fff;text-decoration:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.01em;">Launch PayMint →</a>
+                  <p style="font-size:13px;color:#A1A1AA;margin:0 0 12px;font-weight:600;">While you wait, explore the product:</p>
+                  <a href="https://www.aegibit.com/products/paymint" style="display:inline-block;background:linear-gradient(135deg,#F97316,#EA6C0A);color:#fff;text-decoration:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.01em;">Explore PayMint →</a>
                 </div>`
               : ""
           }
@@ -94,7 +94,7 @@ async function sendConfirmation(data: {
           </p>
           <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:28px 0;"/>
           <p style="font-size:11px;color:#52525B;margin:0;">
-            AEGIBIT Security · <a href="https://www.aegibit.com" style="color:#F97316;text-decoration:none;">www.aegibit.com</a><br/>
+            AEGIBIT Global Consulting · <a href="https://www.aegibit.com" style="color:#F97316;text-decoration:none;">www.aegibit.com</a><br/>
             Securing Tomorrow, Today
           </p>
         </div>
@@ -132,7 +132,6 @@ async function notifyTeam(data: {
   }
 
   try {
-    const { Resend } = await import("resend");
     const resend = new Resend(apiKey);
     const label = SOURCE_LABELS[data.source] ?? data.source;
     const isHot = data.heat === "hot";
@@ -262,72 +261,61 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Failed to save lead" }, { status: 500 });
   }
 
-  // Pull the visitor's session before composing the team email so the
-  // hot-lead enrichment has data to work with. Best-effort, null
-  // journey just falls back to the standard email body.
-  const journey = await fetchVisitorJourney(data.visitorId ?? null);
-  const heat = classifyLead({
-    source: data.source,
-    message: data.message,
-    journey,
-  });
-
-  // Fire team email + Slack push + lead confirmation email in parallel.
-  // All three are best-effort, lead capture has already succeeded by
-  // this point and a downstream notifier outage must not 500 the form.
-  // Slack only fires when SLACK_HOT_LEAD_WEBHOOK_URL is set; absent =
-  // silent skip.
-  const [teamResult, confResult, slackOk] = await Promise.all([
-    notifyTeam({
-      email:   data.email,
-      name:    data.name,
-      company: data.company,
-      phone:   data.phone,
-      source:  data.source,
-      page:    data.page,
-      message: data.message,
-      heat,
-      journey,
-    }),
-    sendConfirmation({
-      email:  data.email,
-      name:   data.name,
+  // Return only after persistence succeeds. Notification work runs within
+  // Next's managed post-response lifetime; provider latency cannot strand the form.
+  after(async () => {
+    // Pull the visitor's session before composing the team email so the
+    // hot-lead enrichment has data to work with. Best-effort, null
+    // journey just falls back to the standard email body.
+    const journey = await fetchVisitorJourney(data.visitorId ?? null);
+    const heat = classifyLead({
       source: data.source,
-    }),
-    notifySlackLead({
-      email:   data.email,
-      name:    data.name,
-      company: data.company,
-      phone:   data.phone,
-      source:  data.source,
-      page:    data.page,
       message: data.message,
-      heat,
       journey,
-      siteUrl: SITE_URL,
-    }),
-  ]);
+    });
 
-  // Email diagnostics are surfaced to the response only for an
-  // authenticated admin session (httpOnly cookie). The previous
-  // x-admin-token header path leaked into client bundles and is gone.
-  const adminGuard = await requireAdmin();
-  const debugAllowed = adminGuard === null;
+    // Fire team email + Slack push + lead confirmation email in parallel.
+    // All three are best-effort, lead capture has already succeeded by
+    // this point and a downstream notifier outage must not 500 the form.
+    // Slack only fires when SLACK_HOT_LEAD_WEBHOOK_URL is set; absent =
+    // silent skip.
+    const results = await Promise.allSettled([
+      notifyTeam({
+        email:   data.email,
+        name:    data.name,
+        company: data.company,
+        phone:   data.phone,
+        source:  data.source,
+        page:    data.page,
+        message: data.message,
+        heat,
+        journey,
+      }),
+      sendConfirmation({
+        email:  data.email,
+        name:   data.name,
+        source: data.source,
+      }),
+      notifySlackLead({
+        email:   data.email,
+        name:    data.name,
+        company: data.company,
+        phone:   data.phone,
+        source:  data.source,
+        page:    data.page,
+        message: data.message,
+        heat,
+        journey,
+        siteUrl: SITE_URL,
+      }),
+    ]);
 
-  const response: Record<string, unknown> = { ok: true, heat };
-  if (debugAllowed) {
-    response._debug = {
-      lead_saved: true,
-      team_email: teamResult,
-      confirmation_email: confResult,
-      slack_pushed: slackOk,
-      heat,
-      journey_pages: journey?.pages_viewed.length ?? null,
-      journey_score: journey?.behavior_score ?? null,
-    };
-  }
-
-  return NextResponse.json(response, { status: 201 });
+    console.info("[enquiry-notifications]", results.map((result, index) => ({
+      channel: ["team_email", "confirmation_email", "slack"][index],
+      ok: result.status === "fulfilled" && (typeof result.value === "boolean" ? result.value : result.value.ok),
+    })));
+  });
+  return NextResponse.json({ ok: true }, { status: 201 });
 }
 
 export async function GET() {
@@ -342,5 +330,5 @@ export async function GET() {
     .limit(100);
 
   if (error) return NextResponse.json({ error: "DB error" }, { status: 500 });
-  return NextResponse.json({ leads: data });
+  return NextResponse.json({ leads: data }, { headers: { "Cache-Control": "private, no-store" } });
 }
