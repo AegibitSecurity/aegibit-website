@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
+import { NextRequest, NextResponse, after } from "next/server";
 export const dynamic = "force-dynamic";
 import { getServiceClient } from "@/lib/supabase-admin";
 import { z } from "zod";
@@ -20,13 +21,12 @@ async function sendEmailNotification(data: {
   message: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return; // skip if not configured
+  if (!apiKey) { console.error("[email][contact] RESEND_API_KEY not configured"); return; }
 
   try {
-    const { Resend } = await import("resend");
     const resend = new Resend(apiKey);
 
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from:    "AEGIBIT <noreply@aegibit.com>",
       to:      ["contact@aegibit.com"],
       replyTo: data.email,
@@ -45,6 +45,8 @@ async function sendEmailNotification(data: {
         </div>
       `,
     });
+    if (result.error) console.error("[email][contact] provider rejected notification", result.error.name);
+    else console.info("[email][contact] accepted", result.data?.id);
   } catch (err) {
     // Email failure shouldn't block form submission
     console.error("Email send failed:", err);
@@ -82,12 +84,12 @@ export async function POST(req: NextRequest) {
   if (error) return NextResponse.json({ error: "Failed to save" }, { status: 500 });
 
   // Send email notification to contact@aegibit.com (non-blocking)
-  await sendEmailNotification({
+  after(() => sendEmailNotification({
     name:    data.name,
     email:   data.email,
     company: data.company,
     message: data.message,
-  });
+  }));
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }
