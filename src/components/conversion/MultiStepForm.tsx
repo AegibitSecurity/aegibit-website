@@ -125,6 +125,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
+        role="status" aria-live="polite"
         className="text-center py-10 space-y-4"
       >
         <CheckCircle2 className="w-12 h-12 text-[#F97316] mx-auto" />
@@ -157,11 +158,11 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
               <h2 className="text-xl font-bold text-white mb-6 tracking-tight">What&apos;s your work email?</h2>
               <div className="space-y-1.5">
                 <input
-                  aria-label="Work email" autoComplete="email" maxLength={200} type="email" value={data.email} onChange={(e) => set("email", e.target.value)}
+                  aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "contact-email-error" : undefined} aria-label="Work email" autoComplete="email" maxLength={200} type="email" value={data.email} onChange={(e) => set("email", e.target.value)}
                   placeholder="you@company.com" autoFocus
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-base outline-none transition-colors"
                 />
-                {errors.email && <p className="text-[#FCA5A5] text-xs">{errors.email}</p>}
+                {errors.email && <p id="contact-email-error" role="alert" className="text-[#FCA5A5] text-xs">{errors.email}</p>}
               </div>
             </motion.div>
           )}
@@ -174,16 +175,16 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
               <div className="space-y-3">
                 <div>
                   <input
-                    aria-label="Your name" autoComplete="name" maxLength={100} type="text" value={data.name} onChange={(e) => set("name", e.target.value)}
+                    aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "contact-name-error" : undefined} aria-label="Your name" autoComplete="name" maxLength={100} type="text" value={data.name} onChange={(e) => set("name", e.target.value)}
                     placeholder="Your name" autoFocus
-                    className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                    className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-base outline-none transition-colors"
                   />
-                  {errors.name && <p className="text-[#FCA5A5] text-xs mt-1">{errors.name}</p>}
+                  {errors.name && <p id="contact-name-error" role="alert" className="text-[#FCA5A5] text-xs mt-1">{errors.name}</p>}
                 </div>
                 <input
                   aria-label="Company name" autoComplete="organization" maxLength={100} type="text" value={data.company} onChange={(e) => set("company", e.target.value)}
                   placeholder="Company name"
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-base outline-none transition-colors"
                 />
               </div>
             </motion.div>
@@ -199,8 +200,8 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
                   <p className="text-[#A1A1AA] text-xs mb-2">Team size</p>
                   <div className="flex flex-wrap gap-2">
                     {TEAM_SIZES.map((size) => (
-                      <button key={size} type="button" onClick={() => set("teamSize", size)}
-                        className={`px-4 py-2 rounded-md text-sm border transition-colors ${data.teamSize === size ? "bg-[#F97316] border-[#F97316] text-black" : "border-[rgba(255,255,255,0.08)] text-[#A1A1AA] hover:border-[rgba(255,255,255,0.2)]"}`}>
+                      <button key={size} type="button" aria-pressed={data.teamSize === size} onClick={() => set("teamSize", size)}
+                        className={`min-h-11 px-4 py-2 rounded-md text-sm border transition-colors ${data.teamSize === size ? "bg-[#F97316] border-[#F97316] text-black" : "border-[rgba(255,255,255,0.08)] text-[#A1A1AA] hover:border-[rgba(255,255,255,0.2)]"}`}>
                         {size}
                       </button>
                     ))}
@@ -209,7 +210,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
                 <textarea aria-label="What are you trying to solve?" maxLength={2000}
                   value={data.message} onChange={(e) => set("message", e.target.value)}
                   placeholder="What are you trying to solve? (optional)" rows={3}
-                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-sm outline-none transition-colors resize-none"
+                  className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[#A1A1AA] focus:border-[rgba(249,115,22,0.5)] rounded-md px-4 py-3 text-base outline-none transition-colors resize-none"
                 />
               </div>
             </motion.div>
@@ -230,7 +231,7 @@ export function MultiStepForm({ source = "contact", onSuccess }: Props) {
             className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#FB923C] text-black font-semibold px-6 py-2.5 rounded-md text-sm transition-colors disabled:opacity-60"
           >
             {status === "loading" ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <><Loader2 aria-hidden="true" className="w-4 h-4 animate-spin" /><span>Sending…</span></>
             ) : step < 3 ? (
               <>Continue <ArrowRight className="w-4 h-4" /></>
             ) : (
