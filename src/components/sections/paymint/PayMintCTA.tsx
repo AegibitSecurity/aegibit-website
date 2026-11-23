@@ -46,12 +46,12 @@ export function PayMintCTA() {
                 backgroundClip: 'text',
               }}
             >
-              Install in seconds.
+              Review your workflow.
             </span>
           </h2>
           <p className="text-lg max-w-2xl mx-auto leading-relaxed mb-10" style={{ color: '#A1A1AA' }}>
-            No app store. No 50&nbsp;MB download. Open the link, tap install, log in.
-            Your team is on PayMint before the kettle boils.
+            Book a walkthrough to review your branches, approval roles and accounting needs.
+            Existing Nibir Motors users can use their organisation sign-in below. New teams need onboarding before access.
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center mb-8">
@@ -61,7 +61,7 @@ export function PayMintCTA() {
               className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-xl text-base font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'linear-gradient(135deg, #F97316, #EA6C0A)',
-                color: '#fff',
+                color: '#000',
                 boxShadow: '0 0 0 1px rgba(249,115,22,0.30), 0 10px 30px rgba(249,115,22,0.25)',
               }}
             >
@@ -72,7 +72,7 @@ export function PayMintCTA() {
               href={PAYMINT_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => track('cta_click', { cta_id: 'paymint_bottom_launch_webapp', cta_label: 'Launch Web App', cta_section: 'paymint_bottom_cta', target: PAYMINT_APP_URL, external: true })}
+              onClick={() => track('cta_click', { cta_id: 'paymint_bottom_launch_webapp', cta_label: 'Nibir Motors sign in', cta_section: 'paymint_bottom_cta', target: PAYMINT_APP_URL, external: true })}
               className="inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl text-base transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'transparent',
@@ -81,7 +81,7 @@ export function PayMintCTA() {
               }}
             >
               <Zap size={18} />
-              Launch Web App
+              Nibir Motors sign in
             </a>
             <a
               href={PAYMINT_APK_URL}
@@ -97,7 +97,7 @@ export function PayMintCTA() {
               <Download size={18} />
               <span className="flex flex-col items-start leading-tight">
                 <span>Download for Android</span>
-                <span className="text-[11px] font-normal" style={{ color: '#52525B' }}>
+                <span className="text-[11px] font-normal" style={{ color: '#A1A1AA' }}>
                   v1.0 · 6.5 MB · APK
                 </span>
               </span>
