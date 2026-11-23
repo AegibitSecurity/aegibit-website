@@ -49,15 +49,15 @@ const FEATURES = [
   { icon: Wallet, title: "Full payment tracking", body: "Cash, UPI, card, bank. Advances, partials, refunds. Bills settle automatically when fully paid and reopen if a payment is removed. One-tap WhatsApp payment reminders." },
   { icon: Repeat, title: "Product exchanges done right", body: "Exchange any item on the same bill: a cheaper replacement leaves an advance balance for the next purchase; a dearer one shows exactly what remains to collect. Old items stay visible struck-through, discounts reset for the fresh deal, and a dedicated Exchange tab lists every exchange ever made." },
   { icon: BarChart3, title: "Reports the owner actually needs", body: "Cash-in-hand and UPI-in-hand that never reset at midnight, opening balances, collections by day, week, month, and financial year, expense tracking per vendor with purpose, and an item sales dashboard showing quantity, revenue share, and totals per product with a chart." },
-  { icon: ShieldCheck, title: "Leakage protection built in", body: "Staff cannot delete or edit bills, payments, or discounts. Only the owner can delete, and every action lands in a permanent audit log. Undocumented discounts are flagged. A bill cannot quietly disappear." },
+  { icon: ShieldCheck, title: "Leakage protection built in", body: "Review staff and owner permissions for bills, payments and discounts during your walkthrough. Confirm which actions are recorded, how corrections and deletions are handled, and the retention policy before rollout." },
   { icon: Scissors, title: "Tailoring workflow", body: "Production orders with customizable stages, worker (Masterji and Karigar) assignment and payout tracking, and customer measurement records." },
-  { icon: RefreshCw, title: "Always up to date", body: "The app updates itself silently. Every improvement AEGIBIT ships reaches every boutique's phone within minutes, no reinstall." },
+  { icon: RefreshCw, title: "Updates and maintenance", body: "Update delivery depends on the platform, installed version and connectivity. Agree supported versions, maintenance responsibilities and support terms before subscribing." },
 ] as const;
 
 const SECURITY = [
-  { icon: Lock, text: "Every boutique's data is isolated with database-level row security" },
-  { icon: ShieldCheck, text: "Financial records are immutable by design, tracked to the paisa" },
-  { icon: MapPin, text: "Hosted in India (Mumbai region)" },
+  { icon: Lock, text: "Review boutique-level access controls and data separation for your deployment" },
+  { icon: ShieldCheck, text: "Confirm correction, deletion and action-history permissions for financial records" },
+  { icon: MapPin, text: "Confirm hosting region, backups and data retention in your service agreement" },
 ] as const;
 
 function productJsonLd() {
@@ -96,9 +96,9 @@ function productJsonLd() {
       "Cash, UPI, card, and bank payment tracking",
       "Product exchanges with advance balances",
       "Owner reports and item sales dashboard",
-      "Immutable records with owner-only deletes and audit log",
+      "Billing permissions and action-history review",
       "Tailoring production orders and measurements",
-      "Silent automatic updates",
+      "Application updates subject to platform and support terms",
     ],
   };
 }
@@ -138,12 +138,12 @@ export default async function VestiqPage() {
             <p className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-9" style={{ color: "#A1A1AA" }}>
               Born inside Burimar Abha Boutique, its founding client, and built around how a real boutique actually
               runs. Mobile-first billing and shop management for Indian boutiques and tailoring businesses. Branded bills,
-              WhatsApp-native sharing, airtight payment tracking, and leakage protection. Runs as an Android app and in
+              WhatsApp-native sharing, payment tracking, and leakage protection. Runs as an Android app and in
               any browser. Powered by AEGIBIT.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <a
-                href={`mailto:contact@aegibit.com?subject=Vestiq for my boutique`}
+                href="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-transform hover:-translate-y-0.5"
                 style={{ background: "#F97316", color: "#000" }}
               >
@@ -204,10 +204,10 @@ export default async function VestiqPage() {
         <section className="px-6 lg:px-12 py-20 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-[11px] uppercase font-medium mb-4" style={{ color: "#F97316", letterSpacing: "0.2em" }}>
-              Built by a security company
+              Access and data handling
             </p>
             <h2 className="font-light mb-10" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: "#fff" }}>
-              Your books, protected like they matter
+              Know how your records are managed
             </h2>
             <div className="grid sm:grid-cols-3 gap-4">
               {SECURITY.map((s) => {
@@ -229,9 +229,9 @@ export default async function VestiqPage() {
             <div className="rounded-2xl p-8" style={{ background: "linear-gradient(180deg, #1a1004 0%, #0a0a0a 100%)", border: "1px solid rgba(249,115,22,0.30)" }}>
               <p className="text-[11px] uppercase font-bold mb-3" style={{ color: "#F97316", letterSpacing: "0.16em" }}>Simple pricing</p>
               <p className="mb-2"><span style={{ fontSize: "2.6rem", color: "#fff", fontWeight: 600 }}>₹599</span><span className="text-sm" style={{ color: "#A1A1AA" }}> per boutique per month</span></p>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: "#A1A1AA" }}>One plan, everything included, silent updates forever. No hardware, no setup fee.</p>
+              <p className="text-sm leading-relaxed mb-6" style={{ color: "#A1A1AA" }}>Standard subscription: ₹599 per boutique per month. Confirm included features, onboarding, support hours, update policy and any third-party charges in writing before subscribing.</p>
               <a
-                href={`mailto:contact@aegibit.com?subject=Vestiq for my boutique`}
+                href="/contact"
                 className="inline-flex items-center gap-2 text-sm font-semibold"
                 style={{ color: "#F97316" }}
               >
@@ -250,7 +250,7 @@ export default async function VestiqPage() {
                   Faster, cleaner tailoring measurements.
                 </li>
               </ul>
-              <p className="text-xs mt-6" style={{ color: "#52525B" }}>Marked upcoming honestly: these are not live yet.</p>
+              <p className="text-xs mt-6" style={{ color: "#A1A1AA" }}>Marked upcoming honestly: these are not live yet.</p>
             </div>
           </div>
         </section>
@@ -262,12 +262,12 @@ export default async function VestiqPage() {
               Put your boutique on Vestiq.
             </h2>
             <p className="text-base leading-relaxed mb-9" style={{ color: "#A1A1AA" }}>
-              Billing, customers, payments, exchanges, tailoring, and reports, all in one app that protects your money.
+              Billing, customers, payments, exchanges, tailoring, and reports, in one application for your shop workflows.
               Powered by AEGIBIT.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <a
-                href={`mailto:contact@aegibit.com?subject=Vestiq for my boutique`}
+                href="/contact"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-transform hover:-translate-y-0.5"
                 style={{ background: "#F97316", color: "#000" }}
               >
