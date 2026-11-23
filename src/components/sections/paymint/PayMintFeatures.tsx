@@ -15,37 +15,37 @@ const FEATURES = [
     Icon: GitBranch,
     title: 'Branch-Coded Vouchers',
     body:
-      'Every payment is stamped with a tamper-proof voucher like KLY/0001/2627, branch code, sequence, fiscal year. Atomic per-branch counters guarantee zero duplicates, even under concurrent writes.',
+      'Branch-coded references such as KLY/0001/2627 combine a branch, sequence and financial year for reconciliation. Review numbering and duplicate-submission handling during acceptance testing.',
   },
   {
     Icon: Users,
     title: 'Role-Based Approvals',
     body:
-      'Maker → Authoriser → Accountant → Admin → Super Admin. Each role sees only what their job demands. Server-enforced rules, not a UI gate.',
+      'Expense requests move through the approval and payment roles configured for your team. Confirm branch access and permissions against your operating process.',
   },
   {
     Icon: RefreshCw,
-    title: 'Real-Time, 24/7 Sync',
+    title: 'Connected workflow updates',
     body:
-      'Built on Firebase real-time streams. The moment a maker submits, every approver across every device sees it. Works offline; syncs the second the network returns.',
+      'Connected devices receive workflow updates through Firebase. Availability and update timing depend on connectivity and service conditions; confirm offline behaviour for your deployment.',
   },
   {
     Icon: ScrollText,
-    title: 'Audit-Grade Logging',
+    title: 'Approval and payment history',
     body:
-      'Every action, create, edit, approve, reject, pay, is captured in an append-only audit trail. Server rules block tampering. Forensics-ready, day one.',
+      'Review recorded approval and payment actions alongside voucher references. Agree the events captured, editing permissions, retention and export requirements during scoping.',
   },
   {
     Icon: FileSpreadsheet,
     title: 'Tally-Ready Exports',
     body:
-      'Eleven-column accounting CSVs that map straight to Tally and Power BI. Cost centers, voucher types, and amounts pre-formatted. No manual cleanup.',
+      'Export accounting CSVs with voucher references, account heads and branch information. Validate ledger mappings and import compatibility against your accounting setup.',
   },
   {
     Icon: Bell,
     title: 'Live Notifications',
     body:
-      'Per-user real-time alerts the moment something needs attention. Approvers know within seconds, not at the end of the day.',
+      'Workflow alerts help users identify requests needing attention. Review notification recipients and delivery behaviour during your walkthrough.',
   },
 ];
 

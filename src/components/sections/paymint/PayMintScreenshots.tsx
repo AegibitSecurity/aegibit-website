@@ -82,7 +82,7 @@ export function PayMintScreenshots() {
             </div>
           </ScreenCard>
 
-          <ScreenCard title="Voucher" subtitle="Branch-coded, immutable, audit-ready." delay={0.1}>
+          <ScreenCard title="Voucher" subtitle="Branch references for reconciliation." delay={0.1}>
             <div className="px-3 pt-2">
               <div className="rounded-xl p-3" style={{ background: '#fff', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
                 <div className="text-[8px] uppercase tracking-wider" style={{ color: '#94A3B8' }}>
