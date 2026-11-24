@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { NextRequest, NextResponse, after } from "next/server";
 export const dynamic = "force-dynamic";
 import { getServiceClient } from "@/lib/supabase-admin";
-import { leadSchema, sanitizeString, sanitizeForDisplay } from "@/lib/validators";
+import { leadSchema, sanitizeString } from "@/lib/validators";
 import { checkRateLimit, leadLimiter } from "@/lib/rate-limiter";
 import { requireAdmin } from "@/lib/auth";
 import {
@@ -13,6 +13,7 @@ import {
   type VisitorJourney,
 } from "@/lib/hot-lead";
 import { notifySlackLead } from "@/lib/slack-hot-lead";
+import { sendEnquiryEmail } from "@/lib/send-enquiry-email";
 import { SITE_URL } from "@/lib/seo";
 
 const SOURCE_LABELS: Record<string, string> = {
@@ -32,87 +33,6 @@ const SOURCE_LABELS: Record<string, string> = {
   snapshot_export:    "PayMint Snapshot Export",
   scan_export:        "MCP Shield Scan Export",
 };
-
-// Confirmation email sent to the lead themselves so they know the request
-// was received + sets warm next-step expectations. Premium tone, brand-grade.
-async function sendConfirmation(data: {
-  email: string;
-  name?: string;
-  source: string;
-}): Promise<{ ok: boolean; error?: string; id?: string }> {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error("[email] confirmation skipped, RESEND_API_KEY not set");
-    return { ok: false, error: "RESEND_API_KEY not configured" };
-  }
-
-  const isPayMint = data.source === "paymint_demo";
-  const subject = isPayMint
-    ? "We received your PayMint demo request, AEGIBIT"
-    : "We received your request, AEGIBIT";
-  const heading = isPayMint
-    ? "Your PayMint demo request is received."
-    : "Thanks, we received your request.";
-  const intro = isPayMint
-    ? "The team will review your request and contact you about a PayMint walkthrough and your requirements."
-    : "Your enquiry has been received for review by the AEGIBIT team. Reply to this email if you would like to add any details.";
-
-  try {
-    const resend = new Resend(apiKey);
-    const result = await resend.emails.send({
-      from: "AEGIBIT <noreply@aegibit.com>",
-      to: [data.email],
-      replyTo: ["contact@aegibit.com"],
-      subject,
-      html: `
-        <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:0 auto;background:#000;color:#fff;padding:40px 32px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:32px;">
-            <div style="width:32px;height:32px;border-radius:7px;background:#000;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(249,115,22,0.4);">
-              <span style="color:#F97316;font-size:18px;font-weight:700;">✓</span>
-            </div>
-            <span style="font-size:16px;font-weight:300;letter-spacing:0.18em;">
-              <span style="color:#fff;">AEGI</span><span style="color:#F97316;">BIT</span>
-            </span>
-          </div>
-          <h1 style="font-size:26px;font-weight:300;line-height:1.2;margin:0 0 18px;letter-spacing:-0.01em;color:#fff;">
-            ${heading}
-          </h1>
-          <p style="font-size:15px;line-height:1.6;color:#A1A1AA;margin:0 0 28px;">
-            ${data.name ? "Hi " + sanitizeForDisplay(data.name) + "," : "Hi,"}<br/><br/>
-            ${intro}
-          </p>
-          ${
-            isPayMint
-              ? `<div style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:18px;margin-bottom:28px;">
-                  <p style="font-size:13px;color:#A1A1AA;margin:0 0 12px;font-weight:600;">While you wait, explore the product:</p>
-                  <a href="https://www.aegibit.com/products/paymint" style="display:inline-block;background:linear-gradient(135deg,#F97316,#EA6C0A);color:#fff;text-decoration:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.01em;">Explore PayMint →</a>
-                </div>`
-              : ""
-          }
-          <p style="font-size:13px;color:#52525B;line-height:1.6;margin:0;">
-            Questions? Reply directly to this email, it routes to the AEGIBIT team inbox.
-          </p>
-          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:28px 0;"/>
-          <p style="font-size:11px;color:#52525B;margin:0;">
-            AEGIBIT Global Consulting · <a href="https://www.aegibit.com" style="color:#F97316;text-decoration:none;">www.aegibit.com</a><br/>
-            Securing Tomorrow, Today
-          </p>
-        </div>
-      `,
-    });
-    if (result.error) {
-      const msg = JSON.stringify(result.error);
-      console.error("[email][confirmation] Resend API error:", msg);
-      return { ok: false, error: msg };
-    }
-    console.log("[email][confirmation] sent. id:", result.data?.id);
-    return { ok: true, id: result.data?.id };
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error("[email][confirmation] exception:", msg);
-    return { ok: false, error: msg };
-  }
-}
 
 async function notifyTeam(data: {
   email: string;
@@ -291,10 +211,12 @@ export async function POST(req: NextRequest) {
         heat,
         journey,
       }),
-      sendConfirmation({
+      sendEnquiryEmail({
         email:  data.email,
         name:   data.name,
         source: data.source,
+        company: data.company,
+        message: data.message,
       }),
       notifySlackLead({
         email:   data.email,
