@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Logo } from "@/components/shared/Logo";
-import { BarChart3, Users, Mail, Settings, Home, Sparkles, Send, Menu, X, GitBranch, Bot, Download, FlaskConical } from "lucide-react";
+import { BarChart3, Users, Mail, Home, Sparkles, Send, Menu, X, GitBranch, Bot, Download, FlaskConical } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
  */
 
 const NAV = [
-  { href: "/dashboard",            icon: Home,      label: "Overview" },
+  { href: "/dashboard",            icon: Home,      label: "Command center" },
   { href: "/dashboard/aira",       icon: Sparkles,  label: "Aira Ops" },
   { href: "/dashboard/funnel",     icon: GitBranch, label: "Funnel" },
   { href: "/dashboard/downloads",  icon: Download,  label: "Downloads" },
@@ -32,7 +32,6 @@ const NAV = [
   { href: "/dashboard/leads",      icon: Mail,      label: "Leads" },
   { href: "/dashboard/visitors",   icon: Users,     label: "Visitors" },
   { href: "/dashboard/seo", icon: BarChart3, label: "Growth & SEO" },
-  { href: "/dashboard/settings",   icon: Settings,  label: "Settings" },
 ];
 
 export function DashboardSidebar() {
@@ -60,10 +59,10 @@ export function DashboardSidebar() {
   return (
     <>
       {/* Mobile header bar */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center gap-3 px-4 py-3 bg-[#070d1a] border-b border-[rgba(37,99,235,0.15)]">
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center gap-3 px-4 py-3 bg-[#111114] border-b border-white/10">
         <button
           onClick={() => setOpen(true)}
-          className="p-1.5 rounded-lg text-[#6B7280] hover:text-[#D1D5DB] hover:bg-white/5 transition-colors"
+          className="min-h-11 min-w-11 p-1.5 rounded-lg text-[#a1a1aa] hover:text-[#D1D5DB] hover:bg-white/5 transition-colors"
           aria-label="Open menu"
         >
           <Menu className="w-5 h-5" />
@@ -82,20 +81,20 @@ export function DashboardSidebar() {
       {/* Sidebar */}
       <aside
         className={cn(
-          "flex-shrink-0 border-r border-[rgba(37,99,235,0.15)] bg-[#070d1a] flex flex-col w-56",
+          "flex-shrink-0 border-r border-white/10 bg-[#111114] flex flex-col w-56",
           "fixed inset-y-0 left-0 z-50 transition-transform duration-200 ease-in-out",
           "md:static md:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="p-5 border-b border-[rgba(37,99,235,0.15)] flex items-center justify-between">
+        <div className="p-5 border-b border-white/10 flex items-center justify-between">
           <div>
             <Logo size="sm" />
-            <p className="mono-label text-[#374151] mt-1">Admin Panel</p>
+            <p className="mono-label text-[#a1a1aa] mt-1">Founder workspace</p>
           </div>
           <button
             onClick={() => setOpen(false)}
-            className="md:hidden p-1.5 rounded-lg text-[#6B7280] hover:text-[#D1D5DB] hover:bg-white/5 transition-colors"
+            className="md:hidden min-h-11 min-w-11 p-1.5 rounded-lg text-[#a1a1aa] hover:text-[#D1D5DB] hover:bg-white/5 transition-colors"
             aria-label="Close menu"
           >
             <X className="w-4 h-4" />
@@ -107,12 +106,13 @@ export function DashboardSidebar() {
             return (
               <Link
                 key={href}
+                aria-current={active ? "page" : undefined}
                 href={href}
                 className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
                   active
-                    ? "bg-[rgba(37,99,235,0.15)] text-[#60A5FA] border border-[rgba(37,99,235,0.25)]"
-                    : "text-[#6B7280] hover:text-[#D1D5DB] hover:bg-white/5"
+                    ? "bg-[#fb923c15] text-[#fdba74] border border-[#fb923c30]"
+                    : "text-[#a1a1aa] hover:text-[#D1D5DB] hover:bg-white/5"
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -121,13 +121,9 @@ export function DashboardSidebar() {
             );
           })}
         </nav>
-        <div className="p-4 border-t border-[rgba(37,99,235,0.15)]">
+        <div className="p-4 border-t border-white/10">
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="ping-green absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]" />
-            </span>
-            <span className="text-xs text-[#6B7280]">Measurement dashboard</span>
+            <span className="text-xs text-[#a1a1aa]">Protected owner workspace</span>
           </div>
         </div>
       </aside>
