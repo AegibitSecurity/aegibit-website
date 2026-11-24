@@ -22,7 +22,7 @@ import { TrackedLink } from "@/components/shared/TrackedLink";
  * terms of service lives at /terms.
  */
 
-const LAST_UPDATED = "2026-11-08";
+const LAST_UPDATED = "2026-11-24";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -326,9 +326,9 @@ export default function PrivacyPage() {
             </P>
           </Section>
 
-          <Section title="Cortex mobile app (workforce and attendance)">
+          <Section title="RightForce mobile app (workforce and attendance)">
             <P>
-              When your employer gives you the AEGIBIT Cortex mobile app, we
+              When your employer gives you the RightForce mobile app, we
               process the data below so your workplace can run attendance and HR.
               It is captured on your phone and lives inside your employer&apos;s
               own private workspace.
@@ -360,14 +360,14 @@ export default function PrivacyPage() {
             </ul>
             <P>
               Who sees it: only your employer&apos;s authorised HR and managers,
-              within your employer&apos;s own private workspace. Cortex never
+              within your employer&apos;s own private workspace. RightForce never
               shares one company&apos;s data with another, and never sells
               personal data.
             </P>
             <P>
               Your employer is the controller of this workplace data. To access,
               correct or delete it, contact your employer&apos;s HR, or email{" "}
-              <Link href="mailto:contact@aegibit.com?subject=Cortex%20App%20Privacy%20Request">
+              <Link href="mailto:contact@aegibit.com?subject=RightForce%20App%20Privacy%20Request">
                 contact@aegibit.com
               </Link>{" "}
               and we will route your request. Data is encrypted in transit.
