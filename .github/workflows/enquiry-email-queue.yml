@@ -1,0 +1,22 @@
+name: Retry saved enquiry emails
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: enquiry-email-queue
+  cancel-in-progress: false
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Process pending enquiry emails
+        env:
+          DASHBOARD_SECRET: ${{ secrets.DASHBOARD_SECRET }}
+        run: |
+          test -n "$DASHBOARD_SECRET" || { echo 'Missing DASHBOARD_SECRET'; exit 1; }
+          curl --fail-with-body --silent --show-error --max-time 65 \
+            -X POST -H "Authorization: Bearer $DASHBOARD_SECRET" \
+            https://www.aegibit.com/api/admin/enquiry-email-queue

@@ -1,12 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
-const mocks = vi.hoisted(() => ({ insert: vi.fn(), service: vi.fn(), after: vi.fn(), guard: vi.fn(), send: vi.fn(), slack: vi.fn(), journey: vi.fn() }));
+const mocks = vi.hoisted(() => ({ insert: vi.fn(), service: vi.fn(), after: vi.fn(), guard: vi.fn(), send: vi.fn(), slack: vi.fn(), journey: vi.fn(), queue: vi.fn(), process: vi.fn() }));
 vi.mock("next/server", async (original) => ({ ...await original<typeof import("next/server")>(), after: mocks.after }));
 vi.mock("@/lib/supabase-admin", () => ({ getServiceClient: mocks.service }));
 vi.mock("@/lib/auth", () => ({ requireAdmin: mocks.guard }));
 vi.mock("@/lib/rate-limiter", () => ({ leadLimiter: {}, checkRateLimit: async () => ({ allowed: true }) }));
 vi.mock("@/lib/hot-lead", () => ({ fetchVisitorJourney: mocks.journey, classifyLead: () => "warm", renderJourneyHtml: () => "" }));
 vi.mock("@/lib/slack-hot-lead", () => ({ notifySlackLead: mocks.slack }));
+vi.mock("@/lib/enquiry-outbox", () => ({queueEnquiry:mocks.queue,processEnquiry:mocks.process}));
 vi.mock("resend", () => ({ Resend: class { emails = { send: mocks.send }; } }));
 import { POST, GET } from "@/app/api/leads/route";
 import { POST as contact } from "@/app/api/contact/route";
@@ -17,6 +18,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   vi.stubEnv("RESEND_API_KEY", "test-only");
   mocks.service.mockReturnValue({ from: () => ({ insert: mocks.insert }) });
+  mocks.queue.mockResolvedValue(undefined); mocks.process.mockResolvedValue({ok:true});
   mocks.insert.mockResolvedValue({ error: null });
   mocks.journey.mockResolvedValue(null);
   mocks.send.mockResolvedValue({ data: { id: "test-message" }, error: null });
@@ -31,7 +33,7 @@ describe("enquiry persistence and notifications", () => {
     expect(mocks.send).not.toHaveBeenCalled();
     expect(mocks.after).toHaveBeenCalledOnce();
     await mocks.after.mock.calls[0][0]();
-    expect(mocks.send).toHaveBeenCalledTimes(2);
+    expect(mocks.process).toHaveBeenCalledOnce();
   });
   it("does not acknowledge or notify an enquiry that failed to save", async () => {
     mocks.insert.mockResolvedValue({ error: { code: "offline" } });
@@ -40,7 +42,7 @@ describe("enquiry persistence and notifications", () => {
   });
   it("does not send duplicate notifications", async () => {
     mocks.insert.mockResolvedValue({ error: { code: "23505" } });
-    expect(await (await POST(request(lead))).json()).toEqual({ ok: true, duplicate: true });
+    expect((await POST(request(lead))).status).toBe(409);
     expect(mocks.after).not.toHaveBeenCalled();
   });
   it("isolates notification failure after persistence", async () => {
@@ -54,13 +56,14 @@ describe("enquiry persistence and notifications", () => {
     expect((await GET()).status).toBe(401);
     expect(mocks.service).not.toHaveBeenCalled();
   });
-  it("logs a rejected legacy contact notification without losing the saved enquiry", async () => {
-    const log = vi.spyOn(console, "error").mockImplementation(() => {});
-    mocks.send.mockResolvedValue({ error: { name: "validation_error" } });
+  it("queues acknowledgements for the legacy contact endpoint", async () => {
     expect((await contact(request(lead))).status).toBe(201);
-    expect(mocks.send).not.toHaveBeenCalled();
     await mocks.after.mock.calls[0][0]();
-    expect(log).toHaveBeenCalledWith("[email][contact] provider rejected notification", "validation_error");
-    log.mockRestore();
+    expect(mocks.process).toHaveBeenCalledOnce();
+  });
+  it("does not claim success when the durable queue is unavailable", async () => {
+    mocks.queue.mockRejectedValue(new Error("offline"));
+    expect((await POST(request(lead))).status).toBe(503);
+    expect(mocks.insert).not.toHaveBeenCalled();
   });
 });

@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 
-interface Lead { id: string; email: string; name?: string; company?: string; source: string; status: string; created_at: string; message?: string; phone?: string; team_size?: string; page?: string; }
+interface Lead { delivery?: {acknowledgement:string;ownerNotification:string;followup:string}; id: string; email: string; name?: string; company?: string; source: string; status: string; created_at: string; message?: string; phone?: string; team_size?: string; page?: string; }
 
 export default function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -37,6 +37,14 @@ export default function LeadsPage() {
     finally { setSending(false); }
   }
 
+  async function repair(leadId: string) {
+    setSending(true);
+    try {
+      const r = await fetch("/api/admin/enquiry-followup", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({leadId,repair:true})});
+      const body = await r.json(); setEmailNotice(body.message || body.error); await load();
+    } catch { setEmailNotice("Status repair unavailable. No email was sent."); }
+    finally { setSending(false); }
+  }
   useEffect(() => { void load(); }, [load]);
 
   return (
@@ -83,7 +91,9 @@ export default function LeadsPage() {
                   <p className="whitespace-pre-wrap break-words mt-3">{lead.message || "No message supplied."}</p>
                   {lead.phone && <p className="mt-2">Phone: {lead.phone}</p>}
                   {lead.team_size && <p>Team size: {lead.team_size}</p>}
-                  {["contact", "demo", "paymint_demo"].includes(lead.source) && <button disabled={sending} onClick={() => void followup(lead.id)} className="block min-h-11 mt-3 text-orange-300 underline disabled:opacity-50">Preview follow-up email</button>}
+                  {lead.delivery && <p className="mt-2">Acknowledgement: {lead.delivery.acknowledgement}. Owner email: {lead.delivery.ownerNotification}. Follow-up: {lead.delivery.followup}. Accepted means provider acceptance, not inbox delivery.</p>}
+                  {lead.delivery?.followup === "accepted" && lead.status === "new" && <button disabled={sending} onClick={() => void repair(lead.id)} className="block min-h-11 text-orange-300 underline">Repair contacted status (no email)</button>}
+                  {lead.delivery?.followup !== "accepted" && ["contact", "demo", "paymint_demo"].includes(lead.source) && <button disabled={sending} onClick={() => void followup(lead.id)} className="block min-h-11 mt-3 text-orange-300 underline disabled:opacity-50">Preview follow-up email</button>}
                   {lead.page && <p className="break-all">Page: {lead.page}</p>}
                 </details></td>
               </tr>
