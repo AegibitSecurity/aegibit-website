@@ -1,9 +1,9 @@
 import { describe,it,expect,vi,beforeEach } from "vitest";
 import { NextRequest } from "next/server";
-const m=vi.hoisted(()=>({guard:vi.fn(),service:vi.fn(),set:vi.fn(),send:vi.fn()}));
+const m=vi.hoisted(()=>({guard:vi.fn(),service:vi.fn(),get:vi.fn(),set:vi.fn(),send:vi.fn()}));
 vi.mock("@/lib/auth",()=>({requireAdmin:m.guard}));
 vi.mock("@/lib/supabase-admin",()=>({getServiceClient:m.service}));
-vi.mock("@upstash/redis",()=>({Redis:{fromEnv:()=>({set:m.set})}}));
+vi.mock("@upstash/redis",()=>({Redis:{fromEnv:()=>({set:m.set,get:m.get})}}));
 vi.mock("@/lib/send-enquiry-email",()=>({sendEnquiryEmail:m.send}));
 import { POST } from "@/app/api/admin/enquiry-followup/route";
 const id="00000000-0000-4000-8000-000000000001";
@@ -16,6 +16,12 @@ beforeEach(()=>{
  m.set.mockResolvedValue("OK");m.send.mockResolvedValue({ok:true,id:"message-id"});
 });
 describe("manual contextual follow-up",()=>{
+ it("repairs only an accepted send and never sends again",async()=>{
+   m.get.mockResolvedValue({status:"accepted"});
+   const req=new NextRequest("https://example.com/api/admin/enquiry-followup",{method:"POST",headers:{origin:"https://example.com"},body:JSON.stringify({leadId:id,repair:true})});
+   expect((await POST(req)).status).toBe(200);expect(m.send).not.toHaveBeenCalled();expect(m.set).not.toHaveBeenCalled();
+ });
+
  it("requires admin authentication",async()=>{m.guard.mockResolvedValue(new Response("Unauthorized",{status:401}));expect((await POST(request())).status).toBe(401);expect(m.service).not.toHaveBeenCalled();});
  it("rejects cross-origin requests",async()=>{expect((await POST(request(true,"https://other.example"))).status).toBe(403);expect(m.send).not.toHaveBeenCalled();});
  it("previews without reserving or sending",async()=>{const r=await POST(request(false));expect(r.status).toBe(200);expect((await r.json()).text).toContain("gym management");expect(m.set).not.toHaveBeenCalled();expect(m.send).not.toHaveBeenCalled();});
